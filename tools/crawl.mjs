@@ -39,9 +39,9 @@ async function autoScroll(page) {
   await page.evaluate(async () => {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     const step = Math.round(innerHeight * 0.6);
-    for (let y = 0; y < document.documentElement.scrollHeight + step; y += step) { scrollTo(0, y); await sleep(220); }
+    for (let y = 0; y < document.documentElement.scrollHeight + step; y += step) { scrollTo({ top: y, behavior: 'instant' }); await sleep(220); }
     await sleep(1500);
-    scrollTo(0, 0);
+    scrollTo({ top: 0, behavior: 'instant' });
   });
 }
 
@@ -76,8 +76,8 @@ for (const w of WIDTHS) {
     const f = path.join(dir, 'sections', `${String(i).padStart(2, '0')}_${r.id}.png`);
     try {
       // прокрутка к секции нужна, чтобы фиксированные элементы (шапка, cookie) попали в кадр так же, как у пользователя
-      await page.evaluate((y) => scrollTo(0, y), r.y);
-      await page.waitForTimeout(150);
+      await page.evaluate((y) => scrollTo({ top: y, behavior: 'instant' }), r.y);
+      await page.waitForTimeout(+(process.env.SECTION_WAIT || 150));
       const { data } = await cdp.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: r.y, width: Math.min(r.w || w, w), height: Math.min(r.h, 6000), scale: 1 } });
       fs.writeFileSync(f, Buffer.from(data, 'base64'));
     } catch (e) { console.log('shot fail', r.id, String(e).slice(0, 80)); }

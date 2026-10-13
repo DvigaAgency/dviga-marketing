@@ -202,7 +202,7 @@ function initCounter() {
 
 /* ---------- ленивые фоновые картинки ---------- */
 function initBg() {
-  const els = $('[data-bg]');
+  const els = $$('[data-bg]');
   if (!els.length) return;
   const show = (el) => { el.style.backgroundImage = el.dataset.bg; el.removeAttribute('data-bg'); };
   if (!('IntersectionObserver' in w)) { els.forEach(show); return; }
@@ -328,6 +328,8 @@ function initLazy() {
 const afterPaint = (fn) => requestAnimationFrame(() => setTimeout(fn, 0));
 const boot = () => {
   initCookie(); initPopups();
+  // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
+  addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   afterPaint(() => { initBg(); initAppear(); initSteps(); afterPaint(() => { initScroll(); initCounter(); initVideo(); initDrag(); initLazy(); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();
