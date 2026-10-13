@@ -35,7 +35,7 @@
 
 ```bash
 npm install
-npm run build        # dist/ — готовая статика
+npm run build        # dist/ — готовая статика (исходный HTML — снимок data/home.source.html; обновить: node tools/fetch-html.mjs)
 npm run preview      # http://localhost:4173 (отдаёт dist/ со сжатием brotli/gzip)
 npm run audit        # проверка: нет Tilda/запрещённых хостов, нет битых ссылок
 ```
@@ -47,7 +47,7 @@ npm run audit        # проверка: нет Tilda/запрещённых х�
 ## Как это устроено
 
 ```
-reference/html/home.html   выгрузка HTML опубликованной главной (только чтение живого сайта)
+data/home.source.html      снимок HTML опубликованной главной (только чтение живого сайта; tools/fetch-html.mjs)
         │   + Tilda MCP: head-код/JSON-LD страницы, проверка кастомного CSS проекта (он пуст), справка по формату блоков
         ▼
 tools/build.mjs ──► tools/lib/zero.mjs          Zero-блок (396) → HTML + CSS

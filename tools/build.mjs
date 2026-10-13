@@ -11,7 +11,7 @@ import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, widget, search, fixLinks } from './lib/components.mjs';
 
-const SRC = 'reference/html/home.html';
+const SRC = 'data/home.source.html'; // снимок исходного HTML главной (обновляется tools/fetch-html.mjs)
 const OUT = process.env.OUT || 'dist';
 const SITE_URL = (process.env.SITE_URL || 'https://dviga.marketing').replace(/\/$/, '');
 const SITE_ORIGINAL = 'https://dviga.marketing';

@@ -1,22 +1,18 @@
-// Скачивает сырой HTML всех страниц из sitemap.xml в reference/html/ (только чтение живого сайта).
+// Скачивает исходный HTML главной dviga.marketing (только чтение живого сайта) в data/home.source.html
+// (и копию reference/html/home.html для инструментов сравнения). С ключом --all — все страницы из sitemap.xml в reference/html/.
 import fs from 'node:fs';
-import path from 'node:path';
-const xml = fs.readFileSync('data/sitemap.xml', 'utf8');
-const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].trim());
+const all = process.argv.includes('--all');
+const get = async (u) => { const r = await fetch(u, { redirect: 'follow' }); if (!r.ok) throw new Error(u + ' ' + r.status); return r.text(); };
 fs.mkdirSync('reference/html', { recursive: true });
-const slug = u => { const p = new URL(u).pathname.replace(/^\/|\/$/g, ''); return p ? p.replace(/\//g, '__') : 'home'; };
-let i = 0, fail = [];
-async function worker() {
-  while (i < urls.length) {
-    const u = urls[i++]; const f = `reference/html/${slug(u)}.html`;
-    if (fs.existsSync(f) && fs.statSync(f).size > 1000) continue;
-    try {
-      const r = await fetch(u, { redirect: 'follow' });
-      if (!r.ok) throw new Error(r.status);
-      fs.writeFileSync(f, await r.text());
-    } catch (e) { fail.push([u, String(e)]); }
-  }
+const home = await get('https://dviga.marketing/');
+fs.writeFileSync('data/home.source.html', home);
+fs.writeFileSync('reference/html/home.html', home);
+console.log('home:', (home.length / 1024).toFixed(0), 'КБ');
+if (all) {
+  const xml = fs.readFileSync('data/sitemap.xml', 'utf8');
+  const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
+  const slug = (u) => { const p = new URL(u).pathname.split('/').filter(Boolean).join('__'); return p || 'home'; };
+  let i = 0;
+  await Promise.all(Array.from({ length: 6 }, async () => { while (i < urls.length) { const u = urls[i++]; try { fs.writeFileSync('reference/html/' + slug(u) + '.html', await get(u)); } catch (e) { console.log('fail', u, e.message); } } }));
+  console.log('pages:', urls.length);
 }
-await Promise.all(Array.from({ length: 6 }, worker));
-fs.writeFileSync('data/urls.json', JSON.stringify(urls, null, 1));
-console.log('urls', urls.length, 'fail', fail);
