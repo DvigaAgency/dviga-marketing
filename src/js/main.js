@@ -113,12 +113,9 @@ function initScroll() {
   $$('.e[data-sc]').forEach((el) => {
     const o = JSON.parse(el.dataset.sc);
     if (mobile && !o.m) return;
-    let steps = o.s;
-    if (ri < RES.length - 1) {
-      for (let i = ri; i < RES.length - 1 && steps === o.s; i++) { const k = RES[i]; if (o.r[k]) { steps = o.r[k]; break; } }
-      if (!steps) return;
-    }
-    sc.push({ el, w: el.querySelector('.sw') || el, steps, t: o.t, o: o.o });
+    const cur = o.r[ri] || o.r[o.r.length - 1];
+    if (!cur || !cur.s) return;
+    sc.push({ el, w: el.querySelector('.sw') || el, steps: cur.s, t: o.t, o: cur.o });
   });
   $$('.e[data-fx]').forEach((el) => {
     const dist = num(el.dataset.fx);
@@ -289,6 +286,7 @@ function initPopups() {
   function wgClose() { if (wp) { wp.classList.remove('on'); } }
   if (wb && wp) {
     wb.addEventListener('click', () => { wp.classList.toggle('on'); if (wp.classList.contains('on')) loadForms(); });
+    $('[data-wg-close]', wp).addEventListener('click', wgClose);
     d.addEventListener('click', (e) => { if (wp.classList.contains('on') && !e.target.closest('[data-wgp],[data-wg]')) wgClose(); });
   }
   // поиск: «site:» в запросе Яндекса

@@ -62,7 +62,7 @@ export function blankPopups($) {
 export function widget($, formHtml) {
   const r = $('#rec1468283321');
   const title = r.find('.t708__title').html().replace(/<br\s*\/?>/g, '<br>').trim();
-  return `<button type="button" class="wg-b" aria-label="Связаться с нами" data-wg><span class="wg-c"><svg viewBox="0 0 60 60" fill="none" stroke="#fff" stroke-width="2" xmlns="http://www.w3.org/2000/svg" role="presentation"><path d="M17 19h26a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H30l-8 7v-7h-5a2 2 0 0 1-2-2V21a2 2 0 0 1 2-2z" stroke-linejoin="round"/><path d="M22 29h16" stroke-linecap="round"/></svg></span></button><div class="wg-p" id="wg" role="dialog" aria-label="Связаться с нами" data-wgp><div class="wg-w"><div class="wg-h">${title}</div>${formHtml}</div></div>`;
+  return `<button type="button" class="wg-b" aria-label="Связаться с нами" data-wg><span class="wg-c"><svg viewBox="0 0 60 60" fill="none" stroke="#fff" stroke-width="2" xmlns="http://www.w3.org/2000/svg" role="presentation"><path d="M17 19h26a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H30l-8 7v-7h-5a2 2 0 0 1-2-2V21a2 2 0 0 1 2-2z" stroke-linejoin="round"/><path d="M22 29h16" stroke-linecap="round"/></svg></span></button><div class="wg-p" id="wg" role="dialog" aria-label="Связаться с нами" data-wgp><div class="wg-t"><button type="button" aria-label="Закрыть" data-wg-close>${CLOSE_SVG}</button></div><div class="wg-w"><div class="wg-h">${title}</div>${formHtml}</div></div>`;
 }
 
 /** поиск (t985) */

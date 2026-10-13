@@ -45,7 +45,8 @@ async function autoScroll(page) {
   });
 }
 
-const browser = await chromium.launch();
+// --disable-lcd-text: одинаковое (серое) сглаживание шрифтов у оригинала и копии, иначе сравнение шумит на LCD-подпикселях
+const browser = await chromium.launch({ args: ['--disable-lcd-text'] });
 const requests = new Set();
 for (const w of WIDTHS) {
   const dir = path.join(OUT, String(w));

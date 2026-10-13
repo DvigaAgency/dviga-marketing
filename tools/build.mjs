@@ -93,7 +93,7 @@ const calcRec = $('#rec742904618');
 const calcForm = renderTildaForm($, calcRec.find('form'), 'calc', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:30px;--mb:25px;--tfs:20px;--tfw:500;--tmb:5px;` });
 const calcPopup = `<div class="pp" id="p-calculate" data-hook="popup:calculate" role="dialog" aria-modal="true" tabindex="-1" aria-label="${calcRec.find('.t702__title').text().trim()}">${closeBtn}<div class="pc cl"><div class="cl-w"><div class="cl-t">${calcRec.find('.t702__title').html()}</div>${calcForm}</div></div></div>`;
 const wRec = $('#rec1468283321');
-const widgetForm = renderTildaForm($, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;` });
+const widgetForm = renderTildaForm($, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
 const popups = [menuPopup, formPopup, calcPopup, reviewPopups($), blankPopups($), search($)].join('');
 
 // ----------------------------------------------------------------- CSS
@@ -139,7 +139,7 @@ const noindex = process.env.NOINDEX ? '<meta name="robots" content="noindex,nofo
 const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="description" content="${descr}">${noindex}<link rel="canonical" href="${SITE_URL}/"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
   + `<meta property="og:url" content="${SITE_URL}/"><meta property="og:title" content="${$('meta[property="og:title"]').attr('content')}"><meta property="og:description" content="${descr}"><meta property="og:type" content="website"><meta property="og:image" content="${SITE_URL}${ogImage.webp.at(-1).src}"><meta name="twitter:card" content="summary_large_image">`
   + `<link rel="icon" type="image/png" sizes="32x32" href="${ic32l}" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" sizes="32x32" href="${ic32d}" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" sizes="any" href="${icSvg}"><link rel="apple-touch-icon" href="${icApple}">`
-  + `${fontPre}<style>${critCss}</style><link rel="stylesheet" href="/assets/${cssName}" media="print" onload="this.media='all';dispatchEvent(new Event('cssload'))"><noscript><link rel="stylesheet" href="/assets/${cssName}"></noscript>${ld}`;
+  + `${fontPre}<style>${critCss}</style><link rel="stylesheet" href="/assets/${cssName}" media="print" onload="this.media='all';dispatchEvent(new Event('cssload'))"><noscript><link rel="stylesheet" href="/assets/${cssName}"><style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style></noscript>${ld}`;
 
 const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${cookie($)}${widget($, widgetForm)}`;
 const page = `<!doctype html><html lang="ru"><head>${head}</head><body>${body}<script type="module" src="/assets/${jsName}"></script></body></html>`;

@@ -46,7 +46,7 @@ export function renderZeroForm(attrs, inputs, uid, screens) {
     '--ih': px(v('inputheight')), '--ir': px(v('inputradius')), '--ibw': px(v('inputbordersize')), '--ibc': v('inputbordercolor'), '--ibg': v('inputbgcolor'), '--ic': v('inputcolor'),
     '--ifs': px(v('inputfontsize')), '--ifw': v('inputfontweight'), '--mb': px(v('inputmargbottom')),
     '--tfs': px(v('inputtitlefontsize')), '--tfw': v('inputtitlefontweight'), '--tc': v('inputtitlecolor'), '--tmb': px(v('inputtitlemargbottom')), '--ec': v('inputelscolor'),
-    '--bw': px(v('buttonwidth')), '--bh': px(v('buttonheight')), '--bmt': px(v('buttonmargtop')), '--br': px(v('buttonradius')), '--bbg': v('buttonbgcolor'), '--bc': v('buttoncolor'),
+    '--bh': px(v('buttonheight')), '--bmt': px(v('buttonmargtop')), '--br': px(v('buttonradius')), '--bbg': v('buttonbgcolor'), '--bc': v('buttoncolor'),
     '--bfs': px(v('buttonfontsize')), '--bfw': v('buttonfontweight'), '--bhb': v('buttonhoverbgcolor'), '--bhc': v('buttonhovercolor'),
   };
   const style = Object.entries(vars).filter(([, x]) => x).map(([k, x]) => `${k}:${x}`).join(';');

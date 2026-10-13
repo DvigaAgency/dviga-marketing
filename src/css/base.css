@@ -48,3 +48,4 @@ html{scroll-behavior:smooth}
 @media (max-width:1199px){.e[data-h0]:not([data-mb])>.sw{opacity:1}}
 .e .a{border:var(--z-borderwidth,0) var(--z-borderstyle,solid) var(--z-bordercolor,transparent);transition:background-color var(--z-speedhover,0s) ease-in-out,color var(--z-speedhover,0s) ease-in-out,border-color var(--z-speedhover,0s) ease-in-out,box-shadow var(--z-shadowshoverspeed,.2s) ease-in-out;text-shadow:var(--z-shadow-text-x,0px) var(--z-shadow-text-y,0px) var(--z-shadow-text-blur,0px) rgba(var(--z-shadow-text-color),var(--z-shadow-text-opacity,100%));background-position:center center;background-size:cover}
 .e{zoom:var(--z)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid #d93433;outline-offset:2px}

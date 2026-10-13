@@ -1,15 +1,21 @@
 {
   "name": "dviga-marketing",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Копия главной dviga.marketing без рантайма Tilda: статический HTML/CSS/JS",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node tools/build.mjs",
+    "preview": "node tools/serve.mjs dist 4173",
+    "assets": "node tools/fetch-html.mjs && node tools/collect-assets.mjs && node tools/fetch-assets.mjs && node tools/optimize-images.mjs && node tools/optimize-video.mjs",
+    "crawl": "node tools/crawl.mjs",
+    "geom": "node tools/geom.mjs",
+    "compare": "sh tools/copy-crawl.sh && node tools/compare.mjs",
+    "anim": "node tools/anim-compare.mjs && node tools/hover-compare.mjs && node tools/animations-report.mjs",
+    "perf": "node tools/perf-report.mjs"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "author": "DVIGA",
+  "license": "UNLICENSED",
+  "type": "module",
   "devDependencies": {
     "cheerio": "^1.2.0",
     "chrome-launcher": "^1.2.2",
@@ -22,5 +28,9 @@
     "pngjs": "^7.0.0",
     "sharp": "^0.35.5",
     "svgo": "^4.1.0"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
   }
 }

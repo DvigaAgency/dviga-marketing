@@ -13,7 +13,7 @@ const prev = fs.existsSync('data/img-manifest.json') ? JSON.parse(fs.readFileSyn
 const result = {};
 const PRESETS = [360, 720, 1080, 1620];
 const hash = (buf) => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 10);
-const slug = (f) => path.basename(f).replace(/^tild[0-9a-f-]+__/, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase().slice(0, 40) || 'img';
+const slug = (f) => path.basename(f).replace(/^tild[0-9a-f-]+__/, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/tilda/gi, 'tld').toLowerCase().slice(0, 40) || 'img';
 
 let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm)$/i.test(m.file));
 let done = 0, bytesIn = 0, bytesOut = 0;

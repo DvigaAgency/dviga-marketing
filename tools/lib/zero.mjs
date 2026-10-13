@@ -259,10 +259,11 @@ function emitElement($, e, recId, ctx, css, A, screens) {
   if (hasSbs) {
     const loop = rm('data-animate-sbs-loop') || '';
     if (sbsEvent === 'scroll') {
-      const steps = scrollSteps(sbsOpts);
-      const resOpts = {};
-      for (const R of screens) { const v = attrs[`data-animate-sbs-opts-res-${R}`]; if (v) resOpts[R] = scrollSteps(v); }
-      data.push(`data-sc='${JSON.stringify({ s: steps, r: resOpts, t: parseFloat(rm('data-animate-sbs-trg') ?? '1'), o: parseInt(rm('data-animate-sbs-trgofst') || '0', 10), m: rm('data-animate-mobile') === 'y' ? 1 : 0 })}'`);
+      const maxR = screens[screens.length - 1];
+      const at = (name, R) => attrs[R === maxR ? 'data-animate-sbs-' + name : `data-animate-sbs-${name}-res-${R}`];
+      const cascade = (name, R) => { let v = at(name, R); for (const c of screens) { if (v !== undefined && v !== '') break; if (c > R) v = at(c === maxR && false ? name : name, c); } return v; };
+      const per = screens.map((R) => ({ s: scrollSteps(cascade('opts', R)), o: parseInt(cascade('trgofst', R) || '0', 10) || 0 }));
+      data.push(`data-sc='${JSON.stringify({ r: per, t: parseFloat(rm('data-animate-sbs-trg') ?? '1'), m: rm('data-animate-mobile') === 'y' ? 1 : 0 })}'`);
     } else {
       const uid = `k${recId}_${id}`;
       const sel = `${ctx.sel(recId, id)}.on>.sw`;
@@ -324,6 +325,7 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   const linkAttrs = [];
   if (href !== undefined) linkAttrs.push(`href="${esc(ctx.href(href))}"`);
   for (const k of ['target', 'rel', 'aria-label', 'data-tooltip']) if (atom.attr(k) !== undefined && atom.attr(k) !== '') linkAttrs.push(`${k}="${esc(atom.attr(k))}"`);
+  const ariaFor = (h) => (/^#menu/.test(h) ? 'Открыть меню' : /^#search/.test(h) ? 'Поиск по сайту' : /^tel:/.test(h) ? 'Позвонить: 8 800 200 23 02' : /^#form/.test(h) ? 'Обсудить проект' : /^#close/.test(h) ? 'Закрыть' : '');
   let body = '';
   let atomClass = 'a';
   let atomTag = tag === 'a' ? 'a' : (/^h[1-6]$/.test(tag) ? tag : 'div');
@@ -335,8 +337,9 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
       if (bg && /background-image/.test(bg)) style = ` style="${esc(bg.replace(/url\(['"]?([^'")]+)['"]?\)/g, (m, u) => ctx.cssImage(u, (parseFloat(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width) || 0) * 1.6)))}"`;
       if (atom.attr('data-original')) style = ` style="${esc('background-image:' + ctx.cssImage(atom.attr('data-original'), (parseFloat(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width) || 0) * 1.6))}"`;
       if (atom.hasClass('t-bgimg')) atomClass += ' bg';
-      const role = atom.attr('role'); if (role) linkAttrs.push(`role="${role}"`);
-      const al = atom.attr('aria-label'); if (al !== undefined && !/aria-label/.test(linkAttrs.join(' '))) linkAttrs.push(`aria-label="${esc(al)}"`);
+      const al = atom.attr('aria-label');
+      const has = linkAttrs.some((x) => x.startsWith('aria-label'));
+      if (href !== undefined) { const lab = al || ariaFor(href); if (lab && !has) linkAttrs.push(`aria-label="${esc(lab)}"`); } else linkAttrs.push('aria-hidden="true"');
       break;
     }
     case 'image': {
@@ -378,7 +381,7 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   if (type === 'button') {
     body = body.replace(/<!--[\s\S]*?-->/g, '');
     const txt = atom.find('.tn-atom__button-text').html();
-    body = e.dot ? `<span class="bc"><div>${txt}</div></span><span class="bb"></span>` : `<span class="bc"><span class="bt">${txt}</span></span><span class="bb"></span>`;
+    body = e.dot ? `<div class="bc"><div>${txt}</div></div><span class="bb"></span>` : `<span class="bc"><span class="bt">${txt}</span></span><span class="bb"></span>`;
   }
   const inner = `<${atomTag} class="${atomClass}"${linkAttrs.length ? ' ' + linkAttrs.join(' ') : ''}${style}>${body}</${atomTag}>`;
   return hasSbs ? `<div class="sw"${wrapStyle}>${inner}</div>` : inner;

@@ -12,7 +12,7 @@ export function picture(url, o = {}) {
   const m = lookup(url);
   if (!m) { console.warn('NO ASSET', url); return `<img class="${o.cls || ''}" src="${esc(url)}" alt="${esc(o.alt || '')}">`; }
   used.add(m.src);
-  const w = o.w || m.w; const h = o.h || m.h;
+  const w = m.w || o.w; const h = m.h || o.h;
   const dim = w && h ? ` width="${Math.round(w)}" height="${Math.round(h)}"` : '';
   const loading = o.eager ? (o.priority ? ' fetchpriority="high"' : '') : ' loading="lazy" decoding="async"';
   const cls = o.cls ? ` class="${o.cls}"` : '';

@@ -10,7 +10,7 @@
 .ck-x{position:absolute;top:5px;right:5px;box-sizing:content-box;width:10px;height:10px;padding:5px;border:0;background:transparent;cursor:pointer;transition:opacity .3s ease-in-out;line-height:0}
 .ck-x:hover{opacity:.5}
 .ck-x svg{width:10px;height:10px;display:block}
-@media (max-width:480px){.ck{left:0;right:0;bottom:0;max-width:none}.ck-w{border-radius:0}}
+@media (max-width:960px){.ck-b{padding:10.9px 15px}.ck{left:0;right:0;bottom:0;width:100%;max-width:100%}.ck-w{max-width:100%;padding:20px 10px;border-radius:0}.ck-x{display:none}}
 /* ===== виджет «Давайте подскажем» ===== */
 .wg-b{position:fixed;right:40px;bottom:40px;z-index:1000;width:60px;height:60px;cursor:pointer;border:0;padding:0;background:none}
 .wg-c{display:block;position:relative;width:60px;height:60px;overflow:hidden;border-radius:50%;background:#d93433;box-shadow:0 0 10px rgba(0,0,0,.3);transition:.2s linear;animation:wg-p 3s ease-in-out infinite}
@@ -21,5 +21,7 @@
 .wg-p{position:fixed;right:40px;bottom:115px;z-index:1001;box-sizing:border-box;width:460px;max-width:calc(100vw - 20px);max-height:calc(100vh - 135px);overflow:auto;border-radius:10px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s ease-in-out,transform .2s ease-in-out,visibility 0s .2s}
 .wg-p.on{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease-in-out,transform .2s ease-in-out}
 .wg-w{padding:30px 35px 40px}
-.wg-h{margin:0 0 25px;font:500 24px/1.35 Inter,Arial,sans-serif;color:#121212}
-@media (max-width:640px){.wg-b{right:20px;bottom:20px}.wg-p{right:0;bottom:0;left:0;width:auto;max-width:none;max-height:none;top:0;border-radius:0}}
+.wg-h{margin:0 0 25px;font:500 24px/1.35 Inter,Arial,sans-serif;color:#121212}@media (max-width:1200px){.wg-h{font-size:22px}}@media (max-width:640px){.wg-h{font-size:20px}}
+
+.wg-t{display:none}
+@media (max-width:960px){.wg-b{right:10px;bottom:10px}.wg-p{inset:0;width:auto;max-width:none;max-height:none;border-radius:0;overflow-y:auto}.wg-w{max-width:500px;margin:0 auto;padding-top:100px}.wg-t{display:flex;position:fixed;z-index:1;left:0;right:0;top:0;height:50px;background:#000;justify-content:flex-end;align-items:center}.wg-t button{padding:15px;border:0;background:none;cursor:pointer;line-height:0}.wg-t svg{width:20px;height:20px}.wg-t g{fill:#fff}}
