@@ -1,11 +1,56 @@
 [
  {
+  "w": 1440,
+  "matched": 333,
+  "ref": 333,
+  "bad": 13,
+  "mean": 2.3,
+  "docRef": 20514,
+  "docMine": 20521
+ },
+ {
+  "w": 1200,
+  "matched": 333,
+  "ref": 333,
+  "bad": 9,
+  "mean": 1.85,
+  "docRef": 17267,
+  "docMine": 17267
+ },
+ {
+  "w": 960,
+  "matched": 333,
+  "ref": 333,
+  "bad": 0,
+  "mean": 0.01,
+  "docRef": 15454,
+  "docMine": 15454
+ },
+ {
+  "w": 640,
+  "matched": 333,
+  "ref": 333,
+  "bad": 0,
+  "mean": 0,
+  "docRef": 19557,
+  "docMine": 19557
+ },
+ {
   "w": 480,
   "matched": 333,
   "ref": 333,
   "bad": 0,
-  "mean": 0.16,
+  "mean": 0,
   "docRef": 18051,
-  "docMine": 17993
+  "docMine": 18051
+ },
+ {
+  "w": 320,
+  "matched": 333,
+  "ref": 333,
+  "bad": 0,
+  "mean": 0,
+  "docRef": 19491,
+  "docMine": 19491
  }
 ]

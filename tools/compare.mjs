@@ -4,6 +4,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
+import * as cheerio from 'cheerio';
+
+const page = cheerio.load(fs.readFileSync('dist/index.html', 'utf8'));
+const label = (id) => {
+  const sec = page(`#r${id}`);
+  const t = (sec.find('h1,h2,h3').first().text() || sec.find('.a').first().text() || '').replace(/\s+/g, ' ').trim();
+  return t.slice(0, 38).replace(/[|]/g, '/') || '—';
+};
 
 const WIDTHS = (process.env.WIDTHS || '1440,1200,960,640,480,320').split(',').map(Number);
 const THRESH = +(process.env.THRESH || 0.12);
@@ -44,12 +52,12 @@ for (const w of WIDTHS) {
   }
 }
 const md = ['# Визуальное сравнение копии с оригиналом', '', `pixelmatch, порог цвета ${THRESH}, AA игнорируется. Критерий приёмки: ≤ 2% отличающихся пикселей на секцию, высота ±8 px.`, '',
-  '| ширина | секция | отличий, % | Δвысоты, px | статус |', '|---|---|---|---|---|'];
+  '| ширина | секция (id записи) | заголовок | отличий, % | Δвысоты, px | статус |', '|---|---|---|---|---|---|'];
 let ok = 0; let bad = 0;
 for (const r of rows) {
   const pass = r.dyn ? Math.abs(r.dh) <= 8 : r.pct <= 2 && Math.abs(r.dh) <= 8;
   pass ? ok++ : bad++;
-  md.push(`| ${r.w} | ${r.id}${r.dyn ? ' (динамич.)' : ''} | ${Number.isNaN(r.pct) ? '—' : r.pct.toFixed(2)} | ${Number.isNaN(r.dh) ? '—' : r.dh.toFixed(0)} | ${pass ? 'ок' : 'расхождение'}${r.note ? ' — ' + r.note : ''} |`);
+  md.push(`| ${r.w} | ${r.id}${r.dyn ? ' (динамич.)' : ''} | ${label(r.id)} | ${Number.isNaN(r.pct) ? '—' : r.pct.toFixed(2)} | ${Number.isNaN(r.dh) ? '—' : r.dh.toFixed(0)} | ${pass ? 'ок' : 'расхождение'}${r.note ? ' — ' + r.note : ''} |`);
 }
 md.splice(4, 0, `Итого: ок ${ok}, расхождений ${bad}.`, '');
 fs.mkdirSync('reports', { recursive: true });

@@ -22,20 +22,20 @@ for (const w of widths) {
       const ab = e.closest('.ab'); const abr = ab.getBoundingClientRect();
       const r = e.getBoundingClientRect();
       const rec = e.closest('.r').id.replace(/^r/, 'rec');
-      out[rec + ':' + id] = { x: r.left - abr.left, y: r.top - abr.top, w: r.width, h: r.height };
+      out[rec.replace(/^rec/, '') + ':' + id] = { x: r.left - abr.left, y: r.top - abr.top, w: r.width, h: r.height };
     });
     const recs = {};
-    document.querySelectorAll('.r').forEach((r) => { const b = r.getBoundingClientRect(); recs[r.id.replace(/^r/, 'rec')] = { y: b.top + scrollY, h: b.height }; });
+    document.querySelectorAll('.r').forEach((r) => { const b = r.getBoundingClientRect(); recs[r.id.replace(/^r/, '')] = { y: b.top + scrollY, h: b.height }; });
     return { elems: out, recs, docH: document.documentElement.scrollHeight };
   });
   let n = 0, bad = []; let sumd = 0;
   for (const e of ref.elems) {
-    const m = mine.elems[e.rec + ':' + e.id]; if (!m) { bad.push({ k: e.rec + ':' + e.id, miss: true, type: e.type }); continue; }
+    const key = String(e.rec).replace(/^rec/, '') + ':' + e.id; const m = mine.elems[key]; if (!m) { bad.push({ k: key, miss: true, type: e.type }); continue; }
     const d = Math.max(Math.abs(m.x - e.x), Math.abs(m.y - e.y), Math.abs(m.w - e.w), Math.abs(m.h - e.h));
-    n++; sumd += d; if (d > 3) bad.push({ k: e.rec + ':' + e.id, type: e.type, d: +d.toFixed(1), ref: [e.x, e.y, e.w, e.h].map(Math.round), mine: [m.x, m.y, m.w, m.h].map(Math.round) });
+    n++; sumd += d; if (d > 3) bad.push({ k: key, type: e.type, d: +d.toFixed(1), ref: [e.x, e.y, e.w, e.h].map(Math.round), mine: [m.x, m.y, m.w, m.h].map(Math.round) });
   }
   const recBad = [];
-  for (const r of ref.records) { const m = mine.recs[r.id]; if (m && Math.abs(m.h - r.h) > 2) recBad.push([r.id, Math.round(r.h), Math.round(m.h)]); }
+  for (const r of ref.records) { const m = mine.recs[String(r.id).replace(/^rec/, '')]; if (m && Math.abs(m.h - r.h) > 2) recBad.push([r.id, Math.round(r.h), Math.round(m.h)]); }
   summary.push({ w, matched: n, ref: ref.elems.length, bad: bad.length, mean: +(sumd / n).toFixed(2), docRef: ref.doc.h, docMine: mine.docH });
   console.log(`\n== ${w}: matched ${n}/${ref.elems.length}, off>3px: ${bad.length}, docH ref ${ref.doc.h} mine ${mine.docH}`);
   if (process.env.V) { bad.filter((b) => !/rec1121678416|rec1064388596/.test(b.k)).slice(0, +process.env.V).forEach((b) => console.log(JSON.stringify(b))); console.log('rec height diffs:', JSON.stringify(recBad.slice(0, 30))); }

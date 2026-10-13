@@ -10,7 +10,8 @@
     "geom": "node tools/geom.mjs",
     "compare": "sh tools/copy-crawl.sh && node tools/compare.mjs",
     "anim": "node tools/anim-compare.mjs && node tools/hover-compare.mjs && node tools/animations-report.mjs",
-    "perf": "node tools/perf-report.mjs"
+    "perf": "node tools/perf-report.mjs",
+    "audit": "node tools/audit-dist.mjs"
   },
   "keywords": [],
   "author": "DVIGA",

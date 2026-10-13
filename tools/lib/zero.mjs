@@ -87,8 +87,8 @@ export function convertZero($, rec, ctx) {
     decl.push(`height:${heightExpr(a)}`);
     rules += `${rid} .ab{${decl.join(';')}}`;
     if (cvOk) {
-      const pads = recPads(rec.attr('class') || '', R);
-      rules += `${rid}{contain-intrinsic-block-size:auto calc(${heightExpr(a)} + ${pads}px)}`;
+      // размер содержимого (padding записи добавляется отдельно — box-sizing: content-box)
+      rules += `${rid}{contain-intrinsic-block-size:auto ${heightExpr(a)}}`;
     }
     for (const e of elems) {
       const cur = layoutByR[R][e.id];
