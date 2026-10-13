@@ -124,26 +124,26 @@ function initScroll() {
     fx.push({ el, dist, ofst: num(arr[ri] ?? arr[arr.length - 1]) });
   });
   if (!sc.length && !fx.length) return;
-  const pageTop = (el) => {
-    const tr = el.style.transform; el.style.transform = 'none';
-    const sw = el.querySelector('.sw');
-    const pt = sw ? sw.style.transform : ''; if (sw) sw.style.transform = 'none';
-    const y = el.getBoundingClientRect().top + scrollY;
-    el.style.transform = tr; if (sw) sw.style.transform = pt;
-    return y;
-  };
+  // Измерение без принудительной раскладки на каждый элемент: сначала сбрасываем transform у всех (запись),
+  // затем один раз читаем геометрию (одна раскладка), затем возвращаем transform (запись).
   const measure = () => {
     const vh = innerHeight;
-    sc.forEach((s) => {
-      const z = zoomOf(s.el); s.z = z;
-      s.top = pageTop(s.el);
+    const items = [...sc.map((s) => s.el), ...fx.map((f) => f.el)];
+    const saved = items.map((el) => { const sw = el.querySelector('.sw'); return [el.style.transform, sw ? sw.style.transform : '', sw]; });
+    items.forEach((el, i) => { el.style.transform = 'none'; if (saved[i][2]) saved[i][2].style.transform = 'none'; });
+    const tops = items.map((el) => el.getBoundingClientRect().top + scrollY);
+    const zooms = items.map((el) => zoomOf(el));
+    items.forEach((el, i) => { el.style.transform = saved[i][0]; if (saved[i][2]) saved[i][2].style.transform = saved[i][1]; });
+    sc.forEach((s, i) => {
+      const z = zooms[i]; s.z = z;
+      s.top = tops[i];
       let to = s.o * z;
       if (s.t === 0.5 || s.t === 1) { to += vh * s.t; if (to > s.top && to <= vh * s.t) to = s.top; }
       s.to = to;
       let un = 0; let prev = s.top;
       s.st = s.steps.map((st) => { const dist = st.d * z; const r = { ...st, dist, start: prev, end: prev + dist, un }; prev += dist; if (!st.f) un += dist; return r; });
     });
-    fx.forEach((f) => { f.z = zoomOf(f.el); f.top = pageTop(f.el); f.end = f.top + f.dist * f.z; });
+    fx.forEach((f, k) => { const i = sc.length + k; f.z = zooms[i]; f.top = tops[i]; f.end = f.top + f.dist * f.z; });
   };
   const frame = () => {
     const y = scrollY;
@@ -200,10 +200,24 @@ function initCounter() {
   io.observe(host);
 }
 
+/* ---------- ленивые фоновые картинки ---------- */
+function initBg() {
+  const els = $('[data-bg]');
+  if (!els.length) return;
+  const show = (el) => { el.style.backgroundImage = el.dataset.bg; el.removeAttribute('data-bg'); };
+  if (!('IntersectionObserver' in w)) { els.forEach(show); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }), { rootMargin: '700px 0px' });
+  els.forEach((el) => io.observe(el));
+}
+
 /* ---------- видео ---------- */
 function initVideo() {
   const vs = $$('video[data-src]');
   if (!vs.length) return;
+  // постеры подгружаются заранее (за ~1,5 экрана), сами ролики — только вблизи экрана и играют только в нём
+  const pio = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { const v = e.target; if (v.dataset.poster) v.poster = v.dataset.poster; pio.unobserve(v); }
+  }), { rootMargin: '1200px 0px' });
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     const v = e.target;
     if (e.isIntersecting) {
@@ -211,7 +225,7 @@ function initVideo() {
       if (!reduce) v.play().catch(() => {});
     } else v.pause();
   }), { rootMargin: '200px 0px' });
-  vs.forEach((v) => io.observe(v));
+  vs.forEach((v) => { pio.observe(v); io.observe(v); });
 }
 
 /* ---------- горизонтальный drag-скролл (лента наград) ---------- */
@@ -309,7 +323,11 @@ function initLazy() {
   }
 }
 
+// Инициализация делится на две части: лёгкая (обработчики, без чтения геометрии) — сразу,
+// тяжёлая (замеры, наблюдатели) — после первого кадра, чтобы не удлинять первую раскладку.
+const afterPaint = (fn) => requestAnimationFrame(() => setTimeout(fn, 0));
 const boot = () => {
-  initAppear(); initSteps(); initScroll(); initCounter(); initVideo(); initDrag(); initCookie(); initPopups(); initLazy();
+  initCookie(); initPopups();
+  afterPaint(() => { initBg(); initAppear(); initSteps(); afterPaint(() => { initScroll(); initCounter(); initVideo(); initDrag(); initLazy(); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

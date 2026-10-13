@@ -8,6 +8,7 @@ import * as esbuild from 'esbuild';
 import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
+import { subsetFonts } from './subset-fonts.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, widget, search, fixLinks } from './lib/components.mjs';
 
 const SRC = 'reference/html/home.html';
@@ -47,7 +48,7 @@ const ctx = {
     usedAssets.add(v.mp4);
     if (v.poster) usedAssets.add(v.poster);
     if (v.webm) usedAssets.add(v.webm);
-    return `<video class="vd" muted loop playsinline preload="none"${v.poster ? ` poster="${v.poster}"` : ''} data-src="${v.mp4}"${v.webm ? ` data-webm="${v.webm}"` : ''} width="${v.w}" height="${v.h}" aria-hidden="true"></video>`;
+    return `<video class="vd" muted loop playsinline preload="none"${v.poster ? ` data-poster="${v.poster}"` : ''} data-src="${v.mp4}"${v.webm ? ` data-webm="${v.webm}"` : ''} width="${v.w}" height="${v.h}" aria-hidden="true"></video>`;
   },
   form(e) {
     const el = e.el;
@@ -108,8 +109,11 @@ const restAll = FB([readCss('src/css/forms.css'), readCss('src/css/components.cs
 const tgt = ['chrome110', 'safari16', 'firefox110'];
 const critCss = (await esbuild.transform(critAll, { loader: 'css', minify: true, target: tgt })).code;
 const minCss = (await esbuild.transform(restAll, { loader: 'css', minify: true, target: tgt })).code;
-const cssName = `app.${hash(minCss)}.css`;
-fs.writeFileSync(path.join(OUT, 'assets', cssName), minCss);
+const CSS_MODE = process.env.CSS_MODE || 'link';
+const fullCss = (await esbuild.transform(critAll + NL + restAll, { loader: 'css', minify: true, target: tgt })).code;
+const outCss = CSS_MODE === 'async' ? minCss : fullCss;
+const cssName = `app.${hash(outCss)}.css`;
+fs.writeFileSync(path.join(OUT, 'assets', cssName), outCss);
 
 // ----------------------------------------------------------------- JS
 const jsRes = await esbuild.build({
@@ -136,17 +140,20 @@ const ld = JSON.parse(fs.readFileSync('data/jsonld.json', 'utf8'))
 const fontPre = ['inter-cyrillic', 'inter-latin'].map((f) => `<link rel="preload" href="/assets/fonts/${f}.woff2" as="font" type="font/woff2" crossorigin>`).join('');
 const noindex = process.env.NOINDEX ? '<meta name="robots" content="noindex,nofollow">' : '';
 
+const cssTags = CSS_MODE === 'inline' ? `<style>${fullCss}</style>` : CSS_MODE === 'async'
+  ? `<style>${critCss}</style><link rel="stylesheet" href="/assets/${cssName}" media="print" onload="this.media='all';dispatchEvent(new Event('cssload'))"><noscript><link rel="stylesheet" href="/assets/${cssName}"><style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style></noscript>`
+  : `<link rel="stylesheet" href="/assets/${cssName}"><noscript><style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style></noscript>`;
 const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><meta name="description" content="${descr}">${noindex}<link rel="canonical" href="${SITE_URL}/"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
   + `<meta property="og:url" content="${SITE_URL}/"><meta property="og:title" content="${$('meta[property="og:title"]').attr('content')}"><meta property="og:description" content="${descr}"><meta property="og:type" content="website"><meta property="og:image" content="${SITE_URL}${ogImage.webp.at(-1).src}"><meta name="twitter:card" content="summary_large_image">`
   + `<link rel="icon" type="image/png" sizes="32x32" href="${ic32l}" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" sizes="32x32" href="${ic32d}" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" sizes="any" href="${icSvg}"><link rel="apple-touch-icon" href="${icApple}">`
-  + `${fontPre}<style>${critCss}</style><link rel="stylesheet" href="/assets/${cssName}" media="print" onload="this.media='all';dispatchEvent(new Event('cssload'))"><noscript><link rel="stylesheet" href="/assets/${cssName}"><style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style></noscript>${ld}`;
+  + `${fontPre}${cssTags}${ld}`;
 
 const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${cookie($)}${widget($, widgetForm)}`;
 const page = `<!doctype html><html lang="ru"><head>${head}</head><body>${body}<script type="module" src="/assets/${jsName}"></script></body></html>`;
 fs.writeFileSync(path.join(OUT, 'index.html'), page);
 
 // ----------------------------------------------------------------- статика
-fs.cpSync('public/assets/fonts', path.join(OUT, 'assets/fonts'), { recursive: true });
+const fontReport = await subsetFonts(page, path.join(OUT, 'assets/fonts'));
 let copied = 0;
 for (const a of usedAssets) {
   const src = path.join('public', a);
@@ -160,4 +167,5 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="U
 fs.writeFileSync(path.join(OUT, '_headers'), '/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 const kb = (n) => (n / 1024).toFixed(1);
 console.log(`critical css ${kb(critCss.length)} KB (inline), rest ${kb(minCss.length)} KB`);
+console.log(`fonts: ${fontReport}`);
 console.log(`build ok: html ${kb(page.length)} KB, css ${kb(minCss.length)} KB, js ${kb(fs.statSync(path.join(OUT, 'assets', jsName)).size)} KB, assets copied ${copied}`);

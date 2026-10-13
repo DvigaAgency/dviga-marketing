@@ -69,6 +69,7 @@ export function convertZero($, rec, ctx) {
   const minR = screens[0];
   const mq = (R) => (R === minR ? null : `(min-width:${R}px)`);
   const layoutCss = {};
+  const cvOk = process.env.NO_CV !== '1' && ovrflw !== 'visible' && !ab['data-artboard-pos'] && !/uc-zindex|uc-cases|uc-case-0|uc-menu-header/.test(rec.attr('class') || '') && !(ctx.eagerRecs && ctx.eagerRecs.has(recId));
   for (const R of screens) {
     let rules = '';
     // артборд
@@ -76,15 +77,19 @@ export function convertZero($, rec, ctx) {
     const prev = R === minR ? null : A[screens[screens.indexOf(R) - 1]];
     const decl = [];
     const s = `tan(atan2(100cqw,${R}px))`;
+    // heightExpr объявлена ниже в цикле; поднимаем сюда
     const heightExpr = (x) => {
       const hh = x.upscale ? `calc(${x.h}px*var(--s))` : `${x.h}px`;
       if (x.vh) return `max(${hh},${x.vh}${'svh'})`;
       return hh;
     };
-    decl.push(`--s:${a.upscale ? s : '1'}`);
-    decl.push(`--z:${a.upscale ? 'var(--s)' : '1'}`);
+    rules += `${rid}{--s:${a.upscale ? s : '1'};--z:${a.upscale ? 'var(--s)' : '1'}}`;
     decl.push(`height:${heightExpr(a)}`);
     rules += `${rid} .ab{${decl.join(';')}}`;
+    if (cvOk) {
+      const pads = recPads(rec.attr('class') || '', R);
+      rules += `${rid}{contain-intrinsic-block-size:auto calc(${heightExpr(a)} + ${pads}px)}`;
+    }
     for (const e of elems) {
       const cur = layoutByR[R][e.id];
       const p = prev ? layoutByR[screens[screens.indexOf(R) - 1]][e.id] : {};
@@ -125,8 +130,23 @@ export function convertZero($, rec, ctx) {
   const carrier = rec.find('.t396__carrier-wrapper').length
     ? '<div class="cw"><div class="cr"></div></div><div class="fl"></div>'
     : '<div class="cr"></div><div class="fl"></div>';
+  if (cvOk) cls.push('cv');
   const out = `<section id="r${recId}" class="r${cls.length ? ' ' + cls.join(' ') : ''}"${style && !/^padding/.test(style) ? '' : ''}><div class="${abClass.join(' ')}"${fixedPos ? ` data-pos="${fixedPos}"` : ''}>${carrier}${html.join('')}</div></section>`;
   return { id: recId, html: out, css: css.join('\n'), elems: elems.length, screens, maxR, upscale: A[maxR].upscale };
+}
+
+/** сумма вертикальных padding записи на брейкпоинте R (как в recPadding) */
+function recPads(cls, R) {
+  const g = (re) => { const m = cls.match(re); return m ? +m[1] : 0; };
+  let pt = g(/t-rec_pt_([0-9]+)/); let pb = g(/t-rec_pb_([0-9]+)/);
+  if (R <= 480) {
+    if (pt === 120) pt = 90;
+    if (pb === 135) pb = 90;
+    const a = cls.match(/t-rec_pt-res-480_([0-9]+)/); const b = cls.match(/t-rec_pb-res-480_([0-9]+)/);
+    if (a) pt = +a[1];
+    if (b) pb = +b[1];
+  }
+  return pt + pb;
 }
 
 function recPadding(cls, recId) {
@@ -333,9 +353,13 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   let style = '';
   switch (type) {
     case 'shape': {
-      const bg = atom.attr('style');
-      if (bg && /background-image/.test(bg)) style = ` style="${esc(bg.replace(/url\(['"]?([^'")]+)['"]?\)/g, (m, u) => ctx.cssImage(u, (parseFloat(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width) || 0) * 1.6)))}"`;
-      if (atom.attr('data-original')) style = ` style="${esc('background-image:' + ctx.cssImage(atom.attr('data-original'), (parseFloat(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width) || 0) * 1.6))}"`;
+      const mw = (parseFloat(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width) || 0) * 1.6;
+      const bgSrc = atom.attr('data-original') || ((atom.attr('style') || '').match(/url\(['"]?([^'")]+)['"]?\)/) || [])[1];
+      if (bgSrc) {
+        const val = ctx.cssImage(bgSrc, mw);
+        // фоновые картинки вне первого экрана подгружаются лениво (IntersectionObserver в main.js)
+        style = ctx.eager() ? ` style="${esc('background-image:' + val)}"` : ` data-bg="${esc(val)}"`;
+      }
       if (atom.hasClass('t-bgimg')) atomClass += ' bg';
       const al = atom.attr('aria-label');
       const has = linkAttrs.some((x) => x.startsWith('aria-label'));
