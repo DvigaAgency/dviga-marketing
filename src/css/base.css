@@ -1,0 +1,35 @@
+@property --s{syntax:"<number>";inherits:true;initial-value:1}
+@property --z{syntax:"<number>";inherits:true;initial-value:1}
+*,*::before,*::after{box-sizing:content-box}
+html{-webkit-text-size-adjust:100%}
+body{--t-headline-font:Inter,Arial,sans-serif;--t-text-font:Inter,Arial,sans-serif;margin:0;background:#fff;font-family:Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#121212}
+div,span,h1,h2,h3,h4,h5,h6,p,a,img,b,u,i,video{margin:0;padding:0;border:0}
+sup,sub{line-height:0;font-size:smaller}sup{vertical-align:super}sub{vertical-align:sub}
+a{color:#121212;text-decoration:none}a[href^=tel]{color:inherit}
+b,strong{font-weight:700}
+img{border:0}
+/* ---- контейнер для cqw: масштаб считается от ширины без полосы прокрутки ---- */
+.cq{container-type:inline-size}
+/* ---- Zero-блоки ---- */
+.r{position:relative}
+.ab{position:relative;width:100%;overflow:hidden;-webkit-text-size-adjust:100%}
+.ab.ov{overflow:visible}
+.cr{position:absolute;left:0;top:0;z-index:0;width:100%;height:100%}
+.fl{position:absolute;left:0;top:0;z-index:1;width:100%;height:100%}
+.cw{position:absolute;width:100%;height:100%;top:0;left:0;clip-path:inset(0 0 0 0)}
+.e{position:absolute;box-sizing:border-box;display:table}
+.e .a{display:table-cell;vertical-align:middle;width:100%;-webkit-text-size-adjust:100%}
+.e[data-t=button]{display:block}
+.e[data-t=button] .a{display:flex;box-sizing:border-box;width:100%;height:100%;flex-direction:row;justify-content:center;align-items:center;overflow:hidden}
+.e[data-t=button] .a::after{content:"";display:block;position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none;opacity:0;z-index:-1}
+.e a.a{text-decoration:none}
+.a ul,.a ol{margin-bottom:0}
+.ai{width:100%;display:block;height:auto}
+.bc{display:flex;flex-direction:row;align-items:center;justify-content:center;flex:0 1 auto;min-width:0}
+.bt{flex:1 1 0;text-overflow:ellipsis}
+.bb{position:absolute;inset:0;z-index:1;border-radius:inherit;transition-duration:inherit;transition-timing-function:inherit;pointer-events:none}
+.bb::before,.bb::after{-webkit-backface-visibility:hidden;position:absolute;inset:0;content:"";border-radius:inherit;z-index:1}
+.bb::after{opacity:0;transition-property:opacity;transition-duration:inherit;transition-timing-function:inherit}
+.e .a.bg{background-repeat:no-repeat}
+.sw{display:inherit;width:inherit;height:inherit}
+.e[data-t=text] .a[class] a{border-bottom:1px solid #121212;box-shadow:none;transition:color .3s,border-bottom .3s,box-shadow .3s}
