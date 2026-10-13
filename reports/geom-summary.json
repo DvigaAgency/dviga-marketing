@@ -1,20 +1,11 @@
 [
  {
-  "w": 960,
+  "w": 480,
   "matched": 333,
   "ref": 333,
-  "bad": 40,
-  "mean": 102.02,
-  "docRef": 15454,
-  "docMine": 16803
- },
- {
-  "w": 320,
-  "matched": 333,
-  "ref": 333,
-  "bad": 39,
-  "mean": 84.31,
-  "docRef": 19491,
-  "docMine": 20783
+  "bad": 0,
+  "mean": 0.16,
+  "docRef": 18051,
+  "docMine": 17993
  }
 ]

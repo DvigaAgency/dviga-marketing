@@ -6,13 +6,13 @@ import { startServer } from './lib/serve.mjs';
 
 const widths = (process.argv[2] || '1440,1200,960,640,480,320').split(',').map(Number);
 const HEIGHT = { 1440: 900, 1200: 900, 960: 800, 640: 900, 480: 850, 320: 700 };
-const srv = await startServer('dist', 4173);
+const srv = await startServer('dist', 4180);
 const browser = await chromium.launch();
 const summary = [];
 for (const w of widths) {
   const ref = JSON.parse(fs.readFileSync(`reference/home/${w}/data.json`, 'utf8'));
   const page = await browser.newPage({ viewport: { width: w, height: HEIGHT[w] || 800 } });
-  await page.goto('http://localhost:4173/', { waitUntil: 'load' });
+  await page.goto('http://localhost:4180/', { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(500);
   const mine = await page.evaluate(() => {

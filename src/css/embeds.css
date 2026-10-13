@@ -1,0 +1,33 @@
+/* ===== перенос кастомного кода страницы (T123-вставки оригинала) ===== */
+.indent{}
+@media (min-width:960px){.indent{text-indent:150px}}
+.uc-zindex{position:relative;z-index:100!important}
+.img-sod{z-index:99}
+/* кнопка «точка» (Увеличение точки на кнопке) */
+:root{--DotColor:#f5d5d2;--TextColorHover:#d93433;--ImgDot:url(%%DOT%%),url(%%DOT%%)}
+.dot-scale .bc{overflow:hidden!important;position:relative;width:100%;height:100%;margin:0;transition:all 1.2s ease-in-out,color .2s ease-in-out,background 0s ease-in-out,border-color 1.2s ease-in-out!important}
+.dot-scale .a{overflow:hidden}
+.dot-scale:hover .bc{transition-delay:.2s;background:var(--DotColor)!important;transition:background 2.3s ease-in-out!important}
+.dot-scale .bc::after{content:"";position:absolute;display:inline-block;width:10px;height:10px;align-items:center;right:15px;border-radius:1000px;background-color:var(--DotColor);background-size:cover;top:50%;transform:translateY(-50%);transition:transform .7s cubic-bezier(.84,-.01,.25,.99)}
+.dot-scale .bc::before{content:"";display:inline-block;height:12px;width:12px;background-image:var(--ImgDot);background-position:0 0,-12px -12px;background-repeat:no-repeat;background-size:contain;vertical-align:middle;opacity:0;transition:opacity .5s cubic-bezier(.84,-.01,.25,.99);right:15px;top:50%;transform:translateY(-50%);position:absolute;z-index:9;animation:buttonArrow .7s infinite cubic-bezier(.84,-.01,.25,.99)}
+@keyframes buttonArrow{0%{background-position:0 0,-12px 12px}100%{background-position:12px -12px,0 0}}
+.dot-scale:hover .bc::before{opacity:1}
+.dot-scale:hover .bc::after{transform:scale(50)}
+.dot-scale .bc div{display:inline-block;z-index:1;position:relative;transition:color .7s cubic-bezier(.84,-.01,.25,.99);margin-right:15px}
+.dot-scale:hover .bc div{color:var(--TextColorHover)}
+/* ссылки с подчёркиванием, уходящим при наведении */
+.link-underline:not(.e){position:relative;display:inline-block;width:fit-content;bottom:2px;transition:color 200ms ease,font-weight 200ms ease!important}
+.link-underline:hover,.link-underline:hover a{color:#d93433!important}
+.link-underline::before{transform-origin:0 50%;transform:scale3d(1,1,1);position:absolute;width:100%;height:1px;background-color:#000;top:100%;left:0;pointer-events:none;content:"";transition:transform 200ms!important}
+.link-underline:hover::before{transform-origin:100% 50%;transform:scale3d(0,1,1)}
+/* ссылки-заголовки публикаций: плавное окрашивание */
+.anx a{transition:all 200ms!important}
+.anx a:hover{color:#d93433!important}
+.anx{display:flex!important;align-items:center;overflow:visible}
+/* лента наград: горизонтальный drag-скролл без полосы */
+.dg{cursor:grab}
+.dg.gr{cursor:grabbing;user-select:none}
+.dg::-webkit-scrollbar{height:0}
+.dg{scrollbar-width:none}
+/* t.me/рейтинг и пр.: ссылки в кастомных попапах */
+.rv-d a[href^="#popup:"]{color:#d93433}

@@ -18,6 +18,7 @@ export function picture(url, o = {}) {
   const cls = o.cls ? ` class="${o.cls}"` : '';
   const alt = ` alt="${esc(o.alt || '')}"`;
   if (m.kind === 'svg') return `<img${cls} src="${m.src}"${alt}${dim}${loading}>`;
+  m.avif.forEach((v) => used.add(v.src)); m.webp.forEach((v) => used.add(v.src));
   const sizes = o.sizes ? ` sizes="${o.sizes}"` : '';
   const ss = (arr) => arr.map((v) => `${v.src} ${v.w}w`).join(',');
   if (m.avif.length === 1 && m.webp.length === 1) {

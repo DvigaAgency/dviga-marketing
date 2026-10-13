@@ -1,0 +1,70 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://dviga.marketing/#organization",
+    "name": "Dviga Marketing",
+    "alternateName": ["DVIGA", "Dviga Marketing Agency", "Маркетинговое агентство Dviga", "Агентство Dviga"],
+    "description": "Разработка сайтов, брендинг и продвижение для застройщиков, крупных производств, транспортных и FMCG компаний. №3 среди самых креативных digital-агентств России (Рейтинг Рунета 2022). 4× Website of the Day на CSS Design Awards.",
+    "url": "https://dviga.marketing",
+    "foundingDate": "2015",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Владивосток",
+      "streetAddress": "Океанский проспект, 135, офис 57",
+      "addressCountry": "RU"
+    },
+    "areaServed": ["RU", "SG", "AU"],
+    "founder": {
+      "@type": "Person",
+      "@id": "https://dviga.marketing/authors/timofey-beloglazov#person",
+      "name": "Тимофей Белоглазов"
+    },
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://static.tildacdn.com/tild6364-3730-4234-b039-643962393136/Layer_2.svg"
+    },
+    "sameAs": [
+      "https://dviga.marketing",
+      "https://en.dviga.marketing/",
+      "https://www.awwwards.com/DVIGA/",
+      "https://www.behance.net/dviga",
+      "https://clutch.co/profile/dviga-marketing-agency",
+      "https://www.linkedin.com/company/dviga",
+      "https://www.trustpilot.com/review/dviga.marketing",
+      "https://www.goodfirms.co/company/dviga",
+      "https://creativepool.com/dviga",
+      "https://www.youtube.com/@dviga",
+      "https://cmsmagazine.ru/agencies/dviga-marketing/",
+      "https://cyclowiki.org/wiki/Dviga",
+      "https://ratingruneta.ru/agency-dviga-marketing/",
+      "https://www.sostav.ru/map/companies/7087",
+      "https://www.1c-bitrix.ru/partners/1585127.php",
+      "https://workspace.ru/contractors/dviga-marketing/",
+      "https://www.vl.ru/reaktivnoe-agentstvo-dviga",
+      "https://2gis.ru/vladivostok/firm/70000001019054964",
+      "https://yandex.ru/maps/org/dviga/1807153931/",
+      "https://tagline.ru/dviga/",
+      "https://dprofile.ru/dviga/info",
+      "https://partners.profitbase.ru/partners/dviga",
+      "https://marketing-tech.ru/companies/dviga/",
+      "https://adpass.ru/company/dviga/"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://dviga.marketing/#website",
+    "url": "https://dviga.marketing",
+    "name": "Dviga Marketing",
+    "description": "Разработка сайтов, брендинг и продвижение для застройщиков, крупных производств, транспортных и FMCG компаний.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "DVIGA",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://static.tildacdn.com/tild6364-3730-4234-b039-643962393136/Layer_2.svg"
+      }
+    }
+  }
+]

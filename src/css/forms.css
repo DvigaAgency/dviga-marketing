@@ -1,0 +1,45 @@
+/* ===== формы ===== */
+.fm{display:block;font-family:Inter,Arial,sans-serif}
+.fx{display:flex;flex-direction:column}
+.fs{display:none}
+.fs.on{display:block}
+.fg{position:relative;margin:0 0 var(--mb,20px)}
+.ft{box-sizing:border-box;padding:0 10px var(--tmb,5px) 0;font-family:Inter,Arial,sans-serif;font-size:var(--tfs,14px);font-weight:var(--tfw,400);line-height:1.55;color:var(--tc,#121212)}
+.fb{position:relative}
+.fi{display:inline-block;box-sizing:border-box;width:100%;height:var(--ih,50px);margin:0;padding:0 20px;border:var(--ibw,1px) solid var(--ibc,#dedede);border-radius:var(--ir,20px);background:var(--ibg,#f2f2f2);color:var(--ic,#121212);font:var(--ifw,300) var(--ifs,14px)/1.33 Inter,Arial,sans-serif;outline:0;appearance:none;-webkit-appearance:none;transition:border-color .2s}
+textarea.fi{height:calc(var(--ih,50px)*2.7);padding:10px 20px 0;vertical-align:bottom;resize:none;overflow:hidden auto}
+.fi::placeholder{color:var(--ic,#121212);opacity:.5}
+.fi:focus{border-color:var(--ic,#121212)}
+.fg.er .fi{border-color:#f00}
+.fe{display:none;position:absolute;z-index:2;margin:5px 0 0;padding:8px 10px;border-radius:2px;background:#fff;box-shadow:0 1px 20px rgba(0,0,0,.2);color:#f00;font:400 13px/1.4 Inter,Arial,sans-serif;pointer-events:none}
+.fg.er .fe{display:block}
+.fk{position:relative;display:flex;box-sizing:border-box;padding:1.6px 0 0;color:var(--tc,#121212);font:400 14px/1.2 Inter,Arial,sans-serif;cursor:pointer}
+.fk input{position:absolute;z-index:-1;width:13px;height:13px;margin:3px;opacity:0}
+.fk i{position:relative;flex:0 0 auto;box-sizing:border-box;width:20px;height:20px;margin:-1.6px 16px 0 0;border:1.667px solid var(--ec,#fff);opacity:.6;transition:.2s}
+.fk i::after{content:"";position:absolute;left:5px;top:1px;box-sizing:border-box;width:6px;height:11px;border:solid var(--ec,#fff);border-width:0 2px 2px 0;opacity:0;transform:rotate(45deg)}
+.fk input:checked+i{opacity:1}
+.fk input:checked+i::after{opacity:1}
+.fk input:focus-visible+i{outline:2px solid #d93433;outline-offset:2px}
+.fk span{flex:1 1 auto;min-width:0;font-weight:400}
+.fg.er .fk i{border-color:#f00}
+.fr{display:flex;align-items:center;margin:0 0 10px;color:#121212;font:400 15px/1.55 Inter,Arial,sans-serif;cursor:pointer}
+.fr input{position:absolute;opacity:0}
+.fr i{box-sizing:border-box;flex:0 0 auto;width:20px;height:20px;margin-right:10px;border:2px solid #000;border-radius:50%;transition:.2s}
+.fr input:checked+i{background:radial-gradient(#000 0 45%,transparent 50%)}
+.fr input:focus-visible+i{outline:2px solid #d93433;outline-offset:2px}
+.ff{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:38px;padding:0 24px;border-radius:var(--br,100px);background:var(--bbg,#f5d5d2);color:var(--bc,#d93433);font:500 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;cursor:pointer;transition:background-color .2s ease-in-out,color .2s ease-in-out}
+.ff:hover{background:var(--bhb,#d93433);color:var(--bhc,#fff)}
+.fu{margin-bottom:5px}
+.fu input{display:none}
+.fu small{display:block;margin-top:6px;color:#848484;font:400 13px/1.4 Inter,Arial,sans-serif}
+.fo{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:var(--bw,200px);max-width:100%;height:var(--bh,50px);margin-top:var(--bmt,20px);padding:0 20px;border:0;border-radius:var(--br,100px);background:var(--bbg,#f5d5d2);color:var(--bc,#d93433);font:var(--bfw,500) var(--bfs,14px)/1.2 Inter,Arial,sans-serif;text-transform:uppercase;cursor:pointer;transition:background-color .2s ease-in-out,color .2s ease-in-out}
+.fo:hover{background:var(--bhb,#d93433);color:var(--bhc,#fff)}
+.fo[disabled]{opacity:.6;cursor:default}
+.fo.pr{background:#d93433;color:#fff}
+.fo.bk{background:transparent;border:1px solid currentColor}
+.fz{display:none;box-sizing:border-box;margin:0 0 20px;padding:20px;background:#62c584;color:#fff;font:400 18px/1.55 Inter,Arial,sans-serif;text-align:center}
+.fm.ok .fz{display:block}
+.fm.ok .fx,.fm.ok .fa{display:none}
+.fm.eg .fz{background:#f66}
+.fm.eg .fz{display:block}
+.fa{display:flex;gap:12px;flex-wrap:wrap}

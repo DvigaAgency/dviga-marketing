@@ -7,3 +7,5 @@ data/pages.json
 reports/dumps/
 reports/_*.png
 tools/_*.mjs
+dist-test/
+dist-dev/

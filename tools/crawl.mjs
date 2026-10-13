@@ -58,6 +58,7 @@ for (const w of WIDTHS) {
   await autoScroll(page);
   await page.waitForLoadState('networkidle').catch(() => {});
   await page.waitForTimeout(2500);
+  if (process.env.INJECT) await page.addStyleTag({ content: process.env.INJECT });
   // стабилизация: ролик на первый кадр
   await page.evaluate(() => document.querySelectorAll('video').forEach((v) => { try { v.pause(); v.currentTime = 0; } catch {} }));
   if (process.env.SEL) await page.evaluate((sel) => { window.__SEL = sel; }, process.env.SEL);
@@ -67,13 +68,18 @@ for (const w of WIDTHS) {
   if (w === 1440) fs.writeFileSync(path.join(OUT, 'rendered.html'), await page.content());
   // скриншоты секций
   const recs = data.records;
+  const cdp = await ctx.newCDPSession(page);
   for (let i = 0; i < recs.length; i++) {
     const r = recs[i];
     if (r.h < 1) continue;
-    await page.evaluate((y) => scrollTo(0, y), r.y);
-    await page.waitForTimeout(120);
     const f = path.join(dir, 'sections', `${String(i).padStart(2, '0')}_${r.id}.png`);
-    try { await page.screenshot({ path: f, clip: { x: 0, y: r.y, width: Math.min(r.w || w, w), height: Math.min(r.h, 6000) }, fullPage: true }); } catch (e) { console.log('shot fail', r.id, String(e).slice(0, 80)); }
+    try {
+      // прокрутка к секции нужна, чтобы фиксированные элементы (шапка, cookie) попали в кадр так же, как у пользователя
+      await page.evaluate((y) => scrollTo(0, y), r.y);
+      await page.waitForTimeout(150);
+      const { data } = await cdp.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: r.y, width: Math.min(r.w || w, w), height: Math.min(r.h, 6000), scale: 1 } });
+      fs.writeFileSync(f, Buffer.from(data, 'base64'));
+    } catch (e) { console.log('shot fail', r.id, String(e).slice(0, 80)); }
   }
   console.log(w, 'docH', data.doc.h, 'records', recs.length, 'elems', data.elems.length, 'reqs', reqs.length);
   reqs.forEach((q) => requests.add(q.u));

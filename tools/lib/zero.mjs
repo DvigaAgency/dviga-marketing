@@ -18,6 +18,22 @@ const SEL_MAP = [
 ];
 const DROP_ELEM_PROPS = new Set(['top', 'left', 'width', 'height', 'display']);
 const DROP_AB_PROPS = new Set(['height', 'min-height']);
+const DEFAULTS = {
+  'border-width': 'var(--t396-borderwidth,0)',
+  'border-style': 'var(--t396-borderstyle,solid)',
+  'border-color': 'var(--t396-bordercolor,transparent)',
+  'background-position': 'center center',
+  'white-space': 'normal',
+  'vertical-align': 'middle',
+  'background-size': 'cover',
+};
+function isDefault(d) {
+  const v = csstree.generate(d.value);
+  if (DEFAULTS[d.property] === v) return true;
+  if (d.property === 'transition' && v.startsWith('background-color var(--t396-speedhover,0s) ease-in-out,color var(--t396-speedhover,0s)')) return true;
+  if (d.property === 'text-shadow' && v.startsWith('var(--t396-shadow-text-x,0px) var(--t396-shadow-text-y,0px) var(--t396-shadow-text-blur,0px)')) return true;
+  return false;
+}
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
@@ -68,17 +84,18 @@ export function convertZero($, rec, ctx) {
     decl.push(`--s:${a.upscale ? s : '1'}`);
     decl.push(`--z:${a.upscale ? 'var(--s)' : '1'}`);
     decl.push(`height:${heightExpr(a)}`);
-    if (!prev || prev.upscale !== a.upscale || prev.h !== a.h || prev.vh !== a.vh || true) rules += `${rid} .ab{${decl.join(';')}}`;
+    rules += `${rid} .ab{${decl.join(';')}}`;
     for (const e of elems) {
       const cur = layoutByR[R][e.id];
       const p = prev ? layoutByR[screens[screens.indexOf(R) - 1]][e.id] : {};
       const d = [];
       for (const k of ['width', 'min-width', 'height', 'left', 'top', 'translate']) {
         if (cur[k] === undefined) continue;
+        if (!prev && cur[k] === '') continue;
         if (!prev || cur[k] !== p[k]) d.push(`${k}:${cur[k] === '' ? 'unset' : cur[k]}`);
       }
-      if (!prev || cur.__zoom !== p.__zoom) d.push(`zoom:${cur.__zoom ? 'var(--z)' : '1'}`);
-      if (d.length) rules += `${rid} .e${e.id}{${d.join(';')}}`;
+      if ((prev ? cur.__zoom !== p.__zoom : !cur.__zoom)) d.push(`zoom:${cur.__zoom ? 'var(--z)' : '1'}`);
+      if (d.length) rules += `${ctx.sel(recId, e.id)}{${d.join(';')}}`;
     }
     layoutCss[R] = rules;
   }
@@ -102,6 +119,7 @@ export function convertZero($, rec, ctx) {
   if (pad) css.push(pad);
   const abClass = ['ab'];
   if (ovrflw === 'visible') abClass.push('ov');
+  if (ctx.drag && ctx.drag.has(recId)) abClass.push('dg');
   const abStyleBits = [];
   void abAttrs; void abStyleBits; void style; void fixedPos;
   const carrier = rec.find('.t396__carrier-wrapper').length
@@ -130,8 +148,9 @@ function recPadding(cls, recId) {
 }
 
 // ---------------------------------------------------------------- CSS
-function mapSelector(sel, recId) {
+function mapSelector(sel, recId, ctx) {
   let s = sel.trim();
+  s = s.replace(/#rec([0-9]+) \.tn-elem\[data-elem-id="([0-9]+)"\]/g, (m, r, id) => ctx.sel(r, id));
   s = s.replace(new RegExp(`#rec${recId}`, 'g'), `#r${recId}`);
   s = s.replace(/\.tn-elem\[data-elem-id="(\d+)"\]/g, '.e$1');
   for (const [re, to] of SEL_MAP) s = s.replace(re, to);
@@ -141,6 +160,7 @@ function mapSelector(sel, recId) {
 function rewriteCss(raw, recId, ctx, elems, widthById) {
   const imgs = [];
   const ast = csstree.parse(raw);
+  const textIds = new Set(elems.filter((e) => e.type === 'text').map((e) => e.id));
   const sbsIds = new Set(elems.filter((e) => e.attrs['data-animate-sbs-opts']).map((e) => e.id));
   const toDelete = [];
   csstree.walk(ast, {
@@ -161,9 +181,13 @@ function rewriteCss(raw, recId, ctx, elems, widthById) {
       const isElemRoot = /^#rec\d+ \.tn-elem\[data-elem-id="\d+"\]$/.test(pre.trim());
       const isAb = /^#rec\d+ \.t396__(artboard|carrier|filter)$/.test(pre.trim());
       const isAtom = /^#rec\d+ \.tn-elem\[data-elem-id="\d+"\] \.tn-atom$/.test(pre.trim());
-      // удаляем layout-свойства (они генерируются из данных)
+      // удаляем layout-свойства (они генерируются из данных) и значения по умолчанию (вынесены в base.css)
+      const top = !this.atrule;
       node.block.children = node.block.children.filter((d) => {
         if (d.type !== 'Declaration') return true;
+        if (top && (isAtom || isElemRoot) && isDefault(d)) return false;
+        // как в zero-1.2: у текстов line-height округляется до целых px (t396__fixElementsLineHeights)
+        if (isAtom && d.property === 'line-height' && idMatch && textIds.has(idMatch[1]) && /^[0-9.]+$/.test(csstree.generate(d.value))) d.value = csstree.parse(`round(${csstree.generate(d.value)}em,1px)`, { context: 'value' });
         if (isElemRoot && DROP_ELEM_PROPS.has(d.property)) { if (d.property !== 'display' || /^(table|block)$/.test(csstree.generate(d.value))) return false; }
         if (isAb && DROP_AB_PROPS.has(d.property)) return false;
         return true;
@@ -178,7 +202,7 @@ function rewriteCss(raw, recId, ctx, elems, widthById) {
           }
           return true;
         });
-        if (move.length) node.__extra = `#r${recId} .e${idMatch[1]} .sw{${move.join(';')}}`;
+        if (move.length) node.__extra = `${ctx.sel(recId, idMatch[1])} .sw{${move.join(';')}}`;
       }
       if (node.block.children.isEmpty) toDelete.push([list, item]);
     },
@@ -197,7 +221,7 @@ function rewriteCss(raw, recId, ctx, elems, widthById) {
   });
   let out = '';
   const printRule = (n) => {
-    const sel = csstree.generate(n.prelude).split(',').map((s) => mapSelector(s, recId)).join(',');
+    const sel = csstree.generate(n.prelude).split(',').map((s) => mapSelector(s, recId, ctx)).join(',');
     let body = csstree.generate(n.block).slice(1, -1).replace(/--t396-/g, '--z-');
     let r = `${sel}{${body}}`;
     if (n.__extra) r += n.__extra.replace(/--t396-/g, '--z-');
@@ -241,11 +265,11 @@ function emitElement($, e, recId, ctx, css, A, screens) {
       data.push(`data-sc='${JSON.stringify({ s: steps, r: resOpts, t: parseFloat(rm('data-animate-sbs-trg') ?? '1'), o: parseInt(rm('data-animate-sbs-trgofst') || '0', 10), m: rm('data-animate-mobile') === 'y' ? 1 : 0 })}'`);
     } else {
       const uid = `k${recId}_${id}`;
-      const sel = `#r${recId} .e${id}.on>.sw`;
+      const sel = `${ctx.sel(recId, id)}.on>.sw`;
       const kf = buildKeyframes(sel, uid, sbsOpts, loop);
       if (kf) {
         css.push(kf.css);
-        if (kf.hidden) wrapStyle = ' style="opacity:0"';
+        if (kf.hidden) data.push('data-h0="1"');
         const trg = rm('data-animate-sbs-trgels');
         const trgOfst = rm('data-animate-sbs-trgofst');
         data.push(`data-an="${sbsEvent}"`);
@@ -254,23 +278,28 @@ function emitElement($, e, recId, ctx, css, A, screens) {
         if (trgOfst !== undefined) data.push(`data-to="${trgOfst}"`);
         if (loop) data.push(`data-lp="${loop}"`);
         if (kf.total) data.push(`data-tt="${kf.total}"`);
-        if (rm('data-animate-mobile') === 'y') data.push('data-mb="1"');
       }
     }
   }
   // appear-анимации (fadein)
   if (rm('data-animate-style')) {
     data.push(`data-fi="${esc(rm('data-animate-style'))}"`);
-    if (rm('data-animate-duration')) data.push(`data-fd="${rm('data-animate-duration')}"`);
-    if (rm('data-animate-delay')) data.push(`data-fl="${rm('data-animate-delay')}"`);
-    if (rm('data-animate-mobile') === 'y') data.push('data-mb="1"');
+    const sv = [];
+    if (rm('data-animate-duration')) sv.push(`--fd:${rm('data-animate-duration')}s`);
+    if (rm('data-animate-delay')) sv.push(`--fl:${rm('data-animate-delay')}s`);
+    if (sv.length) data.push(`style="${sv.join(';')}"`);
   }
   // фиксация на время прокрутки
   if (rm('data-animate-fix') !== undefined) {
-    const tro = {};
-    for (const R of screens) { const v = attrs[`data-animate-fix-trgofst${R === screens[screens.length - 1] ? '' : '-res-' + R}`]; if (v !== undefined) tro[R] = v; }
-    data.push(`data-fx="${rm('data-animate-fix-dist') || 0}" data-fo='${JSON.stringify(tro)}'`);
+    const maxR = screens[screens.length - 1];
+    const at = (R) => attrs[R === maxR ? 'data-animate-fix-trgofst' : `data-animate-fix-trgofst-res-${R}`];
+    const tro = screens.map((R) => { let v = at(R); for (const c of screens) { if (v !== undefined) break; if (c > R) v = at(c); } return parseInt(v ?? '0', 10) || 0; });
+    data.push(`data-fx="${rm('data-animate-fix-dist') || 0}" data-fo="${tro.join(',')}"`);
   }
+  if (rm('data-animate-mobile') === 'y') data.push('data-mb="1"');
+  if (classes.includes('dot-scale-2') && !classes.includes('dot-scale')) classes.push('dot-scale');
+  if (ctx.anx && ctx.anx.has(`${recId}:${id}`)) classes.push('anx');
+  e.dot = classes.includes('dot-scale');
   const inner = emitAtom($, e, ctx, A, screens, hasSbs && sbsEvent !== 'scroll' ? wrapStyle : '', hasSbs);
   return `<div class="e e${id}${classes.length ? ' ' + classes.join(' ') : ''}" ${data.join(' ')}>${inner}</div>`;
 }
@@ -319,6 +348,7 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
     }
     case 'text': {
       body = atom.html();
+      if (atom.attr('field')) atomClass += ' tf';
       body = body.replace(/ field="[^"]*"/g, '');
       body = ctx.textHtml(body);
       break;
@@ -348,7 +378,7 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   if (type === 'button') {
     body = body.replace(/<!--[\s\S]*?-->/g, '');
     const txt = atom.find('.tn-atom__button-text').html();
-    body = `<span class="bc"><span class="bt">${txt}</span></span><span class="bb"></span>`;
+    body = e.dot ? `<span class="bc"><div>${txt}</div></span><span class="bb"></span>` : `<span class="bc"><span class="bt">${txt}</span></span><span class="bb"></span>`;
   }
   const inner = `<${atomTag} class="${atomClass}"${linkAttrs.length ? ' ' + linkAttrs.join(' ') : ''}${style}>${body}</${atomTag}>`;
   return hasSbs ? `<div class="sw"${wrapStyle}>${inner}</div>` : inner;

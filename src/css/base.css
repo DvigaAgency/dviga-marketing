@@ -11,7 +11,7 @@ img{border:0}
 /* ---- контейнер для cqw: масштаб считается от ширины без полосы прокрутки ---- */
 .cq{container-type:inline-size}
 /* ---- Zero-блоки ---- */
-.r{position:relative}
+
 .ab{position:relative;width:100%;overflow:hidden;-webkit-text-size-adjust:100%}
 .ab.ov{overflow:visible}
 .cr{position:absolute;left:0;top:0;z-index:0;width:100%;height:100%}
@@ -19,9 +19,9 @@ img{border:0}
 .cw{position:absolute;width:100%;height:100%;top:0;left:0;clip-path:inset(0 0 0 0)}
 .e{position:absolute;box-sizing:border-box;display:table}
 .e .a{display:table-cell;vertical-align:middle;width:100%;-webkit-text-size-adjust:100%}
-.e[data-t=button]{display:block}
-.e[data-t=button] .a{display:flex;box-sizing:border-box;width:100%;height:100%;flex-direction:row;justify-content:center;align-items:center;overflow:hidden}
-.e[data-t=button] .a::after{content:"";display:block;position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none;opacity:0;z-index:-1}
+:where(.e[data-t=button]){display:block}
+:where(.e[data-t=button] .a){display:flex;box-sizing:border-box;width:100%;height:100%;flex-direction:row;justify-content:center;align-items:center;overflow:hidden}
+:where(.e[data-t=button] .a)::after{content:"";display:block;position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none;opacity:0;z-index:-1}
 .e a.a{text-decoration:none}
 .a ul,.a ol{margin-bottom:0}
 .ai{width:100%;display:block;height:auto}
@@ -32,4 +32,19 @@ img{border:0}
 .bb::after{opacity:0;transition-property:opacity;transition-duration:inherit;transition-timing-function:inherit}
 .e .a.bg{background-repeat:no-repeat}
 .sw{display:inherit;width:inherit;height:inherit}
-.e[data-t=text] .a[class] a{border-bottom:1px solid #121212;box-shadow:none;transition:color .3s,border-bottom .3s,box-shadow .3s}
+.tf a{border-bottom:1px solid #121212;box-shadow:none;transition:color .3s,border-bottom .3s,box-shadow .3s}
+.tf a:hover{color:#121212;border-color:#121212;box-shadow:inset 0 -1px 0 0 #121212}
+.vd{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.e[data-t=video] .a{display:block;height:100%}
+.fm.ok .fo{display:none}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* появление (fadein) */
+@media (min-width:1200px){.e[data-fi]{opacity:0;transition:opacity var(--fd,1s) cubic-bezier(.19,1,.22,1) var(--fl,0s)}.e[data-fi].in{opacity:1}}
+.e[data-fi][data-mb]{opacity:0;transition:opacity var(--fd,1s) cubic-bezier(.19,1,.22,1) var(--fl,0s)}.e[data-fi][data-mb].in{opacity:1}
+@media (prefers-reduced-motion:reduce){.e[data-fi]{opacity:1!important;transition:none!important}}
+/* начальное скрытие шагов анимации (как «anim-hidden»): только когда анимации активны */
+.e[data-h0]>.sw{opacity:0}
+@media (max-width:1199px){.e[data-h0]:not([data-mb])>.sw{opacity:1}}
+.e .a{border:var(--z-borderwidth,0) var(--z-borderstyle,solid) var(--z-bordercolor,transparent);transition:background-color var(--z-speedhover,0s) ease-in-out,color var(--z-speedhover,0s) ease-in-out,border-color var(--z-speedhover,0s) ease-in-out,box-shadow var(--z-shadowshoverspeed,.2s) ease-in-out;text-shadow:var(--z-shadow-text-x,0px) var(--z-shadow-text-y,0px) var(--z-shadow-text-blur,0px) rgba(var(--z-shadow-text-color),var(--z-shadow-text-opacity,100%));background-position:center center;background-size:cover}
+.e{zoom:var(--z)}
