@@ -46,5 +46,11 @@
   "poster": "/assets/video/grink.232795e28d.webp",
   "w": 1280,
   "h": 720
+ },
+ "https://cp80604-bitrix-8.tw1.ru/showreel1.mp4": {
+  "mp4": "/assets/video/showreel1.6e77b2e96b.mp4",
+  "poster": "/assets/video/showreel1.9538550e06.webp",
+  "w": 1394,
+  "h": 720
  }
 }

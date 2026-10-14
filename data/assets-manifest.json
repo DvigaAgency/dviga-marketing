@@ -440,6 +440,7 @@
   "size": 88499
  },
  "https://cp80604-bitrix-8.tw1.ru/showreel1.mp4": {
-  "error": "TypeError: fetch failed"
+  "file": "source-assets/showreel1.mp4",
+  "size": 11557586
  }
 }
