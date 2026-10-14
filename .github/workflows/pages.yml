@@ -1,5 +1,7 @@
 name: Deploy to GitHub Pages
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,7 +23,11 @@ jobs:
       - run: npm run build
         env:
           NOINDEX: "1"
+          BASE: /${{ github.event.repository.name }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
       - run: node tools/audit-dist.mjs
+        env:
+          BASE: /${{ github.event.repository.name }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

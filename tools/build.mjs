@@ -13,6 +13,8 @@ import { cookie, reviewsSlider, reviewPopups, blankPopups, widget, search, fixLi
 
 const SRC = 'data/home.source.html'; // снимок исходного HTML главной (обновляется tools/fetch-html.mjs)
 const OUT = process.env.OUT || 'dist';
+// BASE — подкаталог публикации (например /dviga-marketing для GitHub Pages проекта); по умолчанию сайт в корне
+const BASE = (process.env.BASE || '').replace(/\/$/, '');
 const SITE_URL = (process.env.SITE_URL || 'https://dviga.marketing').replace(/\/$/, '');
 const SITE_ORIGINAL = 'https://dviga.marketing';
 const hash = (s) => crypto.createHash('sha1').update(s).digest('hex').slice(0, 10);
@@ -113,7 +115,7 @@ const CSS_MODE = process.env.CSS_MODE || 'link';
 const fullCss = (await esbuild.transform(critAll + NL + restAll, { loader: 'css', minify: true, target: tgt })).code;
 const outCss = CSS_MODE === 'async' ? minCss : fullCss;
 const cssName = `app.${hash(outCss)}.css`;
-fs.writeFileSync(path.join(OUT, 'assets', cssName), outCss);
+fs.writeFileSync(path.join(OUT, 'assets', cssName), BASE ? outCss.replace(/url\((['"]?)\/assets\//g, `url($1${BASE}/assets/`) : outCss);
 
 // ----------------------------------------------------------------- JS
 const jsRes = await esbuild.build({
@@ -150,7 +152,7 @@ const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-
 
 const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${cookie($)}${widget($, widgetForm)}`;
 const page = `<!doctype html><html lang="ru"><head>${head}</head><body>${body}<script type="module" src="/assets/${jsName}"></script></body></html>`;
-fs.writeFileSync(path.join(OUT, 'index.html'), page);
+fs.writeFileSync(path.join(OUT, 'index.html'), BASE ? page.replace(/(["'(,\s])\/assets\//g, `$1${BASE}/assets/`).replace(/href="\/"/g, `href="${BASE}/"`) : page);
 
 // ----------------------------------------------------------------- статика
 const fontReport = await subsetFonts(page, path.join(OUT, 'assets/fonts'));

@@ -5,6 +5,7 @@ import path from 'node:path';
 import * as cheerio from 'cheerio';
 
 const root = process.argv[2] || 'dist';
+const BASE = (process.env.BASE || '').replace(/[/]$/, '');
 const files = [];
 (function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : files.push(p); } })(root);
 const text = files.filter((f) => /\.(html|css|js|json|xml|txt)$/.test(f) || path.basename(f) === '_headers');
@@ -32,7 +33,7 @@ $('[src],[href],[srcset],[poster],[data-src],[data-poster]').each((i, e) => {
 });
 for (const m of html.matchAll(/url\((\/assets\/[^)]+)\)/g)) refs.add(m[1]);
 let missing = 0;
-for (const r of refs) { if (r.startsWith('/') && !r.startsWith('//') && !r.includes('#')) { if (!fs.existsSync(path.join(root, r.split('?')[0]))) { console.log('FAIL нет файла', r); missing++; } } }
+for (const r of refs) { if (r.startsWith('/') && !r.startsWith('//') && !r.includes('#')) { if (!fs.existsSync(path.join(root, (BASE && r.startsWith(BASE + '/') ? r.slice(BASE.length) : r).split('?')[0]))) { console.log('FAIL нет файла', r); missing++; } } }
 // внешние ссылки только как переходы (a[href]); ресурсы (img/script/link/source/video) — локальные
 const external = [];
 $('img[src],script[src],link[rel=stylesheet],link[rel=preload],link[rel=icon],link[rel=apple-touch-icon],source[src],source[srcset],video[src],video[data-src]').each((i, e) => { const v = $(e).attr('src') || $(e).attr('href') || ''; if (/^https?:|^\/\//.test(v)) external.push(v); });
