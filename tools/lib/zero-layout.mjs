@@ -25,7 +25,12 @@ export function makeGetter(attrs, screens, prefix, suffix) {
 export function artboardAt(ab, screens, R) {
   const get = makeGetter(ab, screens, 'data-artboard-', '');
   const h = num(get('height', R)) ?? 0;
-  const vhRaw = get('height_vh', R);
+  // height_vh: пустая строка на брейкпоинте — осознанное «выкл.» (не каскадируется с более широкого экрана), каскад только при отсутствии атрибута
+  let vhRaw = null;
+  for (const c of [R, ...screens.filter((x) => x > R)]) {
+    const v = ab[c === screens[screens.length - 1] ? 'data-artboard-height_vh' : `data-artboard-height_vh-res-${c}`];
+    if (v !== undefined) { vhRaw = v; break; }
+  }
   const vh = vhRaw === null || vhRaw === '' ? 0 : parseFloat(vhRaw) || 0;
   return {
     R,

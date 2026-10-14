@@ -81,6 +81,8 @@ body.pl{}
 @media (min-width:641px) and (max-width:960px){.si-x{max-width:90%}}
 @media (max-width:640px){.si-x{max-width:100%}}
 @media (max-width:480px){.sl{padding-bottom:75px}}
+/* на телефонах оригинальный slick остаётся на 2 слайдах в ряд (responsive-брейкпоинты не срабатывают) — повторяем */
+@media (max-width:960px){.mob .si{width:50%;box-sizing:border-box}}
 
 .si-i{overflow:hidden;border-radius:50%;background:#fff}.si-i img{display:block;width:100%;height:100%;object-fit:cover}
 /* адаптивные кегли: как у типографики оригинала (≤1200 / ≤640) */

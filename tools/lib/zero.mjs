@@ -199,7 +199,8 @@ function rewriteCss(raw, recId, ctx, elems, widthById) {
       if (/anim-hidden/.test(pre)) { toDelete.push([list, item]); return; }
       const idMatch = pre.match(/\.tn-elem\[data-elem-id="(\d+)"\]/);
       const isElemRoot = /^#rec\d+ \.tn-elem\[data-elem-id="\d+"\]$/.test(pre.trim());
-      const isAb = /^#rec\d+ \.t396__(artboard|carrier|filter)$/.test(pre.trim());
+      // список селекторов через запятую («.ab, .fl, .cr {min-height; height:1vh}» в мобильных @media Tilda) тоже считается артбордом
+      const isAb = pre.split(',').every((x) => /^#rec\d+ \.t396__(artboard|carrier|filter)$/.test(x.trim()));
       const isAtom = /^#rec\d+ \.tn-elem\[data-elem-id="\d+"\] \.tn-atom$/.test(pre.trim());
       // удаляем layout-свойства (они генерируются из данных) и значения по умолчанию (вынесены в base.css)
       const top = !this.atrule;
