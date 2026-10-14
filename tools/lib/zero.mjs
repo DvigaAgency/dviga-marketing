@@ -76,7 +76,7 @@ export function convertZero($, rec, ctx) {
     const a = A[R];
     const prev = R === minR ? null : A[screens[screens.indexOf(R) - 1]];
     const decl = [];
-    const s = `tan(atan2(100cqw,${R}px))`;
+    const s = `calc(var(--cw)/${R})`;
     // heightExpr объявлена ниже в цикле; поднимаем сюда
     const heightExpr = (x) => {
       const hh = x.upscale ? `calc(${x.h}px*var(--s))` : `${x.h}px`;

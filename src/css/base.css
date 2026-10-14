@@ -8,8 +8,8 @@ sup,sub{line-height:0;font-size:smaller}sup{vertical-align:super}sub{vertical-al
 a{color:#121212;text-decoration:none}a[href^=tel]{color:inherit}
 b,strong{font-weight:700}
 img{border:0}
-/* ---- контейнер для cqw: масштаб считается от ширины без полосы прокрутки ---- */
-.cq{container-type:inline-size}
+/* ---- масштаб: --cw = ширина окна без полосы прокрутки (число, ставит инлайн-скрипт в <head> и обновляет при ресайзе) ---- */
+@property --cw{syntax:"<number>";inherits:true;initial-value:1440}
 /* ---- Zero-блоки ---- */
 
 .ab{position:relative;width:100%;overflow:hidden;-webkit-text-size-adjust:100%}

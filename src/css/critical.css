@@ -1,4 +1,7 @@
 /* критичный CSS первого экрана: cookie-плашка и кнопка виджета (fixed поверх хиро) */
+/* масштаб интерфейса как у Zero-блоков: ширина окна / ширина артборда ближайшего брейкпоинта */
+:root{--ui:calc(var(--cw)/320)}@media(min-width:480px){:root{--ui:calc(var(--cw)/480)}}@media(min-width:640px){:root{--ui:calc(var(--cw)/640)}}@media(min-width:960px){:root{--ui:calc(var(--cw)/960)}}@media(min-width:1200px){:root{--ui:calc(var(--cw)/1200)}}
+.ck,.wg-b,.wg-p{zoom:var(--ui)}
 /* ===== cookie ===== */
 .ck{position:fixed;left:20px;bottom:30px;right:30px;z-index:100001;max-width:340px;font-family:Inter,Arial,sans-serif;transition:opacity .3s,transform .3s;opacity:0;visibility:hidden;transform:translateY(20px)}
 .ck.on{opacity:1;visibility:visible;transform:none}
@@ -18,7 +21,7 @@
 .wg-b::before{content:"";position:absolute;inset:-3px;border:3px solid #d93433;border-radius:100%;box-shadow:0 0 20px rgba(0,0,0,.2);opacity:0;animation:wg-r 3s ease-in-out infinite;pointer-events:none}
 @keyframes wg-p{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
 @keyframes wg-r{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
-.wg-p{position:fixed;right:40px;bottom:115px;z-index:1001;box-sizing:border-box;width:460px;max-width:calc(100vw - 20px);max-height:calc(100vh - 135px);overflow:auto;border-radius:10px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s ease-in-out,transform .2s ease-in-out,visibility 0s .2s}
+.wg-p{position:fixed;right:40px;bottom:115px;z-index:1001;box-sizing:border-box;width:460px;max-width:calc((100vw - 20px)/var(--ui));max-height:calc((100vh - 135px)/var(--ui));overflow:auto;border-radius:10px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s ease-in-out,transform .2s ease-in-out,visibility 0s .2s}
 .wg-p.on{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease-in-out,transform .2s ease-in-out}
 .wg-w{padding:30px 35px 40px}
 .wg-h{margin:0 0 25px;font:500 24px/1.35 Inter,Arial,sans-serif;color:#121212}@media (max-width:1200px){.wg-h{font-size:22px}}@media (max-width:640px){.wg-h{font-size:20px}}
