@@ -145,44 +145,93 @@ function initScroll() {
     });
     fx.forEach((f, k) => { const i = sc.length + k; f.z = zooms[i]; f.top = tops[i]; f.end = f.top + f.dist * f.z; });
   };
+  // Состояние sc-элемента как чистая функция позиции прокрутки y (px) -> {x, y, sx, sy, r, o}
+  const calc = (s, y) => {
+    const r = y + s.to;
+    const n = { o: 1, b: 0, fix: false, sh: 0, x: 0, y: 0, sx: 1, sy: 1, r: 0 };
+    s.st.forEach((st, i) => {
+      const started = r >= st.start; const fin = st.end <= r;
+      if (started && !fin) {
+        st.state = 1;
+        step(n, st, st.dist === 0 ? 1 : (r - st.start) / st.dist, i, s);
+      }
+      if (fin) { st.state = 2; step(n, st, 1, i, s); }
+      if (!started && st.state) { st.state = 0; step(n, st, 0, i, s); }
+    });
+    let ty = n.y + n.sh;
+    if (n.fix) ty += ((s.to - (n.un || 0)) - (s.top - y)) / s.z;
+    return { x: n.x, y: ty, sx: n.sx, sy: n.sy, r: n.r, o: n.o, fix: n.fix };
+  };
+  const calcFx = (f, y) => {
+    const r = y + f.ofst * f.z;
+    if (r >= f.end) return f.dist;
+    return r >= f.top ? (r - f.top) / f.z : 0;
+  };
+  const tfOf = (c) => `translate(${c.x.toFixed(2)}px,${c.y.toFixed(2)}px) scale(${c.sx},${c.sy}) rotate(${c.r}deg)`;
   const frame = () => {
     const y = scrollY;
     sc.forEach((s) => {
-      const r = y + s.to;
-      const n = { o: 1, b: 0, fix: false, sh: 0, x: 0, y: 0, sx: 1, sy: 1, r: 0 };
-      s.st.forEach((st, i) => {
-        const started = r >= st.start; const fin = st.end <= r;
-        if (started && !fin) {
-          st.state = 1;
-          step(n, st, st.dist === 0 ? 1 : (r - st.start) / st.dist, i, s);
-        }
-        if (fin) { st.state = 2; step(n, st, 1, i, s); }
-        if (!started && st.state) { st.state = 0; step(n, st, 0, i, s); }
-      });
-      let ty = n.y + n.sh;
-      if (n.fix) ty += ((s.to - (n.un || 0)) - (s.top - y)) / s.z;
-      const tf = `${n.x ? `translateX(${n.x.toFixed(2)}px)` : ''}${ty ? `translateY(${ty.toFixed(2)}px)` : ''}${n.sx !== 1 || n.sy !== 1 ? `scale(${n.sx},${n.sy})` : ''}${n.r ? `rotate(${n.r}deg)` : ''}`;
+      const c = calc(s, y);
+      const tf = `${c.x ? `translateX(${c.x.toFixed(2)}px)` : ''}${c.y ? `translateY(${c.y.toFixed(2)}px)` : ''}${c.sx !== 1 || c.sy !== 1 ? `scale(${c.sx},${c.sy})` : ''}${c.r ? `rotate(${c.r}deg)` : ''}`;
       s.w.style.transform = tf || 'scale(1)';
-      s.w.style.opacity = n.o;
-      if (n.fix !== s.fixed) { s.fixed = n.fix; s.w.style.willChange = n.fix ? 'transform' : ''; }
+      s.w.style.opacity = c.o;
+      if (c.fix !== s.fixed) { s.fixed = c.fix; s.w.style.willChange = c.fix ? 'transform' : ''; }
     });
     fx.forEach((f) => {
-      const r = y + f.ofst * f.z;
-      let ty = 0;
-      if (r >= f.end) ty = f.dist;
-      else if (r >= f.top) ty = (r - f.top) / f.z;
+      const ty = calcFx(f, y);
       if (ty !== f.ty) { f.ty = ty; f.el.style.transform = ty ? `translateY(${ty.toFixed(2)}px)` : ''; }
     });
   };
+  // Прокрутка идёт в потоке композитора, а rAF-обработчик отстаёт на кадр, поэтому «виртуальный fixed»
+  // на transform дёргается. Где есть ScrollTimeline, раскладываем сцену в кусочно-линейные keyframes по
+  // позиции прокрутки: анимацию ведёт композитор синхронно со скроллом, JS на скролле не нужен.
+  const native = typeof ScrollTimeline === 'function' && typeof Element.prototype.animate === 'function';
+  let anims = [];
+  const clear = () => { anims.forEach((a) => a.cancel()); anims = []; };
+  const bind = () => {
+    const max = d.documentElement.scrollHeight - innerHeight;
+    if (!(max > 0)) return false;
+    const timeline = new ScrollTimeline({ source: d.scrollingElement, axis: 'block' });
+    const pts = (list) => {
+      const set = new Set([0, max]);
+      list.forEach((v) => [v - 0.5, v, v + 0.5].forEach((p) => { if (p > 0 && p < max) set.add(+p.toFixed(3)); }));
+      return [...set].sort((p, q) => p - q);
+    };
+    const run = (el, frames) => anims.push(el.animate(frames, { timeline, fill: 'both', easing: 'linear', duration: 'auto' }));
+    sc.forEach((s) => {
+      const ys = pts(s.st.flatMap((st) => [st.start - s.to, st.end - s.to]));
+      const frames = ys.map((y) => { const c = calc(s, y); return { offset: y / max, transform: tfOf(c), opacity: c.o }; });
+      s.w.style.transform = ''; s.w.style.opacity = ''; s.w.style.willChange = 'transform';
+      run(s.w, frames);
+    });
+    fx.forEach((f) => {
+      const ys = pts([f.top - f.ofst * f.z, f.end - f.ofst * f.z]);
+      f.el.style.transform = '';
+      run(f.el, ys.map((y) => ({ offset: y / max, transform: `translateY(${calcFx(f, y).toFixed(2)}px)` })));
+    });
+    return true;
+  };
   let ticking = false;
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; frame(); }); } };
-  const remeasure = () => { measure(); frame(); };
-  measure(); frame();
-  addEventListener('scroll', onScroll, { passive: true });
+  let nativeOn = false;
+  const apply = () => {
+    clear();
+    measure();
+    nativeOn = native && bind();
+    if (!nativeOn) frame();
+  };
+  const remeasure = () => { clear(); apply(); };
+  apply();
+  addEventListener('scroll', () => { if (!nativeOn) onScroll(); }, { passive: true });
   addEventListener('resize', () => { clearTimeout(remeasure.t); remeasure.t = setTimeout(remeasure, 150); });
   addEventListener('load', remeasure);
   addEventListener('cssload', remeasure);
   if (d.fonts && d.fonts.ready) d.fonts.ready.then(remeasure);
+  // высота страницы меняется по мере рендера секций с content-visibility — keyframes привязаны к диапазону прокрутки
+  if (native && window.ResizeObserver) {
+    let h = d.documentElement.scrollHeight;
+    new ResizeObserver(() => { const nh = d.documentElement.scrollHeight; if (Math.abs(nh - h) > 1) { h = nh; clearTimeout(remeasure.t); remeasure.t = setTimeout(remeasure, 100); } }).observe(d.body);
+  }
 }
 
 /* ---------- счётчик «50+» ---------- */
