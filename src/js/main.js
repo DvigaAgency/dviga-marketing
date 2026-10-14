@@ -234,6 +234,48 @@ function initScroll() {
   }
 }
 
+/* ---------- iOS/WebKit: CSS zoom не масштабирует текст ----------
+   На части сборок WebKit (iPhone) zoom элемента увеличивает рамки, но кегль/интерлиньяж/трекинг остаются «как до zoom»,
+   поэтому тексты получаются мельче, чем в оригинале (Tilda для Safari выставляет масштабированный font-size явно).
+   Проверяем это на реальном тексте страницы и только при сбое задаём font-size/line-height/letter-spacing явно (× zoom). */
+function initTextZoom() {
+  const atom = (e) => e.querySelector('.a');
+  const els = $$('.e').filter((e) => atom(e));
+  const firstText = (a) => { const t = d.createTreeWalker(a, NodeFilter.SHOW_TEXT); let n; while ((n = t.nextNode())) if (n.textContent.trim().length >= 3) return n; return null; };
+  const width = (n) => { const r = d.createRange(); const i = n.textContent.search(/\S/); r.setStart(n, i); r.setEnd(n, Math.min(n.textContent.length, i + 12)); return r.getBoundingClientRect().width; };
+  const broken = () => {
+    for (const e of els) {
+      const z = zoomOf(e);
+      if (z < 1.08) continue;
+      const n = firstText(atom(e));
+      if (!n) continue;
+      const w1 = width(n);
+      if (!w1) continue;
+      e.style.zoom = '1';
+      const w0 = width(n);
+      e.style.zoom = '';
+      return w0 > 0 && w1 / w0 < 1 + (z - 1) * 0.5;
+    }
+    return false;
+  };
+  if (!els.length || !broken()) return;
+  const apply = () => {
+    const list = els.map((e) => ({ e, a: atom(e), z: zoomOf(e) })).filter((x) => Math.abs(x.z - 1) > 0.01);
+    list.forEach((x) => { x.a.style.fontSize = ''; x.a.style.lineHeight = ''; x.a.style.letterSpacing = ''; });
+    list.forEach((x) => { x.e.style.zoom = '1'; });
+    list.forEach((x) => { const cs = getComputedStyle(x.a); x.fs = parseFloat(cs.fontSize); x.lh = cs.lineHeight; x.ls = cs.letterSpacing; });
+    list.forEach((x) => { x.e.style.zoom = ''; });
+    list.forEach((x) => {
+      x.a.style.fontSize = `${(x.fs * x.z).toFixed(2)}px`;
+      if (/px$/.test(x.lh)) x.a.style.lineHeight = `${(parseFloat(x.lh) * x.z).toFixed(2)}px`;
+      if (/px$/.test(x.ls)) x.a.style.letterSpacing = `${(parseFloat(x.ls) * x.z).toFixed(2)}px`;
+    });
+  };
+  apply();
+  let t;
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(apply, 160); });
+}
+
 /* ---------- счётчик «50+» ---------- */
 function initCounter() {
   const el = $('.myClass016 .a');
@@ -379,6 +421,6 @@ const boot = () => {
   initCookie(); initPopups();
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
-  afterPaint(() => { initBg(); initAppear(); initSteps(); afterPaint(() => { initScroll(); initCounter(); initVideo(); initDrag(); initLazy(); }); });
+  afterPaint(() => { initBg(); initAppear(); initSteps(); afterPaint(() => { initTextZoom(); initScroll(); initCounter(); initVideo(); initDrag(); initLazy(); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

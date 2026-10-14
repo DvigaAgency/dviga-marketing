@@ -88,3 +88,6 @@ body.pl{}
 /* адаптивные кегли: как у типографики оригинала (≤1200 / ≤640) */
 @media (max-width:1200px){.si-s{font-size:12px}.rv-t{font-size:30px}.rv-d{font-size:14px}}
 @media (max-width:640px){.si-x{line-height:1.45}.rv-t{font-size:26px}.rv-d{font-size:12px;line-height:1.45}.rv-u{font-size:10px}}
+
+/* hero-видео на мобильных: вписывается в контейнер целиком, без увеличения (cover обрезал и «зумил» кадр) */
+@media (max-width:959px){#r1438775181 .vd{object-fit:contain}}
