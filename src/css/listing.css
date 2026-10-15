@@ -1,0 +1,21 @@
+/* ===== вкладки (T395) ===== */
+.tb{max-width:1200px;margin:0 auto;padding:0 20px;box-sizing:border-box}
+.tb-w{display:flex;flex-wrap:wrap;justify-content:center;margin:0;padding:0;list-style:none}
+.tb-t{display:block;margin:5px 15px 15px 0;border-radius:30px;background:#f2f2f2;width:fit-content}
+.tb-b{display:inline-block;margin:0;padding:18px 22px;border:0;background:transparent;color:#121212;font:400 16px/21.6px Inter,Inter Fallback,Arial,sans-serif;cursor:pointer;transition:font-weight,color .3s}
+.tb-t.on{background:#d93433}
+.tb-t.on .tb-b{color:#fff;font-weight:600;cursor:default}
+@media (hover:hover){.tb-t:not(.on) .tb-b:hover{color:#d93433}}
+@media (max-width:960px){.tb-w{justify-content:flex-start}.tb-t{margin:5px 10px 10px 0}.tb-b{font-size:10px;line-height:5px}}
+/* ===== «Загрузить еще» (T400) ===== */
+.lm{display:flex;justify-content:center}
+.lm-b{display:flex;align-items:center;justify-content:center;padding:18.8px 60px;border:0;border-radius:30px;background:#d93433;color:#fff;font:400 16px/22.4px Inter,Inter Fallback,Arial,sans-serif;cursor:pointer;transition:background-color .2s ease-in-out,color .2s ease-in-out}
+@media (hover:hover){.lm-b:hover{background:#f5d5d2;color:#d93433}}
+@media (max-width:960px){.lm-b{padding:18.8px 30px}}
+/* записи, скрытые вкладками/кнопкой (в Tilda — нулевая высота): display:none, чтобы браузер не считал стили и раскладку 180 свёрнутых блоков; при показе анимации прокрутки перемеряются (resize) */
+.r.off{display:none!important}
+/* ===== «поделиться» (T014): квадраты 34×34, как у виджета Яндекса ===== */
+.sh-r{text-align:center}
+.sh{display:flex;justify-content:center;gap:4px;height:34px}
+.sh-a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:2px;background:#111;transition:background-color .2s}
+@media (hover:hover){.sh-a:hover{background:#d93433}}

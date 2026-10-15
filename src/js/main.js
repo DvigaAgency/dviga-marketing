@@ -7,7 +7,7 @@ const $$ = (s, r = d) => Array.from(r.querySelectorAll(s));
 const num = (v, f = 0) => (v == null || v === '' || Number.isNaN(+v) ? f : +v);
 const RES = [320, 480, 640, 960, 1200];
 const resIdx = () => { let r = 0; RES.forEach((v, i) => { if (innerWidth >= v) r = i; }); return r; };
-const zoomOf = (el) => num(getComputedStyle(el).getPropertyValue('--z'), 1) || 1;
+const zoomOf = (el) => num(getComputedStyle(el).getPropertyValue('--zw'), 1) || 1;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const safe = (f) => { try { return f(); } catch (e) { console.error(e); return null; } };
 
@@ -111,6 +111,7 @@ function initScroll() {
   const ri = resIdx();
   const mobile = innerWidth < 1200;
   $$('.e[data-sc]').forEach((el) => {
+    if (el.closest('.r.off')) return; // записи, свёрнутые вкладками, измеряются при показе (событие resize)
     const o = JSON.parse(el.dataset.sc);
     if (mobile && !o.m) return;
     const cur = o.r[ri] || o.r[o.r.length - 1];
@@ -118,6 +119,7 @@ function initScroll() {
     sc.push({ el, w: el.querySelector('.sw') || el, steps: cur.s, t: o.t, o: cur.o });
   });
   $$('.e[data-fx]').forEach((el) => {
+    if (el.closest('.r.off')) return;
     const dist = num(el.dataset.fx);
     if (!dist || (mobile && !el.dataset.mb)) return;
     const arr = (el.dataset.fo || '').split(',');
@@ -371,6 +373,10 @@ function initLazy() {
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); import('./slider.js').then((m) => m.init(sl)); } }, { rootMargin: '600px 0px' });
     io.observe(sl);
   } else if (sl) import('./slider.js').then((m) => m.init(sl));
+  $$('[data-share]').forEach((a) => { a.href = a.dataset.share + encodeURIComponent(location.href.split('#')[0]); });
+  if ($('[data-tabs],.lm-b')) import('./tabs.js').then((m) => m.init());
+  const cs = $('[data-cases-root]');
+  if (cs) import('./cases.js').then((m) => m.init(cs));
   const fm = $('.fm');
   if (fm && 'IntersectionObserver' in w) {
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); import('./forms.js').then((m) => m.init()); } }, { rootMargin: '400px 0px' });
@@ -381,10 +387,14 @@ function initLazy() {
 // Инициализация делится на две части: лёгкая (обработчики, без чтения геометрии) — сразу,
 // тяжёлая (замеры, наблюдатели) — после первого кадра, чтобы не удлинять первую раскладку.
 const afterPaint = (fn) => requestAnimationFrame(() => setTimeout(fn, 0));
+// стили свёрнутых записей (вкладки блога) подгружаются в простое после загрузки страницы — не мешают первому экрану
+const loadDeferredCss = () => { $$('link[data-defer]').forEach((l) => { l.onload = () => dispatchEvent(new Event('cssload')); l.media = 'all'; l.removeAttribute('data-defer'); }); };
+addEventListener('load', () => (self.requestIdleCallback || setTimeout)(loadDeferredCss, { timeout: 5000 }));
 const boot = () => {
   [initCookie, initPopups].forEach((f) => safe(f));
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
-  afterPaint(() => { [initBg, initAppear, initSteps].forEach((f) => safe(f)); afterPaint(() => { [initScroll, initCounter, initVideo, initDrag, initLazy].forEach((f) => safe(f)); }); });
+  // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

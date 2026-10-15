@@ -9,3 +9,4 @@ reports/_*.png
 tools/_*.mjs
 dist-test/
 dist-dev/
+reports/diff-*/

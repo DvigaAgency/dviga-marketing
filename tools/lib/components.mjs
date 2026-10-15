@@ -1,11 +1,11 @@
 // Не-Zero блоки главной (cookie, отзывы, попапы, виджет, поиск) — собственная разметка по данным оригинала.
 import { picture, cssImage, lookup, usedAssets } from './assets.mjs';
 import { renderField } from './forms.mjs';
-import { fixLinks, ORIGIN } from './util.mjs';
+import { fixLinks, link } from './util.mjs';
 export { fixLinks };
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-const abs = (h) => (h && /^\/(?!\/)/.test(h) && h !== '/' ? ORIGIN + h : h);
+const abs = (h) => link(h);
 
 const CLOSE_SVG = '<svg role="presentation" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><rect transform="translate(11.31 11.31) rotate(-45) translate(-11.31 -11.31)" x="10.31" y="-3.69" width="2" height="30"/><rect transform="translate(11.31 11.31) rotate(-315) translate(-11.31 -11.31)" x="10.31" y="-3.69" width="2" height="30"/></g></svg>';
 const closeBtn = '<div class="px"><button type="button" aria-label="Закрыть диалоговое окно" data-close>' + CLOSE_SVG + '</button></div>';

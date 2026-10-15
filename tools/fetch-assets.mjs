@@ -3,9 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 const all = JSON.parse(fs.readFileSync('data/assets-raw.json', 'utf8'));
 const list = all.filter((u) => /static\.tildacdn\.com\/(tild|vide)/.test(u));
-list.push('https://cp80604-bitrix-8.tw1.ru/showreel1.mp4');
+
 fs.mkdirSync('source-assets', { recursive: true });
-const manifest = {};
+const prevM = fs.existsSync('data/assets-manifest.json') ? JSON.parse(fs.readFileSync('data/assets-manifest.json', 'utf8')) : {};
+const manifest = { ...prevM };
 const localName = (u) => {
   const p = new URL(u);
   if (p.host.startsWith('static.tildacdn.com')) {
@@ -20,6 +21,7 @@ async function worker() {
     const u = list[i++];
     const f = 'source-assets/' + localName(u);
     try {
+      if (manifest[u] && manifest[u].file && fs.existsSync(manifest[u].file)) continue;
       if (!fs.existsSync(f)) {
         const r = await fetch(u);
         if (!r.ok) throw new Error('HTTP ' + r.status);

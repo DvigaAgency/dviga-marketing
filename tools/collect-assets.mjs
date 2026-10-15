@@ -1,14 +1,20 @@
-// Собирает список URL ассетов Tilda, которые используются на главной (из выгруженного HTML).
+// Собирает адреса изображений/видео Tilda из снимков страниц (tools/pages.mjs) и дописывает их в data/assets-raw.json.
+// Дальше: node tools/fetch-assets.mjs && node tools/optimize-images.mjs
 import fs from 'node:fs';
-const t = fs.readFileSync('reference/html/home.html', 'utf8');
-const re = /https?:\/\/[a-z0-9.-]*(?:tildacdn\.com|tilda\.ws|tilda\.cc)[^\s"')<>\x5c]*/gi;
-const all = [...new Set(t.match(re))].map((u) => u.replace(/&amp;/g, '&'));
-const byHost = {};
-for (const u of all) { const h = new URL(u).host; byHost[h] = (byHost[h] || 0) + 1; }
-console.log(all.length, byHost);
-const media = all.filter((u) => /static\.tildacdn\.com\/(tild|vide|lib|img)/.test(u));
-const ext = {};
-for (const u of media) { const e = (u.split('?')[0].match(/\.([a-z0-9]+)$/i) || [, 'none'])[1].toLowerCase(); ext[e] = (ext[e] || 0) + 1; }
-console.log('media', media.length, ext);
-console.log('NOT media:\n' + all.filter((u) => !media.includes(u)).join('\n'));
-fs.writeFileSync('data/assets-raw.json', JSON.stringify(all, null, 1));
+import { PAGES } from './pages.mjs';
+
+const rawFile = 'data/assets-raw.json';
+const raw = new Set(fs.existsSync(rawFile) ? JSON.parse(fs.readFileSync(rawFile, 'utf8')) : []);
+const norm = (u) => u.replace(/&amp;/g, '&').replace(/^\/\//, 'https://')
+  .replace(/^https:\/\/thb\.tildacdn\.com\/([^/]+)\/-\/(?:resizeb?|empty)\/[^/]*\/?(?:-\/)?(.*)$/, 'https://static.tildacdn.com/$1/$2')
+  .replace(/^https:\/\/optim\.tildacdn\.com\/([^/]+)\/-\/[^/]+\/(?:-\/)?(?:[^/]+\/)*([^/]+)$/, 'https://static.tildacdn.com/$1/$2');
+const before = raw.size;
+for (const p of PAGES) {
+  const s = fs.readFileSync(p.src, 'utf8');
+  for (const m of s.matchAll(/https?:\/\/(?:static|thb|optim)\.tildacdn\.com\/(?:tild|vide)[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/[^"')\s<>]+/g)) {
+    const u = norm(m[0]);
+    if (/^https:\/\/static\.tildacdn\.com\/(tild|vide)/.test(u) && !/\/-\//.test(u)) raw.add(u);
+  }
+}
+fs.writeFileSync(rawFile, JSON.stringify([...raw], null, 1));
+console.log('assets-raw:', before, '->', raw.size);

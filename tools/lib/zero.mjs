@@ -66,6 +66,9 @@ export function convertZero($, rec, ctx) {
     layoutByR[R] = {};
     for (const e of elems) layoutByR[R][e.id] = elemLayout(e.attrs, screens, R, A[R]);
   }
+  // артборд, где все элементы с контейнером «окно», масштабируется только по высоте (как в Tilda), содержимое — без масштаба
+  const allWin = {};
+  for (const R of screens) allWin[R] = !!A[R].upscale && elems.length > 0 && elems.every((e) => layoutByR[R][e.id].__zoom === false);
   const minR = screens[0];
   const mq = (R) => (R === minR ? null : `(min-width:${R}px)`);
   const layoutCss = {};
@@ -83,7 +86,7 @@ export function convertZero($, rec, ctx) {
       if (x.vh) return `max(${hh},${x.vh}${'svh'})`;
       return hh;
     };
-    rules += `${rid}{--s:${a.upscale ? s : '1'};--z:${a.upscale ? 'var(--s)' : '1'}}`;
+    rules += `${rid}{--s:${a.upscale ? s : '1'};--z:${a.upscale ? 'var(--s)' : '1'};--zw:${a.upscale && !allWin[R] ? 'var(--s)' : '1'}}`;
     decl.push(`height:${heightExpr(a)}`);
     rules += `${rid} .ab{${decl.join(';')}}`;
     if (cvOk) {
@@ -99,7 +102,8 @@ export function convertZero($, rec, ctx) {
         if (!prev && cur[k] === '') continue;
         if (!prev || cur[k] !== p[k]) d.push(`${k}:${cur[k] === '' ? 'unset' : cur[k]}`);
       }
-      if ((prev ? cur.__zoom !== p.__zoom : !cur.__zoom)) d.push(`zoom:${cur.__zoom ? 'var(--z)' : '1'}`);
+      // масштаб задаёт обёртка .zw (transform); элементы «окна» в смешанном артборде компенсируются: px-значения делятся на масштаб
+      if (cur.__zoom === false && A[R].upscale && !allWin[R]) for (let i = 0; i < d.length; i++) d[i] = d[i].replace(/(-?[0-9.]+)px/g, (m, n) => (+n === 0 ? m : `calc(${n}px/var(--zw))`));
       if (d.length) rules += `${ctx.sel(recId, e.id)}{${d.join(';')}}`;
     }
     layoutCss[R] = rules;
@@ -149,7 +153,7 @@ function recPads(cls, R) {
   return pt + pb;
 }
 
-function recPadding(cls, recId) {
+export function recPadding(cls, recId) {
   let c = '';
   const pt = cls.match(/t-rec_pt_(\d+)/); const pb = cls.match(/t-rec_pb_(\d+)/);
   const pt480 = cls.match(/t-rec_pt-res-480_(\d+)/); const pb480 = cls.match(/t-rec_pb-res-480_(\d+)/);

@@ -5,13 +5,15 @@
   "scripts": {
     "build": "node tools/build.mjs",
     "preview": "node tools/serve.mjs dist 4173",
-    "assets": "node tools/fetch-html.mjs && node tools/collect-assets.mjs && node tools/fetch-assets.mjs && node tools/optimize-images.mjs && node tools/optimize-video.mjs",
+    "assets": "node tools/fetch-html.mjs && node tools/fetch-html.mjs --pages && node tools/collect-assets.mjs && node tools/fetch-assets.mjs && node tools/optimize-images.mjs && node tools/optimize-video.mjs",
     "crawl": "node tools/crawl.mjs",
     "geom": "node tools/geom.mjs",
     "compare": "sh tools/copy-crawl.sh && node tools/compare.mjs",
     "anim": "node tools/anim-compare.mjs && node tools/hover-compare.mjs && node tools/animations-report.mjs",
     "perf": "node tools/perf-report.mjs",
-    "audit": "node tools/audit-dist.mjs"
+    "audit": "node tools/audit-dist.mjs",
+    "pages": "node tools/fetch-html.mjs --pages",
+    "compare:page": "sh tools/page-compare.sh"
   },
   "keywords": [],
   "author": "DVIGA",
