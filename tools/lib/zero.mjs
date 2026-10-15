@@ -131,7 +131,7 @@ export function convertZero($, rec, ctx) {
     ? '<div class="cw"><div class="cr"></div></div><div class="fl"></div>'
     : '<div class="cr"></div><div class="fl"></div>';
   if (cvOk) cls.push('cv');
-  const out = `<section id="r${recId}" class="r${cls.length ? ' ' + cls.join(' ') : ''}"${style && !/^padding/.test(style) ? '' : ''}><div class="${abClass.join(' ')}"${fixedPos ? ` data-pos="${fixedPos}"` : ''}>${carrier}${html.join('')}</div></section>`;
+  const out = `<section id="r${recId}" class="r${cls.length ? ' ' + cls.join(' ') : ''}"${style && !/^padding/.test(style) ? '' : ''}><div class="${abClass.join(' ')}"${fixedPos ? ` data-pos="${fixedPos}"` : ''}>${carrier}<div class="zw">${html.join('')}</div></div></section>`;
   return { id: recId, html: out, css: css.join('\n'), elems: elems.length, screens, maxR, upscale: A[maxR].upscale };
 }
 

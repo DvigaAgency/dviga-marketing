@@ -7,7 +7,7 @@ const $$ = (s, r = d) => Array.from(r.querySelectorAll(s));
 const num = (v, f = 0) => (v == null || v === '' || Number.isNaN(+v) ? f : +v);
 const RES = [320, 480, 640, 960, 1200];
 const resIdx = () => { let r = 0; RES.forEach((v, i) => { if (innerWidth >= v) r = i; }); return r; };
-const zoomOf = (el) => num(getComputedStyle(el).zoom, 1) || 1;
+const zoomOf = (el) => num(getComputedStyle(el).getPropertyValue('--z'), 1) || 1;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const safe = (f) => { try { return f(); } catch (e) { console.error(e); return null; } };
 
@@ -234,59 +234,6 @@ function initScroll() {
   }
 }
 
-/* ---------- масштаб (аналог t396_scale из Tilda) ----------
-   Tilda ставит zoom на каждый элемент числом в style и пересчитывает при ресайзе/повороте; для Safari дополнительно
-   «подправляет» размеры шрифтов. Делаем то же: zoom пишем литералом в style (а не через var() в стилях), а если после этого
-   текст всё равно не масштабируется (часть сборок WebKit на iPhone берёт кегль из таблицы стилей до применения zoom),
-   записываем authored-кегль/интерлиньяж/трекинг в style элемента — такие значения zoom получают. Значения НЕ умножаются на zoom
-   (иначе масштаб применится дважды). */
-function initZoom() {
-  const el = (e) => e.querySelector(':scope > .a') || e.querySelector('.a');
-  const zs = [
-    { sel: '.e', v: '--z', text: (e) => [el(e)] },
-    { sel: '.ck, .wg-b, .wg-p', v: '--ui', text: (e) => $$('*', e).filter((x) => [...x.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) },
-  ];
-  const groups = zs.map((g) => ({ ...g, els: $$(g.sel).filter((e) => !(g.sel === '.e' && !el(e))) }));
-  const probeBroken = () => {
-    const first = (a) => { const t = d.createTreeWalker(a, NodeFilter.SHOW_TEXT); let n; while ((n = t.nextNode())) if (n.textContent.trim().length >= 3) return n; return null; };
-    const width = (n) => { const r = d.createRange(); const i = n.textContent.search(/\S/); r.setStart(n, i); r.setEnd(n, Math.min(n.textContent.length, i + 12)); return r.getBoundingClientRect().width; };
-    for (const e of groups[0].els) {
-      const z = num(e.dataset.zz, 1);
-      if (z < 1.08) continue;
-      const a = el(e); const n = a && first(a);
-      if (!n) continue;
-      const w1 = width(n);
-      if (!w1) continue;
-      e.style.zoom = '1';
-      const w0 = width(n);
-      e.style.zoom = String(z);
-      return w0 > 0 && w1 / w0 < 1 + (z - 1) * 0.5;
-    }
-    return false;
-  };
-  let broken = null;
-  const apply = () => {
-    const items = [];
-    groups.forEach((g) => g.els.forEach((e) => items.push({ g, e, z: num(getComputedStyle(e).getPropertyValue(g.v), 1) || 1 })));
-    items.forEach((x) => { x.e.dataset.zz = x.z; x.e.style.zoom = String(x.z); });
-    if (broken === null) broken = /[?&]zfix/.test(location.search) || probeBroken();
-    if (!broken) return;
-    // 1) сбрасываем прежние значения, 2) снимаем zoom и читаем authored-значения, 3) пишем их в style и возвращаем zoom
-    const tg = [];
-    items.forEach((x) => x.g.text(x.e).forEach((t) => { if (t) { tg.push({ x, t }); t.style.fontSize = ''; t.style.lineHeight = ''; t.style.letterSpacing = ''; } }));
-    items.forEach((x) => { x.e.style.zoom = '1'; });
-    tg.forEach((o) => { const cs = getComputedStyle(o.t); o.fs = cs.fontSize; o.lh = cs.lineHeight; o.ls = cs.letterSpacing; });
-    tg.forEach((o) => { o.t.style.fontSize = o.fs; if (/px$/.test(o.lh)) o.t.style.lineHeight = o.lh; if (/px$/.test(o.ls)) o.t.style.letterSpacing = o.ls; });
-    items.forEach((x) => { x.e.style.zoom = String(x.z); });
-  };
-  apply();
-  let t;
-  const again = () => { clearTimeout(t); t = setTimeout(apply, 120); };
-  addEventListener('resize', again);
-  addEventListener('orientationchange', again);
-  if (d.fonts && d.fonts.ready) d.fonts.ready.then(again);
-}
-
 /* ---------- счётчик «50+» ---------- */
 function initCounter() {
   const el = $('.myClass016 .a');
@@ -438,6 +385,6 @@ const boot = () => {
   [initCookie, initPopups].forEach((f) => safe(f));
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
-  afterPaint(() => { [initZoom, initBg, initAppear, initSteps].forEach((f) => safe(f)); afterPaint(() => { [initScroll, initCounter, initVideo, initDrag, initLazy].forEach((f) => safe(f)); }); });
+  afterPaint(() => { [initBg, initAppear, initSteps].forEach((f) => safe(f)); afterPaint(() => { [initScroll, initCounter, initVideo, initDrag, initLazy].forEach((f) => safe(f)); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

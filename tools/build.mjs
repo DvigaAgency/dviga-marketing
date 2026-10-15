@@ -5,6 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import * as cheerio from 'cheerio';
 import * as esbuild from 'esbuild';
+import * as csstree from 'css-tree';
 import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
@@ -101,12 +102,23 @@ const popups = [menuPopup, formPopup, calcPopup, reviewPopups($), blankPopups($)
 
 // ----------------------------------------------------------------- CSS
 const readCss = (f) => fs.readFileSync(f, 'utf8');
+// cookie и виджет: все px масштабируются явно (calc(Npx*var(--ui))) — без CSS zoom, который по-разному работает в браузерах
+const scaleUi = (css) => {
+  const ast = csstree.parse(css);
+  csstree.walk(ast, { visit: 'Declaration', enter(decl) {
+    csstree.walk(decl.value, { visit: 'Dimension', enter(node, item, list) {
+      if (node.unit !== 'px' || +node.value === 0 || !list) return;
+      list.replace(item, list.createItem({ type: 'Function', name: 'calc', children: new csstree.List().fromArray([{ type: 'Dimension', value: node.value, unit: 'px' }, { type: 'Operator', value: '*' }, { type: 'Function', name: 'var', children: new csstree.List().fromArray([{ type: 'Identifier', name: '--ui' }]) }]) }));
+    } });
+  } });
+  return csstree.generate(ast);
+};
 const dot = lookup('https://static.tildacdn.com/tild6163-3064-4564-b862-643738343166/Frame_2.png');
 usedAssets.add(dot.webp.at(-1).src);
 const FB = (t) => t.replace(/font-family:Inter,Arial,sans-serif/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif').replace(/font-family:'?Inter'?;/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif;').replace(/--t-(headline|text)-font:Inter,Arial,sans-serif/g, '--t-$1-font:Inter,Inter Fallback,Arial,sans-serif');
 const embeds = readCss('src/css/embeds.css').replace(/%%DOT%%/g, dot.webp.at(-1).src);
 const NL = String.fromCharCode(10);
-const critAll = readCss('src/css/fonts.css') + FB([readCss('src/css/base.css'), readCss('src/css/critical.css'), embeds, critZero.join(NL)].join(NL));
+const critAll = readCss('src/css/fonts.css') + FB([readCss('src/css/base.css'), scaleUi(readCss('src/css/critical.css')), embeds, critZero.join(NL)].join(NL));
 const restAll = FB([readCss('src/css/forms.css'), readCss('src/css/components.css'), css.join(NL), extraCss.join(NL)].join(NL));
 const tgt = ['chrome110', 'safari16', 'firefox110'];
 const critCss = (await esbuild.transform(critAll, { loader: 'css', minify: true, target: tgt })).code;
