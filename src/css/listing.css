@@ -1,11 +1,18 @@
 /* ===== вкладки (T395) ===== */
-.tb{max-width:1200px;margin:0 auto;padding:0 20px;box-sizing:border-box}
+/* сетка Tilda: контейнер 640 / 960 / 1200, поля колонки 0 / 10 / 20 (замерено на оригинале) */
+.tb{box-sizing:border-box;width:100%;margin:0 auto}
+@media (min-width:641px){.tb{width:640px}}
+@media (min-width:641px){.tb{padding-bottom:10px}}
+@media (min-width:961px){.tb{width:960px;padding-bottom:0}.tb .tb-w{margin:0 10px}}
+@media (min-width:1201px){.tb{width:1200px}.tb .tb-w{margin:0 20px}}
+@media (max-width:640px){.tb{padding-bottom:10px}.tb .tb-w{padding-left:20px}}
 .tb-w{display:flex;flex-wrap:wrap;justify-content:center;margin:0;padding:0;list-style:none}
 .tb-t{display:block;margin:5px 15px 15px 0;border-radius:30px;background:#f2f2f2;width:fit-content}
 .tb-b{display:inline-block;margin:0;padding:18px 22px;border:0;background:transparent;color:#121212;font:400 16px/21.6px Inter,Inter Fallback,Arial,sans-serif;cursor:pointer;transition:font-weight,color .3s}
 .tb-t.on{background:#d93433}
 .tb-t.on .tb-b{color:#fff;font-weight:600;cursor:default}
 @media (hover:hover){.tb-t:not(.on) .tb-b:hover{color:#d93433}}
+@media (max-width:1200px){.tb-b{font-size:14px;line-height:18.9px}}
 @media (max-width:960px){.tb-w{justify-content:flex-start}.tb-t{margin:5px 10px 10px 0}.tb-b{font-size:10px;line-height:5px}}
 /* ===== «Загрузить еще» (T400) ===== */
 .lm{display:flex;justify-content:center}

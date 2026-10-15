@@ -113,7 +113,8 @@ export function convertZero($, rec, ctx) {
   // ---------- 3. переписанный CSS записи
   const raw = rec.find('style').map((i, e) => $(e).text()).get().join('\n');
   const widthById = {};
-  for (const e of elems) widthById[e.id] = parseFloat(layoutByR[maxR][e.id].width) || 0;
+  // ширина в % (элемент на всё окно) — размер заранее неизвестен: берём самый крупный вариант изображения
+  for (const e of elems) { const wv = String(layoutByR[maxR][e.id].width); widthById[e.id] = /%|auto/.test(wv) ? 0 : parseFloat(wv) || 0; }
   css.push(rewriteCss(raw, recId, ctx, elems, widthById));
 
   // ---------- 4. keyframes пошаговых анимаций (hover/click/blockintoview)
@@ -358,7 +359,8 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   let style = '';
   switch (type) {
     case 'shape': {
-      const mw = (parseFloat(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width) || 0) * 1.6;
+      const wv = String(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width);
+      const mw = /%|auto/.test(wv) ? 0 : (parseFloat(wv) || 0) * 1.6; // ширина в % — размер неизвестен: самый крупный вариант
       const bgSrc = atom.attr('data-original') || ((atom.attr('style') || '').match(/url\(['"]?([^'")]+)['"]?\)/) || [])[1];
       if (bgSrc) {
         const val = ctx.cssImage(bgSrc, mw);

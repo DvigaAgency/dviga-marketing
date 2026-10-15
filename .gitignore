@@ -10,3 +10,4 @@ tools/_*.mjs
 dist-test/
 dist-dev/
 reports/diff-*/
+dist-cmp/
