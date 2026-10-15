@@ -16,7 +16,8 @@ const MAXH = +(process.env.MAXH || 720);
 const hash = (f) => crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 10);
 const run = (args) => { const r = spawnSync(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-y', ...args], { encoding: 'utf8' }); if (r.status) throw new Error(r.stderr); };
 
-const list = Object.entries(man).filter(([u, m]) => m.file && /\.mp4$/i.test(m.file));
+// ONLY=<часть адреса> — обработать только один ролик; POSTER_AT=<сек> — кадр постера (по умолчанию 0,4 с)
+const list = Object.entries(man).filter(([u, m]) => m.file && /\.mp4$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)));
 for (const [url, m] of list) {
   const src = m.file;
   const slug = path.basename(url, '.mp4').toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -27,7 +28,7 @@ for (const [url, m] of list) {
   const tmpMp4 = path.join(OUT, `${slug}.tmp.mp4`); const tmpPng = path.join(OUT, `${slug}.tmp.png`);
   const vf = `scale=${w}:${h}:flags=lanczos,format=yuv420p`;
   run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-profile:v', 'main', '-movflags', '+faststart', tmpMp4]);
-  run(['-i', src, '-ss', '0.4', '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
+  run(['-i', src, '-ss', process.env.POSTER_AT || '0.4', '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
   const mp4 = `${slug}.${hash(tmpMp4)}.mp4`; 
   fs.renameSync(tmpMp4, path.join(OUT, mp4));
   const poster = `${slug}.${hash(tmpPng)}.webp`;
