@@ -51,5 +51,7 @@ html{scroll-behavior:smooth}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid #d93433;outline-offset:2px}
 /* пропуск раскладки/отрисовки секций вне экрана; размеры заданы точно (contain-intrinsic-block-size из данных артборда) */
 .cv{content-visibility:auto}
+/* iOS/WebKit: отложенный рендер секций ломает расчёт масштаба текста (zoom) — там показываем всё сразу */
+@supports (-webkit-touch-callout:none){.cv{content-visibility:visible}}
 /* как у корневого контейнера оригинала: всё, что выходит за края секций (overflow:visible у артборда), не создаёт горизонтальную прокрутку */
 main.cq,footer.cq{overflow:clip}

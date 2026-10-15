@@ -26,9 +26,9 @@ for (const [url, m] of list) {
   const sw = +dim[1]; const sh = +dim[2];
   const h = Math.min(sh, MAXH); const w = Math.round((sw * h) / sh / 2) * 2;
   const tmpMp4 = path.join(OUT, `${slug}.tmp.mp4`); const tmpPng = path.join(OUT, `${slug}.tmp.png`);
-  const vf = `scale=${w}:${h}:flags=lanczos,format=yuv420p`;
-  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-profile:v', 'main', '-movflags', '+faststart', tmpMp4]);
-  run(['-i', src, '-ss', process.env.POSTER_AT || '0.4', '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
+  const vf = `scale=${w}:${h}:flags=lanczos,setsar=1,format=yuv420p`;
+  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-profile:v', 'main', '-level', '4.0', '-r', '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
+  run(['-i', src, '-ss', process.env.POSTER_AT || (slug === 'showreel1' ? '8' : '0.4'), '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
   const mp4 = `${slug}.${hash(tmpMp4)}.mp4`; 
   fs.renameSync(tmpMp4, path.join(OUT, mp4));
   const poster = `${slug}.${hash(tmpPng)}.webp`;
