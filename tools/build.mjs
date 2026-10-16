@@ -1,5 +1,5 @@
 // Сборка статической копии dviga.marketing: страницы из tools/pages.mjs (снимки HTML Tilda) -> чистые HTML/CSS/JS в dist/.
-// Запуск: node tools/build.mjs   (переменные: SITE_URL, NOINDEX=1, BASE=/подкаталог, OUT, CSS_MODE)
+// Запуск: node tools/build.mjs   (переменные: SITE_URL, NOINDEX=1, BASE=/подкаталог, OUT)
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -10,9 +10,9 @@ import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
-import { cookie, reviewsSlider, reviewPopups, blankPopups, widget, search, fixLinks } from './lib/components.mjs';
+import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, search, fixLinks } from './lib/components.mjs';
 import { setLocalPaths, link } from './lib/util.mjs';
-import { tabsBlock, loadMoreBlock, shareBlock } from './lib/listing.mjs';
+import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock } from './lib/listing.mjs';
 import { casesCatalog } from './lib/cases.mjs';
 import { PAGES } from './pages.mjs';
 
@@ -46,9 +46,8 @@ usedAssets.add(dot.webp.at(-1).src);
 const FB = (t) => t.replace(/font-family:Inter,Arial,sans-serif/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif').replace(/font-family:'?Inter'?;/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif;').replace(/--t-(headline|text)-font:Inter,Arial,sans-serif/g, '--t-$1-font:Inter,Inter Fallback,Arial,sans-serif');
 const embeds = readCss('src/css/embeds.css').replace(/%%DOT%%/g, dot.webp.at(-1).src);
 const staticCrit = [readCss('src/css/base.css'), scaleUi(readCss('src/css/critical.css')), embeds];
-const staticRest = [readCss('src/css/forms.css'), readCss('src/css/components.css'), readCss('src/css/listing.css'), scaleUi(readCss('src/css/cases.css'))];
+const staticRest = [readCss('src/css/forms.css'), readCss('src/css/components.css'), scaleUi(readCss('src/css/listing.css')), scaleUi(readCss('src/css/cases.css'))];
 const tgt = ['chrome110', 'safari16', 'firefox110'];
-const CSS_MODE = process.env.CSS_MODE || 'link';
 const withBase = (s) => (BASE ? s.replace(/url\((['"]?)\/assets\//g, `url($1${BASE}/assets/`) : s);
 
 // ----------------------------------------------------------------- JS (общий для всех страниц)
@@ -79,6 +78,12 @@ const HOME_ANX = new Set(['991113446:1743673825773', '991113446:1744966468663', 
 // url() внутри пользовательских свойств (--icon: url(…)) css-tree не разбирает — подставляем локальные файлы здесь
 const localUrls = (t) => t.replace(/url\((['"]?)(https?:\/\/(?:static|thb)\.tildacdn\.com\/[^)'"]+)\1\)/g, (m, q, u) => { const a = lookup(u); if (!a) { console.warn('NO CSS ASSET', u); return m; } const f = a.kind === 'svg' ? a.src : a.webp.at(-1).src; usedAssets.add(f); return `url(${f})`; });
 const isZero = (rec) => rec.attr('data-record-type') === '396' || rec.attr('data-alias-record-type') === '396';
+
+// ----------------------------------------------------------------- общий CSS (один файл на все страницы — кэшируется между переходами)
+const commonSrc = readCss('src/css/fonts.css') + FB([...staticCrit, ...staticRest].join(NL));
+const commonCss = (await esbuild.transform(commonSrc, { loader: 'css', minify: true, target: tgt })).code;
+const commonName = `common.${hash(commonCss)}.css`;
+fs.writeFileSync(path.join(OUT, 'assets', commonName), withBase(commonCss));
 
 // ----------------------------------------------------------------- одна страница
 async function buildPage(spec) {
@@ -111,6 +116,12 @@ async function buildPage(spec) {
       if (v.poster) usedAssets.add(v.poster);
       if (v.webm) usedAssets.add(v.webm);
       return `<video class="vd" muted loop playsinline preload="none"${v.poster ? ` data-poster="${v.poster}"` : ''} data-src="${v.mp4}"${v.webm ? ` data-webm="${v.webm}"` : ''} width="${v.w}" height="${v.h}" aria-hidden="true"></video>`;
+    },
+    gallery(imgs, o) {
+      if (!imgs.length) return '';
+      const slides = imgs.map((x, i) => '<div class="gl-s">' + picture(x.li_img, { alt: x.li_imgalt || '', sizes: '(min-width:1200px) 1140px,100vw', eager: false }) + '</div>').join('');
+      const dots = imgs.length > 1 ? '<div class="gl-d" style="--d:' + (o.dots || '#818181') + ';--da:' + (o.dotsOn || '#d93433') + '">' + imgs.map((x, i) => '<i' + (i ? '' : ' class="on"') + '></i>').join('') + '</div>' : '';
+      return '<div class="gl" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + dots + '</div>';
     },
     form(e) {
       const el = e.el;
@@ -146,6 +157,9 @@ async function buildPage(spec) {
       if (type === '525') { html[name].push(reviewsSlider($)); continue; }
       if (type === '395' && name === 'main') { const t = tabsBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
       if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
+      if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
+      if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '431' && name === 'main') { const t = tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (!isZero(rec)) continue;
       const r = convertZero($, rec, ctx);
@@ -173,17 +187,14 @@ async function buildPage(spec) {
   const calcPopup = `<div class="pp" id="p-calculate" data-hook="popup:calculate" role="dialog" aria-modal="true" tabindex="-1" aria-label="${calcRec.find('.t702__title').text().trim()}">${closeBtn}<div class="pc cl"><div class="cl-w"><div class="cl-t">${calcRec.find('.t702__title').html()}</div>${calcForm}</div></div></div>`;
   const wRec = $('#rec1468283321');
   const widgetForm = renderTildaForm($, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
-  const popups = [menuPopup, formPopup, calcPopup, reviewPopups($), blankPopups($), search($)].join('');
+  const popups = [menuPopup, formPopup, calcPopup, reviewPopups($), blankPopups($), lightboxes($), search($)].join('');
 
   // ---------------- CSS страницы
-  const critAll = readCss('src/css/fonts.css') + FB([...staticCrit, critZero.join(NL)].join(NL));
-  const restAll = FB([...staticRest, css.join(NL), extraCss.join(NL)].join(NL));
-  const critCss = (await esbuild.transform(critAll, { loader: 'css', minify: true, target: tgt })).code;
-  const minCss = (await esbuild.transform(restAll, { loader: 'css', minify: true, target: tgt })).code;
-  const fullCss = (await esbuild.transform(critAll + NL + restAll, { loader: 'css', minify: true, target: tgt })).code;
-  const outCss = CSS_MODE === 'async' ? minCss : fullCss;
-  const cssName = `app.${hash(outCss)}.css`;
-  fs.writeFileSync(path.join(OUT, 'assets', cssName), withBase(outCss));
+  // CSS страницы: стили её записей; общие стили (шрифты, база, компоненты) — в одном файле common.<hash>.css для всех страниц
+  const pageSrc = FB([critZero.join(NL), css.join(NL), extraCss.join(NL)].join(NL));
+  const minCss = (await esbuild.transform(pageSrc, { loader: 'css', minify: true, target: tgt })).code;
+  const cssName = `app.${hash(minCss)}.css`;
+  fs.writeFileSync(path.join(OUT, 'assets', cssName), withBase(minCss));
   let deferTag = '';
   if (deferred.length) {
     const dCss = (await esbuild.transform(FB(deferred.join(NL)), { loader: 'css', minify: true, target: tgt })).code;
@@ -204,9 +215,7 @@ async function buildPage(spec) {
     .map((o) => JSON.parse(JSON.stringify(o).replace(/https?:\\?\/\\?\/(static|thb)\.tildacdn\.com[^"\\]*/g, SITE_URL + logo.src).replace(/https:\/\/dviga\.marketing/g, SITE_URL)))
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('');
   const noscript = '<style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style>';
-  const cssTags = CSS_MODE === 'inline' ? `<style>${fullCss}</style>` : CSS_MODE === 'async'
-    ? `<style>${critCss}</style><link rel="stylesheet" href="/assets/${cssName}" media="print" onload="this.media='all';dispatchEvent(new Event('cssload'))"><noscript><link rel="stylesheet" href="/assets/${cssName}">${noscript}</noscript>`
-    : `<link rel="stylesheet" href="/assets/${cssName}"><noscript>${noscript}</noscript>`;
+  const cssTags = `<link rel="stylesheet" href="/assets/${commonName}"><link rel="stylesheet" href="/assets/${cssName}"><noscript>${noscript}</noscript>`;
   const ogTitle = $('meta[property="og:title"]').attr('content') || title;
   const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(e){function f(){e.style.setProperty("--cw",e.clientWidth)}f();addEventListener("resize",f)})(document.documentElement)</script><title>${title}</title><meta name="description" content="${descr}">${noindex}<link rel="canonical" href="${url}"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
     + `<meta property="og:url" content="${url}"><meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${descr}"><meta property="og:type" content="${/^\/blog\/.+/.test(spec.path) ? 'article' : 'website'}"><meta property="og:image" content="${SITE_URL}${ogM.webp.at(-1).src}"><meta name="twitter:card" content="summary_large_image">`
@@ -220,7 +229,7 @@ async function buildPage(spec) {
   const outFile = path.join(OUT, spec.path === '/' ? '' : spec.path, 'index.html');
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, fixed);
-  return { spec, page, critCss, minCss, cssLen: minCss.length };
+  return { spec, page, cssLen: minCss.length };
 }
 
 const built = [];

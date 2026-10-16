@@ -31,3 +31,4 @@
 .dg{scrollbar-width:none}
 /* t.me/рейтинг и пр.: ссылки в кастомных попапах */
 .rv-d a[href^="#popup:"]{color:#d93433}
+.video-case .a,.video-case .vd{border-radius:14px}

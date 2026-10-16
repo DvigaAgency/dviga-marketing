@@ -26,3 +26,8 @@
 .shr{display:flex;justify-content:center;gap:4px;height:34px}
 .sh-a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:2px;background:#111;transition:background-color .2s}
 @media (hover:hover){.sh-a:hover{background:#d93433}}
+/* ===== обложка (T160) ===== */
+.cov{background:#f2f2f2 center/cover no-repeat}
+/* якоря (T215) */
+.anc-r{height:0}
+.anc{display:block;height:0;scroll-margin-top:100px}

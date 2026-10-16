@@ -70,3 +70,16 @@ export function search($) {
   const ph = $('#rec3285898701 input').attr('placeholder') || 'Поиск';
   return `<div class="sr" id="sr" role="dialog" aria-label="Поиск" data-hook="search"><div class="sr-h"><div class="sr-c"><form class="sr-i" action="https://yandex.ru/search/" method="get" target="_blank" role="search"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" role="presentation"><circle r="7.93" transform="matrix(.7156 .6985 -.7156 .6985 18.59 11.78)" stroke="#b6b6b6"/><line y1="-.5" x2="9.18" y2="-.5" transform="matrix(-.7156 .6985 -.7156 -.6985 12.75 16.96)" stroke="#b6b6b6"/></svg><input type="search" name="text" placeholder="${esc(ph)}" aria-label="${esc(ph)}" autocomplete="off"><input type="hidden" name="site" value="dviga.marketing"><button type="button" class="sr-x" aria-label="Закрыть поиск" data-close>×</button></form></div></div></div>`;
 }
+
+/** лайтбокс-галереи (T746): попап с картинками, открывается ссылкой #popup:<имя>; слайдер — общий модуль gallery.js */
+export function lightboxes($) {
+  return $('.r[data-record-type=746]').map((i, el) => {
+    const r = $(el);
+    const hook = (r.find('.t-popup').attr('data-tooltip-hook') || '').replace('#', '');
+    const imgs = r.find('img.t-slds__img').map((k, im) => $(im).attr('data-original') || $(im).attr('src')).get();
+    if (!hook || !imgs.length) return '';
+    const slides = imgs.map((u) => `<div class="gl-s">${picture(u, { alt: '', sizes: '90vw' })}</div>`).join('');
+    const dots = imgs.length > 1 ? `<div class="gl-d">${imgs.map((u, k) => `<i${k ? '' : ' class="on"'}></i>`).join('')}</div>` : '';
+    return `<div class="pp lb" id="p-${hook.replace(/[^a-z0-9]/gi, '-')}" data-hook="${hook}" role="dialog" aria-modal="true" tabindex="-1" aria-label="Галерея">${closeBtn}<div class="pc lbx"><div class="gl" data-gl><div class="gl-t">${slides}</div>${dots}</div></div></div>`;
+  }).get().join('');
+}

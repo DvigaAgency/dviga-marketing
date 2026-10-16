@@ -17,17 +17,18 @@ const hash = (f) => crypto.createHash('sha1').update(fs.readFileSync(f)).digest(
 const run = (args) => { const r = spawnSync(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-y', ...args], { encoding: 'utf8' }); if (r.status) throw new Error(r.stderr); };
 
 // ONLY=<часть адреса> — обработать только один ролик; POSTER_AT=<сек> — кадр постера (по умолчанию 0,4 с)
-const list = Object.entries(man).filter(([u, m]) => m.file && /\.mp4$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)));
+const list = Object.entries(man).filter(([u, m]) => m.file && /\.(mp4|mov)$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)));
 for (const [url, m] of list) {
+  if (process.env.SKIP_DONE && prev[url] && prev[url].mp4 && fs.existsSync(path.join('public', prev[url].mp4))) continue; // уже обработано
   const src = m.file;
-  const slug = path.basename(url, '.mp4').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const slug = path.basename(url).replace(/\.[A-Za-z0-9]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'v';
   const probe = spawnSync(ffmpeg, ['-hide_banner', '-i', src], { encoding: 'utf8' }).stderr;
   const dim = /Video:.*?, (\d{2,5})x(\d{2,5})/.exec(probe);
   const sw = +dim[1]; const sh = +dim[2];
   const h = Math.min(sh, MAXH); const w = Math.round((sw * h) / sh / 2) * 2;
   const tmpMp4 = path.join(OUT, `${slug}.tmp.mp4`); const tmpPng = path.join(OUT, `${slug}.tmp.png`);
   const vf = `scale=${w}:${h}:flags=lanczos,setsar=1,format=yuv420p`;
-  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-profile:v', 'main', '-level', '4.0', '-r', '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
+  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', process.env.PRESET || 'slow', '-crf', '30', '-profile:v', 'main', '-level', '4.0', '-r', '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
   run(['-i', src, '-ss', process.env.POSTER_AT || (slug === 'showreel1' ? '8' : '0.4'), '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
   const mp4 = `${slug}.${hash(tmpMp4)}.mp4`; 
   fs.renameSync(tmpMp4, path.join(OUT, mp4));

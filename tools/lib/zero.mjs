@@ -127,6 +127,9 @@ export function convertZero($, rec, ctx) {
   const style = (rec.attr('style') || '').trim();
   const pad = recPadding(rec.attr('class') || '', recId);
   if (pad) css.push(pad);
+  // фон самой записи (область отступов вокруг артборда)
+  const recBg = /background-color:\s*([^;]+)/.exec(style);
+  if (recBg) css.push(`${rid}{background-color:${recBg[1].trim()}}`);
   const abClass = ['ab'];
   if (ovrflw === 'visible') abClass.push('ov');
   if (ctx.drag && ctx.drag.has(recId)) abClass.push('dg');
@@ -395,6 +398,21 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
       const v = atom.find('.tn-atom__videoiframe');
       body = ctx.video(v.attr('data-mp4video'), id);
       style = ' style="height:100%"';
+      break;
+    }
+    case 'html': {
+      // вставка HTML: встречается как <video><source src=…> (ролик с хоста оригинала) — собираем в обычный лениво грузимый ролик
+      const src = atom.find('video source').attr('src') || atom.find('video').attr('src');
+      if (src) { body = ctx.video(src, id); style = ' style="height:100%"'; atomClass += ' vid'; } else { body = ''; console.warn('WARN html-элемент без поддерживаемого содержимого', ctx.rec, id); }
+      break;
+    }
+    case 'gallery': {
+      // галерея (слайдер картинок): список слайдов лежит в data-field-imgs-value
+      let imgs = [];
+      try { imgs = JSON.parse(attrs['data-field-imgs-value'] || '[]'); } catch { /* пусто */ }
+      body = ctx.gallery(imgs, { autoplay: +(attrs['data-field-slds_autoplay-value'] || 0), dots: attrs['data-field-slds_dotsbgcolor-value'], dotsOn: attrs['data-field-slds_dotsbgcoloractive-value'] });
+      style = ' style="height:100%"';
+      atomClass += ' gl-a';
       break;
     }
     case 'vector': {

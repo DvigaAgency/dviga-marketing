@@ -1,11 +1,16 @@
 // Страницы копии: адрес -> снимок HTML оригинала (data/pages/, обновляется tools/fetch-html.mjs --pages).
 // kind: home | cases (каталог кейсов с новой фильтрацией) | page (любая страница из Zero-блоков)
+// Страницы кейсов и статей подхватываются автоматически: data/pages/cases__<slug>.html -> /cases/<slug>, blog__<slug>.html -> /blog/<slug>.
+import fs from 'node:fs';
+
+const dir = 'data/pages';
+const files = fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+const sub = (prefix) => files.filter((f) => f.startsWith(prefix + '__') && f.endsWith('.html')).map((f) => ({ path: `/${prefix}/${f.slice(prefix.length + 2, -5)}`, src: `${dir}/${f}`, kind: 'page' }));
+
 export const PAGES = [
   { path: '/', src: 'data/home.source.html', kind: 'home' },
-  { path: '/cases', src: 'data/pages/cases.html', kind: 'cases' },
-  { path: '/cases/tush-i-teni', src: 'data/pages/cases__tush-i-teni.html', kind: 'page' },
-  { path: '/cases/sever-staff-groupp', src: 'data/pages/cases__sever-staff-groupp.html', kind: 'page' },
-  { path: '/blog', src: 'data/pages/blog.html', kind: 'page' },
-  { path: '/blog/kak-optimizirovat-smetu-proekta', src: 'data/pages/blog__kak-optimizirovat-smetu-proekta.html', kind: 'page' },
-  { path: '/blog/ren-tv-obnovili-svoy-logotip-i-pozitsionirovaniye', src: 'data/pages/blog__ren-tv-obnovili-svoy-logotip-i-pozitsionirovaniye.html', kind: 'page' },
+  { path: '/cases', src: `${dir}/cases.html`, kind: 'cases' },
+  ...sub('cases'),
+  { path: '/blog', src: `${dir}/blog.html`, kind: 'page' },
+  ...sub('blog'),
 ];

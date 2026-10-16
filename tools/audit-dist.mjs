@@ -16,7 +16,7 @@ const FORBIDDEN = [
 ];
 let bad = 0;
 for (const [name, re] of FORBIDDEN) {
-  const hits = text.filter((f) => re.test(fs.readFileSync(f, 'utf8')));
+  const hits = text.filter((f) => re.test(fs.readFileSync(f, 'utf8').replace(/<a [^>]*>[^]*?<\/a>/g, ''))); // адреса в href — внешние ссылки-переходы (например, на сайт кейса), не ресурсы
   console.log(`${hits.length ? 'FAIL' : 'ok  '} ${name}${hits.length ? ': ' + hits.join(', ') : ''}`);
   bad += hits.length;
 }
@@ -50,7 +50,7 @@ for (const pf of pages) {
   // якоря и попапы: каждый #hook ведёт на существующий попап/элемент
   const hooks = new Set($('[data-hook]').map((i, e) => $(e).attr('data-hook')).get());
   const dead = [];
-  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup'].includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h)) dead.push('#' + h); });
+  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup'].includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
   if (dead.length) console.log('FAIL якоря без цели на', path.relative(root, pf) || 'index.html', [...new Set(dead)].join(', '));
   deadCount += dead.length;
 }

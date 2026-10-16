@@ -375,6 +375,7 @@ function initLazy() {
   } else if (sl) import('./slider.js').then((m) => m.init(sl));
   $$('[data-share]').forEach((a) => { a.href = a.dataset.share + encodeURIComponent(location.href.split('#')[0]); });
   if ($('[data-tabs],.lm-b')) import('./tabs.js').then((m) => m.init());
+  $$('[data-gl]').forEach((g) => import('./gallery.js').then((m) => m.init(g)));
   const cs = $('[data-cases-root]');
   if (cs) import('./cases.js').then((m) => m.init(cs));
   const fm = $('.fm');

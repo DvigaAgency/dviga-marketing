@@ -34,3 +34,25 @@ export function shareBlock($, rec) {
   const items = SHARE.map(([n, u, p]) => `<a class="sh-a" href="${u}" target="_blank" rel="noopener" aria-label="${n}" data-share="${u}"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">${p}</svg></a>`).join('');
   return { id, css, html: `<section id="r${id}" class="r sh-r"><div class="shr">${items}</div></section>` };
 }
+
+/** обложка (T160): блок во всю высоту экрана с фоновой картинкой */
+export function coverBlock($, rec, cssImage) {
+  const id = rec.attr('id').replace('rec', '');
+  const car = rec.find('.t-cover__carrier');
+  const bg = car.attr('data-content-cover-bg');
+  const h = (car.attr('data-content-cover-height') || '100vh').replace(/vh$/, 'svh');
+  const img = bg ? cssImage(bg, 0) : '';
+  return { id, css: recPadding(rec.attr('class') || '', id), html: `<section id="r${id}" class="r cov" style="height:${h}"${img ? ` data-bg="${esc(img)}"` : ''}></section>` };
+}
+
+/** таблица (T431): данные лежат в скрытых блоках data-part1 (шапка) и data-part2 (строки), ячейки через «;» */
+export function tableBlock($, rec) {
+  const id = rec.attr('id').replace('rec', '');
+  const widths = (rec.find('.t431__table').attr('data-table-width') || '').split(';');
+  const head = (rec.find('.t431__data-part1').text() || '').trim().split(';');
+  const rows = (rec.find('.t431__data-part2').text() || '').split(String.fromCharCode(10)).map((x) => x.trim()).filter(Boolean).map((x) => x.split(';'));
+  const col = widths.map((w, i) => (i === widths.length - 1 ? '<col>' : `<col style="width:${esc(w)}">`)).join('');
+  const th = head.map((c) => `<th scope="col">${esc(c.trim())}</th>`).join('');
+  const tr = rows.map((r) => `<tr>${r.map((c, i) => (i ? `<td>${esc(c.trim())}</td>` : `<th scope="row">${esc(c.trim())}</th>`)).join('')}</tr>`).join('');
+  return { id, css: recPadding(rec.attr('class') || '', id), html: `<section id="r${id}" class="r tbl"><div class="tbl-w"><table class="tbl-t"><colgroup>${col}</colgroup><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div></section>` };
+}

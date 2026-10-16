@@ -57,6 +57,8 @@ async function one([url, m]) {
 }
 let idx = 0;
 async function worker() { while (idx < todo.length) { const t = todo[idx++]; try { await one(t); } catch (e) { console.log('FAIL', t[0], e.message); } if (++done % 20 === 0) console.log(done, '/', todo.length); } }
+const checkpoint = setInterval(() => fs.writeFileSync('data/img-manifest.json', JSON.stringify({ ...prev, ...result }, null, 1)), 20000); // чтобы прерванный прогон можно было продолжить
 await Promise.all(Array.from({ length: 4 }, worker));
-fs.writeFileSync('data/img-manifest.json', JSON.stringify(result, null, 1));
+clearInterval(checkpoint);
+fs.writeFileSync('data/img-manifest.json', JSON.stringify({ ...prev, ...result }, null, 1));
 console.log('images', Object.keys(result).length, 'in MB', (bytesIn / 1e6).toFixed(1), 'out (largest variant, webp+avif) MB', (bytesOut / 1e6).toFixed(1));

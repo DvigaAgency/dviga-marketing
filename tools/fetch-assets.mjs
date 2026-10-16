@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 const all = JSON.parse(fs.readFileSync('data/assets-raw.json', 'utf8'));
-const list = all.filter((u) => /static\.tildacdn\.com\/(tild|vide)/.test(u));
+const list = all.filter((u) => /static\.tildacdn\.com\/(tild|vide)|cp80604-bitrix-8\.tw1\.ru\//.test(u));
 
 fs.mkdirSync('source-assets', { recursive: true });
 const prevM = fs.existsSync('data/assets-manifest.json') ? JSON.parse(fs.readFileSync('data/assets-manifest.json', 'utf8')) : {};
@@ -13,7 +13,7 @@ const localName = (u) => {
     const [id, ...rest] = p.pathname.replace(/^\//, '').split('/');
     return `${id}__${decodeURIComponent(rest.join('_')).replace(/[^\w.\-]+/g, '_')}`;
   }
-  return 'ext__' + path.basename(p.pathname);
+  return 'ext__' + decodeURIComponent(path.basename(p.pathname)).replace(/[^A-Za-z0-9._-]+/g, '_');
 };
 let i = 0;
 async function worker() {
@@ -23,7 +23,7 @@ async function worker() {
     try {
       if (manifest[u] && manifest[u].file && fs.existsSync(manifest[u].file)) continue;
       if (!fs.existsSync(f)) {
-        const r = await fetch(u);
+        const r = await fetch(u.replace(/ /g, '%20'));
         if (!r.ok) throw new Error('HTTP ' + r.status);
         fs.writeFileSync(f, Buffer.from(await r.arrayBuffer()));
       }
