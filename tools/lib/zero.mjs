@@ -112,9 +112,16 @@ export function convertZero($, rec, ctx) {
 
   // ---------- 3. переписанный CSS записи
   const raw = rec.find('style').map((i, e) => $(e).text()).get().join('\n');
-  const widthById = {};
-  // ширина в % (элемент на всё окно) — размер заранее неизвестен: берём самый крупный вариант изображения
-  for (const e of elems) { const wv = String(layoutByR[maxR][e.id].width); widthById[e.id] = /%|auto/.test(wv) ? 0 : parseFloat(wv) || 0; }
+  // размеры слоя в дизайн-px по всем брейкпоинтам (максимум): нужны, чтобы выбрать вариант картинки без «мыла» на ретине.
+  // Ширина в % / auto (слой на всё окно) — размер заранее неизвестен: берём самый крупный вариант (w = 0).
+  const sizeById = {};
+  for (const e of elems) {
+    let w = 0; let h = 0; let unknown = false;
+    for (const R of screens) { const l = layoutByR[R][e.id]; const wv = String(l.width); const hv = String(l.height); if (/%|auto/.test(wv)) unknown = true; else w = Math.max(w, parseFloat(wv) || 0); if (!/%|auto/.test(hv)) h = Math.max(h, parseFloat(hv) || 0); }
+    sizeById[e.id] = { w: unknown ? 0 : w, h: unknown ? 0 : h };
+  }
+  ctx.sizeOf = (id) => sizeById[id] || { w: 0, h: 0 };
+  const widthById = sizeById;
   css.push(rewriteCss(raw, recId, ctx, elems, widthById));
 
   // ---------- 4. keyframes пошаговых анимаций (hover/click/blockintoview)
@@ -243,8 +250,8 @@ function rewriteCss(raw, recId, ctx, elems, widthById) {
     enter(node) {
       const u = typeof node.value === 'string' ? node.value : node.value.value;
       const idm = this.rule ? csstree.generate(this.rule.prelude).match(/data-elem-id="([0-9]+)"/) : null;
-      const w = idm && widthById[idm[1]] ? widthById[idm[1]] * 1.6 : 0;
-      imgs.push(ctx.cssImage(u, w));
+      const sz = idm && widthById[idm[1]];
+      imgs.push(ctx.cssImage(u, sz && sz.w ? sz.w * 1.6 : 0, sz && sz.h ? sz.h * 1.6 : 0));
       node.value = '__IMG' + (imgs.length - 1) + '__';
     },
   });
@@ -362,11 +369,11 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   let style = '';
   switch (type) {
     case 'shape': {
-      const wv = String(elemLayout(attrs, screens, screens[screens.length - 1], A[screens[screens.length - 1]]).width);
-      const mw = /%|auto/.test(wv) ? 0 : (parseFloat(wv) || 0) * 1.6; // ширина в % — размер неизвестен: самый крупный вариант
+            const sz = ctx.sizeOf ? ctx.sizeOf(e.id) : { w: 0, h: 0 };
+      const mw = sz.w ? sz.w * 1.6 : 0; const mh = sz.h ? sz.h * 1.6 : 0; // ширина в % — размер неизвестен: самый крупный вариант
       const bgSrc = atom.attr('data-original') || ((atom.attr('style') || '').match(/url\(['"]?([^'")]+)['"]?\)/) || [])[1];
       if (bgSrc) {
-        const val = ctx.cssImage(bgSrc, mw);
+        const val = ctx.cssImage(bgSrc, mw, mh);
         // фоновые картинки вне первого экрана подгружаются лениво (IntersectionObserver в main.js)
         style = ctx.eager() ? ` style="${esc('background-image:' + val)}"` : ` data-bg="${esc(val)}"`;
       }

@@ -28,12 +28,24 @@ export function picture(url, o = {}) {
 }
 
 /** значение для CSS background-image: url() или image-set() */
-export function cssImage(url, maxW) {
+export function cssImage(url, maxW, maxH) {
   const m = lookup(url);
   if (!m) { console.warn('NO CSS ASSET', url); return `url(${url})`; }
   if (m.kind === 'svg') { used.add(m.src); return `url(${m.src})`; }
-  const pick = (arr) => arr.find((v) => v.w >= (maxW || 1e9)) || arr.at(-1);
-  const a = pick(m.avif); const w = pick(m.webp);
-  used.add(w.src); used.add(a.src);
-  return `image-set(url(${a.src}) type("image/avif"),url(${w.src}) type("image/webp"))`;
+  // maxW — ширина слоя в дизайн-px × 1.6 (самый широкий экран). Для плотностей 1x/2x/3x выбираем варианты под
+  // 1.6 / 2.6 / 3.8 ширины слоя; браузер берёт подходящий его плотности экрана, так что на ретине фон не мылится.
+  // при background-size:cover нужная ширина определяется и высотой слоя: ширина картинки = высота слоя × её пропорции
+  let base = maxW ? maxW / 1.6 : 0;
+  if (base && maxH && m.w && m.h) base = Math.max(base, (maxH / 1.6) * (m.w / m.h));
+  const entries = (arr, fmt) => {
+    const seen = new Set(); const out = [];
+    for (const [d, f] of [[1, 1.6], [2, 2.6], [3, 3.8]]) {
+      const v = (base ? arr.find((x) => x.w >= base * f) : null) || arr.at(-1);
+      if (seen.has(v.src)) continue;
+      seen.add(v.src); used.add(v.src);
+      out.push(`url(${v.src}) ${d}x type("image/${fmt}")`);
+    }
+    return out;
+  };
+  return `image-set(${[...entries(m.avif, 'avif'), ...entries(m.webp, 'webp')].join(',')})`;
 }

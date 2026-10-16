@@ -12,16 +12,17 @@ fs.mkdirSync(OUT, { recursive: true });
 const prev = fs.existsSync('data/img-manifest.json') ? JSON.parse(fs.readFileSync('data/img-manifest.json', 'utf8')) : {};
 const result = {};
 const PRESETS = [360, 720, 1080, 1620];
+const QV = 'q2'; // версия параметров качества (PNG-скриншоты и иллюстрации — выше: на них заметны артефакты)
 const hash = (buf) => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 10);
 const slug = (f) => path.basename(f).replace(/^tild[0-9a-f-]+__/, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/tilda/gi, 'tld').toLowerCase().slice(0, 40) || 'img';
 
-let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm)$/i.test(m.file));
+let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm|mov)$/i.test(m.file));
 let done = 0, bytesIn = 0, bytesOut = 0;
 async function one([url, m]) {
   const f = m.file; const ext = path.extname(f).toLowerCase();
   const buf = fs.readFileSync(f);
   bytesIn += buf.length;
-  if (prev[url] && prev[url].src && prev[url].inSize === buf.length && fs.existsSync(path.join('public', prev[url].src))) { result[url] = prev[url]; bytesOut += prev[url].outSize || 0; return; }
+  if (prev[url] && prev[url].q === QV && prev[url].src && prev[url].inSize === buf.length && fs.existsSync(path.join('public', prev[url].src)) && [...(prev[url].avif || []), ...(prev[url].webp || [])].every((v) => fs.existsSync(path.join('public', v.src)))) { result[url] = prev[url]; bytesOut += prev[url].outSize || 0; return; }
   if (ext === '.svg') {
     const r = optimize(buf.toString('utf8'), { multipass: true, plugins: ['preset-default'] });
     const out = Buffer.from(r.data);
@@ -44,7 +45,8 @@ async function one([url, m]) {
   for (const w of widths) {
     const base = sharp(buf).resize({ width: w, withoutEnlargement: true });
     for (const fmt of ['avif', 'webp']) {
-      const q = fmt === 'avif' ? { quality: 55, effort: 4 } : { quality: 80, effort: 5 };
+      const png = ext === '.png';
+      const q = fmt === 'avif' ? { quality: png ? 72 : 62, effort: 4 } : { quality: png ? 90 : 82, effort: 5 };
       const o = await base.clone()[fmt](q).toBuffer();
       const name = `${slug(f)}-${w}.${hash(o)}.${fmt}`;
       fs.writeFileSync(path.join(OUT, name), o);
@@ -52,7 +54,7 @@ async function one([url, m]) {
       if (w === N || (w === widths.at(-1))) out0 += o.length;
     }
   }
-  result[url] = { kind: 'raster', w: N, h: H, alpha: !!meta.hasAlpha, avif: variants.avif, webp: variants.webp, src: variants.webp.at(-1).src, inSize: buf.length, outSize: out0 };
+  result[url] = { q: QV, kind: 'raster', w: N, h: H, alpha: !!meta.hasAlpha, avif: variants.avif, webp: variants.webp, src: variants.webp.at(-1).src, inSize: buf.length, outSize: out0 };
   bytesOut += out0;
 }
 let idx = 0;
