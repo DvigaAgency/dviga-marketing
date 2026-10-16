@@ -49,7 +49,7 @@ html{scroll-behavior:smooth}
 @media (max-width:1199px){.e[data-h0]:not([data-mb])>.sw{opacity:1}}
 .e .a{border:var(--z-borderwidth,0) var(--z-borderstyle,solid) var(--z-bordercolor,transparent);transition:background-color var(--z-speedhover,0s) ease-in-out,color var(--z-speedhover,0s) ease-in-out,border-color var(--z-speedhover,0s) ease-in-out,box-shadow var(--z-shadowshoverspeed,.2s) ease-in-out;text-shadow:var(--z-shadow-text-x,0px) var(--z-shadow-text-y,0px) var(--z-shadow-text-blur,0px) rgba(var(--z-shadow-text-color),var(--z-shadow-text-opacity,100%));background-position:center center;background-size:cover}
 /* масштаб блока: содержимое артборда рисуется в «дизайнерских» px на сетке R и масштабируется целиком (transform), как zoom у Tilda, но без зависимости от реализации zoom в браузере */
-.zw{position:absolute;left:0;top:0;width:calc(100%/var(--zw,1));height:calc(100%/var(--zw,1));transform:scale(var(--zw,1));transform-origin:0 0}
+.zw{position:absolute;z-index:2;left:0;top:0;width:calc(100%/var(--zw,1));height:calc(100%/var(--zw,1));transform:scale(var(--zw,1));transform-origin:0 0}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid #d93433;outline-offset:2px}
 /* пропуск раскладки/отрисовки секций вне экрана; размеры заданы точно (contain-intrinsic-block-size из данных артборда) */
 .cv{content-visibility:auto}
