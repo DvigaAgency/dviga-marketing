@@ -23,6 +23,6 @@
 .r.off{display:none!important}
 /* ===== «поделиться» (T014): квадраты 34×34, как у виджета Яндекса ===== */
 .sh-r{text-align:center}
-.sh{display:flex;justify-content:center;gap:4px;height:34px}
+.shr{display:flex;justify-content:center;gap:4px;height:34px}
 .sh-a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:2px;background:#111;transition:background-color .2s}
 @media (hover:hover){.sh-a:hover{background:#d93433}}

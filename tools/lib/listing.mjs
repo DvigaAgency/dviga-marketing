@@ -32,5 +32,5 @@ export function shareBlock($, rec) {
   const id = rec.attr('id').replace('rec', '');
   const css = recPadding(rec.attr('class') || '', id);
   const items = SHARE.map(([n, u, p]) => `<a class="sh-a" href="${u}" target="_blank" rel="noopener" aria-label="${n}" data-share="${u}"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">${p}</svg></a>`).join('');
-  return { id, css, html: `<section id="r${id}" class="r sh-r"><div class="sh">${items}</div></section>` };
+  return { id, css, html: `<section id="r${id}" class="r sh-r"><div class="shr">${items}</div></section>` };
 }
