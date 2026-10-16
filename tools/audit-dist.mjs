@@ -54,6 +54,12 @@ for (const pf of pages) {
   if (dead.length) console.log('FAIL якоря без цели на', path.relative(root, pf) || 'index.html', [...new Set(dead)].join(', '));
   deadCount += dead.length;
 }
+// сайт закрыт от индексации: на каждой странице мета-тег noindex, в robots.txt нет sitemap
+if (process.env.INDEX !== '1') {
+  const open = pages.filter((f) => !/<meta name="robots" content="noindex,nofollow">/.test(fs.readFileSync(f, 'utf8')));
+  console.log(open.length ? 'FAIL нет noindex: ' + open.join(', ') : 'ok   noindex на всех страницах');
+  bad += open.length;
+}
 console.log('страниц проверено:', pages.length, '| упоминания «tilda» в HTML (ссылки/тексты, допустимо):', [...mentions].join(', '));
 console.log(extCount ? 'FAIL внешние ресурсы' : 'ok   внешних подгружаемых ресурсов нет (внешние адреса — только ссылки-переходы)');
 console.log('локальных ссылок проверено:', refsTotal, ', отсутствует:', missing);

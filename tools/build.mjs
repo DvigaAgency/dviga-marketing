@@ -69,7 +69,9 @@ const ic32d = icon('https://static.tildacdn.com/tild3539-6364-4563-b635-38313131
 const icSvg = icon('https://static.tildacdn.com/tild6366-6462-4930-b765-623636353931/Frame_60.svg');
 const icApple = icon('https://static.tildacdn.com/tild3063-3138-4639-b765-316663623732/_.png');
 const fontPre = ['inter-cyrillic', 'inter-latin'].map((f) => `<link rel="preload" href="/assets/fonts/${f}.woff2" as="font" type="font/woff2" crossorigin>`).join('');
-const noindex = process.env.NOINDEX ? '<meta name="robots" content="noindex,nofollow">' : '';
+// сайт закрыт от индексации по умолчанию; для боевого запуска собирайте с INDEX=1
+const INDEXABLE = process.env.INDEX === '1';
+const noindex = INDEXABLE ? '' : '<meta name="robots" content="noindex,nofollow">';
 const closeSvg = '<svg role="presentation" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><rect transform="translate(11.31 11.31) rotate(-45) translate(-11.31 -11.31)" x="10.31" y="-3.69" width="2" height="30"/><rect transform="translate(11.31 11.31) rotate(-315) translate(-11.31 -11.31)" x="10.31" y="-3.69" width="2" height="30"/></g></svg>';
 const closeBtn = `<div class="px"><button type="button" aria-label="Закрыть диалоговое окно" data-close>${closeSvg}</button></div>`;
 const FORM_VARS = '--ih:50px;--ir:20px;--ibc:#dedede;--ibg:#f2f2f2;--ic:#121212;--tc:#121212;--ec:#000;--bbg:#f5d5d2;--bc:#d93433;--bhb:#d93433;--bhc:#fff;--bw:auto;';
@@ -78,6 +80,18 @@ const HOME_ANX = new Set(['991113446:1743673825773', '991113446:1744966468663', 
 
 // url() внутри пользовательских свойств (--icon: url(…)) css-tree не разбирает — подставляем локальные файлы здесь
 const localUrls = (t) => t.replace(/url\((['"]?)(https?:\/\/(?:static|thb)\.tildacdn\.com\/[^)'"]+)\1\)/g, (m, q, u) => { const a = lookup(u); if (!a) { console.warn('NO CSS ASSET', u); return m; } const f = a.kind === 'svg' ? a.src : a.webp.at(-1).src; usedAssets.add(f); return `url(${f})`; });
+// JSON-LD оригинала: в одном <script> бывает несколько объектов подряд (невалидный JSON) — разбираем каждый отдельно
+const parseJsonLd = (text) => {
+  const out = []; let depth = 0; let start = -1; let str = false; let esc = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (str) { if (esc) esc = false; else if (ch === String.fromCharCode(92)) esc = true; else if (ch === '"') str = false; continue; }
+    if (ch === '"') { str = true; continue; }
+    if (ch === '{' || ch === '[') { if (depth === 0) start = i; depth++; }
+    else if (ch === '}' || ch === ']') { depth--; if (depth === 0 && start >= 0) { try { const j = JSON.parse(text.slice(start, i + 1)); (Array.isArray(j) ? j : [j]).forEach((o) => out.push(o)); } catch { /* битый объект пропускаем */ } start = -1; } }
+  }
+  return out;
+};
 const isZero = (rec) => rec.attr('data-record-type') === '396' || rec.attr('data-alias-record-type') === '396';
 
 // ----------------------------------------------------------------- общий CSS (один файл на все страницы — кэшируется между переходами)
@@ -215,7 +229,7 @@ async function buildPage(spec) {
   const ogSrc = $('meta[property="og:image"]').attr('content');
   const ogM = (ogSrc && lookup(ogSrc)) || ogDefault;
   usedAssets.add(ogM.webp.at(-1).src);
-  const ldFile = home ? JSON.parse(fs.readFileSync('data/jsonld.json', 'utf8')) : $('script[type="application/ld+json"]').map((i, e) => { try { return JSON.parse($(e).text()); } catch { return null; } }).get().filter(Boolean);
+  const ldFile = home ? JSON.parse(fs.readFileSync('data/jsonld.json', 'utf8')) : $('script[type="application/ld+json"]').map((i, e) => parseJsonLd($(e).text())).get();
   const ld = ldFile
     .map((o) => JSON.parse(JSON.stringify(o).replace(/https?:\\?\/\\?\/(static|thb)\.tildacdn\.com[^"\\]*/g, SITE_URL + logo.src).replace(/https:\/\/dviga\.marketing/g, SITE_URL)))
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('');
@@ -250,8 +264,10 @@ for (const a of usedAssets) {
   fs.copyFileSync(src, path.join(OUT, a));
   copied++;
 }
-fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
-fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${PAGES.map((p) => `<url><loc>${SITE_URL}${p.path === '/' ? '/' : p.path + '/'}</loc></url>`).join('')}</urlset>\n`);
+// при noindex обход разрешён (иначе поисковик не увидит мета-тег и заголовок), но sitemap не публикуется
+fs.writeFileSync(path.join(OUT, 'robots.txt'), INDEXABLE ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n` : 'User-agent: *\nAllow: /\n');
+if (!INDEXABLE) fs.rmSync(path.join(OUT, 'sitemap.xml'), { force: true });
+if (INDEXABLE) fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${PAGES.map((p) => `<url><loc>${SITE_URL}${p.path === '/' ? '/' : p.path + '/'}</loc></url>`).join('')}</urlset>\n`);
 fs.writeFileSync(path.join(OUT, '_headers'), '/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 const kb = (n) => (n / 1024).toFixed(1);
 for (const b of built) console.log(`${b.spec.path.padEnd(60)} html ${kb(b.page.length)} KB, css ${kb(b.cssLen)} KB`);

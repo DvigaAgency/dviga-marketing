@@ -42,7 +42,7 @@ npm run audit        # проверка: нет Tilda/запрещённых х�
 
 Требования: Node ≥ 20. Для Playwright — `npx playwright install chromium`, для Lighthouse — установленный Google Chrome.
 
-Переменные сборки: `SITE_URL` (по умолчанию `https://dviga.marketing`; canonical/og/sitemap/JSON-LD), `NOINDEX=1` (добавить `noindex`, пока копия не выведена в продакшен), `OUT` (каталог вывода), `CSS_MODE=link|async|inline` (доставка CSS; по умолчанию один блокирующий файл — см. ниже), `NO_CV=1` (отключить `content-visibility`).
+Переменные сборки: `SITE_URL` (по умолчанию `https://dviga.marketing`; canonical/og/sitemap/JSON-LD), `INDEX=1` (**по умолчанию сайт закрыт от индексации**: на каждой странице `<meta name="robots" content="noindex,nofollow">`, в `_headers` — `X-Robots-Tag`, в `robots.txt` нет sitemap, `sitemap.xml` не создаётся; `INDEX=1` — только для боевого запуска; `tools/audit-dist.mjs` проверяет noindex на всех страницах), `OUT` (каталог вывода), `CSS_MODE=link|async|inline` (доставка CSS; по умолчанию один блокирующий файл — см. ниже), `NO_CV=1` (отключить `content-visibility`).
 
 ## Как это устроено
 
@@ -167,7 +167,9 @@ gzip on; gzip_types text/css application/javascript image/svg+xml;   # лучш�
 
 Workflow `.github/workflows/pages.yml` собирает сайт при каждом пуше в `main` (и вручную) и публикует `dist/` на
 `https://dayana494.github.io/dviga-marketing/`. Сборка для подкаталога: `BASE=/dviga-marketing npm run build`
-(переменная `BASE` добавляет префикс ко всем путям `/assets/…`). В Pages-сборке включён `noindex`, а `/api/lead`
+(переменная `BASE` добавляет префикс ко всем путям `/assets/…`). Сайт закрыт от индексации (`noindex`), а `/api/lead`
 недоступен (бэкенда нет) — формы покажут сообщение об ошибке отправки. Для боевого домена собирайте без `BASE`.
 
 **Блоки со стандартной вёрсткой Tilda (квиз, аккордеон).** Их CSS нельзя воспроизвести вручную без потерь, поэтому `node tools/extract-block-css.mjs <адрес страницы> <id записи>…` (только чтение оригинала) сохраняет в `data/block-css/<id>.css` правила, реально применяемые к записи: в порядке документа, ограниченные записью (`:where(#r<id>)` — специфичность не меняется). Разметку собирает `tools/lib/blocks.mjs`, размеры остаются в px оригинала без масштабирования (Tilda не масштабирует такие блоки, на всех ширинах метрики совпадают с оригиналом).
+
+**Schema.org.** JSON-LD берётся из оригинала у каждой страницы (главная — `data/jsonld.json`; остальные — из снимка `data/pages/*.html`). Если в одном `<script>` оригинала подряд записано несколько объектов (невалидный JSON, так у части кейсов), сборка разбирает каждый объект и публикует отдельным `<script>`. Адреса в разметке переписываются на `SITE_URL`.
