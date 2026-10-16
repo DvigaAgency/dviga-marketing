@@ -162,8 +162,8 @@ async function buildPage(spec) {
       if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '431' && name === 'main') { const t = tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
-      if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(scaleUi(t.css)); html[name].push(t.html); continue; }
-      if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(scaleUi(t.css)); html[name].push(t.html); continue; }
+      if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
+      if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (!isZero(rec)) continue;
       const r = convertZero($, rec, ctx);

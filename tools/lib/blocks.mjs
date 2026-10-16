@@ -6,13 +6,9 @@ import { picture, cssImage } from './assets.mjs';
 import { fixLinks } from './util.mjs';
 import { recPadding } from './zero.mjs';
 
-// inline-стили: px масштабируются так же, как в CSS (calc(Npx*var(--ui)))
-const scaleStyle = (s) => s.replace(/(-?\d*\.?\d+)px/g, (m, n) => (+n === 0 ? '0' : `calc(${n}px*var(--ui))`));
 const recBg = (rec, id) => { const m = (rec.attr('style') || '').match(/background-color:\s*([^;\s]+)/); return m ? `#r${id}{background-color:${m[1]}}` : ''; };
 const recCls = (rec) => (rec.attr('class') || '').split(/\s+/).filter((c) => c && c !== 'r' && c !== 't-rec' && !/^t-rec_/.test(c)).join(' ');
 const blockCss = (id) => (fs.existsSync(`data/block-css/${id}.css`) ? fs.readFileSync(`data/block-css/${id}.css`, 'utf8') : '');
-// на широких экранах оригинал не масштабирует такие блоки (Tilda: фиксированные px) — масштаб только на узких
-const unscaleWide = (id) => `@media (min-width:1200px){#r${id}{--ui:1}}`;
 
 const clean = ($, root) => {
   root.find('style,script,noscript,meta').remove();
@@ -22,7 +18,7 @@ const clean = ($, root) => {
       if (/^(field|imgfield|bgimgfield|itemprop|itemscope|itemtype|data-redactor-.*|data-customstyle)$/.test(a)) $(e).removeAttr(a);
     }
     const st = $(e).attr('style');
-    if (st !== undefined) { const v = scaleStyle(st).trim(); v && !/^display:\s*;?$/.test(v) ? $(e).attr('style', v) : $(e).removeAttr('style'); }
+    if (st !== undefined) { const v = st.trim(); v && !/^display:\s*;?$/.test(v) ? $(e).attr('style', v) : $(e).removeAttr('style'); }
   });
 };
 
@@ -34,7 +30,7 @@ export function accordionBlock($, rec) {
   clean(root, r);
   r.find('.t668__content').attr('hidden', '');
   const html = fixLinks(r.html());
-  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), unscaleWide(id)].join('\n');
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id)].join('\n');
   return { id, css, html: `<section id="r${id}" class="r acc ${recCls(rec)}" data-acc>${html}</section>` };
 }
 
@@ -55,7 +51,9 @@ export function quizBlock($, rec, hooks = {}) {
   // аватар консультанта
   q.find('img.t-quiz__consultant__img').each((i, e) => {
     const u = root(e).attr('src');
-    root(e).replaceWith(picture(u, { cls: 't-quiz__consultant__img', alt: 'Тимофей Белоглазов', sizes: '54px', eager: false }).replace(/ width="\d+" height="\d+"/, '')); // размеры задаёт CSS (aspect-ratio)
+    // только <img> (без <picture>/<source>, они ломают flex-раскладку аватара); размеры задаёт CSS (aspect-ratio)
+    const tag = (picture(u, { cls: 't-quiz__consultant__img', alt: 'Тимофей Белоглазов', sizes: '54px', eager: false }).match(/<img[^>]*>/) || [''])[0];
+    root(e).replaceWith(tag.replace(/ width="\d+" height="\d+"/, ''));
   });
   clean(root, q);
   q.find('input.js-formaction-services,input[name^=tildaspec-formname],.t-quiz__result_ordinary,.t-form__errorbox-middle,.t-form__errorbox-bottom').remove();
@@ -65,7 +63,8 @@ export function quizBlock($, rec, hooks = {}) {
   const form = q.find('form');
   form.attr('action', '/api/lead').attr('data-quiz-form', formName).attr('novalidate', '');
   form.removeAttr('data-success-callback').removeAttr('data-formactiontype').removeAttr('data-inputbox').removeAttr('role');
+  q.find('.t-quiz__screen-wrapper').first().addClass('t-step-form__step_active'); // первый шаг виден сразу, до загрузки скрипта
   const html = fixLinks(q.html());
-  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), extra.join('\n'), `:where(#r${id}) picture{display:contents}:where(#r${id}) .t-quiz__consultant__img{display:block}@media screen and (max-width:640px){#r${id} .t-quiz__btn-wrapper.t-quiz__btn-wrapper_mobile{display:flex;opacity:1}}`, unscaleWide(id)].join('\n');
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), extra.join('\n'), `:where(#r${id}) picture{display:contents}:where(#r${id}) .t-quiz__consultant__img{display:block}@media screen and (max-width:640px){#r${id} .t-quiz__btn-wrapper.t-quiz__btn-wrapper_mobile{display:flex;opacity:1}}@media screen and (max-width:960px){#r${id} .t-input-group__header .t-quiz__consultant{order:-1}}`].join('\n');
   return { id, css, html: `<section id="r${id}" class="r qz ${recCls(rec)}" data-quiz>${html}</section>` };
 }
