@@ -48,4 +48,32 @@ export function init(root) {
   toggle.addEventListener('click', () => { const open = panel.hidden; panel.hidden = !open; toggle.setAttribute('aria-expanded', open); });
   if (picked.service.size || picked.industry.size) { panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); }
   apply(false);
+  zoom(root);
+}
+
+// Фото карточек при прокрутке плавно увеличиваются 1 → 1,1 со сдвигом вверх внутри своей рамки (.cs-i обрезает по краям) —
+// как scroll-анимация фото на оригинале: старт, когда карточка входит снизу, длина 770 px (в масштабе страницы).
+function zoom(root) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const vis = new Set();
+  const io = new IntersectionObserver((es) => { es.forEach((e) => (e.isIntersecting ? vis.add(e.target) : vis.delete(e.target))); frame(); }, { rootMargin: '10% 0px' });
+  $$('.cs-i', root).forEach((a) => io.observe(a));
+  const ui = () => { const w = innerWidth; return w >= 1200 ? w / 1200 : w >= 960 ? w / 960 : w >= 640 ? w / 640 : w >= 480 ? w / 480 : w / 320; };
+  let raf = 0;
+  function frame() {
+    raf = 0;
+    const vh = innerHeight; const z = ui();
+    vis.forEach((a) => {
+      const img = $('.cs-p', a); if (!img) return;
+      const box = a.getBoundingClientRect();
+      const top = box.top + scrollY;
+      const start = top > vh ? top - vh : top; // карточка с первого экрана стартует, когда дойдёт до верха окна
+      const p = Math.max(0, Math.min(1, (scrollY - start) / (770 * z)));
+      img.style.transform = p ? `translateY(${(-Math.min(30 * z, box.height * 0.05) * p).toFixed(2)}px) scale(${(1 + 0.1 * p).toFixed(4)})` : ''; // сдвиг не больше запаса от увеличения — снизу не открывается фон
+    });
+  }
+  const tick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+  addEventListener('scroll', tick, { passive: true });
+  addEventListener('resize', tick);
+  tick();
 }
