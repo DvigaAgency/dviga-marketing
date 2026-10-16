@@ -16,7 +16,7 @@ const QV = 'q2'; // версия параметров качества (PNG-ск
 const hash = (buf) => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 10);
 const slug = (f) => path.basename(f).replace(/^tild[0-9a-f-]+__/, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/tilda/gi, 'tld').toLowerCase().slice(0, 40) || 'img';
 
-let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm|mov)$/i.test(m.file));
+let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm|mov)$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)) && (!process.env.NEW || !prev[u])); // NEW=1 — только ещё не обработанные // ONLY=<часть адреса> — только выбранные изображения
 let done = 0, bytesIn = 0, bytesOut = 0;
 async function one([url, m]) {
   const f = m.file; const ext = path.extname(f).toLowerCase();

@@ -10,6 +10,7 @@ import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
+import { quizBlock, accordionBlock } from './lib/blocks.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, search, fixLinks } from './lib/components.mjs';
 import { setLocalPaths, link } from './lib/util.mjs';
 import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock } from './lib/listing.mjs';
@@ -86,6 +87,7 @@ const commonName = `common.${hash(commonCss)}.css`;
 fs.writeFileSync(path.join(OUT, 'assets', commonName), withBase(commonCss));
 
 // ----------------------------------------------------------------- одна страница
+const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { decodeEntities: false });
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
@@ -154,12 +156,14 @@ async function buildPage(spec) {
       const rid = rec.attr('id').replace('rec', '');
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
-      if (type === '525') { html[name].push(reviewsSlider($)); continue; }
+      if (type === '525') { html[name].push(reviewsSlider($, rec, home)); continue; }
       if (type === '395' && name === 'main') { const t = tabsBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
       if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
       if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '431' && name === 'main') { const t = tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(scaleUi(t.css)); html[name].push(t.html); continue; }
+      if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(scaleUi(t.css)); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (!isZero(rec)) continue;
       const r = convertZero($, rec, ctx);
@@ -182,12 +186,13 @@ async function buildPage(spec) {
   // ---------------- попапы и виджет (одинаковые на всех страницах)
   const menuPopup = `<div class="pp blk menu cq" id="p-menu" data-hook="menu" role="dialog" aria-modal="true" aria-label="Меню" tabindex="-1"><div class="pc">${popupZero.menu}</div></div>`;
   const formPopup = `<div class="pp blk form cq" id="p-form" data-hook="form" role="dialog" aria-modal="true" aria-label="Обсудить проект" tabindex="-1">${closeBtn}<div class="pc">${popupZero.form}</div></div>`;
-  const calcRec = $('#rec742904618');
-  const calcForm = renderTildaForm($, calcRec.find('form'), 'calc', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:30px;--mb:25px;--tfs:20px;--tfw:500;--tmb:5px;` });
+  const $c = $('#rec742904618').length ? $ : $home; // общие записи сайта (cookie, виджет, расчёт) есть не в каждом снимке
+  const calcRec = $c('#rec742904618');
+  const calcForm = renderTildaForm($c, calcRec.find('form'), 'calc', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:30px;--mb:25px;--tfs:20px;--tfw:500;--tmb:5px;` });
   const calcPopup = `<div class="pp" id="p-calculate" data-hook="popup:calculate" role="dialog" aria-modal="true" tabindex="-1" aria-label="${calcRec.find('.t702__title').text().trim()}">${closeBtn}<div class="pc cl"><div class="cl-w"><div class="cl-t">${calcRec.find('.t702__title').html()}</div>${calcForm}</div></div></div>`;
-  const wRec = $('#rec1468283321');
-  const widgetForm = renderTildaForm($, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
-  const popups = [menuPopup, formPopup, calcPopup, reviewPopups($), blankPopups($), lightboxes($), search($)].join('');
+  const wRec = $c('#rec1468283321');
+  const widgetForm = renderTildaForm($c, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
+  const popups = [menuPopup, formPopup, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), search($)].join('');
 
   // ---------------- CSS страницы
   // CSS страницы: стили её записей; общие стили (шрифты, база, компоненты) — в одном файле common.<hash>.css для всех страниц
@@ -222,7 +227,7 @@ async function buildPage(spec) {
     + `<link rel="icon" type="image/png" sizes="32x32" href="${ic32l}" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" sizes="32x32" href="${ic32d}" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" sizes="any" href="${icSvg}"><link rel="apple-touch-icon" href="${icApple}">`
     + `${fontPre}${cssTags}${deferTag}${ld}`;
 
-  const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${cookie($)}${widget($, widgetForm)}`;
+  const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${cookie($c)}${widget($c, widgetForm)}`;
   const page = `<!doctype html><html lang="ru"><head>${head}</head><body${catalog ? ' data-cases' : ''}>${body}<script type="module" src="/assets/${jsName}"></script></body></html>`;
   // локальные ссылки на страницы (href="/…") и ассеты (/assets/…) получают префикс подкаталога — каждая ровно один раз
   const fixed = BASE ? page.replace(/href="\/(?!\/|assets\/)/g, `href="${BASE}/`).replace(/(["'(,\s])\/assets\//g, `$1${BASE}/assets/`) : page;

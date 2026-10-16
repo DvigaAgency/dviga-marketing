@@ -376,6 +376,11 @@ function initLazy() {
   $$('[data-share]').forEach((a) => { a.href = a.dataset.share + encodeURIComponent(location.href.split('#')[0]); });
   if ($('[data-tabs],.lm-b')) import('./tabs.js').then((m) => m.init());
   $$('[data-gl]').forEach((g) => import('./gallery.js').then((m) => m.init(g)));
+  $$('[data-acc]').forEach((a) => import('./accordion.js').then((m) => m.init(a)));
+  $$('[data-quiz]').forEach((qz) => {
+    const load = () => import('./quiz.js').then((m) => m.init(qz));
+    if ('IntersectionObserver' in w) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '800px 0px' }); io.observe(qz); } else load();
+  });
   const cs = $('[data-cases-root]');
   if (cs) import('./cases.js').then((m) => m.init(cs));
   const fm = $('.fm');

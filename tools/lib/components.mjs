@@ -19,43 +19,44 @@ export function cookie($) {
 }
 
 /** слайдер отзывов (t525) */
-export function reviewsSlider($) {
-  const r = $('#rec680540530');
+export function reviewsSlider($, rec, zoom = false) {
+  const r = rec || $('#rec680540530');
+  const rid = r.attr('id').replace('rec', '');
   const items = r.find('li.t525__col').map((i, li) => {
     const x = $(li);
     const bg = x.find('.t525__bgimg').attr('data-original');
     const pic = picture(bg, { cls: '', alt: '', w: 100, h: 100, sizes: '110px' });
-    const text = fixLinks(x.find('.t525__text').html().trim());
+    const text = fixLinks(x.find('.t525__text').html().trim()).replace(/<a (href="[^"]*")([^>]*)>(Бланк отзыва)/g, '<a class="si-bl" $1$2>$3'); // кнопка-ссылка «Бланк отзыва»
     return `<li class="si"><div class="si-i">${pic}</div><div class="si-b"><div class="si-x">${text}</div><div class="si-n">${x.find('.t525__title').html().trim()}</div><div class="si-s">${x.find('.t525__descr').html().trim()}</div></div></li>`;
   }).get();
   const prev = lookup('https://static.tildacdn.com/tild3466-3038-4438-b232-343039306635/arrow-left.svg');
   const next = lookup('https://static.tildacdn.com/tild3031-3561-4064-a533-323033643532/arrow-right.svg');
   if (prev) usedAssets.add(prev.src); if (next) usedAssets.add(next.src);
-  return `<section class="r sl" id="r680540530" aria-label="Отзывы"><div class="sl-vp"><ul class="sl-tr" role="list">${items.join('')}</ul></div><button type="button" class="sl-a sl-p" aria-label="Предыдущий отзыв" hidden><img src="${prev ? prev.src : ''}" alt="" width="40" height="40"></button><button type="button" class="sl-a sl-n" aria-label="Следующий отзыв" hidden><img src="${next ? next.src : ''}" alt="" width="40" height="40"></button></section>`;
+  return `<section class="r sl" id="r${rid}"${zoom ? ' data-z' : ''} aria-label="Отзывы"><div class="sl-vp"><ul class="sl-tr" role="list">${items.join('')}</ul></div><button type="button" class="sl-a sl-p" aria-label="Предыдущий отзыв" hidden><img src="${prev ? prev.src : ''}" alt="" width="40" height="40"></button><button type="button" class="sl-a sl-n" aria-label="Следующий отзыв" hidden><img src="${next ? next.src : ''}" alt="" width="40" height="40"></button></section>`;
 }
 
 /** попапы отзывов (t390) */
-export function reviewPopups($) {
-  return $('.r[data-record-type=390]').map((i, el) => {
-    const r = $(el);
-    const hook = r.find('.t-popup').attr('data-tooltip-hook').replace('#popup:', '');
+const hookOf = (r) => r.find('.t-popup').attr('data-tooltip-hook').replace(/^#/, '');
+const popupId = (hook) => 'p-' + hook.replace(/^popup:/, '');
+// попапы страницы + недостающие из главной (в оригинале у части кнопок слайдера на странице попапов нет)
+const withFallback = ($, $alt, type, fn) => { const have = new Set(); const out = []; for (const [$x, own] of [[$, 1], [$alt, 0]]) { if (!$x) continue; $x('.r[data-record-type=' + type + ']').each((i, el) => { const r = $x(el); const hook = hookOf(r); if (have.has(hook)) return; have.add(hook); out.push(fn($x, r, hook)); }); } return out.join(''); };
+export function reviewPopups($, $alt) {
+  return withFallback($, $alt, 390, ($, r, hook) => {
     const btn = r.find('a.t-btnflex');
     const b = btn.length ? `<div class="rv-b"><a class="rv-btn" href="${esc(btn.attr('href'))}">${esc(btn.find('.t-btnflex__text').text().trim())}</a></div>` : '';
-    return `<div class="pp" id="p-${hook}" data-hook="popup:${hook}" role="dialog" aria-modal="true" tabindex="-1" aria-label="${esc(r.find('.t-popup').attr('aria-label'))}">${closeBtn}<div class="pc rv"><div class="rv-w"><div class="rv-u">${r.find('.t390__uptitle').html()}</div><div class="rv-t">${r.find('.t390__title').html()}</div><div class="rv-d">${fixLinks(r.find('.t390__descr').html().trim())}</div>${b}</div></div></div>`;
-  }).get().join('');
+    return `<div class="pp" id="${popupId(hook)}" data-hook="${hook}" role="dialog" aria-modal="true" tabindex="-1" aria-label="${esc(r.find('.t-popup').attr('aria-label'))}">${closeBtn}<div class="pc rv"><div class="rv-w"><div class="rv-u">${r.find('.t390__uptitle').html()}</div><div class="rv-t">${r.find('.t390__title').html()}</div><div class="rv-d">${fixLinks(r.find('.t390__descr').html().trim())}</div>${b}</div></div></div>`;
+  });
 }
 
 /** попапы «Бланк отзыва» с изображением (t756) */
-export function blankPopups($) {
-  return $('.r[data-record-type=756]').map((i, el) => {
-    const r = $(el);
-    const hook = r.find('.t-popup').attr('data-tooltip-hook').replace('#popup:', '');
+export function blankPopups($, $alt) {
+  return withFallback($, $alt, 756, ($, r, hook) => {
     const img = r.find('.t-slds__bgimg').attr('data-original');
     const pb = parseFloat((r.find('.t-slds__bgimg').attr('style') || '').match(/padding-bottom:\s*([\d.]+)%/)?.[1] || '133');
     const m = lookup(img);
     const w = m?.w || 460; const h = m?.h || Math.round(460 * pb / 100);
-    return `<div class="pp" id="p-${hook}" data-hook="popup:${hook}" role="dialog" aria-modal="true" tabindex="-1" aria-label="Бланк отзыва">${closeBtn}<div class="pc bl st">${picture(img, { cls: 'bl-i', alt: 'Бланк отзыва', w, h, sizes: '(min-width:560px) 460px,100vw' })}<div class="bl-w"></div></div></div>`;
-  }).get().join('');
+    return `<div class="pp" id="${popupId(hook)}" data-hook="${hook}" role="dialog" aria-modal="true" tabindex="-1" aria-label="Бланк отзыва">${closeBtn}<div class="pc bl st">${picture(img, { cls: 'bl-i', alt: 'Бланк отзыва', w, h, sizes: '(min-width:560px) 460px,100vw' })}<div class="bl-w"></div></div></div>`;
+  });
 }
 
 /** виджет-кнопка и попап «Давайте подскажем» (t708) */

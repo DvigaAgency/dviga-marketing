@@ -50,7 +50,7 @@ for (const pf of pages) {
   // якоря и попапы: каждый #hook ведёт на существующий попап/элемент
   const hooks = new Set($('[data-hook]').map((i, e) => $(e).attr('data-hook')).get());
   const dead = [];
-  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup'].includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
+  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup'].includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && h !== 'other' /* ссылка без цели и в оригинале */ && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
   if (dead.length) console.log('FAIL якоря без цели на', path.relative(root, pf) || 'index.html', [...new Set(dead)].join(', '));
   deadCount += dead.length;
 }

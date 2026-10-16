@@ -1,6 +1,6 @@
 // Страницы копии: адрес -> снимок HTML оригинала (data/pages/, обновляется tools/fetch-html.mjs --pages).
 // kind: home | cases (каталог кейсов с новой фильтрацией) | page (любая страница из Zero-блоков)
-// Страницы кейсов и статей подхватываются автоматически: data/pages/cases__<slug>.html -> /cases/<slug>, blog__<slug>.html -> /blog/<slug>.
+// Страницы кейсов, статей и услуг подхватываются автоматически: data/pages/cases__<slug>.html -> /cases/<slug>, blog__<slug>.html -> /blog/<slug>, services__<slug>.html -> /services/<slug>.
 import fs from 'node:fs';
 
 const dir = 'data/pages';
@@ -13,4 +13,5 @@ export const PAGES = [
   ...sub('cases'),
   { path: '/blog', src: `${dir}/blog.html`, kind: 'page' },
   ...sub('blog'),
+  ...sub('services'),
 ];

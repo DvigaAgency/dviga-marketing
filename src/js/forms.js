@@ -9,7 +9,7 @@ const MSG = {
 };
 const DEV = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 
-function mask(inp) {
+export function mask(inp) {
   const fmt = (raw) => {
     let d = raw.replace(/\D/g, '');
     if (d.startsWith('7') || d.startsWith('8')) d = d.slice(1);
