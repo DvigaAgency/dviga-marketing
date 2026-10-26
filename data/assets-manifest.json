@@ -4343,7 +4343,7 @@
   "error": "Error: HTTP 404"
  },
  "https://static.tildacdn.com/tild6566-3833-4432-b765-373663386439/": {
-  "error": "Error: HTTP 404"
+  "error": "TypeError: fetch failed"
  },
  "https://static.tildacdn.com/tild6131-3734-4266-a137-306363633030/862_404_4_84b2e4c54c.jpg": {
   "file": "source-assets/tild6131-3734-4266-a137-306363633030__862_404_4_84b2e4c54c.jpg",
@@ -4354,7 +4354,7 @@
   "size": 20279
  },
  "https://static.tildacdn.com/tild3236-3764-4531-a635-323337643838/": {
-  "error": "Error: HTTP 404"
+  "error": "TypeError: fetch failed"
  },
  "https://static.tildacdn.com/tild3362-6337-4439-a565-643231316235/image_69.png": {
   "file": "source-assets/tild3362-6337-4439-a565-643231316235__image_69.png",
@@ -4389,7 +4389,7 @@
   "size": 187826
  },
  "https://static.tildacdn.com/tild6131-3734-4266-a137-306363633030/": {
-  "error": "TypeError: fetch failed"
+  "error": "Error: HTTP 404"
  },
  "https://static.tildacdn.com/tild3961-3162-4564-b164-303134393366/KMRV3.jpg": {
   "file": "source-assets/tild3961-3162-4564-b164-303134393366__KMRV3.jpg",
@@ -5092,6 +5092,7 @@
   "size": 864
  },
  "https://static.tildacdn.com/tild6631-3961-4239-a432-336136343165/Group_1314100.svg": {
-  "error": "TypeError: fetch failed"
+  "file": "source-assets/tild6631-3961-4239-a432-336136343165__Group_1314100.svg",
+  "size": 616
  }
 }

@@ -60344,5 +60344,29 @@
   "src": "/assets/img/min-1-548.e5d190411e.webp",
   "inSize": 5326,
   "outSize": 5757
+ },
+ "https://static.tildacdn.com/tild3335-3639-4630-b938-333334666437/Group_1314098.svg": {
+  "kind": "svg",
+  "src": "/assets/img/group-1314098.6efdc57c69.svg",
+  "w": 100,
+  "h": 100,
+  "inSize": 842,
+  "outSize": 619
+ },
+ "https://static.tildacdn.com/tild3835-3637-4362-b663-306235636463/photo.svg": {
+  "kind": "svg",
+  "src": "/assets/img/photo.a9ac94e9a7.svg",
+  "w": 100,
+  "h": 100,
+  "inSize": 864,
+  "outSize": 538
+ },
+ "https://static.tildacdn.com/tild6631-3961-4239-a432-336136343165/Group_1314100.svg": {
+  "kind": "svg",
+  "src": "/assets/img/group-1314100.06402bc4c2.svg",
+  "w": 100,
+  "h": 100,
+  "inSize": 616,
+  "outSize": 446
  }
 }
