@@ -1,5 +1,7 @@
 // Ядро поведения страницы: анимации появления, пошаговые анимации, прокрутка, попапы, cookie, видео.
 // Без зависимостей. Тяжёлые куски (слайдер, формы) подгружаются динамически.
+import { saveUtm } from './lead.js';
+
 const d = document;
 const w = window;
 const $ = (s, r = d) => r.querySelector(s);
@@ -397,7 +399,7 @@ const afterPaint = (fn) => requestAnimationFrame(() => setTimeout(fn, 0));
 const loadDeferredCss = () => { $$('link[data-defer]').forEach((l) => { l.onload = () => dispatchEvent(new Event('cssload')); l.media = 'all'; l.removeAttribute('data-defer'); }); };
 addEventListener('load', () => (self.requestIdleCallback || setTimeout)(loadDeferredCss, { timeout: 5000 }));
 const boot = () => {
-  [initCookie, initPopups].forEach((f) => safe(f));
+  [initCookie, initPopups, saveUtm].forEach((f) => safe(f));
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать

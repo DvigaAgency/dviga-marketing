@@ -1,4 +1,5 @@
-// Формы: маска телефона, валидация, шаги, отправка на POST /api/lead (заглушка, см. README).
+// Формы: маска телефона, валидация, шаги, отправка заявки (src/js/lead.js, см. README).
+import { sendLead } from './lead.js';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const MSG = {
@@ -7,7 +8,6 @@ const MSG = {
   phone: 'Укажите, пожалуйста, корректный номер телефона',
   fail: 'Не удалось отправить заявку. Попробуйте позже или позвоните 8 800 200 23 02.',
 };
-const DEV = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 
 export function mask(inp) {
   const fmt = (raw) => {
@@ -107,12 +107,7 @@ function bind(form) {
     const body = new FormData(form);
     body.append('form', form.dataset.f || '');
     body.append('page', location.href);
-    let done = false;
-    try {
-      const r = await fetch('/api/lead', { method: 'POST', body });
-      done = r.ok;
-      if (!r.ok && DEV) { console.info('[lead] /api/lead недоступен — dev-заглушка считает отправку успешной'); done = true; }
-    } catch { done = DEV; }
+    const done = await sendLead(body, form.dataset.f || '');
     if (btn) btn.disabled = false;
     const box = $('.fz', form);
     if (done) { form.classList.remove('eg'); form.classList.add('ok'); form.reset(); } else { form.classList.add('eg'); if (box) box.textContent = MSG.fail; }

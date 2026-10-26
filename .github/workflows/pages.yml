@@ -23,6 +23,9 @@ jobs:
       - run: npm run build
         env:
           NOINDEX: "1"
+          LEAD_URL: ${{ vars.LEAD_URL }}
+          YM_ID: ${{ vars.YM_ID }}
+          CT_PROJECT: ${{ vars.CT_PROJECT }}
           BASE: /${{ github.event.repository.name }}
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
       - run: node tools/audit-dist.mjs

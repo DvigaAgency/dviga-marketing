@@ -1,5 +1,6 @@
-// Квиз (T1040): шаги с условиями показа, автопереход после выбора, прогресс, подсказки консультанта, отправка на POST /api/lead (заглушка).
+// Квиз (T1040): шаги с условиями показа, автопереход после выбора, прогресс, подсказки консультанта, отправка заявки (src/js/lead.js).
 import { mask } from './forms.js';
+import { sendLead } from './lead.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -9,7 +10,6 @@ const MSG = {
   phone: 'Укажите, пожалуйста, корректный номер телефона',
   fail: 'Не удалось отправить заявку. Попробуйте позже или позвоните 8 800 200 23 02.',
 };
-const DEV = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const AUTO_MS = 700; // пауза перед автопереходом после выбора варианта (как в оригинале)
 
 export function init(root) {
@@ -147,12 +147,7 @@ export function init(root) {
     body.append('form', form.dataset.quizForm || 'Квиз');
     body.append('page', location.href);
     subs.forEach((b) => { b.disabled = true; });
-    let ok = false;
-    try {
-      const r = await fetch('/api/lead', { method: 'POST', body });
-      ok = r.ok || DEV;
-      if (!r.ok && DEV) console.info('[lead] /api/lead недоступен — dev-заглушка считает отправку успешной');
-    } catch { ok = DEV; }
+    const ok = await sendLead(body, form.dataset.quizForm || 'Квиз');
     subs.forEach((b) => { b.disabled = false; });
     if (!ok) { let box = $('.t-quiz__err', root); if (!box) { box = document.createElement('div'); box.className = 't-quiz__err t-input-error'; box.style.display = 'block'; $('.t-quiz__contact-form__main', cur.el).append(box); } box.textContent = MSG.fail; return; }
     // экран результата — по ответам, как условия показа

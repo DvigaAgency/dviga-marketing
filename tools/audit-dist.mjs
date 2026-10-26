@@ -10,7 +10,7 @@ const files = [];
 (function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : files.push(p); } })(root);
 const text = files.filter((f) => /\.(html|css|js|json|xml|txt)$/.test(f) || path.basename(f) === '_headers');
 const FORBIDDEN = [
-  ['tildacdn.com', /tildacdn\.com/i], ['tilda.ws / tilda.cc', /tilda\.(ws|cc)\b/i], ['Яндекс.Метрика', /mc\.yandex\.ru|metrika/i], ['calltracking', /calltracking/i],
+  ['tildacdn.com', /tildacdn\.com/i], ['tilda.ws / tilda.cc', /tilda\.(ws|cc)\b/i],
   ['Google Fonts', /fonts\.(googleapis|gstatic)\.com/i], ['jsdelivr', /cdn\.jsdelivr\.net/i], ['jQuery/slick/hammer/dragscroll', /jquery|\bslick\b|hammer\.js|dragscroll/i],
   ['классы Tilda t-rec / t396__ / tn-atom / tn-elem', /\bt-rec\b|t396__|tn-atom|tn-elem|t-records/],
 ];
@@ -22,6 +22,18 @@ for (const [name, re] of FORBIDDEN) {
 }
 // страницы: все index.html в dist
 const pages = files.filter((f) => path.basename(f) === 'index.html');
+// счётчики оригинала (tools/lib/tracking.mjs): на каждой странице есть Метрика и коллтрекинг; если отключены (YM_ID=0, CT_PROJECT=0) — их нет нигде
+const { YM_ID, CT_PROJECT } = await import('./lib/tracking.mjs');
+const TRACKERS = [
+  ['Яндекс.Метрика', YM_ID, /mc\.yandex\.ru\/metrika/, (id) => `ym('${id}',"init"`],
+  ['calltracking', CT_PROJECT, /calltracking\.ru/, (id) => `.${id}.async.js`],
+];
+for (const [name, id, any, mark] of TRACKERS) {
+  const html = pages.map((f) => [f, fs.readFileSync(f, 'utf8')]);
+  const wrong = html.filter(([, h]) => (id ? !h.includes(mark(id)) : any.test(h))).map(([f]) => f);
+  console.log(`${wrong.length ? 'FAIL' : 'ok  '} ${name} ${id ? id + ' на всех страницах' : 'отключён'}${wrong.length ? ': ' + wrong.join(', ') : ''}`);
+  bad += wrong.length;
+}
 const mentions = new Set();
 let missing = 0; let extCount = 0; let deadCount = 0; let refsTotal = 0;
 for (const pf of pages) {
