@@ -14,4 +14,5 @@ export const PAGES = [
   { path: '/blog', src: `${dir}/blog.html`, kind: 'page' },
   ...sub('blog'),
   ...sub('services'),
+  { path: '/contacts', src: `${dir}/contacts.html`, kind: 'page' },
 ];
