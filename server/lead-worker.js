@@ -5,6 +5,8 @@
 //   BITRIX_WEBHOOK_URL  входящий вебхук Битрикс24 с правом crm: https://dvigamarketing.bitrix24.ru/rest/<id>/<токен>/  (секрет, не хранить в репозитории)
 //   ALLOWED_ORIGINS     адреса сайтов через запятую, с которых принимаются заявки (например https://dvigaagency.github.io,https://dviga.marketing); * — любые
 //   RESPONSIBLE_ID      (необязательно) ID ответственного за лид
+//   FILE_FIELD          (необязательно) код пользовательского поля лида типа «Файл» (множественное), например UF_CRM_1700000000;
+//                       если задан, файлы из формы кладутся в это поле, иначе в комментарий попадают только их имена
 //
 // Формат запроса — multipart/form-data, поля форм сайта (Name, Phone, Email, comment, Textarea, ответы квиза …),
 // служебные form, page и utm_*/yclid (src/js/lead.js).
@@ -12,6 +14,7 @@
 const UTM = { utm_source: 'UTM_SOURCE', utm_medium: 'UTM_MEDIUM', utm_campaign: 'UTM_CAMPAIGN', utm_content: 'UTM_CONTENT', utm_term: 'UTM_TERM' };
 const SERVICE = new Set(['form', 'page', 'checkbox', 'yclid', ...Object.keys(UTM)]);
 const MAX_FIELD = 4000;
+const MAX_FILES_BYTES = 10 * 1024 * 1024; // суммарно на заявку; остальное в лид не попадает, имя остаётся в комментарии
 
 const cors = (env, request) => {
   const origin = request.headers.get('Origin') || '';
@@ -28,9 +31,10 @@ export function toLead(formData, env = {}) {
   const f = { NAME: '', PHONE: '', EMAIL: '' };
   const extra = [];
   const files = [];
+  const fileObjs = [];
   let form = ''; let page = '';
   for (const [key, value] of formData.entries()) {
-    if (typeof value !== 'string') { if (value && value.name) files.push(value.name); continue; }
+    if (typeof value !== 'string') { if (value && value.name && value.size) { files.push(value.name); fileObjs.push(value); } continue; }
     const v = clean(value);
     const k = key.trim().toLowerCase();
     if (k === 'form') form = v;
@@ -44,7 +48,7 @@ export function toLead(formData, env = {}) {
     else extra.push([key.trim(), v]);
   }
   if (!f.PHONE && !f.EMAIL) return null;
-  const comments = [...extra.map(([k, v]) => `${k}: ${v}`), files.length ? `Файлы (не переданы): ${files.join(', ')}` : '', page ? `Страница: ${page}` : '', form ? `Форма: ${form}` : ''].filter(Boolean).join('\n');
+  const comments = [...extra.map(([k, v]) => `${k}: ${v}`), files.length ? `Файлы: ${files.join(', ')}` : '', page ? `Страница: ${page}` : '', form ? `Форма: ${form}` : ''].filter(Boolean).join('\n');
   const fields = {
     TITLE: `Заявка с сайта DVIGA${form ? ` (${form})` : ''}`,
     NAME: f.NAME || 'Без имени',
@@ -57,6 +61,32 @@ export function toLead(formData, env = {}) {
   if (f.EMAIL) fields.EMAIL = [{ VALUE: f.EMAIL, VALUE_TYPE: 'WORK' }];
   for (const u of Object.values(UTM)) if (f[u]) fields[u] = f[u];
   if (env.RESPONSIBLE_ID) fields.ASSIGNED_BY_ID = env.RESPONSIBLE_ID;
+  Object.defineProperty(fields, '_files', { value: fileObjs, enumerable: false });
+  return fields;
+}
+
+const b64 = (buf) => {
+  let s = '';
+  const a = new Uint8Array(buf);
+  for (let i = 0; i < a.length; i += 0x8000) s += String.fromCharCode(...a.subarray(i, i + 0x8000));
+  return btoa(s);
+};
+
+// файлы формы -> поле лида типа «Файл»: [{fileData: [имя, base64]}]; что не влезло в лимит — только именем в комментарии
+export async function attachFiles(fields, env) {
+  const files = fields._files || [];
+  if (!env.FILE_FIELD || !files.length) return fields;
+  const out = [];
+  const skipped = [];
+  let total = 0;
+  for (const f of files) {
+    if (total + f.size > MAX_FILES_BYTES) { skipped.push(f.name); continue; }
+    total += f.size;
+    out.push({ fileData: [f.name, b64(await f.arrayBuffer())] });
+  }
+  if (out.length) fields[env.FILE_FIELD] = out;
+  if (skipped.length) fields.COMMENTS += `
+Не вложены (больше 10 МБ суммарно): ${skipped.join(', ')}`;
   return fields;
 }
 
@@ -70,8 +100,9 @@ export default {
 
     let fd;
     try { fd = await request.formData(); } catch { return json(400, { ok: false, error: 'body' }, headers); }
-    const fields = toLead(fd, env);
-    if (!fields) return json(422, { ok: false, error: 'phone or email required' }, headers);
+    const lead = toLead(fd, env);
+    if (!lead) return json(422, { ok: false, error: 'phone or email required' }, headers);
+    const fields = await attachFiles(lead, env);
 
     const url = `${env.BITRIX_WEBHOOK_URL.replace(/\/?$/, '/')}crm.lead.add.json`;
     let res;
