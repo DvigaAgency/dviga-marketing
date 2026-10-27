@@ -50,7 +50,7 @@ usedAssets.add(dot.webp.at(-1).src);
 const FB = (t) => t.replace(/font-family:Inter,Arial,sans-serif/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif').replace(/font-family:'?Inter'?;/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif;').replace(/--t-(headline|text)-font:Inter,Arial,sans-serif/g, '--t-$1-font:Inter,Inter Fallback,Arial,sans-serif');
 const embeds = readCss('src/css/embeds.css').replace(/%%DOT%%/g, dot.webp.at(-1).src);
 const staticCrit = [readCss('src/css/base.css'), scaleUi(readCss('src/css/critical.css')), embeds];
-const staticRest = [readCss('src/css/forms.css'), readCss('src/css/components.css'), scaleUi(readCss('src/css/listing.css')), scaleUi(readCss('src/css/cases.css')), scaleUi(readCss('src/css/article.css'), '--s'), readCss('src/css/article-table.css')]; // тело статей: px макета × --s (как у Zero-блоков)
+const staticRest = [readCss('src/css/forms.css'), readCss('src/css/components.css'), scaleUi(readCss('src/css/listing.css')), scaleUi(readCss('src/css/cases.css')), scaleUi(readCss('src/css/article.css'), '--s'), scaleUi(readCss('src/css/article-table.css'), '--s')]; // тело статей: px макета × --s (как у Zero-блоков)
 const tgt = ['chrome110', 'safari16', 'firefox110'];
 const withBase = (s) => (BASE ? s.replace(/url\((['"]?)\/assets\//g, `url($1${BASE}/assets/`) : s);
 
