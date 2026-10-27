@@ -15,6 +15,8 @@ import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, s
 import { setLocalPaths, link } from './lib/util.mjs';
 import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock } from './lib/listing.mjs';
 import { casesCatalog } from './lib/cases.mjs';
+import { articleBlock } from './lib/article.mjs';
+import { pinFirst } from './lib/blog-pin.mjs';
 import { PAGES } from './pages.mjs';
 import { leadMeta, trackingTags } from './lib/tracking.mjs';
 
@@ -33,12 +35,12 @@ const videoManifest = fs.existsSync('data/video-manifest.json') ? JSON.parse(fs.
 // ----------------------------------------------------------------- общий CSS (одинаков для всех страниц)
 const readCss = (f) => fs.readFileSync(f, 'utf8');
 // cookie и виджет: все px масштабируются явно (calc(Npx*var(--ui))) — без CSS zoom, который по-разному работает в браузерах
-const scaleUi = (css) => {
+const scaleUi = (css, v = '--ui') => {
   const ast = csstree.parse(css);
   csstree.walk(ast, { visit: 'Declaration', enter(decl) {
     csstree.walk(decl.value, { visit: 'Dimension', enter(node, item, list) {
       if (node.unit !== 'px' || +node.value === 0 || !list) return;
-      list.replace(item, list.createItem({ type: 'Function', name: 'calc', children: new csstree.List().fromArray([{ type: 'Dimension', value: node.value, unit: 'px' }, { type: 'Operator', value: '*' }, { type: 'Function', name: 'var', children: new csstree.List().fromArray([{ type: 'Identifier', name: '--ui' }]) }]) }));
+      list.replace(item, list.createItem({ type: 'Function', name: 'calc', children: new csstree.List().fromArray([{ type: 'Dimension', value: node.value, unit: 'px' }, { type: 'Operator', value: '*' }, { type: 'Function', name: 'var', children: new csstree.List().fromArray([{ type: 'Identifier', name: v }]) }]) }));
     } });
   } });
   return csstree.generate(ast);
@@ -48,7 +50,7 @@ usedAssets.add(dot.webp.at(-1).src);
 const FB = (t) => t.replace(/font-family:Inter,Arial,sans-serif/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif').replace(/font-family:'?Inter'?;/g, 'font-family:Inter,Inter Fallback,Arial,sans-serif;').replace(/--t-(headline|text)-font:Inter,Arial,sans-serif/g, '--t-$1-font:Inter,Inter Fallback,Arial,sans-serif');
 const embeds = readCss('src/css/embeds.css').replace(/%%DOT%%/g, dot.webp.at(-1).src);
 const staticCrit = [readCss('src/css/base.css'), scaleUi(readCss('src/css/critical.css')), embeds];
-const staticRest = [readCss('src/css/forms.css'), readCss('src/css/components.css'), scaleUi(readCss('src/css/listing.css')), scaleUi(readCss('src/css/cases.css'))];
+const staticRest = [readCss('src/css/forms.css'), readCss('src/css/components.css'), scaleUi(readCss('src/css/listing.css')), scaleUi(readCss('src/css/cases.css')), scaleUi(readCss('src/css/article.css'), '--s')]; // тело статей: px макета × --s (как у Zero-блоков)
 const tgt = ['chrome110', 'safari16', 'firefox110'];
 const withBase = (s) => (BASE ? s.replace(/url\((['"]?)\/assets\//g, `url($1${BASE}/assets/`) : s);
 
@@ -106,6 +108,8 @@ const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { d
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
+  // статьи с data/articles/<slug>.json → pin: карточка первой в сетке блога (tools/lib/blog-pin.mjs)
+  if (spec.path === '/blog' && process.env.NO_PIN !== '1') for (const f of fs.readdirSync('data/articles').filter((x) => x.endsWith('.json'))) { const a = JSON.parse(fs.readFileSync(`data/articles/${f}`, 'utf8')); if (a.pin) console.log('blog-pin', f.slice(0, -5), pinFirst($, { slug: f.slice(0, -5), ...a.pin }).join('; ')); }
   const extraCss = [];
   const idCount = {};
   $('.t396__elem').each((i, e) => { const id = $(e).attr('data-elem-id'); idCount[id] = (idCount[id] || 0) + 1; });
@@ -171,6 +175,7 @@ async function buildPage(spec) {
       const rid = rec.attr('id').replace('rec', '');
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
+      if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }
       if (type === '525' || rec.attr('data-alias-record-type') === '525') { html[name].push(reviewsSlider($, rec, home || rec.attr('data-alias-record-type') === '525')); continue; } // глобальный блок отзывов (121 -> 525) — тот же блок, что на главной: масштаб как у неё
       if (type === '395' && name === 'main') { const t = tabsBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
       if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
