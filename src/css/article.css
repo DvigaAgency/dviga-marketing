@@ -8,7 +8,8 @@
 @media(min-width:960px){.ar{--s:calc(var(--cw)/960)}}
 @media(min-width:1200px){.ar{--s:calc(var(--cw)/1200)}}
 .ar *,.ar *::before,.ar *::after{box-sizing:border-box}
-.ar-c{margin:0 0 0 10px;width:300px;padding:30px 0 30px}
+.ar-c{margin:0 0 0 10px;width:300px}
+.ar-c>:last-child{margin-bottom:0}
 @media(min-width:480px){.ar-c{width:460px}}
 @media(min-width:640px){.ar-c{width:620px}}
 @media(min-width:960px){.ar-c{width:760px}}
@@ -47,12 +48,12 @@
 .ar-toc a{border-bottom:0}
 .ar-toc li{font-size:16px}
 @media(min-width:480px){.ar-toc li{font-size:20px}}
-/* таблицы — секции с видом T431 (components.css .tbl-w/.tbl-t); отступы вокруг как у спейсеров эталона */
-.ar-tb{padding:0}
+/* таблицы — секции в колонке контента, вид — article-table.css; отступы вокруг как у спейсеров эталона (60px) */
+.ar-tb .ar-c{padding:60px 0}
 /* важное */
 .ar-n{margin:10px 0 30px;padding:22px 24px 6px 74px;position:relative;background:#f2f2f2}
 @media(min-width:480px){.ar-n{padding:28px 36px 8px 90px}}
-.ar-n::before{content:"!";position:absolute;left:20px;top:22px;width:36px;height:36px;background:#d93433;color:#fff;font:600 22px/36px Inter,Arial,sans-serif;text-align:center}
+.ar-n::before{content:"!";position:absolute;left:20px;top:22px;width:36px;height:36px;border-radius:50%;background:#d93433;color:#fff;font:600 22px/36px Inter,Arial,sans-serif;text-align:center}
 @media(min-width:480px){.ar-n::before{left:32px;top:28px}}
 .ar p.ar-fn{margin:0 0 28px;font-size:14px;line-height:1.4;color:#818181}
 @media(min-width:480px){.ar p.ar-fn{font-size:16px}}

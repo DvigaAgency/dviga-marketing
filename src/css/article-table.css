@@ -1,0 +1,10 @@
+/* Таблицы статей — вид T431 эталона (/blog/kak-uznat-dvizhok-sayta): серая шапка #f2f2f2, сетка 1px #d9d9d9, шрифт 14px, отступы 20px.
+   Ширина — как у колонки текста (.ar-c); кегль и отступы таблицы не масштабируются вместе с макетом, как у Tilda. */
+.ar-tsc{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ar-tt{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid #d9d9d9;text-align:left}
+.ar-tt th,.ar-tt td{padding:20px 10px;border:1px solid #d9d9d9;vertical-align:top;font:400 12px/1.55 Inter,Inter Fallback,Arial,sans-serif;color:#121212;text-align:left;letter-spacing:0;overflow-wrap:anywhere}
+.ar-tt thead th{background:#f2f2f2;font-size:14px;font-weight:600}
+.ar-tt tbody th{background:none;font-weight:400}
+@media(max-width:639px){.ar-tt-wide{min-width:560px}} /* таблицы с 4+ колонками на узких экранах прокручиваются */
+@media(min-width:480px){.ar-tt th,.ar-tt td{padding:20px;font-size:14px}}
+.ar .ar-tbl .ar-fn{margin:14px 0 0}

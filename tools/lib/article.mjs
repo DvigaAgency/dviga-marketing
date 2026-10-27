@@ -46,12 +46,11 @@ function faq($, h2) {
   h2.after(`<div class="ar-faq" data-acc>${html}</div>`);
 }
 
-/** таблица статьи -> секция с таблицей T431 (ширины колонок — data-w, последняя колонка занимает остаток) */
-function tableSection(id, table) {
+/** таблица статьи -> секция в колонке контента, вид T431 эталона (ширины колонок — data-w, последняя колонка занимает остаток; сноска — под таблицей) */
+function tableSection(id, table, note = '') {
   const w = (table.attr('data-w') || '').split(';').filter(Boolean);
   const col = w.map((x) => `<col style="width:${x}">`).join('') + '<col>';
-  table.removeAttr('data-w').removeAttr('class').addClass('tbl-t');
-  return `<section id="${id}" class="r tbl ar-tb"><div class="tbl-w"><table class="tbl-t"><colgroup>${col}</colgroup>${table.html()}</table></div></section>`;
+  return `<section id="${id}" class="r ar ar-tb"><div class="ar-c ar-tbl"><div class="ar-tsc"><table class="ar-tt${w.length >= 3 ? ' ar-tt-wide' : ''}"><colgroup>${col}</colgroup>${table.html()}</table></div>${note}</div></section>`;
 }
 
 /** запись article -> { id, html } (fixLinks — переписывание адресов страниц оригинала на копию) */
@@ -64,10 +63,15 @@ export function articleBlock($, rec, fixLinks) {
   if (faqH2.length) faq($b, faqH2);
   const out = []; let buf = []; let n = 0;
   const flush = () => { if (buf.length) out.push(`<section id="r${id}${n ? `-${n}` : ''}" class="r ar"><div class="ar-c">${buf.join('')}</div></section>`); n++; buf = []; };
-  $b('#ar').children().each((i, e) => {
-    const el = $b(e);
-    if (el.is('.ar-tw')) { flush(); out.push(tableSection(`r${id}-${n++}`, el.find('table'))); } else buf.push($b.html(el));
-  });
+  const kids = $b('#ar').children().toArray();
+  for (let i = 0; i < kids.length; i++) {
+    const el = $b(kids[i]);
+    if (el.is('.ar-tw')) {
+      flush();
+      const next = kids[i + 1] && $b(kids[i + 1]).is('p.ar-fn') ? $b.html(kids[++i]) : '';
+      out.push(tableSection(`r${id}-${n++}`, el.find('table'), next));
+    } else buf.push($b.html(el));
+  }
   flush();
   return { id, html: fixLinks(out.join('')) };
 }
