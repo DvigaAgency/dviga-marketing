@@ -12,6 +12,7 @@ const SEL_MAP = [
   [/\.tn-atom__button-text/g, '.bt'],
   [/\.tn-atom__button-border/g, '.bb'],
   [/\.tn-atom__button-content/g, '.bc'],
+  [/\.tn-atom__button-icon/g, '.bi'],
   [/\.tn-atom__video-play-icon/g, '.vpi'],
   [/\.tn-atom__vector/g, '.av'],
   [/\.tn-atom/g, '.a'],
@@ -437,7 +438,8 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   if (type === 'button') {
     body = body.replace(/<!--[\s\S]*?-->/g, '');
     const txt = atom.find('.tn-atom__button-text').html();
-    body = e.dot ? `<div class="bc"><div>${txt}</div></div><span class="bb"></span>` : `<span class="bc"><span class="bt">${txt}</span></span><span class="bb"></span>`;
+    const icon = atom.find('.tn-atom__button-icon').length ? '<span class="bi"></span>' : ''; // иконка кнопки (--icon / --icon-hover в CSS записи), например самолётик «Подписаться»
+    body = e.dot ? `<div class="bc"><div>${txt}</div></div><span class="bb"></span>` : `<span class="bc">${icon}<span class="bt">${txt}</span></span><span class="bb"></span>`;
   }
   const inner = `<${atomTag} class="${atomClass}"${linkAttrs.length ? ' ' + linkAttrs.join(' ') : ''}${style}>${body}</${atomTag}>`;
   return hasSbs ? `<div class="sw"${wrapStyle}>${inner}</div>` : inner;

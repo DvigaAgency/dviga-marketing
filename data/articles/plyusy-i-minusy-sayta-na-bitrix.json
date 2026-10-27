@@ -11,5 +11,23 @@
       "Все статьи",
       "Сайты"
     ]
-  }
+  },
+  "fresh": [
+    {
+      "slug": "plyusy-i-minusy-sayta-na-tilda",
+      "href": "https://dviga.marketing/blog/plyusy-i-minusy-sayta-na-tilda",
+      "title": "Плюсы и минусы сайта на Тильде: подробный разбор конструктора"
+    },
+    {
+      "slug": "ne-kormite-programmistov-vybiraem-cms-dlya-sayta-zhilogo-kompleksa",
+      "href": "https://dviga.marketing/blog/ne-kormite-programmistov-vybiraem-cms-dlya-sayta-zhilogo-kompleksa",
+      "title": "Тильда или Битрикс для сайта жилого комплекса — какую CMS выбрать"
+    },
+    {
+      "slug": "skolko-stoit-sdelat-sajt-na-tilde-v-2026-ceny",
+      "listing": "skolko-stoit-sdelat-sajt-na-tilde-v-2025-ceny",
+      "href": "https://dviga.marketing/blog/skolko-stoit-sdelat-sajt-na-tilde-v-2026-ceny",
+      "title": "Сколько стоит сайт на Тильде в 2026 году"
+    }
+  ]
 }

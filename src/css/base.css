@@ -28,6 +28,8 @@ img{border:0}
 .ai{width:100%;display:block;height:auto}
 .bc{display:flex;flex-direction:row;align-items:center;justify-content:center;flex:0 1 auto;min-width:0}
 .bt{flex:1 1 0;text-overflow:ellipsis}
+.bi{flex:none;background:var(--icon) center/contain no-repeat}
+@media(hover:hover){.a:hover .bi{background-image:var(--icon-hover,var(--icon))}}
 .bb{position:absolute;inset:0;z-index:1;border-radius:inherit;transition-duration:inherit;transition-timing-function:inherit;pointer-events:none}
 .bb::before,.bb::after{-webkit-backface-visibility:hidden;position:absolute;inset:0;content:"";border-radius:inherit;z-index:1}
 .bb::after{opacity:0;transition-property:opacity;transition-duration:inherit;transition-timing-function:inherit}

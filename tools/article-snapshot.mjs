@@ -5,10 +5,11 @@
 // оставляет в нём «рамку» страницы и заменяет тело статьи записями типа `article` — их разметка лежит в
 // data/articles/<slug>.html (части разделены <!--part:N-->) и превращается в страницу сборкой (tools/lib/article.mjs).
 // Исходный снимок сохраняется в data/articles/<slug>.source.html (скрипт можно запускать повторно).
-// Здесь же: title/description/og, H1, хлебные крошки, время чтения, JSON-LD (Article + FAQPage).
+// Здесь же: title/description/og, H1, хлебные крошки, время чтения, JSON-LD (Article + FAQPage), блок «Свежие статьи».
 import fs from 'node:fs';
 import * as cheerio from 'cheerio';
 import { articleText } from './lib/article.mjs';
+import { fillFresh } from './lib/fresh-articles.mjs';
 
 const slug = process.argv[2];
 if (!slug) throw new Error('usage: node tools/article-snapshot.mjs <slug> [source.html]');
@@ -62,6 +63,9 @@ $('#allrecords > .r').each((i, e) => { if (!keep.includes($(e).attr('id').replac
 $('#rec1168888261').after(rec('9100000001', 1));
 $('#rec1170289596').after(rec('9100000002', 2));
 $('#rec1170292846').after(rec('9100000003', 3));
+
+// ---- «Свежие статьи»: карточки (обложка, категории, время) — из листинга блога, названия и ссылки — из настроек статьи
+if (cfg.fresh) fillFresh($, cheerio.load(fs.readFileSync('data/pages/blog.html', 'utf8'), { decodeEntities: false }), '1168888436', cfg.fresh);
 
 // ---- цитата перед FAQ (плашка автора — запись Tilda сохранена, меняется только текст)
 setText('1170292846', '1745997240173', cfg.quote);

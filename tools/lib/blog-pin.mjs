@@ -9,16 +9,16 @@ import * as csstree from 'css-tree';
 
 const SCREENS = [320, 480, 640, 960]; // + базовый (≥1200)
 const FIELDS = ['left', 'top'];
-const attrName = (f, bp) => (bp === 'base' ? `data-field-${f}-value` : `data-field-${f}-res-${bp}-value`);
+export const attrName = (f, bp) => (bp === 'base' ? `data-field-${f}-value` : `data-field-${f}-res-${bp}-value`);
 const chain = (bp) => (bp === 'base' ? ['base'] : [...SCREENS.filter((s) => s >= bp), 'base']); // текущий → более широкие → базовый
-const BPS = [...SCREENS, 'base'];
+export const BPS = [...SCREENS, 'base'];
 
 /** значение поля с каскадом брейкпоинтов, как в Tilda */
-function eff(el, f, bp, name = attrName) {
+export function eff(el, f, bp, name = attrName) {
   for (const b of chain(bp)) { const v = el.attr(name(f, b)); if (v !== undefined && v !== '') return parseFloat(v); }
   return NaN;
 }
-const abName = (f, bp) => (bp === 'base' ? `data-artboard-${f}` : `data-artboard-${f}-res-${bp}`);
+export const abName = (f, bp) => (bp === 'base' ? `data-artboard-${f}` : `data-artboard-${f}-res-${bp}`);
 
 export function pinFirst($, { slug, title, tabs: tabNames }) {
   const log = [];
@@ -101,7 +101,7 @@ function pinInTab($, ids, slug, title) {
 }
 
 /** ряд: три карточки (элементы группируются по ближайшей картинке слева направо), слот = порядок по левой границе картинки */
-function parseRow($, rec, shapes) {
+export function parseRow($, rec, shapes) {
   const ab = rec.find('.t396__artboard').first();
   const els = ab.children('.t396__elem').toArray().map((n) => $(n));
   const shapeEls = shapes.toArray().map((n) => $(n)).sort((a, b) => eff(a, 'left', 'base') - eff(b, 'left', 'base'));
@@ -119,8 +119,8 @@ function parseRow($, rec, shapes) {
   return { rec, ab, cards };
 }
 
-/** правила <style> записи, относящиеся к элементам ids (селекторы вида #rec<id> .tn-elem[data-elem-id="…"]…); из записи они удаляются, текст возвращается */
-function takeCss($, rec, ids) {
+/** правила <style> записи, относящиеся к элементам ids (селекторы вида #rec<id> .tn-elem[data-elem-id="…"]…); текст возвращается, из записи правила удаляются (remove=false — только копия) */
+export function takeCss($, rec, ids, remove = true) {
   const ours = (sel) => ids.some((id) => sel.includes(`data-elem-id="${id}"`));
   const split = (rule) => { // правило → [наше, остальное]
     const sels = rule.prelude.children.toArray().map((n) => csstree.generate(n));
@@ -142,7 +142,7 @@ function takeCss($, rec, ids) {
         if (k.length) keep.push(`${pre}{${k.join('')}}`);
       } else keep.push(csstree.generate(node));
     }
-    $(st).text(keep.join(''));
+    if (remove) $(st).text(keep.join(''));
   });
   return moved.join('');
 }
