@@ -13,6 +13,7 @@ export const PAGES = [
   ...sub('cases'),
   { path: '/blog', src: `${dir}/blog.html`, kind: 'page' },
   ...sub('blog'),
+  { path: '/services', src: `${dir}/services.html`, kind: 'page' },
   ...sub('services'),
   { path: '/contacts', src: `${dir}/contacts.html`, kind: 'page' },
   ...sub('contacts'),
