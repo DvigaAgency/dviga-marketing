@@ -28,6 +28,16 @@
 @media (hover:hover){.sh-a:hover{background:#d93433}}
 /* ===== обложка (T160) ===== */
 .cov{background:#f2f2f2 center/cover no-repeat}
+/* ===== обложка с фоновым слайдером (T018 + T833) ===== */
+.hs{position:relative;overflow:hidden;background:linear-gradient(to bottom,#ccc,#777)}
+.hs-s{position:absolute;z-index:2;inset:0;width:100%;height:100%;background:#000 center/cover no-repeat;opacity:0;transform:scale(1)}
+.hs-s.op:first-child{opacity:1}
+.hs-fade .hs-s,.hs-effect .hs-s{transition:opacity 3s,transform 8s}
+.hs-zoom .hs-s{transform:scale(1.3);transition:opacity 3s,transform 8s}
+.hs-fade .hs-s.fx,.hs-fade .hs-s.f1{transform:translate3d(0,0,0);opacity:1}
+.hs-zoom .hs-s.fx,.hs-zoom .hs-s.f1{transform:scale(1);opacity:1}
+.hs-effect .hs-s.fx,.hs-effect .hs-s.f1{transform:scale(1.3);opacity:1}
+.hs-fade .hs-s.fx:first-child+.hs-s~.hs-s,.hs-fade .hs-s.f1,.hs-zoom .hs-s.fx:first-child+.hs-s~.hs-s,.hs-zoom .hs-s.f1,.hs-effect .hs-s.fx:first-child+.hs-s~.hs-s,.hs-effect .hs-s.f1{z-index:1}
 /* якоря (T215) */
 .anc-r{height:0}
 .anc{display:block;height:0;scroll-margin-top:100px}

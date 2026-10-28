@@ -68,3 +68,19 @@ export function quizBlock($, rec, hooks = {}) {
   const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), extra.join('\n'), `:where(#r${id}) picture{display:contents}:where(#r${id}) .t-quiz__consultant__img{display:block}@media screen and (max-width:640px){#r${id} .t-quiz__btn-wrapper.t-quiz__btn-wrapper_mobile{display:flex;opacity:1}}@media screen and (max-width:960px){#r${id} .t-input-group__header .t-quiz__consultant{order:-1}}`].join('\n');
   return { id, css, html: `<section id="r${id}" class="r qz ${recCls(rec)}" data-quiz>${html}</section>` };
 }
+
+/** галерея-плитка (t155, запись T169): сетка из фоновых картинок; раскладка — переменные --desktop-grid-… / --mobile-grid-… у плиток, стили — data/block-css/<id>.css.
+ *  Увеличение по клику (tilda-zoom) в копии, как и у остальных картинок с data-zoomable, не переносится. */
+export function tilesBlock($, rec) {
+  const id = rec.attr('id').replace('rec', '');
+  const root = cheerio.load(`<div>${$.html(rec.find('.t155'))}</div>`, { decodeEntities: false });
+  const g = root('div').first();
+  g.find('.t155__bgimg').each((i, e) => {
+    const u = root(e).attr('data-original');
+    if (!u) return;
+    root(e).attr('data-bg', cssImage(u, 1100, 800)).removeAttr('data-original').removeAttr('style').removeAttr('data-zoomable').removeAttr('data-zoom-target').removeAttr('data-img-zoom-url').removeClass('t-bgimg');
+  });
+  clean(root, g);
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id)].join('\n');
+  return { id, css, html: `<section id="r${id}" class="r tls ${recCls(rec)}">${g.html()}</section>` };
+}

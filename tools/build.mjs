@@ -10,10 +10,10 @@ import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
-import { quizBlock, accordionBlock } from './lib/blocks.mjs';
+import { quizBlock, accordionBlock, tilesBlock } from './lib/blocks.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, search, fixLinks } from './lib/components.mjs';
 import { setLocalPaths, link } from './lib/util.mjs';
-import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock } from './lib/listing.mjs';
+import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSliderBlock } from './lib/listing.mjs';
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
 import { pinFirst } from './lib/blog-pin.mjs';
@@ -108,6 +108,13 @@ const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { d
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
+  // T331: попап с видео (Rutube/YouTube) -> ссылка на страницу ролика: внешние iframe в копии не грузятся
+  const videoUrls = {};
+  $('.r[data-record-type=331]').each((i, e) => {
+    const r = $(e); const hook = r.find('.t-popup').attr('data-tooltip-hook'); const v = r.find('[data-videolazy-id]').first(); const vid = v.attr('data-videolazy-id');
+    if (hook && vid) videoUrls[hook] = v.attr('data-videolazy-type') === 'youtube' ? `https://www.youtube.com/watch?v=${vid}` : `https://rutube.ru/video/${vid}/`;
+  });
+  const videoLinks = (h) => h.replace(/<a ([^>]*?)href="(#popup:[^"]*)"/g, (m, a, href) => (videoUrls[href] ? `<a ${a}href="${videoUrls[href]}"` : m));
   // статьи с data/articles/<slug>.json → pin: карточка первой в сетке блога (tools/lib/blog-pin.mjs)
   if (spec.path === '/blog' && process.env.NO_PIN !== '1') for (const f of fs.readdirSync('data/articles').filter((x) => x.endsWith('.json'))) { const a = JSON.parse(fs.readFileSync(`data/articles/${f}`, 'utf8')); if (a.pin) console.log('blog-pin', f.slice(0, -5), pinFirst($, { slug: f.slice(0, -5), ...a.pin }).join('; ')); }
   const extraCss = [];
@@ -129,7 +136,7 @@ async function buildPage(spec) {
     eager() { return ctx.eagerRecs.has(ctx.rec); },
     drag: new Set(home ? ['864137673'] : []),
     eagerRecs,
-    textHtml: (h) => fixLinks(h),
+    textHtml: (h) => videoLinks(fixLinks(h)),
     video(url) {
       const v = videoManifest[url];
       if (!v) return '<video class="vd" muted loop playsinline preload="none" aria-hidden="true"></video>';
@@ -171,15 +178,19 @@ async function buildPage(spec) {
   for (const [name, list] of Object.entries(regions)) {
     for (const node of list) {
       const rec = $(node);
-      const type = rec.attr('data-record-type');
+      const alias = rec.attr('data-alias-record-type');
+      const type = rec.attr('data-record-type') === '121' && alias ? alias : rec.attr('data-record-type'); // глобальный блок Tilda (121) ведёт себя как тип, на который он ссылается
       const rid = rec.attr('id').replace('rec', '');
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
       if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }
-      if (type === '525' || rec.attr('data-alias-record-type') === '525') { html[name].push(reviewsSlider($, rec, home || rec.attr('data-alias-record-type') === '525')); continue; } // глобальный блок отзывов (121 -> 525) — тот же блок, что на главной: масштаб как у неё
+      if (type === '525') { html[name].push(reviewsSlider($, rec, home || alias === '525')); continue; } // глобальный блок отзывов (121 -> 525) — тот же блок, что на главной: масштаб как у неё
       if (type === '395' && name === 'main') { const t = tabsBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
       if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
       if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
+      if (type === '18' && name === 'main') { const t = heroSliderBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; } // обложка; слайды — из привязанной записи T833
+      if (type === '833' || type === '331') continue; // T833 — фон обложки (см. выше); T331 — попап с видео: ссылка на него ведёт на страницу ролика (videoLinks)
+      if (type === '169' && name === 'main') { const t = tilesBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '431' && name === 'main') { const t = tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала

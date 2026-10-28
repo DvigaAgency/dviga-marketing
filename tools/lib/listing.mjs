@@ -19,7 +19,12 @@ export function tabsBlock($, rec) {
 export function loadMoreBlock($, rec) {
   const id = rec.attr('id').replace('rec', '');
   const b = rec.find('.t400__submit');
-  const css = recPadding(rec.attr('class') || '', id);
+  let css = recPadding(rec.attr('class') || '', id);
+  // глобальный блок (121 -> 400) Tilda не масштабирует: размеры кнопки — в px оригинала (отступы по брейкпоинтам Tilda), фон записи — из её стиля
+  if (rec.attr('data-record-type') === '121') {
+    const bg = ((rec.attr('style') || '').match(/background-color:\s*([^;\s]+)/) || [])[1];
+    css += `${bg ? `#r${id}{background-color:${bg}}` : ''}#r${id} .lm-b{padding:18.8px 60px;font-size:16px;line-height:22.4px}@media(max-width:1200px){#r${id} .lm-b{padding:18.8px 45px}}@media(max-width:640px){#r${id} .lm-b{padding:18.8px 30px}}`;
+  }
   return { id, css, more: (b.attr('data-hidden-rec-ids') || '').split(',').filter(Boolean), html: `<section id="r${id}" class="r lm-r"><div class="lm"><button type="button" class="lm-b" data-more="${esc(b.attr('data-hidden-rec-ids'))}" data-back="${esc(b.attr('data-hide-back-text') || '')}">${b.find('.t-btnflex__text').first().html().trim()}</button></div></section>` };
 }
 
@@ -55,4 +60,20 @@ export function tableBlock($, rec) {
   const th = head.map((c) => `<th scope="col">${esc(c.trim())}</th>`).join('');
   const tr = rows.map((r) => `<tr>${r.map((c, i) => (i ? `<td>${esc(c.trim())}</td>` : `<th scope="row">${esc(c.trim())}</th>`)).join('')}</tr>`).join('');
   return { id, css: recPadding(rec.attr('class') || '', id), html: `<section id="r${id}" class="r tbl"><div class="tbl-w"><table class="tbl-t"><colgroup>${col}</colgroup><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div></section>` };
+}
+
+/** обложка T018 с фоновым слайдером T833 («Кен Бёрнс», как tilda-cover): слайды — из записи T833, привязанной к обложке (data-coverslider-rec-ids).
+ *  Для 2–3 слайдов Tilda дублирует их в конец ленты — делаем то же в разметке; смена — src/js/hero.js */
+export function heroSliderBlock($, rec, cssImage) {
+  const id = rec.attr('id').replace('rec', '');
+  const car = rec.find('.t-cover__carrier');
+  const h = (car.attr('data-content-cover-height') || '100vh').replace(/vh$/, 'svh');
+  const sl = $('.r[data-record-type=833]').filter((i, e) => ($(e).find('.t833').attr('data-coverslider-rec-ids') || '').split(',').includes(id)).first();
+  const urls = sl.find('.t833__slide').map((i, e) => $(e).attr('data-original')).get().filter(Boolean);
+  const fx = (sl.find('.t833__slider').attr('class') || '').match(/t833__slider_(fade|zoom|effect)/);
+  const all = urls.length === 2 || urls.length === 3 ? [...urls, ...urls] : urls;
+  const bg = (u) => cssImage(u, 1920);
+  const slides = all.map((u, i) => `<div class="hs-s${i ? '' : ' op'}"${i ? ` data-bg="${esc(bg(u))}"` : ''}></div>`).join('');
+  const css = [recPadding(rec.attr('class') || '', id), `#r${id}{height:${h}}`, urls.length ? `#r${id} .hs-s:first-child{background-image:${bg(urls[0])}}` : ''].join('\n');
+  return { id, css, html: `<section id="r${id}" class="r hs hs-${fx ? fx[1] : 'fade'}" data-hs="${urls.length}">${slides}</section>` };
 }

@@ -106,6 +106,12 @@ export function convertZero($, rec, ctx) {
       // масштаб задаёт обёртка .zw (transform); элементы «окна» в смешанном артборде компенсируются: px-значения делятся на масштаб
       if (cur.__zoom === false && A[R].upscale && !allWin[R]) for (let i = 0; i < d.length; i++) d[i] = d[i].replace(/(-?[0-9.]+)px/g, (m, n) => (+n === 0 ? m : `calc(${n}px/var(--zw))`));
       if (d.length) rules += `${ctx.sel(recId, e.id)}{${d.join(';')}}`;
+      // у элемента с анимацией обёртка .sw наследует размер (inherit); процент при наследовании пересчитывается второй раз (120% -> 144%), поэтому для %-размеров обёртка занимает 100% элемента
+      if (e.attrs['data-animate-sbs-opts'] && e.attrs['data-animate-sbs-event'] && screens.some((r) => /%$/.test(String(layoutByR[r][e.id].width)) || /%$/.test(String(layoutByR[r][e.id].height)))) {
+        const sw = [];
+        for (const k of ['width', 'height']) if (cur[k] !== undefined && (!prev || cur[k] !== p[k])) sw.push(`${k}:${/%$/.test(String(cur[k])) ? '100%' : 'inherit'}`);
+        if (sw.length) rules += `${ctx.sel(recId, e.id)}>.sw{${sw.join(';')}}`;
+      }
     }
     layoutCss[R] = rules;
   }

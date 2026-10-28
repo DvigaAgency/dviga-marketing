@@ -61194,5 +61194,9029 @@
   "src": "/assets/img/min-1920.252c50ce56.webp",
   "inSize": 122335,
   "outSize": 90340
+ },
+ "https://static.tildacdn.com/tild3662-6230-4233-b039-643136666135/Frame_9.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 900,
+  "h": 620,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-9-360.cf4e384094.avif",
+    "size": 2940
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-9-720.74d46305cd.avif",
+    "size": 6969
+   },
+   {
+    "w": 900,
+    "src": "/assets/img/frame-9-900.689b99eb99.avif",
+    "size": 8824
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-9-360.04623abc11.webp",
+    "size": 3090
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-9-720.21d44acc8a.webp",
+    "size": 7120
+   },
+   {
+    "w": 900,
+    "src": "/assets/img/frame-9-900.2642eef447.webp",
+    "size": 9646
+   }
+  ],
+  "src": "/assets/img/frame-9-900.2642eef447.webp",
+  "inSize": 98046,
+  "outSize": 18470
+ },
+ "https://static.tildacdn.com/tild3435-6334-4231-b831-393233623233/Frame_8_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 900,
+  "h": 620,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-8-11zon-360.d1c13c9c94.avif",
+    "size": 6834
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-8-11zon-720.496d17711c.avif",
+    "size": 17809
+   },
+   {
+    "w": 900,
+    "src": "/assets/img/frame-8-11zon-900.d79bd4714b.avif",
+    "size": 22170
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-8-11zon-360.8d0584da68.webp",
+    "size": 8316
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-8-11zon-720.d48faeb900.webp",
+    "size": 19670
+   },
+   {
+    "w": 900,
+    "src": "/assets/img/frame-8-11zon-900.cde20b70d4.webp",
+    "size": 24626
+   }
+  ],
+  "src": "/assets/img/frame-8-11zon-900.cde20b70d4.webp",
+  "inSize": 27113,
+  "outSize": 46796
+ },
+ "https://static.tildacdn.com/tild6132-6338-4066-b230-336434353036/3.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 890,
+  "h": 1180,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.44e4c69d33.avif",
+    "size": 20006
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.4a4232ce85.avif",
+    "size": 50165
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/3-890.953a07ac02.avif",
+    "size": 71080
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.e7e0755f33.webp",
+    "size": 26106
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.f9d67cce38.webp",
+    "size": 67544
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/3-890.c7e550324f.webp",
+    "size": 89876
+   }
+  ],
+  "src": "/assets/img/3-890.c7e550324f.webp",
+  "inSize": 136997,
+  "outSize": 160956
+ },
+ "https://static.tildacdn.com/tild6133-6338-4565-b661-363764363231/1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 744,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.556c8c6c0f.avif",
+    "size": 7393
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.4cce5a5576.avif",
+    "size": 18633
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.9d13b38f97.avif",
+    "size": 32884
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1-1680.987ada2839.avif",
+    "size": 64396
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.d1df24618c.webp",
+    "size": 8662
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.e1efcace0a.webp",
+    "size": 23466
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.73693e591f.webp",
+    "size": 42424
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1-1680.6c2b98d24e.webp",
+    "size": 83410
+   }
+  ],
+  "src": "/assets/img/1-1680.6c2b98d24e.webp",
+  "inSize": 163171,
+  "outSize": 147806
+ },
+ "https://static.tildacdn.com/tild6130-3463-4364-a137-373034636266/Mask_Group-2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 964,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/mask-group-2-360.cc3091885b.avif",
+    "size": 10524
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mask-group-2-720.93d48074f9.avif",
+    "size": 31276
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mask-group-2-1080.cb91f792c3.avif",
+    "size": 60250
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/mask-group-2-1680.8b350e0f07.avif",
+    "size": 139330
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/mask-group-2-360.5f4ba2b525.webp",
+    "size": 12894
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mask-group-2-720.db16166a25.webp",
+    "size": 37294
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mask-group-2-1080.7b5d495929.webp",
+    "size": 70516
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/mask-group-2-1680.bcf12c0a4b.webp",
+    "size": 149338
+   }
+  ],
+  "src": "/assets/img/mask-group-2-1680.bcf12c0a4b.webp",
+  "inSize": 283896,
+  "outSize": 288668
+ },
+ "https://static.tildacdn.com/tild6136-6133-4863-b561-333138343163/bitrix_certificate__.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1686,
+  "h": 2371,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bitrix-certificate-360.c77c3e745d.avif",
+    "size": 11195
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bitrix-certificate-720.5922870877.avif",
+    "size": 26378
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bitrix-certificate-1080.ab7656652b.avif",
+    "size": 41572
+   },
+   {
+    "w": 1686,
+    "src": "/assets/img/bitrix-certificate-1686.b64e9c9d8c.avif",
+    "size": 63720
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bitrix-certificate-360.312d79f551.webp",
+    "size": 14186
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bitrix-certificate-720.730a57e780.webp",
+    "size": 36630
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bitrix-certificate-1080.c5f715e046.webp",
+    "size": 61154
+   },
+   {
+    "w": 1686,
+    "src": "/assets/img/bitrix-certificate-1686.c2cf3071c6.webp",
+    "size": 109870
+   }
+  ],
+  "src": "/assets/img/bitrix-certificate-1686.c2cf3071c6.webp",
+  "inSize": 324106,
+  "outSize": 173590
+ },
+ "https://static.tildacdn.com/tild6663-3935-4261-b630-346431373635/Mask_Group-1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 964,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/mask-group-1-360.17da47ea69.avif",
+    "size": 10118
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mask-group-1-720.abbee04d49.avif",
+    "size": 25293
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mask-group-1-1080.fa86015c5f.avif",
+    "size": 42351
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/mask-group-1-1680.c1d240c92b.avif",
+    "size": 82840
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/mask-group-1-360.b25505e300.webp",
+    "size": 12324
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mask-group-1-720.b1b22401ce.webp",
+    "size": 29960
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mask-group-1-1080.72868a8117.webp",
+    "size": 50530
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/mask-group-1-1680.bb9e219e43.webp",
+    "size": 95266
+   }
+  ],
+  "src": "/assets/img/mask-group-1-1680.bb9e219e43.webp",
+  "inSize": 218827,
+  "outSize": 178106
+ },
+ "https://static.tildacdn.com/tild3265-6230-4463-b935-396264663730/80020D0BDD0B020402.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 800,
+  "h": 400,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/80020d0bdd0b020402-360.2670f74724.avif",
+    "size": 5796
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/80020d0bdd0b020402-720.f2f5e81914.avif",
+    "size": 11605
+   },
+   {
+    "w": 800,
+    "src": "/assets/img/80020d0bdd0b020402-800.356cb7a355.avif",
+    "size": 13262
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/80020d0bdd0b020402-360.e74f6ce6ff.webp",
+    "size": 7976
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/80020d0bdd0b020402-720.5d63f2222f.webp",
+    "size": 17200
+   },
+   {
+    "w": 800,
+    "src": "/assets/img/80020d0bdd0b020402-800.96123ba7c5.webp",
+    "size": 19176
+   }
+  ],
+  "src": "/assets/img/80020d0bdd0b020402-800.96123ba7c5.webp",
+  "inSize": 42443,
+  "outSize": 32438
+ },
+ "https://static.tildacdn.com/tild3962-6634-4130-a636-326234383561/22.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2244,
+  "h": 1497,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/22-360.b8cdcce557.avif",
+    "size": 3746
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/22-720.120313f78a.avif",
+    "size": 9543
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/22-1080.4797959c0a.avif",
+    "size": 15886
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/22-1620.812b85740e.avif",
+    "size": 25587
+   },
+   {
+    "w": 2244,
+    "src": "/assets/img/22-2244.1af9bc4b2b.avif",
+    "size": 39168
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/22-360.0df2a7a9fc.webp",
+    "size": 4110
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/22-720.ecc80850c0.webp",
+    "size": 11014
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/22-1080.0162c734c8.webp",
+    "size": 19424
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/22-1620.e95e8222e0.webp",
+    "size": 33206
+   },
+   {
+    "w": 2244,
+    "src": "/assets/img/22-2244.d99ec80743.webp",
+    "size": 48806
+   }
+  ],
+  "src": "/assets/img/22-2244.d99ec80743.webp",
+  "inSize": 70458,
+  "outSize": 87974
+ },
+ "https://static.tildacdn.com/tild3939-3763-4164-b634-653238613331/29.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 998,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/29-360.f564173014.avif",
+    "size": 5228
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/29-720.6f008f418f.avif",
+    "size": 13305
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/29-1080.bd13f48355.avif",
+    "size": 20907
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/29-1680.1ba4f036a1.avif",
+    "size": 36135
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/29-360.7e704ef090.webp",
+    "size": 6656
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/29-720.bbeea4a220.webp",
+    "size": 15780
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/29-1080.a077634400.webp",
+    "size": 25634
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/29-1680.1882caa463.webp",
+    "size": 44716
+   }
+  ],
+  "src": "/assets/img/29-1680.1882caa463.webp",
+  "inSize": 116722,
+  "outSize": 80851
+ },
+ "https://static.tildacdn.com/tild3266-6134-4231-b631-363930333838/1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2224,
+  "h": 1816,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.d8914fc037.avif",
+    "size": 4654
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.9ea80760bd.avif",
+    "size": 9167
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.5c59377b62.avif",
+    "size": 14050
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/1-1620.4c85e549b6.avif",
+    "size": 22521
+   },
+   {
+    "w": 2224,
+    "src": "/assets/img/1-2224.861763d64d.avif",
+    "size": 37024
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.ff906d4f9c.webp",
+    "size": 5128
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.ceba4bfce0.webp",
+    "size": 11126
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.bc49c02e81.webp",
+    "size": 18242
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/1-1620.d5a6b17c11.webp",
+    "size": 29606
+   },
+   {
+    "w": 2224,
+    "src": "/assets/img/1-2224.26dd8715d3.webp",
+    "size": 44016
+   }
+  ],
+  "src": "/assets/img/1-2224.26dd8715d3.webp",
+  "inSize": 81184,
+  "outSize": 81040
+ },
+ "https://static.tildacdn.com/tild3265-3933-4934-b732-376633366636/Mask_Group.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1991,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/mask-group-360.510f6ff298.avif",
+    "size": 10959
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mask-group-720.5118d8d2ca.avif",
+    "size": 29142
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mask-group-1080.2986af25db.avif",
+    "size": 61093
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/mask-group-1680.60c2304007.avif",
+    "size": 176218
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/mask-group-360.8cced411ec.webp",
+    "size": 13452
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mask-group-720.0a8964cd9e.webp",
+    "size": 35442
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mask-group-1080.5d4a03fe4e.webp",
+    "size": 77112
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/mask-group-1680.6bbfd79f19.webp",
+    "size": 177486
+   }
+  ],
+  "src": "/assets/img/mask-group-1680.6bbfd79f19.webp",
+  "inSize": 416888,
+  "outSize": 353704
+ },
+ "https://static.tildacdn.com/tild3762-3230-4831-a134-366239633830/111.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/111-360.ef8fe3b5b3.avif",
+    "size": 5729
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/111-720.ac8b0d5696.avif",
+    "size": 13156
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/111-1080.517f1b757d.avif",
+    "size": 19449
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/111-1680.f1bd5a2e56.avif",
+    "size": 39689
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/111-360.f71382b4d8.webp",
+    "size": 7656
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/111-720.066e272f3d.webp",
+    "size": 18662
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/111-1080.b080fd4f71.webp",
+    "size": 30650
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/111-1680.f714fe86b3.webp",
+    "size": 52094
+   }
+  ],
+  "src": "/assets/img/111-1680.f714fe86b3.webp",
+  "inSize": 119957,
+  "outSize": 91783
+ },
+ "https://static.tildacdn.com/tild3133-6434-4834-b231-643636383231/22.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 914,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/22-360.329e2d99d0.avif",
+    "size": 5287
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/22-720.09f34afb77.avif",
+    "size": 13436
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/22-1080.8aad030940.avif",
+    "size": 22664
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/22-1680.0474253935.avif",
+    "size": 42679
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/22-360.24a8b3cab0.webp",
+    "size": 6628
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/22-720.d93053ae0d.webp",
+    "size": 17074
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/22-1080.f830896167.webp",
+    "size": 28166
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/22-1680.bf5a151fa6.webp",
+    "size": 50740
+   }
+  ],
+  "src": "/assets/img/22-1680.bf5a151fa6.webp",
+  "inSize": 118668,
+  "outSize": 93419
+ },
+ "https://static.tildacdn.com/tild3635-3138-4962-a362-613161353263/still-life-business-.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/still-life-business-360.c02ded2978.avif",
+    "size": 4157
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/still-life-business-720.44fcac6814.avif",
+    "size": 9999
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/still-life-business-1080.09ddb0710f.avif",
+    "size": 18724
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/still-life-business-1680.b72680767a.avif",
+    "size": 41809
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/still-life-business-360.049860e713.webp",
+    "size": 3998
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/still-life-business-720.4a957c0131.webp",
+    "size": 9680
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/still-life-business-1080.a16a9ad058.webp",
+    "size": 18064
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/still-life-business-1680.af75194dd1.webp",
+    "size": 40688
+   }
+  ],
+  "src": "/assets/img/still-life-business-1680.af75194dd1.webp",
+  "inSize": 96115,
+  "outSize": 82497
+ },
+ "https://static.tildacdn.com/tild6132-6263-4637-b733-653234303630/102.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2234,
+  "h": 1371,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/102-360.6b3386d6d9.avif",
+    "size": 6152
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/102-720.55eb209115.avif",
+    "size": 14167
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/102-1080.75273dcfeb.avif",
+    "size": 22286
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/102-1620.2d36e90441.avif",
+    "size": 36094
+   },
+   {
+    "w": 2234,
+    "src": "/assets/img/102-2234.d2694f3e29.avif",
+    "size": 57452
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/102-360.56658b84f0.webp",
+    "size": 7000
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/102-720.bec7e7063a.webp",
+    "size": 15836
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/102-1080.1b5982eba9.webp",
+    "size": 26626
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/102-1620.c0ed356266.webp",
+    "size": 42166
+   },
+   {
+    "w": 2234,
+    "src": "/assets/img/102-2234.c9fe56c2f8.webp",
+    "size": 64158
+   }
+  ],
+  "src": "/assets/img/102-2234.c9fe56c2f8.webp",
+  "inSize": 141601,
+  "outSize": 121610
+ },
+ "https://static.tildacdn.com/tild3433-6432-4230-a534-376565653464/D0BFD0BED181D0BBD0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.c968cedbf3.avif",
+    "size": 9363
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.46ad448dc7.avif",
+    "size": 23861
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.3fa9729edf.avif",
+    "size": 37719
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.8a548aa021.avif",
+    "size": 60021
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.f91f9fc37a.avif",
+    "size": 79469
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.3eb528f9de.webp",
+    "size": 12098
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.a5e9e07566.webp",
+    "size": 30098
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.c46a2e22a1.webp",
+    "size": 49412
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.88106e5b58.webp",
+    "size": 78000
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.76a0406834.webp",
+    "size": 95534
+   }
+  ],
+  "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.76a0406834.webp",
+  "inSize": 144891,
+  "outSize": 175003
+ },
+ "https://static.tildacdn.com/tild6537-6532-4333-b836-343737383732/D0BFD0BED181D0BBD0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.47ad9e1431.avif",
+    "size": 9130
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.bbecd86f2f.avif",
+    "size": 23459
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.08d42a9c50.avif",
+    "size": 36391
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.1e1d838d29.avif",
+    "size": 58229
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.35d120d4c5.avif",
+    "size": 78483
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.f9e688cbce.webp",
+    "size": 11510
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.688b48a8d6.webp",
+    "size": 28320
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.d16533d1ec.webp",
+    "size": 45614
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.07b919fb0d.webp",
+    "size": 71968
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.7218f17944.webp",
+    "size": 86964
+   }
+  ],
+  "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.7218f17944.webp",
+  "inSize": 132979,
+  "outSize": 165447
+ },
+ "https://static.tildacdn.com/tild6638-3363-4539-b762-316136323664/D0BFD0BED181D0BBD0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.39064dfd8a.avif",
+    "size": 8951
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.2e18bb7ee2.avif",
+    "size": 23142
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.154207f447.avif",
+    "size": 37346
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.8d5d634a95.avif",
+    "size": 61278
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.3cbfb85292.avif",
+    "size": 81655
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.bfbf7b162a.webp",
+    "size": 11626
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.3cd58c8014.webp",
+    "size": 28782
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.c7aa029f5e.webp",
+    "size": 46864
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.e72f7f65e5.webp",
+    "size": 74624
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.d6c799382f.webp",
+    "size": 92480
+   }
+  ],
+  "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.d6c799382f.webp",
+  "inSize": 135313,
+  "outSize": 174135
+ },
+ "https://static.tildacdn.com/tild6663-6261-4066-a639-343335646132/D0BFD0BED181D0BBD0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.6f62186aac.avif",
+    "size": 9676
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.0a87299ea8.avif",
+    "size": 25725
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.ca5d08956f.avif",
+    "size": 41713
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.f5ce99ef62.avif",
+    "size": 68226
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.d783bdc43e.avif",
+    "size": 91706
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.bd53b45c63.webp",
+    "size": 12856
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.9bdfd33e4c.webp",
+    "size": 32532
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.b8a2bfe0e9.webp",
+    "size": 54388
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.67c469c9a3.webp",
+    "size": 88250
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.25fd22a33f.webp",
+    "size": 109676
+   }
+  ],
+  "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.25fd22a33f.webp",
+  "inSize": 156525,
+  "outSize": 201382
+ },
+ "https://static.tildacdn.com/tild3738-3335-4439-b765-336437393736/-min_3.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 880,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-3-360.8ba1058ccf.avif",
+    "size": 4921
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-3-720.b059cac7ac.avif",
+    "size": 13139
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-3-1080.213182647e.avif",
+    "size": 21980
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/min-3-1680.af15df9016.avif",
+    "size": 40462
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-3-360.f7cc126d91.webp",
+    "size": 6310
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-3-720.298d3e7e34.webp",
+    "size": 16886
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-3-1080.086d3211f1.webp",
+    "size": 28444
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/min-3-1680.4798515cca.webp",
+    "size": 50986
+   }
+  ],
+  "src": "/assets/img/min-3-1680.4798515cca.webp",
+  "inSize": 100454,
+  "outSize": 91448
+ },
+ "https://static.tildacdn.com/tild6236-3837-4539-b132-323363333265/D0BFD0BED181D0BBD0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.63fa156c8b.avif",
+    "size": 8014
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.55ca24b3f6.avif",
+    "size": 19160
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.90fe737bb7.avif",
+    "size": 28591
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.b5d9432763.avif",
+    "size": 44573
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.fc5953a0b8.avif",
+    "size": 60107
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.ce794d5da3.webp",
+    "size": 9690
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.0fb4866370.webp",
+    "size": 22710
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.b990bbfef2.webp",
+    "size": 35840
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.b11301acbb.webp",
+    "size": 56666
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.d93874f9b0.webp",
+    "size": 69066
+   }
+  ],
+  "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.d93874f9b0.webp",
+  "inSize": 107446,
+  "outSize": 129173
+ },
+ "https://static.tildacdn.com/tild6165-3434-4335-b939-316335613662/D0BFD0BED181D0BBD0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.b08993efc7.avif",
+    "size": 8570
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.646f1604b5.avif",
+    "size": 22206
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.2742cef952.avif",
+    "size": 35001
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.1479541e35.avif",
+    "size": 56615
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.562d34274f.avif",
+    "size": 76124
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-360.117d46af11.webp",
+    "size": 10794
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-720.62bd87503e.webp",
+    "size": 26692
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1080.49c96c3885.webp",
+    "size": 43148
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1620.0547e2d8a4.webp",
+    "size": 67850
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.5bd4c15b5f.webp",
+    "size": 82960
+   }
+  ],
+  "src": "/assets/img/d0bfd0bed181d0bbd0b5-1920.5bd4c15b5f.webp",
+  "inSize": 127956,
+  "outSize": 159084
+ },
+ "https://static.tildacdn.com/tild6365-3336-4964-a230-306561653235/cssda-wotd-black_1.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 220,
+  "h": 220,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 220,
+    "src": "/assets/img/cssda-wotd-black-1-220.2032394fb7.avif",
+    "size": 4889
+   }
+  ],
+  "webp": [
+   {
+    "w": 220,
+    "src": "/assets/img/cssda-wotd-black-1-220.d89e62fba8.webp",
+    "size": 6124
+   }
+  ],
+  "src": "/assets/img/cssda-wotd-black-1-220.d89e62fba8.webp",
+  "inSize": 7453,
+  "outSize": 11013
+ },
+ "https://static.tildacdn.com/tild6364-6663-4538-a335-316437633233/IMG_3595201.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1366,
+  "h": 1025,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-3595201-360.4fd00ec58e.avif",
+    "size": 10791
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-3595201-720.948e49ffdc.avif",
+    "size": 36852
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/img-3595201-1080.aa2adef76e.avif",
+    "size": 75973
+   },
+   {
+    "w": 1366,
+    "src": "/assets/img/img-3595201-1366.6ed097a923.avif",
+    "size": 122846
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-3595201-360.c32ab2d12b.webp",
+    "size": 13632
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-3595201-720.bd3700a246.webp",
+    "size": 47512
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/img-3595201-1080.8e94c42d75.webp",
+    "size": 100812
+   },
+   {
+    "w": 1366,
+    "src": "/assets/img/img-3595201-1366.98db375d64.webp",
+    "size": 158678
+   }
+  ],
+  "src": "/assets/img/img-3595201-1366.98db375d64.webp",
+  "inSize": 194775,
+  "outSize": 281524
+ },
+ "https://static.tildacdn.com/tild6366-3464-4138-b362-656330386431/7883_11zon_2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7883-11zon-2-360.48a6daa3b4.avif",
+    "size": 4067
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7883-11zon-2-720.762e9e0bde.avif",
+    "size": 9003
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7883-11zon-2-1080.346a1e1cf3.avif",
+    "size": 14862
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/7883-11zon-2-1620.876602ae49.avif",
+    "size": 24905
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/7883-11zon-2-1920.a93572ccda.avif",
+    "size": 27994
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7883-11zon-2-360.27179e9af7.webp",
+    "size": 4640
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7883-11zon-2-720.d1575afa86.webp",
+    "size": 10180
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7883-11zon-2-1080.0eb1347635.webp",
+    "size": 16694
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/7883-11zon-2-1620.7fa5d66e06.webp",
+    "size": 27720
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/7883-11zon-2-1920.94f4c4e9a2.webp",
+    "size": 31208
+   }
+  ],
+  "src": "/assets/img/7883-11zon-2-1920.94f4c4e9a2.webp",
+  "inSize": 39373,
+  "outSize": 59202
+ },
+ "https://static.tildacdn.com/tild6162-3065-4562-b630-663337653963/7875.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7875-360.06017fbf16.avif",
+    "size": 8925
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7875-720.6e52b7f500.avif",
+    "size": 29801
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7875-1080.403182d0fc.avif",
+    "size": 54168
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/7875-1620.e0a534ba94.avif",
+    "size": 93016
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/7875-1920.71363c9bcf.avif",
+    "size": 122415
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7875-360.aab8ba3aaa.webp",
+    "size": 11924
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7875-720.15aaa8bf02.webp",
+    "size": 39928
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7875-1080.25ffda2f12.webp",
+    "size": 74712
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/7875-1620.bda41b3b56.webp",
+    "size": 126938
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/7875-1920.3bed815ab7.webp",
+    "size": 154050
+   }
+  ],
+  "src": "/assets/img/7875-1920.3bed815ab7.webp",
+  "inSize": 193154,
+  "outSize": 276465
+ },
+ "https://static.tildacdn.com/tild3166-3934-4235-b665-653064333339/Bus_Stop_Billboard_M.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1163,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bus-stop-billboard-m-360.747f0cba92.avif",
+    "size": 11301
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bus-stop-billboard-m-720.273630a2d5.avif",
+    "size": 32581
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bus-stop-billboard-m-1080.123edda4fd.avif",
+    "size": 58971
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/bus-stop-billboard-m-1680.1e599ba4aa.avif",
+    "size": 121426
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bus-stop-billboard-m-360.221d4ff807.webp",
+    "size": 17000
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bus-stop-billboard-m-720.8ed543219a.webp",
+    "size": 45996
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bus-stop-billboard-m-1080.216b129dad.webp",
+    "size": 82090
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/bus-stop-billboard-m-1680.4f3e31f73d.webp",
+    "size": 159260
+   }
+  ],
+  "src": "/assets/img/bus-stop-billboard-m-1680.4f3e31f73d.webp",
+  "inSize": 259735,
+  "outSize": 280686
+ },
+ "https://static.tildacdn.com/tild6364-3662-4235-a461-366234303836/Rectangle_2682_1-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1420,
+  "h": 710,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/rectangle-2682-1-min-360.0024a41528.avif",
+    "size": 16261
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/rectangle-2682-1-min-720.7b9b338b79.avif",
+    "size": 49398
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/rectangle-2682-1-min-1080.2bb42cb583.avif",
+    "size": 90082
+   },
+   {
+    "w": 1420,
+    "src": "/assets/img/rectangle-2682-1-min-1420.7e2cd908c0.avif",
+    "size": 180901
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/rectangle-2682-1-min-360.5b531e0d76.webp",
+    "size": 22454
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/rectangle-2682-1-min-720.b6fd3c3c3a.webp",
+    "size": 66186
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/rectangle-2682-1-min-1080.9e2e5500ab.webp",
+    "size": 125336
+   },
+   {
+    "w": 1420,
+    "src": "/assets/img/rectangle-2682-1-min-1420.a257c2cafc.webp",
+    "size": 215914
+   }
+  ],
+  "src": "/assets/img/rectangle-2682-1-min-1420.a257c2cafc.webp",
+  "inSize": 437164,
+  "outSize": 396815
+ },
+ "https://static.tildacdn.com/tild3932-6365-4136-a261-373035343561/1020D0B2D0B5D189D0B5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-360.fe8a3d8a28.avif",
+    "size": 5225
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-720.bab67a3d2e.avif",
+    "size": 13496
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-1080.0d1109b642.avif",
+    "size": 21347
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-1680.2bf0aa4f79.avif",
+    "size": 41184
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-360.fe8e5f6a19.webp",
+    "size": 7034
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-720.26b596d2ee.webp",
+    "size": 19320
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-1080.71e8ad7b83.webp",
+    "size": 31420
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1020d0b2d0b5d189d0b5-1680.53ebd873d2.webp",
+    "size": 50766
+   }
+  ],
+  "src": "/assets/img/1020d0b2d0b5d189d0b5-1680.53ebd873d2.webp",
+  "inSize": 136458,
+  "outSize": 91950
+ },
+ "https://static.tildacdn.com/tild3763-6161-4734-b837-656330313838/3-1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-1-360.113664917b.avif",
+    "size": 2441
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-1-720.9cfca96f9f.avif",
+    "size": 4577
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1-1080.47f608c382.avif",
+    "size": 6619
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/3-1-1680.0f68259b79.avif",
+    "size": 10566
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-1-360.ea3848accf.webp",
+    "size": 2192
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-1-720.8e3a14c445.webp",
+    "size": 4934
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1-1080.af9e30e9f0.webp",
+    "size": 8368
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/3-1-1680.bc49157462.webp",
+    "size": 14902
+   }
+  ],
+  "src": "/assets/img/3-1-1680.bc49157462.webp",
+  "inSize": 55099,
+  "outSize": 25468
+ },
+ "https://static.tildacdn.com/tild3331-3731-4436-b436-626534623138/3.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.0b8d058fda.avif",
+    "size": 7475
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.1d5d4d5334.avif",
+    "size": 17505
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1080.c647ed57b2.avif",
+    "size": 28036
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/3-1680.bca5b45024.avif",
+    "size": 50303
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.d91f342671.webp",
+    "size": 9944
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.b9253c3963.webp",
+    "size": 24236
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1080.cd96eefe91.webp",
+    "size": 37918
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/3-1680.8a4fa013b7.webp",
+    "size": 62946
+   }
+  ],
+  "src": "/assets/img/3-1680.8a4fa013b7.webp",
+  "inSize": 157306,
+  "outSize": 113249
+ },
+ "https://static.tildacdn.com/tild3533-6466-4930-b033-323433656466/61.svg": {
+  "kind": "svg",
+  "src": "/assets/img/61.3f259b66aa.svg",
+  "w": 233,
+  "h": 148,
+  "inSize": 562,
+  "outSize": 423
+ },
+ "https://static.tildacdn.com/tild3063-3933-4139-b739-636137653061/D093D180D0B8D0BDD0BA.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 890,
+  "h": 1180,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-360.72834a857c.avif",
+    "size": 9421
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-720.a0bf0f7b15.avif",
+    "size": 20609
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-890.8dbf497815.avif",
+    "size": 27168
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-360.185e5463d7.webp",
+    "size": 12838
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-720.4134e39757.webp",
+    "size": 27728
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-890.ea3bba8e59.webp",
+    "size": 34086
+   }
+  ],
+  "src": "/assets/img/d093d180d0b8d0bdd0ba-890.ea3bba8e59.webp",
+  "inSize": 60882,
+  "outSize": 61254
+ },
+ "https://static.tildacdn.com/tild3737-3939-4665-b063-386234663739/D093D180D0B8D0BDD0BA.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 890,
+  "h": 1180,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-360.b340c1bfc2.avif",
+    "size": 19490
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-720.77e6d270ce.avif",
+    "size": 48168
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-890.52e6a3a96f.avif",
+    "size": 69430
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-360.7677841b91.webp",
+    "size": 27362
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-720.94cb885d17.webp",
+    "size": 70682
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/d093d180d0b8d0bdd0ba-890.fee46a6355.webp",
+    "size": 91572
+   }
+  ],
+  "src": "/assets/img/d093d180d0b8d0bdd0ba-890.fee46a6355.webp",
+  "inSize": 116183,
+  "outSize": 161002
+ },
+ "https://static.tildacdn.com/tild3735-3465-4361-b564-306433366261/Frame_509.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 180,
+  "h": 180,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 180,
+    "src": "/assets/img/frame-509-180.c5c01caa75.avif",
+    "size": 4838
+   }
+  ],
+  "webp": [
+   {
+    "w": 180,
+    "src": "/assets/img/frame-509-180.00dc325316.webp",
+    "size": 6382
+   }
+  ],
+  "src": "/assets/img/frame-509-180.00dc325316.webp",
+  "inSize": 12555,
+  "outSize": 11220
+ },
+ "https://static.tildacdn.com/tild6361-3862-4638-b037-303636313061/_4-min_1_11zon_1.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1440,
+  "h": 876,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-min-1-11zon-1-360.bd7ce65891.avif",
+    "size": 17377
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-min-1-11zon-1-720.b9b19ba147.avif",
+    "size": 51942
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/4-min-1-11zon-1-1080.0ec81df8c1.avif",
+    "size": 103433
+   },
+   {
+    "w": 1440,
+    "src": "/assets/img/4-min-1-11zon-1-1440.8c0b264ac2.avif",
+    "size": 244384
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-min-1-11zon-1-360.9b4a45291b.webp",
+    "size": 22912
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-min-1-11zon-1-720.f4c2260ab2.webp",
+    "size": 72364
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/4-min-1-11zon-1-1080.494ffd5cfd.webp",
+    "size": 151524
+   },
+   {
+    "w": 1440,
+    "src": "/assets/img/4-min-1-11zon-1-1440.7081f487f8.webp",
+    "size": 292496
+   }
+  ],
+  "src": "/assets/img/4-min-1-11zon-1-1440.7081f487f8.webp",
+  "inSize": 258869,
+  "outSize": 536880
+ },
+ "https://static.tildacdn.com/tild3037-3739-4136-a638-623230303333/Industrial_MacBook_A.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/industrial-macbook-a-360.5229b5bb96.avif",
+    "size": 10171
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/industrial-macbook-a-720.138a40c42e.avif",
+    "size": 27121
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/industrial-macbook-a-1080.ca2fab4b7f.avif",
+    "size": 48358
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/industrial-macbook-a-1680.b7420d8eab.avif",
+    "size": 97313
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/industrial-macbook-a-360.b893918f3a.webp",
+    "size": 13504
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/industrial-macbook-a-720.6d3b8eb0df.webp",
+    "size": 36710
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/industrial-macbook-a-1080.9fd381fce7.webp",
+    "size": 64976
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/industrial-macbook-a-1680.ef9f00e03b.webp",
+    "size": 126494
+   }
+  ],
+  "src": "/assets/img/industrial-macbook-a-1680.ef9f00e03b.webp",
+  "inSize": 208997,
+  "outSize": 223807
+ },
+ "https://static.tildacdn.com/tild6265-6665-4031-b464-313938313665/Macbook_Air_M2_Mocku.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-m2-mocku-360.3fb10c0f9d.avif",
+    "size": 8628
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-m2-mocku-720.755c378b9c.avif",
+    "size": 23416
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-m2-mocku-1080.f5e51254b2.avif",
+    "size": 38714
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-m2-mocku-1680.66ba211b9b.avif",
+    "size": 73481
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-m2-mocku-360.de35c701e7.webp",
+    "size": 11844
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-m2-mocku-720.f7eed903e8.webp",
+    "size": 32338
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-m2-mocku-1080.d380d9bb07.webp",
+    "size": 56618
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-m2-mocku-1680.5395250b51.webp",
+    "size": 105382
+   }
+  ],
+  "src": "/assets/img/macbook-air-m2-mocku-1680.5395250b51.webp",
+  "inSize": 174785,
+  "outSize": 178863
+ },
+ "https://static.tildacdn.com/tild3032-6533-4961-b830-656235626161/__-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-360.8423d0d942.avif",
+    "size": 7672
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-720.f8b6866a29.avif",
+    "size": 23625
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-1080.438a141659.avif",
+    "size": 43504
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/min-1680.76bb5a668b.avif",
+    "size": 88778
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-360.e5f7670d0d.webp",
+    "size": 9996
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-720.4961693d38.webp",
+    "size": 31042
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-1080.f76f4b3c74.webp",
+    "size": 58000
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/min-1680.169931dfbb.webp",
+    "size": 116050
+   }
+  ],
+  "src": "/assets/img/min-1680.169931dfbb.webp",
+  "inSize": 191572,
+  "outSize": 204828
+ },
+ "https://static.tildacdn.com/tild3138-3338-4332-a138-303233393135/7887-min_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7887-min-1-360.97f28201f7.avif",
+    "size": 3047
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7887-min-1-720.4c165eb530.avif",
+    "size": 9776
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7887-min-1-1080.42c3512c9d.avif",
+    "size": 16726
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/7887-min-1-1620.0aef342644.avif",
+    "size": 26243
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/7887-min-1-1920.dfcebc0ffc.avif",
+    "size": 33111
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7887-min-1-360.43b6b5e2b1.webp",
+    "size": 3790
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7887-min-1-720.c8fafbd9b5.webp",
+    "size": 12118
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7887-min-1-1080.59dfa1bcd8.webp",
+    "size": 23128
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/7887-min-1-1620.6fa7054cbc.webp",
+    "size": 37838
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/7887-min-1-1920.be28679f5f.webp",
+    "size": 45560
+   }
+  ],
+  "src": "/assets/img/7887-min-1-1920.be28679f5f.webp",
+  "inSize": 71262,
+  "outSize": 78671
+ },
+ "https://static.tildacdn.com/tild3236-6236-4963-a435-336334303162/D0B3D0B5D0BED0B3D180.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 800,
+  "h": 1200,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0b3d0b5d0bed0b3d180-360.c6e76caed8.avif",
+    "size": 24116
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0b3d0b5d0bed0b3d180-720.fb1d8192aa.avif",
+    "size": 65613
+   },
+   {
+    "w": 800,
+    "src": "/assets/img/d0b3d0b5d0bed0b3d180-800.0a938a0af5.avif",
+    "size": 83351
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0b3d0b5d0bed0b3d180-360.134d354bd1.webp",
+    "size": 33718
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0b3d0b5d0bed0b3d180-720.f9c4102ec6.webp",
+    "size": 90620
+   },
+   {
+    "w": 800,
+    "src": "/assets/img/d0b3d0b5d0bed0b3d180-800.d580776dfa.webp",
+    "size": 108828
+   }
+  ],
+  "src": "/assets/img/d0b3d0b5d0bed0b3d180-800.d580776dfa.webp",
+  "inSize": 170343,
+  "outSize": 192179
+ },
+ "https://static.tildacdn.com/tild3362-6530-4634-b031-383735333362/Frame206.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 2123,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame206-360.a4ae66bfef.avif",
+    "size": 9778
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame206-720.ae4c1af1da.avif",
+    "size": 24720
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame206-1080.b73d79c346.avif",
+    "size": 39650
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/frame206-1680.cf81931288.avif",
+    "size": 73509
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame206-360.d519247301.webp",
+    "size": 12962
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame206-720.2d30807e2c.webp",
+    "size": 33400
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame206-1080.77937e4cc8.webp",
+    "size": 54168
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/frame206-1680.a3e6485837.webp",
+    "size": 95830
+   }
+  ],
+  "src": "/assets/img/frame206-1680.a3e6485837.webp",
+  "inSize": 241477,
+  "outSize": 169339
+ },
+ "https://static.tildacdn.com/tild6137-6237-4334-b762-663331653439/D0A2D09B201.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 800,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0a2d09b201-360.a1acba63c0.avif",
+    "size": 5332
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0a2d09b201-720.94ac5a0b28.avif",
+    "size": 15542
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0a2d09b201-1080.8b69369734.avif",
+    "size": 27955
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/d0a2d09b201-1200.2bb86c9cb1.avif",
+    "size": 33987
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0a2d09b201-360.cb79301935.webp",
+    "size": 8182
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0a2d09b201-720.fa25af327b.webp",
+    "size": 24978
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0a2d09b201-1080.37334e12e4.webp",
+    "size": 45906
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/d0a2d09b201-1200.ed37f71755.webp",
+    "size": 55362
+   }
+  ],
+  "src": "/assets/img/d0a2d09b201-1200.ed37f71755.webp",
+  "inSize": 190384,
+  "outSize": 89349
+ },
+ "https://static.tildacdn.com/tild3331-3065-4566-a666-326238626439/image20291.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image20291-360.091a05dccd.avif",
+    "size": 6724
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image20291-720.9d0dd4d0c7.avif",
+    "size": 14454
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image20291-1080.40ae24856e.avif",
+    "size": 21647
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image20291-1620.e2b8ae91d6.avif",
+    "size": 34932
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image20291-1920.71f9841fa6.avif",
+    "size": 42420
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image20291-360.8cbd7c2b1d.webp",
+    "size": 8594
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image20291-720.b39b0f1fbc.webp",
+    "size": 19002
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image20291-1080.51cdf6eb42.webp",
+    "size": 29028
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image20291-1620.bc7b3e1d75.webp",
+    "size": 47216
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image20291-1920.23ef75c5a7.webp",
+    "size": 55120
+   }
+  ],
+  "src": "/assets/img/image20291-1920.23ef75c5a7.webp",
+  "inSize": 96134,
+  "outSize": 97540
+ },
+ "https://static.tildacdn.com/tild6538-3364-4038-a566-343237316434/image2028.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 987,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2028-360.abe3e6f7c8.avif",
+    "size": 6983
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2028-720.04c3063add.avif",
+    "size": 19358
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2028-1080.8b82a0d788.avif",
+    "size": 34987
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/image2028-1680.4f796f4c26.avif",
+    "size": 73193
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2028-360.ef2b2840e0.webp",
+    "size": 8410
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2028-720.54643043d4.webp",
+    "size": 23272
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2028-1080.ffa9d0c4f6.webp",
+    "size": 43176
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/image2028-1680.50397f3649.webp",
+    "size": 87270
+   }
+  ],
+  "src": "/assets/img/image2028-1680.50397f3649.webp",
+  "inSize": 180818,
+  "outSize": 160463
+ },
+ "https://static.tildacdn.com/tild6435-6666-4663-a437-346633303265/_1jpg.webp": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1jpg-360.25d33bd333.avif",
+    "size": 12011
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1jpg-720.13e3734bd3.avif",
+    "size": 37949
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1jpg-1080.1f942a5c30.avif",
+    "size": 71446
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1jpg-1680.fc1b4e0bf8.avif",
+    "size": 138101
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1jpg-360.cedf708540.webp",
+    "size": 15704
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1jpg-720.732eff840c.webp",
+    "size": 47686
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1jpg-1080.699108aeb7.webp",
+    "size": 88748
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1jpg-1680.dc66ef56d1.webp",
+    "size": 166214
+   }
+  ],
+  "src": "/assets/img/1jpg-1680.dc66ef56d1.webp",
+  "inSize": 151414,
+  "outSize": 304315
+ },
+ "https://static.tildacdn.com/tild6535-3431-4564-b762-316531616232/cssda-wotd-black.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 220,
+  "h": 220,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 220,
+    "src": "/assets/img/cssda-wotd-black-220.2032394fb7.avif",
+    "size": 4889
+   }
+  ],
+  "webp": [
+   {
+    "w": 220,
+    "src": "/assets/img/cssda-wotd-black-220.d89e62fba8.webp",
+    "size": 6124
+   }
+  ],
+  "src": "/assets/img/cssda-wotd-black-220.d89e62fba8.webp",
+  "inSize": 7453,
+  "outSize": 11013
+ },
+ "https://static.tildacdn.com/tild3363-3932-4634-b432-373839633538/Frame_1321316731.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 642,
+  "h": 489,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316731-360.4259617c3b.avif",
+    "size": 1724
+   },
+   {
+    "w": 642,
+    "src": "/assets/img/frame-1321316731-642.d6276662ef.avif",
+    "size": 2470
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316731-360.3d73412160.webp",
+    "size": 1802
+   },
+   {
+    "w": 642,
+    "src": "/assets/img/frame-1321316731-642.5d4833a2b2.webp",
+    "size": 2934
+   }
+  ],
+  "src": "/assets/img/frame-1321316731-642.5d4833a2b2.webp",
+  "inSize": 14154,
+  "outSize": 5404
+ },
+ "https://static.tildacdn.com/tild3037-6239-4866-b861-613965346466/8.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/8-360.2eac9ea33d.avif",
+    "size": 6512
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/8-720.1d3b40b055.avif",
+    "size": 11337
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/8-954.b43f41945c.avif",
+    "size": 9920
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/8-360.86a01a8e19.webp",
+    "size": 8258
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/8-720.8800e58bc8.webp",
+    "size": 16652
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/8-954.070c03a2be.webp",
+    "size": 7890
+   }
+  ],
+  "src": "/assets/img/8-954.070c03a2be.webp",
+  "inSize": 6695,
+  "outSize": 17810
+ },
+ "https://static.tildacdn.com/tild3035-6531-4266-b933-323535383835/7.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7-360.351282315a.avif",
+    "size": 6081
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7-720.4d90e1760c.avif",
+    "size": 14269
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/7-954.7f5fb926c0.avif",
+    "size": 17853
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7-360.df9c71bdc5.webp",
+    "size": 8330
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7-720.00a460c0cf.webp",
+    "size": 21950
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/7-954.42c641f2c6.webp",
+    "size": 25580
+   }
+  ],
+  "src": "/assets/img/7-954.42c641f2c6.webp",
+  "inSize": 54604,
+  "outSize": 43433
+ },
+ "https://static.tildacdn.com/tild3264-6263-4335-a639-366139613334/Depositphotos_179322.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 943,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/depositphotos-179322-360.95f0b11a90.avif",
+    "size": 17180
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/depositphotos-179322-720.74a665f8d7.avif",
+    "size": 61639
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/depositphotos-179322-1080.f2adf09305.avif",
+    "size": 124415
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/depositphotos-179322-1680.e5bcadb014.avif",
+    "size": 286725
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/depositphotos-179322-360.0013421de6.webp",
+    "size": 23694
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/depositphotos-179322-720.3f7ca19b53.webp",
+    "size": 81370
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/depositphotos-179322-1080.a559e36bed.webp",
+    "size": 169790
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/depositphotos-179322-1680.c8f8f1d33f.webp",
+    "size": 369024
+   }
+  ],
+  "src": "/assets/img/depositphotos-179322-1680.c8f8f1d33f.webp",
+  "inSize": 547703,
+  "outSize": 655749
+ },
+ "https://static.tildacdn.com/tild3866-6561-4631-a430-376532623165/Bus_Stop_Billboard_M.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1163,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bus-stop-billboard-m-360.747f0cba92.avif",
+    "size": 11301
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bus-stop-billboard-m-720.273630a2d5.avif",
+    "size": 32581
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bus-stop-billboard-m-1080.123edda4fd.avif",
+    "size": 58971
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/bus-stop-billboard-m-1680.1e599ba4aa.avif",
+    "size": 121426
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bus-stop-billboard-m-360.221d4ff807.webp",
+    "size": 17000
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bus-stop-billboard-m-720.8ed543219a.webp",
+    "size": 45996
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bus-stop-billboard-m-1080.216b129dad.webp",
+    "size": 82090
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/bus-stop-billboard-m-1680.4f3e31f73d.webp",
+    "size": 159260
+   }
+  ],
+  "src": "/assets/img/bus-stop-billboard-m-1680.4f3e31f73d.webp",
+  "inSize": 259735,
+  "outSize": 280686
+ },
+ "https://static.tildacdn.com/tild3436-3062-4332-a634-343735366130/image2029.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2029-360.a1161c6c9d.avif",
+    "size": 5328
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2029-720.5cec57b6f4.avif",
+    "size": 13742
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2029-1080.1de6c91b4a.avif",
+    "size": 24786
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2029-1620.832dc48642.avif",
+    "size": 47230
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2029-1920.9bd0f201fd.avif",
+    "size": 80192
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2029-360.33ecbe5af3.webp",
+    "size": 9942
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2029-720.3c70d5977f.webp",
+    "size": 28432
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2029-1080.a467c59f29.webp",
+    "size": 60258
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2029-1620.15de0d5d01.webp",
+    "size": 141444
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2029-1920.cfee10842f.webp",
+    "size": 111814
+   }
+  ],
+  "src": "/assets/img/image2029-1920.cfee10842f.webp",
+  "inSize": 202604,
+  "outSize": 192006
+ },
+ "https://static.tildacdn.com/tild6461-6564-4539-b036-633366393132/_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.2b19143504.avif",
+    "size": 10201
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.e940ee5be8.avif",
+    "size": 25940
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.44456e98af.avif",
+    "size": 44403
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1-1680.5f553dcef4.avif",
+    "size": 84152
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.2f84eca2d5.webp",
+    "size": 14428
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.66f54de33a.webp",
+    "size": 34646
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.8a21f6cf97.webp",
+    "size": 56924
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1-1680.8b3df4817e.webp",
+    "size": 103944
+   }
+  ],
+  "src": "/assets/img/1-1680.8b3df4817e.webp",
+  "inSize": 181948,
+  "outSize": 188096
+ },
+ "https://static.tildacdn.com/tild3161-6634-4532-a635-303863323162/D09ED0B1D0BBD0BED0B6.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-360.f3354bd0bb.avif",
+    "size": 10199
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-720.55212668dd.avif",
+    "size": 30056
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-1080.308a03f197.avif",
+    "size": 53470
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-1680.26d08c4103.avif",
+    "size": 112294
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-360.e61aa71284.webp",
+    "size": 14600
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-720.d0f8fb8b89.webp",
+    "size": 42476
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-1080.756c0011e0.webp",
+    "size": 76686
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/d09ed0b1d0bbd0bed0b6-1680.a9132476ea.webp",
+    "size": 148686
+   }
+  ],
+  "src": "/assets/img/d09ed0b1d0bbd0bed0b6-1680.a9132476ea.webp",
+  "inSize": 292552,
+  "outSize": 260980
+ },
+ "https://static.tildacdn.com/tild3436-6332-4137-a131-646532643137/_4-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1440,
+  "h": 876,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-min-360.d064cd1c79.avif",
+    "size": 17489
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-min-720.a8c12f5f8a.avif",
+    "size": 51150
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/4-min-1080.b3d9ef1fb7.avif",
+    "size": 97002
+   },
+   {
+    "w": 1440,
+    "src": "/assets/img/4-min-1440.c5cb97a594.avif",
+    "size": 203607
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-min-360.50ad50dfc3.webp",
+    "size": 22714
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-min-720.9dbef3444e.webp",
+    "size": 71152
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/4-min-1080.f273002d75.webp",
+    "size": 142284
+   },
+   {
+    "w": 1440,
+    "src": "/assets/img/4-min-1440.1737bcf1b0.webp",
+    "size": 267114
+   }
+  ],
+  "src": "/assets/img/4-min-1440.1737bcf1b0.webp",
+  "inSize": 468950,
+  "outSize": 470721
+ },
+ "https://static.tildacdn.com/tild3132-3466-4531-b138-663962643434/_2_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1600,
+  "h": 1704,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-1-360.e93f1d3140.avif",
+    "size": 7206
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-1-720.d0ef38ece5.avif",
+    "size": 16749
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1-1080.d597bc8f64.avif",
+    "size": 28121
+   },
+   {
+    "w": 1600,
+    "src": "/assets/img/2-1-1600.e7951225fc.avif",
+    "size": 43718
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-1-360.c3ede20e9d.webp",
+    "size": 8026
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-1-720.5f153730de.webp",
+    "size": 18824
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1-1080.d02ccf061c.webp",
+    "size": 30702
+   },
+   {
+    "w": 1600,
+    "src": "/assets/img/2-1-1600.8f505361f3.webp",
+    "size": 50166
+   }
+  ],
+  "src": "/assets/img/2-1-1600.8f505361f3.webp",
+  "inSize": 56898,
+  "outSize": 93884
+ },
+ "https://static.tildacdn.com/tild6465-3063-4633-a531-616435323565/Frame_6757820_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 890,
+  "h": 1180,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757820-1-360.eb19a1cd91.avif",
+    "size": 22241
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757820-1-720.8cdc282928.avif",
+    "size": 53225
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/frame-6757820-1-890.54a4e02182.avif",
+    "size": 69460
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757820-1-360.99bd6ab9b0.webp",
+    "size": 28616
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757820-1-720.34f3b6db22.webp",
+    "size": 67176
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/frame-6757820-1-890.dda1bc3d9d.webp",
+    "size": 87190
+   }
+  ],
+  "src": "/assets/img/frame-6757820-1-890.dda1bc3d9d.webp",
+  "inSize": 832985,
+  "outSize": 156650
+ },
+ "https://static.tildacdn.com/tild6538-6331-4466-b835-343366633164/11.svg": {
+  "kind": "svg",
+  "src": "/assets/img/11.728b21428e.svg",
+  "w": 230,
+  "h": 161,
+  "inSize": 686,
+  "outSize": 565
+ },
+ "https://static.tildacdn.com/tild3165-6239-4539-b335-653365363764/Frame_48.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-48-360.86fbf698a5.avif",
+    "size": 6730
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-48-720.4c712b0a4e.avif",
+    "size": 17716
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-48-1080.3e853dc6a8.avif",
+    "size": 31946
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/frame-48-1680.b8ac50c684.avif",
+    "size": 70233
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-48-360.d43db33931.webp",
+    "size": 7330
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-48-720.8ee5e44fa6.webp",
+    "size": 18646
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-48-1080.4b3b7e8aaf.webp",
+    "size": 34554
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/frame-48-1680.656f2ecac7.webp",
+    "size": 73218
+   }
+  ],
+  "src": "/assets/img/frame-48-1680.656f2ecac7.webp",
+  "inSize": 173498,
+  "outSize": 143451
+ },
+ "https://static.tildacdn.com/tild6436-3032-4835-a661-383536643832/bitrix_certificate__.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1686,
+  "h": 2371,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bitrix-certificate-360.64619e7fdb.avif",
+    "size": 11276
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bitrix-certificate-720.21a93efb24.avif",
+    "size": 26411
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bitrix-certificate-1080.2f6626ac70.avif",
+    "size": 41740
+   },
+   {
+    "w": 1686,
+    "src": "/assets/img/bitrix-certificate-1686.a5e9dcf91c.avif",
+    "size": 64713
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bitrix-certificate-360.c60d937cdd.webp",
+    "size": 14196
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bitrix-certificate-720.25edbfa42f.webp",
+    "size": 36788
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bitrix-certificate-1080.e14417b08a.webp",
+    "size": 62222
+   },
+   {
+    "w": 1686,
+    "src": "/assets/img/bitrix-certificate-1686.efd9472cab.webp",
+    "size": 110794
+   }
+  ],
+  "src": "/assets/img/bitrix-certificate-1686.efd9472cab.webp",
+  "inSize": 306669,
+  "outSize": 175507
+ },
+ "https://static.tildacdn.com/tild3134-3838-4330-b261-323365333963/__1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1119,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.eb5c6dfe5d.avif",
+    "size": 17381
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.fe2baf4b7d.avif",
+    "size": 55601
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.aa7559b85c.avif",
+    "size": 111886
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1-1680.57d0b48697.avif",
+    "size": 251091
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.c3b532f19d.webp",
+    "size": 23324
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.066620e9a7.webp",
+    "size": 78656
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.ceaedd8206.webp",
+    "size": 155314
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/1-1680.7b3b88ab11.webp",
+    "size": 332168
+   }
+  ],
+  "src": "/assets/img/1-1680.7b3b88ab11.webp",
+  "inSize": 426151,
+  "outSize": 583259
+ },
+ "https://static.tildacdn.com/tild3338-6366-4636-b535-383161303866/case.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2091,
+  "h": 1358,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/case-360.9e9bb5bf25.avif",
+    "size": 9292
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/case-720.9574745926.avif",
+    "size": 25613
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/case-1080.c1673a1fee.avif",
+    "size": 44553
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/case-1620.87d17c13cf.avif",
+    "size": 75554
+   },
+   {
+    "w": 2091,
+    "src": "/assets/img/case-2091.da726e3890.avif",
+    "size": 116020
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/case-360.6323a568cb.webp",
+    "size": 12378
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/case-720.1fad988ba6.webp",
+    "size": 35022
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/case-1080.05bd2ef772.webp",
+    "size": 60310
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/case-1620.eeb62bf3f6.webp",
+    "size": 101398
+   },
+   {
+    "w": 2091,
+    "src": "/assets/img/case-2091.623de68858.webp",
+    "size": 138814
+   }
+  ],
+  "src": "/assets/img/case-2091.623de68858.webp",
+  "inSize": 206756,
+  "outSize": 254834
+ },
+ "https://static.tildacdn.com/tild6661-3134-4738-b031-623233316237/Rectangle_1_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/rectangle-1-11zon-360.b0d013a50d.avif",
+    "size": 10268
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/rectangle-1-11zon-720.e768f1a87c.avif",
+    "size": 33191
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/rectangle-1-11zon-1080.55ad6ae3fd.avif",
+    "size": 61649
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/rectangle-1-11zon-1620.6c3e8b53db.avif",
+    "size": 115946
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/rectangle-1-11zon-1920.c1f7780d39.avif",
+    "size": 127764
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/rectangle-1-11zon-360.71f23c2c8f.webp",
+    "size": 13360
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/rectangle-1-11zon-720.b49d4003b6.webp",
+    "size": 41962
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/rectangle-1-11zon-1080.3014dae700.webp",
+    "size": 80086
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/rectangle-1-11zon-1620.714f186652.webp",
+    "size": 150276
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/rectangle-1-11zon-1920.f72c3830a5.webp",
+    "size": 182672
+   }
+  ],
+  "src": "/assets/img/rectangle-1-11zon-1920.f72c3830a5.webp",
+  "inSize": 137778,
+  "outSize": 310436
+ },
+ "https://static.tildacdn.com/tild3232-3431-4164-a362-373962653436/christian-harb-76yzy.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1050,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/christian-harb-76yzy-360.a57ce2b5cf.avif",
+    "size": 11521
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/christian-harb-76yzy-720.95d74762bf.avif",
+    "size": 35935
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/christian-harb-76yzy-1080.9d1dc59532.avif",
+    "size": 69179
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/christian-harb-76yzy-1680.0ce707f7a4.avif",
+    "size": 142580
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/christian-harb-76yzy-360.d715172f98.webp",
+    "size": 14294
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/christian-harb-76yzy-720.46b5a8ffbd.webp",
+    "size": 47538
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/christian-harb-76yzy-1080.0f34a636dc.webp",
+    "size": 93332
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/christian-harb-76yzy-1680.e42acfdf94.webp",
+    "size": 188554
+   }
+  ],
+  "src": "/assets/img/christian-harb-76yzy-1680.e42acfdf94.webp",
+  "inSize": 260090,
+  "outSize": 331134
+ },
+ "https://static.tildacdn.com/tild3732-3366-4163-b837-623964393437/Magazine20Mockup2042.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1800,
+  "h": 1238,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/magazine20mockup2042-360.411437b43a.avif",
+    "size": 4458
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/magazine20mockup2042-720.84c13fe67b.avif",
+    "size": 13453
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/magazine20mockup2042-1080.9d35b9d027.avif",
+    "size": 23919
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/magazine20mockup2042-1620.c0e37681db.avif",
+    "size": 42691
+   },
+   {
+    "w": 1800,
+    "src": "/assets/img/magazine20mockup2042-1800.177d3842ad.avif",
+    "size": 52058
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/magazine20mockup2042-360.80f6da0e16.webp",
+    "size": 5528
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/magazine20mockup2042-720.857871c7a4.webp",
+    "size": 16882
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/magazine20mockup2042-1080.06f32e29e4.webp",
+    "size": 30830
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/magazine20mockup2042-1620.6bfba1604c.webp",
+    "size": 53918
+   },
+   {
+    "w": 1800,
+    "src": "/assets/img/magazine20mockup2042-1800.43691ac6d9.webp",
+    "size": 62758
+   }
+  ],
+  "src": "/assets/img/magazine20mockup2042-1800.43691ac6d9.webp",
+  "inSize": 81321,
+  "outSize": 114816
+ },
+ "https://static.tildacdn.com/tild3162-3665-4166-b734-643432626365/Rectangle_240651026_.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/rectangle-240651026-360.18e02ea2ff.avif",
+    "size": 12225
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/rectangle-240651026-720.4e9dad64b6.avif",
+    "size": 42343
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/rectangle-240651026-1080.dbb1fd36d2.avif",
+    "size": 78614
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/rectangle-240651026-1620.42147414ec.avif",
+    "size": 138052
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/rectangle-240651026-1920.c5bbe66a19.avif",
+    "size": 153224
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/rectangle-240651026-360.6947e9890c.webp",
+    "size": 16012
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/rectangle-240651026-720.49c6f31ad3.webp",
+    "size": 55168
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/rectangle-240651026-1080.945a1e9c97.webp",
+    "size": 103480
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/rectangle-240651026-1620.ed896b1791.webp",
+    "size": 182362
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/rectangle-240651026-1920.ab2c2832a4.webp",
+    "size": 216976
+   }
+  ],
+  "src": "/assets/img/rectangle-240651026-1920.ab2c2832a4.webp",
+  "inSize": 159464,
+  "outSize": 370200
+ },
+ "https://static.tildacdn.com/tild3930-6461-4261-a166-396461633930/bc421925-aa57-4904-a.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1194,
+  "h": 486,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bc421925-aa57-4904-a-360.3f0e03ff0b.avif",
+    "size": 10307
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bc421925-aa57-4904-a-720.0e5f909225.avif",
+    "size": 33957
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bc421925-aa57-4904-a-1080.7c18e8b4dd.avif",
+    "size": 68228
+   },
+   {
+    "w": 1194,
+    "src": "/assets/img/bc421925-aa57-4904-a-1194.18f872fe06.avif",
+    "size": 80650
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bc421925-aa57-4904-a-360.15ded6ae1b.webp",
+    "size": 18808
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bc421925-aa57-4904-a-720.9ea8768f96.webp",
+    "size": 71826
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bc421925-aa57-4904-a-1080.9338f7b33a.webp",
+    "size": 148254
+   },
+   {
+    "w": 1194,
+    "src": "/assets/img/bc421925-aa57-4904-a-1194.33df18f917.webp",
+    "size": 142910
+   }
+  ],
+  "src": "/assets/img/bc421925-aa57-4904-a-1194.33df18f917.webp",
+  "inSize": 54316,
+  "outSize": 223560
+ },
+ "https://static.tildacdn.com/tild3763-3830-4135-a563-376565353435/7.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1041,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7-360.6e327d1995.avif",
+    "size": 8460
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7-720.b1dbc83f64.avif",
+    "size": 25987
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7-1080.00885e031f.avif",
+    "size": 48178
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/7-1680.8ed5e9c1c9.avif",
+    "size": 98539
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7-360.dac43aba74.webp",
+    "size": 10660
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7-720.339d43bee6.webp",
+    "size": 31394
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7-1080.a36cb6f4e8.webp",
+    "size": 57476
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/7-1680.acb55d69a4.webp",
+    "size": 111228
+   }
+  ],
+  "src": "/assets/img/7-1680.acb55d69a4.webp",
+  "inSize": 235661,
+  "outSize": 209767
+ },
+ "https://static.tildacdn.com/tild3038-6234-4339-a466-643631613538/PS1D_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/ps1d-11zon-360.2c89ec27f3.avif",
+    "size": 9788
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/ps1d-11zon-720.7dd656a34e.avif",
+    "size": 32310
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/ps1d-11zon-1080.6e3d3d1c78.avif",
+    "size": 64335
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/ps1d-11zon-1680.f9dd93f667.avif",
+    "size": 145113
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/ps1d-11zon-360.d9269e2805.webp",
+    "size": 12748
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/ps1d-11zon-720.008bf9ee4f.webp",
+    "size": 41366
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/ps1d-11zon-1080.9d38653158.webp",
+    "size": 81022
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/ps1d-11zon-1680.e1b0346e7b.webp",
+    "size": 172130
+   }
+  ],
+  "src": "/assets/img/ps1d-11zon-1680.e1b0346e7b.webp",
+  "inSize": 260808,
+  "outSize": 317243
+ },
+ "https://static.tildacdn.com/tild3330-3663-4066-b366-383734386239/1.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 914,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.40efc5650c.avif",
+    "size": 4069
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.112941dfe0.avif",
+    "size": 7511
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.49cee66c30.avif",
+    "size": 10760
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/1-1200.7e5a501611.avif",
+    "size": 10600
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.4492aeea28.webp",
+    "size": 5462
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.e845267d3a.webp",
+    "size": 11166
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.568d2b405d.webp",
+    "size": 16514
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/1-1200.3987151463.webp",
+    "size": 18220
+   }
+  ],
+  "src": "/assets/img/1-1200.3987151463.webp",
+  "inSize": 102972,
+  "outSize": 28820
+ },
+ "https://static.tildacdn.com/tild6233-3766-4565-b837-623432326464/D0BFD180D0B5D0BBD0BE.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1420,
+  "h": 933,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-360.8badb460eb.avif",
+    "size": 16034
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-720.bec73ab62e.avif",
+    "size": 41961
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-1080.7c7d1100b9.avif",
+    "size": 71119
+   },
+   {
+    "w": 1420,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-1420.34905ff691.avif",
+    "size": 106008
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-360.fba8253da5.webp",
+    "size": 21054
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-720.6a0f1626af.webp",
+    "size": 65192
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-1080.744b6b06d4.webp",
+    "size": 119476
+   },
+   {
+    "w": 1420,
+    "src": "/assets/img/d0bfd180d0b5d0bbd0be-1420.f04e94559b.webp",
+    "size": 182924
+   }
+  ],
+  "src": "/assets/img/d0bfd180d0b5d0bbd0be-1420.f04e94559b.webp",
+  "inSize": 1753917,
+  "outSize": 288932
+ },
+ "https://static.tildacdn.com/tild3639-3166-4735-b331-353330303338/2.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 914,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.fd1bae3cd9.avif",
+    "size": 3591
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.17e4c1e2c9.avif",
+    "size": 7127
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1080.07abb8d2e0.avif",
+    "size": 10839
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/2-1200.dea8cee804.avif",
+    "size": 12023
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.3c5fd3c820.webp",
+    "size": 5362
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.71a312eafa.webp",
+    "size": 11102
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1080.188393089c.webp",
+    "size": 16718
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/2-1200.eb959ff05a.webp",
+    "size": 18916
+   }
+  ],
+  "src": "/assets/img/2-1200.eb959ff05a.webp",
+  "inSize": 164725,
+  "outSize": 30939
+ },
+ "https://static.tildacdn.com/tild3832-3833-4335-a661-613439643830/_-min_2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-2-360.43a6de65dd.avif",
+    "size": 7709
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-2-720.75f7242a8b.avif",
+    "size": 21852
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-2-1080.a687fe4252.avif",
+    "size": 39215
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/min-2-1620.c4e36464fb.avif",
+    "size": 68564
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/min-2-1920.777e1f8fb3.avif",
+    "size": 89154
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-2-360.0896d0f463.webp",
+    "size": 10352
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-2-720.24c9dde79c.webp",
+    "size": 29018
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-2-1080.31e09f1703.webp",
+    "size": 54184
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/min-2-1620.6d1f92b930.webp",
+    "size": 95928
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/min-2-1920.a620b70428.webp",
+    "size": 121704
+   }
+  ],
+  "src": "/assets/img/min-2-1920.a620b70428.webp",
+  "inSize": 214529,
+  "outSize": 210858
+ },
+ "https://static.tildacdn.com/tild6231-6261-4139-a434-396532643761/4.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 914,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-360.54c22ce93e.avif",
+    "size": 3309
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-720.3f61cf6058.avif",
+    "size": 6623
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/4-1080.29fae5bd86.avif",
+    "size": 10266
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/4-1200.4fbd5f4900.avif",
+    "size": 11481
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-360.bff17e9ef6.webp",
+    "size": 4700
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-720.86c39e839a.webp",
+    "size": 9682
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/4-1080.9f93651f8f.webp",
+    "size": 15156
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/4-1200.05d5c93954.webp",
+    "size": 17028
+   }
+  ],
+  "src": "/assets/img/4-1200.05d5c93954.webp",
+  "inSize": 40720,
+  "outSize": 28509
+ },
+ "https://static.tildacdn.com/tild3839-3731-4930-a632-333339323839/5.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 914,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-360.7d0f3dab18.avif",
+    "size": 4584
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-720.1151824f64.avif",
+    "size": 9066
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-1080.67f81bf84f.avif",
+    "size": 13221
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/5-1200.8f07eab710.avif",
+    "size": 12676
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-360.f9efc36019.webp",
+    "size": 7116
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-720.9e7181c51f.webp",
+    "size": 14164
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-1080.c0baac87a0.webp",
+    "size": 21258
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/5-1200.6f6b7722c2.webp",
+    "size": 23712
+   }
+  ],
+  "src": "/assets/img/5-1200.6f6b7722c2.webp",
+  "inSize": 15968,
+  "outSize": 36388
+ },
+ "https://static.tildacdn.com/tild3536-3763-4165-b766-656462343963/image_266.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 886,
+  "h": 1411,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-266-360.21da3cc114.avif",
+    "size": 29064
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-266-720.24250d1241.avif",
+    "size": 80835
+   },
+   {
+    "w": 886,
+    "src": "/assets/img/image-266-886.507aec60ca.avif",
+    "size": 111578
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-266-360.d9970676eb.webp",
+    "size": 50030
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-266-720.a22ee34976.webp",
+    "size": 163678
+   },
+   {
+    "w": 886,
+    "src": "/assets/img/image-266-886.e542f83421.webp",
+    "size": 227336
+   }
+  ],
+  "src": "/assets/img/image-266-886.e542f83421.webp",
+  "inSize": 905196,
+  "outSize": 338914
+ },
+ "https://static.tildacdn.com/tild3439-3865-4333-b061-666638323764/bc421925-aa57-4904-a.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1838,
+  "h": 1336,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bc421925-aa57-4904-a-360.470c785583.avif",
+    "size": 13352
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bc421925-aa57-4904-a-720.a8df97e574.avif",
+    "size": 41904
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bc421925-aa57-4904-a-1080.dff67c6a7d.avif",
+    "size": 86039
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/bc421925-aa57-4904-a-1620.ab7a1da75d.avif",
+    "size": 177161
+   },
+   {
+    "w": 1838,
+    "src": "/assets/img/bc421925-aa57-4904-a-1838.b5f3c258fc.avif",
+    "size": 228682
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bc421925-aa57-4904-a-360.ac7dbd4ac7.webp",
+    "size": 26106
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bc421925-aa57-4904-a-720.d0afaefad8.webp",
+    "size": 92150
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bc421925-aa57-4904-a-1080.78b66fe249.webp",
+    "size": 209820
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/bc421925-aa57-4904-a-1620.7f348df459.webp",
+    "size": 451524
+   },
+   {
+    "w": 1838,
+    "src": "/assets/img/bc421925-aa57-4904-a-1838.8371380d49.webp",
+    "size": 498668
+   }
+  ],
+  "src": "/assets/img/bc421925-aa57-4904-a-1838.8371380d49.webp",
+  "inSize": 666504,
+  "outSize": 727350
+ },
+ "https://static.tildacdn.com/tild3132-3364-4762-a633-643961363030/3.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 914,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.d637e9b434.avif",
+    "size": 4305
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.06a4763c72.avif",
+    "size": 7911
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1080.7197dce04c.avif",
+    "size": 11654
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/3-1200.363c147b31.avif",
+    "size": 11204
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.4379a4ac68.webp",
+    "size": 5558
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.eb16ae48c8.webp",
+    "size": 11278
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1080.16bcc758c2.webp",
+    "size": 16970
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/3-1200.d2f92c0f24.webp",
+    "size": 18386
+   }
+  ],
+  "src": "/assets/img/3-1200.d2f92c0f24.webp",
+  "inSize": 116627,
+  "outSize": 29590
+ },
+ "https://static.tildacdn.com/tild6264-3766-4561-b863-626430613566/image_267.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 910,
+  "h": 1393,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-267-360.6d3be5c787.avif",
+    "size": 31050
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-267-720.4b15de554b.avif",
+    "size": 82867
+   },
+   {
+    "w": 910,
+    "src": "/assets/img/image-267-910.6b03cae877.avif",
+    "size": 116907
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-267-360.17ba086e13.webp",
+    "size": 50646
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-267-720.e460b6c39b.webp",
+    "size": 166970
+   },
+   {
+    "w": 910,
+    "src": "/assets/img/image-267-910.cfc390340a.webp",
+    "size": 247888
+   }
+  ],
+  "src": "/assets/img/image-267-910.cfc390340a.webp",
+  "inSize": 1309890,
+  "outSize": 364795
+ },
+ "https://static.tildacdn.com/tild6563-3763-4961-b133-626364656564/image_267.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1316,
+  "h": 458,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-267-360.d691aeaab6.avif",
+    "size": 9072
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-267-720.1a762f5882.avif",
+    "size": 27087
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image-267-1080.91e23249a0.avif",
+    "size": 50026
+   },
+   {
+    "w": 1316,
+    "src": "/assets/img/image-267-1316.171ec5d1b7.avif",
+    "size": 67222
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-267-360.efbacff25c.webp",
+    "size": 14250
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-267-720.eda1730060.webp",
+    "size": 49008
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image-267-1080.d8b146af63.webp",
+    "size": 99606
+   },
+   {
+    "w": 1316,
+    "src": "/assets/img/image-267-1316.1c30051352.webp",
+    "size": 126070
+   }
+  ],
+  "src": "/assets/img/image-267-1316.1c30051352.webp",
+  "inSize": 206810,
+  "outSize": 193292
+ },
+ "https://static.tildacdn.com/tild3130-3561-4735-b661-646637346432/view-9_201.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 750,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/view-9-201-360.15be967ac6.avif",
+    "size": 11629
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/view-9-201-720.c35119007a.avif",
+    "size": 43066
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/view-9-201-1080.5cce6b8f69.avif",
+    "size": 91653
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/view-9-201-1200.66f0948991.avif",
+    "size": 119259
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/view-9-201-360.a950d882ca.webp",
+    "size": 15224
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/view-9-201-720.f357a8707f.webp",
+    "size": 57778
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/view-9-201-1080.53ac3ff50e.webp",
+    "size": 126578
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/view-9-201-1200.ebb148629d.webp",
+    "size": 161628
+   }
+  ],
+  "src": "/assets/img/view-9-201-1200.ebb148629d.webp",
+  "inSize": 223451,
+  "outSize": 280887
+ },
+ "https://static.tildacdn.com/tild6264-6166-4461-b465-333036623566/Frame_184-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1015,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-184-min-360.39b51db80c.avif",
+    "size": 10063
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-184-min-720.8b0faaa4cb.avif",
+    "size": 29872
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-184-min-1080.f8641bdc4e.avif",
+    "size": 53593
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/frame-184-min-1620.3c6d9b01ab.avif",
+    "size": 95836
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/frame-184-min-1920.7a80a00191.avif",
+    "size": 126603
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-184-min-360.36f87aebf2.webp",
+    "size": 13078
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-184-min-720.fed7b5300d.webp",
+    "size": 39530
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-184-min-1080.1faed7771d.webp",
+    "size": 72102
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/frame-184-min-1620.212dfb88bb.webp",
+    "size": 127644
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/frame-184-min-1920.20550eac13.webp",
+    "size": 164060
+   }
+  ],
+  "src": "/assets/img/frame-184-min-1920.20550eac13.webp",
+  "inSize": 261426,
+  "outSize": 290663
+ },
+ "https://static.tildacdn.com/tild3036-3637-4664-a130-316634663931/_-min_3.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-3-360.647a6d0347.avif",
+    "size": 4606
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-3-720.84bebbeb3c.avif",
+    "size": 12334
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-3-1080.bfa08a4040.avif",
+    "size": 21909
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/min-3-1620.50fce3345a.avif",
+    "size": 39278
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/min-3-1920.a112abdded.avif",
+    "size": 51675
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-3-360.01cccba64b.webp",
+    "size": 6206
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-3-720.6890ca7529.webp",
+    "size": 17248
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-3-1080.b23803350a.webp",
+    "size": 30294
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/min-3-1620.b40e87186d.webp",
+    "size": 53282
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/min-3-1920.de275551b0.webp",
+    "size": 70664
+   }
+  ],
+  "src": "/assets/img/min-3-1920.de275551b0.webp",
+  "inSize": 152495,
+  "outSize": 122339
+ },
+ "https://static.tildacdn.com/tild6138-3234-4435-a434-353330626136/_2_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 580,
+  "h": 870,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-1-360.7af0dc4567.avif",
+    "size": 10758
+   },
+   {
+    "w": 580,
+    "src": "/assets/img/2-1-580.2dc219e809.avif",
+    "size": 18886
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-1-360.6ac1386db9.webp",
+    "size": 11540
+   },
+   {
+    "w": 580,
+    "src": "/assets/img/2-1-580.f6c39d156c.webp",
+    "size": 21660
+   }
+  ],
+  "src": "/assets/img/2-1-580.f6c39d156c.webp",
+  "inSize": 19146,
+  "outSize": 40546
+ },
+ "https://static.tildacdn.com/tild6164-3662-4661-a633-373132383939/yandex_music_badge_r.svg": {
+  "kind": "svg",
+  "src": "/assets/img/yandex-music-badge-r.9afb9b83b5.svg",
+  "w": 705,
+  "h": 207,
+  "inSize": 9917,
+  "outSize": 5984
+ },
+ "https://static.tildacdn.com/tild6536-3934-4663-b433-616630623064/yandex_music_badge_r.svg": {
+  "kind": "svg",
+  "src": "/assets/img/yandex-music-badge-r.4fa70bb0ad.svg",
+  "w": 705,
+  "h": 207,
+  "inSize": 18680,
+  "outSize": 9469
+ },
+ "https://static.tildacdn.com/tild3238-6466-4336-a639-376661336431/54-min_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/54-min-1-360.d063834d77.avif",
+    "size": 6860
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/54-min-1-720.c15d77bffc.avif",
+    "size": 18103
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/54-min-1-1080.261075286c.avif",
+    "size": 28773
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/54-min-1-1620.7aa7176da3.avif",
+    "size": 47540
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/54-min-1-1920.050125c763.avif",
+    "size": 61212
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/54-min-1-360.fea28405db.webp",
+    "size": 9022
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/54-min-1-720.665c6c3035.webp",
+    "size": 22434
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/54-min-1-1080.ad1e2f36c1.webp",
+    "size": 37530
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/54-min-1-1620.f8fe59eafa.webp",
+    "size": 61660
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/54-min-1-1920.21db49af45.webp",
+    "size": 77294
+   }
+  ],
+  "src": "/assets/img/54-min-1-1920.21db49af45.webp",
+  "inSize": 162145,
+  "outSize": 138506
+ },
+ "https://static.tildacdn.com/tild3434-3064-4434-b936-366636633634/_.svg": {
+  "kind": "svg",
+  "src": "/assets/img/img.c910e2cafb.svg",
+  "w": 150,
+  "h": 150,
+  "inSize": 364,
+  "outSize": 219
+ },
+ "https://static.tildacdn.com/tild6134-6139-4666-b064-303836626534/S600xU_2_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 836,
+  "h": 870,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/s600xu-2-11zon-360.f99f84f01f.avif",
+    "size": 12623
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/s600xu-2-11zon-720.782b0c3fa0.avif",
+    "size": 29279
+   },
+   {
+    "w": 836,
+    "src": "/assets/img/s600xu-2-11zon-836.ce90549e65.avif",
+    "size": 33702
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/s600xu-2-11zon-360.24be1c6a35.webp",
+    "size": 14618
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/s600xu-2-11zon-720.03d09b4fab.webp",
+    "size": 33682
+   },
+   {
+    "w": 836,
+    "src": "/assets/img/s600xu-2-11zon-836.9af3780e74.webp",
+    "size": 39692
+   }
+  ],
+  "src": "/assets/img/s600xu-2-11zon-836.9af3780e74.webp",
+  "inSize": 35031,
+  "outSize": 73394
+ },
+ "https://static.tildacdn.com/tild3535-6636-4533-a537-343032636165/57d11ffe-7b3a-41c3-8.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 870,
+  "h": 870,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/57d11ffe-7b3a-41c3-8-360.96d99a9b67.avif",
+    "size": 10203
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/57d11ffe-7b3a-41c3-8-720.2f583a42e4.avif",
+    "size": 25025
+   },
+   {
+    "w": 870,
+    "src": "/assets/img/57d11ffe-7b3a-41c3-8-870.9e5528cb15.avif",
+    "size": 29672
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/57d11ffe-7b3a-41c3-8-360.1788602457.webp",
+    "size": 12094
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/57d11ffe-7b3a-41c3-8-720.dd2a5efaae.webp",
+    "size": 27568
+   },
+   {
+    "w": 870,
+    "src": "/assets/img/57d11ffe-7b3a-41c3-8-870.28732adf06.webp",
+    "size": 34098
+   }
+  ],
+  "src": "/assets/img/57d11ffe-7b3a-41c3-8-870.28732adf06.webp",
+  "inSize": 30533,
+  "outSize": 63770
+ },
+ "https://static.tildacdn.com/tild6563-6434-4138-a134-663832333435/_-min_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-1-360.23ee69e049.avif",
+    "size": 4224
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-1-720.6d9ba9b538.avif",
+    "size": 11681
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-1-1080.3a3ae2c349.avif",
+    "size": 20024
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/min-1-1620.73972eeea7.avif",
+    "size": 36277
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/min-1-1920.e29dc7c871.avif",
+    "size": 49392
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-1-360.da6c917e86.webp",
+    "size": 5868
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-1-720.1a2d015997.webp",
+    "size": 15972
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-1-1080.fdeed7cb77.webp",
+    "size": 27490
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/min-1-1620.30cebfe04f.webp",
+    "size": 49336
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/min-1-1920.0a6dc449ff.webp",
+    "size": 65494
+   }
+  ],
+  "src": "/assets/img/min-1-1920.0a6dc449ff.webp",
+  "inSize": 146694,
+  "outSize": 114886
+ },
+ "https://static.tildacdn.com/tild3361-3530-4964-b730-646166656339/MacBook_Mockup_9-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-mockup-9-min-360.3b9a7131cb.avif",
+    "size": 7165
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-mockup-9-min-720.c53b91cb7f.avif",
+    "size": 19861
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-mockup-9-min-1080.46299c7d25.avif",
+    "size": 36164
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-mockup-9-min-1680.aced4bc226.avif",
+    "size": 77058
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-mockup-9-min-360.4bb55555ed.webp",
+    "size": 10058
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-mockup-9-min-720.1d370f9fb4.webp",
+    "size": 27246
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-mockup-9-min-1080.910c3fad97.webp",
+    "size": 49014
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-mockup-9-min-1680.77aa4b9ff0.webp",
+    "size": 95644
+   }
+  ],
+  "src": "/assets/img/macbook-mockup-9-min-1680.77aa4b9ff0.webp",
+  "inSize": 170723,
+  "outSize": 172702
+ },
+ "https://static.tildacdn.com/tild6430-6237-4634-b339-643562613038/5_5.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1121,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-5-360.6cc43c2b3a.avif",
+    "size": 14886
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-5-720.b75b42f659.avif",
+    "size": 54302
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-5-1080.d30726b0da.avif",
+    "size": 110261
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/5-5-1680.28cb21c21f.avif",
+    "size": 229689
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-5-360.feb7b15189.webp",
+    "size": 22414
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-5-720.d93d3a58a4.webp",
+    "size": 89350
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-5-1080.230e34f22c.webp",
+    "size": 189136
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/5-5-1680.40ff8f429b.webp",
+    "size": 397658
+   }
+  ],
+  "src": "/assets/img/5-5-1680.40ff8f429b.webp",
+  "inSize": 552409,
+  "outSize": 627347
+ },
+ "https://static.tildacdn.com/tild6664-6536-4462-b663-343830346639/phone_v2-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1280,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/phone-v2-min-360.2f775fdfdb.avif",
+    "size": 3384
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/phone-v2-min-720.900a2eb068.avif",
+    "size": 9616
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/phone-v2-min-1080.350784dc1d.avif",
+    "size": 17396
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/phone-v2-min-1620.8af4d00141.avif",
+    "size": 32103
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/phone-v2-min-1920.0f932fb677.avif",
+    "size": 41572
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/phone-v2-min-360.2fdfd9c006.webp",
+    "size": 4502
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/phone-v2-min-720.8db21d966b.webp",
+    "size": 12740
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/phone-v2-min-1080.79f2982977.webp",
+    "size": 23826
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/phone-v2-min-1620.5f33fe0127.webp",
+    "size": 42946
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/phone-v2-min-1920.8e2634229b.webp",
+    "size": 55406
+   }
+  ],
+  "src": "/assets/img/phone-v2-min-1920.8e2634229b.webp",
+  "inSize": 105575,
+  "outSize": 96978
+ },
+ "https://static.tildacdn.com/tild6636-6361-4362-b738-613135613538/AFTRM-IPAD-WOODY-1-m.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-360.e8c39ec71b.avif",
+    "size": 6306
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-720.287a2a194c.avif",
+    "size": 21711
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-1080.a0baa0ffa0.avif",
+    "size": 51817
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-1620.1fda51964e.avif",
+    "size": 108837
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-1920.848f809ba9.avif",
+    "size": 150190
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-360.a0c9bd9ab1.webp",
+    "size": 9574
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-720.2e4bf376ae.webp",
+    "size": 35818
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-1080.4e3264eaee.webp",
+    "size": 75186
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-1620.0632cfb532.webp",
+    "size": 142662
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/aftrm-ipad-woody-1-m-1920.24c72aa4b3.webp",
+    "size": 186516
+   }
+  ],
+  "src": "/assets/img/aftrm-ipad-woody-1-m-1920.24c72aa4b3.webp",
+  "inSize": 311969,
+  "outSize": 336706
+ },
+ "https://static.tildacdn.com/tild3064-3032-4461-b262-333366323366/Macbook_Air_M2_Mocku.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-m2-mocku-360.6d6e201b3e.avif",
+    "size": 5650
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-m2-mocku-720.16cdfddc88.avif",
+    "size": 15429
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-m2-mocku-1080.80ff3a97a3.avif",
+    "size": 26820
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-m2-mocku-1680.d705fcdcd8.avif",
+    "size": 52598
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-m2-mocku-360.ccfb03c088.webp",
+    "size": 8350
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-m2-mocku-720.0e85ea8967.webp",
+    "size": 23164
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-m2-mocku-1080.85415e3e98.webp",
+    "size": 41492
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-m2-mocku-1680.10973bc0f5.webp",
+    "size": 78502
+   }
+  ],
+  "src": "/assets/img/macbook-air-m2-mocku-1680.10973bc0f5.webp",
+  "inSize": 153010,
+  "outSize": 131100
+ },
+ "https://static.tildacdn.com/tild3236-6135-4166-b735-343035383465/Macbook_Mockup_1-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-mockup-1-min-360.92065ffc5f.avif",
+    "size": 4917
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-mockup-1-min-720.37aa759a0b.avif",
+    "size": 12960
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-mockup-1-min-1080.313b8846c4.avif",
+    "size": 22613
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-mockup-1-min-1680.4292567ab8.avif",
+    "size": 45439
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-mockup-1-min-360.3b721518c8.webp",
+    "size": 6720
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-mockup-1-min-720.20d3276923.webp",
+    "size": 18522
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-mockup-1-min-1080.9b1da73f0b.webp",
+    "size": 33190
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-mockup-1-min-1680.8b3d3d92e3.webp",
+    "size": 64428
+   }
+  ],
+  "src": "/assets/img/macbook-mockup-1-min-1680.8b3d3d92e3.webp",
+  "inSize": 131289,
+  "outSize": 109867
+ },
+ "https://static.tildacdn.com/tild3535-3064-4633-b264-633363376634/image_266.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1206,
+  "h": 1970,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-266-360.b68f6dbff7.avif",
+    "size": 44682
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-266-720.57f1f11a92.avif",
+    "size": 116629
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image-266-1080.f78dda0d3c.avif",
+    "size": 223279
+   },
+   {
+    "w": 1206,
+    "src": "/assets/img/image-266-1206.e1e0a44f1c.avif",
+    "size": 276730
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-266-360.a9c544b08b.webp",
+    "size": 69958
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-266-720.2a22559ab7.webp",
+    "size": 249932
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image-266-1080.9cf92ef9f1.webp",
+    "size": 508300
+   },
+   {
+    "w": 1206,
+    "src": "/assets/img/image-266-1206.136fd500b6.webp",
+    "size": 613182
+   }
+  ],
+  "src": "/assets/img/image-266-1206.136fd500b6.webp",
+  "inSize": 2642613,
+  "outSize": 889912
+ },
+ "https://static.tildacdn.com/tild3537-3861-4237-a537-396365363433/_.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-360.b89fd83eb8.avif",
+    "size": 10714
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-720.ec51f72eda.avif",
+    "size": 27358
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/img-1080.c73895eb36.avif",
+    "size": 47336
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/img-1680.59f64aa8ce.avif",
+    "size": 94631
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-360.38d73ccf9a.webp",
+    "size": 15466
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-720.fbe7f7bbc5.webp",
+    "size": 36688
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/img-1080.290a53b1f1.webp",
+    "size": 62840
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/img-1680.509da28d8e.webp",
+    "size": 120968
+   }
+  ],
+  "src": "/assets/img/img-1680.509da28d8e.webp",
+  "inSize": 216496,
+  "outSize": 215599
+ },
+ "https://static.tildacdn.com/tild3165-6339-4532-b761-633934363961/Frame201.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1320,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame201-360.7b2ebb92c8.avif",
+    "size": 2569
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame201-720.0393464cc3.avif",
+    "size": 4696
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame201-1080.e51524a869.avif",
+    "size": 6426
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/frame201-1620.cc4f20f184.avif",
+    "size": 10187
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/frame201-1920.d5aedbe893.avif",
+    "size": 12789
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame201-360.308fb50d60.webp",
+    "size": 3160
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame201-720.4d881c43cb.webp",
+    "size": 6122
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame201-1080.b988ef1b59.webp",
+    "size": 9282
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/frame201-1620.d2c12a80a8.webp",
+    "size": 14770
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/frame201-1920.d46eea5f2b.webp",
+    "size": 17710
+   }
+  ],
+  "src": "/assets/img/frame201-1920.d46eea5f2b.webp",
+  "inSize": 39852,
+  "outSize": 30499
+ },
+ "https://static.tildacdn.com/tild6233-3830-4734-a138-396432336366/wowfest-logo.svg": {
+  "kind": "svg",
+  "src": "/assets/img/wowfest-logo.91c2099556.svg",
+  "w": 100,
+  "h": 20,
+  "inSize": 3016,
+  "outSize": 1734
+ },
+ "https://static.tildacdn.com/tild6638-6165-4334-a337-643738666566/3-1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2300,
+  "h": 1400,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-1-360.e084768a47.avif",
+    "size": 6059
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-1-720.6aa302704b.avif",
+    "size": 15728
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1-1080.465d3e497a.avif",
+    "size": 28117
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/3-1-1620.1efda761fb.avif",
+    "size": 49726
+   },
+   {
+    "w": 2300,
+    "src": "/assets/img/3-1-2300.54a26833a6.avif",
+    "size": 78559
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-1-360.37306691f9.webp",
+    "size": 7568
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-1-720.e45271a8e9.webp",
+    "size": 19930
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1-1080.d072fbf9a6.webp",
+    "size": 36348
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/3-1-1620.3cf4b6005b.webp",
+    "size": 62704
+   },
+   {
+    "w": 2300,
+    "src": "/assets/img/3-1-2300.2a4c38f980.webp",
+    "size": 96672
+   }
+  ],
+  "src": "/assets/img/3-1-2300.2a4c38f980.webp",
+  "inSize": 116826,
+  "outSize": 175231
+ },
+ "https://static.tildacdn.com/tild6561-3665-4634-b638-636635303837/33_1_11zon_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1155,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/33-1-11zon-1-360.c197e60dd5.avif",
+    "size": 7840
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/33-1-11zon-1-720.f8a08387da.avif",
+    "size": 22623
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/33-1-11zon-1-1080.7b81e30c5a.avif",
+    "size": 40568
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/33-1-11zon-1-1680.e1b0fbf20c.avif",
+    "size": 72120
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/33-1-11zon-1-360.837767b696.webp",
+    "size": 10448
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/33-1-11zon-1-720.7a47b7d62f.webp",
+    "size": 29802
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/33-1-11zon-1-1080.9d2db15e9c.webp",
+    "size": 52968
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/33-1-11zon-1-1680.ee5666df2c.webp",
+    "size": 94486
+   }
+  ],
+  "src": "/assets/img/33-1-11zon-1-1680.ee5666df2c.webp",
+  "inSize": 101821,
+  "outSize": 166606
+ },
+ "https://static.tildacdn.com/tild3435-6239-4132-b830-303939643761/REPA_logo.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1024,
+  "h": 1024,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/repa-logo-360.3d235017ac.avif",
+    "size": 6543
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/repa-logo-720.6ffbd2f0fd.avif",
+    "size": 15919
+   },
+   {
+    "w": 1024,
+    "src": "/assets/img/repa-logo-1024.8ae26b81e8.avif",
+    "size": 18007
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/repa-logo-360.7e9b62bef7.webp",
+    "size": 10634
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/repa-logo-720.469329eaab.webp",
+    "size": 24532
+   },
+   {
+    "w": 1024,
+    "src": "/assets/img/repa-logo-1024.640f571872.webp",
+    "size": 27388
+   }
+  ],
+  "src": "/assets/img/repa-logo-1024.640f571872.webp",
+  "inSize": 57960,
+  "outSize": 45395
+ },
+ "https://static.tildacdn.com/tild6532-6332-4433-a466-663635373038/Mockup_1_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/mockup-1-1-360.bd2416491e.avif",
+    "size": 11964
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mockup-1-1-720.be5239df11.avif",
+    "size": 47947
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mockup-1-1-1080.adc7f78347.avif",
+    "size": 89519
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/mockup-1-1-1620.27ac66d81f.avif",
+    "size": 155937
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/mockup-1-1-1920.ebba1fb081.avif",
+    "size": 210807
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/mockup-1-1-360.6835d0f952.webp",
+    "size": 21704
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/mockup-1-1-720.65b9903466.webp",
+    "size": 63868
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/mockup-1-1-1080.19042a904f.webp",
+    "size": 106856
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/mockup-1-1-1620.f00da9b279.webp",
+    "size": 175714
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/mockup-1-1-1920.1baf8dff28.webp",
+    "size": 226836
+   }
+  ],
+  "src": "/assets/img/mockup-1-1-1920.1baf8dff28.webp",
+  "inSize": 384387,
+  "outSize": 437643
+ },
+ "https://static.tildacdn.com/tild6439-3939-4437-a138-376231353834/IMG_3594_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-3594-11zon-360.776a44264e.avif",
+    "size": 7884
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-3594-11zon-720.1755cbff41.avif",
+    "size": 21326
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/img-3594-11zon-1080.92e4d9f1a0.avif",
+    "size": 36956
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/img-3594-11zon-1680.3d19ae110d.avif",
+    "size": 71949
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-3594-11zon-360.0a9f5f6bec.webp",
+    "size": 10896
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-3594-11zon-720.7fa11dcce8.webp",
+    "size": 29748
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/img-3594-11zon-1080.233173d9cd.webp",
+    "size": 52958
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/img-3594-11zon-1680.a4dd1f7d72.webp",
+    "size": 96436
+   }
+  ],
+  "src": "/assets/img/img-3594-11zon-1680.a4dd1f7d72.webp",
+  "inSize": 177632,
+  "outSize": 168385
+ },
+ "https://static.tildacdn.com/tild3162-6165-4738-a637-633965363166/Free_City_Outdoor_Ad.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1096,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/free-city-outdoor-ad-360.883dd5db22.avif",
+    "size": 11683
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/free-city-outdoor-ad-720.2457c991f1.avif",
+    "size": 36519
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/free-city-outdoor-ad-1080.161937ec06.avif",
+    "size": 67498
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/free-city-outdoor-ad-1680.f5d477958c.avif",
+    "size": 124710
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/free-city-outdoor-ad-360.9de1fa89c6.webp",
+    "size": 16204
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/free-city-outdoor-ad-720.89cf7ab107.webp",
+    "size": 49652
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/free-city-outdoor-ad-1080.7f308f51f9.webp",
+    "size": 92802
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/free-city-outdoor-ad-1680.c6a5cb91c3.webp",
+    "size": 168612
+   }
+  ],
+  "src": "/assets/img/free-city-outdoor-ad-1680.c6a5cb91c3.webp",
+  "inSize": 162393,
+  "outSize": 293322
+ },
+ "https://static.tildacdn.com/tild3439-3330-4331-b232-633633363864/Business20Card20Mock.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 800,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/business20card20mock-360.097075ca44.avif",
+    "size": 15276
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/business20card20mock-720.a7d8da5a2b.avif",
+    "size": 42020
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/business20card20mock-1080.0af6b4bbb3.avif",
+    "size": 75350
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/business20card20mock-1200.6a589848de.avif",
+    "size": 90372
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/business20card20mock-360.3685ef348e.webp",
+    "size": 21690
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/business20card20mock-720.6888418dd2.webp",
+    "size": 58754
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/business20card20mock-1080.09f413eb96.webp",
+    "size": 102120
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/business20card20mock-1200.cb4585b640.webp",
+    "size": 121042
+   }
+  ],
+  "src": "/assets/img/business20card20mock-1200.cb4585b640.webp",
+  "inSize": 260866,
+  "outSize": 211414
+ },
+ "https://static.tildacdn.com/tild6137-3433-4034-a432-393531636639/Realistic_2016-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/realistic-2016-min-360.9ad46a76ed.avif",
+    "size": 6169
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/realistic-2016-min-720.49887ef159.avif",
+    "size": 17562
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/realistic-2016-min-1080.38c62c563e.avif",
+    "size": 32042
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/realistic-2016-min-1680.e91fba8944.avif",
+    "size": 59311
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/realistic-2016-min-360.3ac3446120.webp",
+    "size": 9232
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/realistic-2016-min-720.d3eb7efa92.webp",
+    "size": 27768
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/realistic-2016-min-1080.5ffcdedf08.webp",
+    "size": 51796
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/realistic-2016-min-1680.37b4b05d7c.webp",
+    "size": 98986
+   }
+  ],
+  "src": "/assets/img/realistic-2016-min-1680.37b4b05d7c.webp",
+  "inSize": 1560562,
+  "outSize": 158297
+ },
+ "https://static.tildacdn.com/tild6361-3437-4136-b835-376430623838/_90_1_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1762,
+  "h": 992,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/90-1-1-360.92e84b82f6.avif",
+    "size": 12022
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/90-1-1-720.d91675aec7.avif",
+    "size": 39624
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/90-1-1-1080.7feccfa9c0.avif",
+    "size": 69392
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/90-1-1-1620.2cb3b048ff.avif",
+    "size": 116512
+   },
+   {
+    "w": 1762,
+    "src": "/assets/img/90-1-1-1762.0dc68ae8f1.avif",
+    "size": 116390
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/90-1-1-360.c4a9ccc5c7.webp",
+    "size": 15078
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/90-1-1-720.88bdb7738a.webp",
+    "size": 49610
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/90-1-1-1080.e4cdc3251a.webp",
+    "size": 87080
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/90-1-1-1620.d86b26d607.webp",
+    "size": 147542
+   },
+   {
+    "w": 1762,
+    "src": "/assets/img/90-1-1-1762.18f99f0bf4.webp",
+    "size": 153344
+   }
+  ],
+  "src": "/assets/img/90-1-1-1762.18f99f0bf4.webp",
+  "inSize": 118937,
+  "outSize": 269734
+ },
+ "https://static.tildacdn.com/tild3135-3035-4364-b934-323532663466/5224631758157376387-.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1020,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/5224631758157376387-360.8090b65b50.avif",
+    "size": 6942
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5224631758157376387-720.2159302547.avif",
+    "size": 21879
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5224631758157376387-1080.50317259e7.avif",
+    "size": 38560
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/5224631758157376387-1620.e689f39cc0.avif",
+    "size": 65234
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/5224631758157376387-1920.efd42f1dcc.avif",
+    "size": 80213
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/5224631758157376387-360.c021604a44.webp",
+    "size": 8836
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5224631758157376387-720.325a3cef71.webp",
+    "size": 28072
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5224631758157376387-1080.c0ebfd9f6d.webp",
+    "size": 51618
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/5224631758157376387-1620.3e2cdd86ea.webp",
+    "size": 87596
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/5224631758157376387-1920.a4d6b6519d.webp",
+    "size": 108892
+   }
+  ],
+  "src": "/assets/img/5224631758157376387-1920.a4d6b6519d.webp",
+  "inSize": 1892603,
+  "outSize": 189105
+ },
+ "https://static.tildacdn.com/tild6434-6136-4566-a563-663331623837/image_220.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1748,
+  "h": 821,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-220-360.902400ac2c.avif",
+    "size": 2095
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-220-720.2b8b20b049.avif",
+    "size": 4346
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image-220-1080.1334c0d2be.avif",
+    "size": 6470
+   },
+   {
+    "w": 1748,
+    "src": "/assets/img/image-220-1748.4d1e2a8a50.avif",
+    "size": 10712
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-220-360.91754d1eaa.webp",
+    "size": 2022
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-220-720.ac168b9efa.webp",
+    "size": 4900
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image-220-1080.ebe2da6e94.webp",
+    "size": 8240
+   },
+   {
+    "w": 1748,
+    "src": "/assets/img/image-220-1748.a04cf68293.webp",
+    "size": 14996
+   }
+  ],
+  "src": "/assets/img/image-220-1748.a04cf68293.webp",
+  "inSize": 127033,
+  "outSize": 25708
+ },
+ "https://static.tildacdn.com/tild6565-3634-4739-b630-326262393262/BIM-107-_View02_2_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/bim-107-view02-2-1-360.f4168135cd.avif",
+    "size": 13326
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bim-107-view02-2-1-720.a3d2ce72b2.avif",
+    "size": 50058
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bim-107-view02-2-1-1080.e13c36a429.avif",
+    "size": 100396
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/bim-107-view02-2-1-1620.8d92736f49.avif",
+    "size": 187091
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/bim-107-view02-2-1-1920.dadbe4e793.avif",
+    "size": 211249
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/bim-107-view02-2-1-360.4fe1f79d49.webp",
+    "size": 19360
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/bim-107-view02-2-1-720.18b7b26f1b.webp",
+    "size": 69066
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/bim-107-view02-2-1-1080.e5449718da.webp",
+    "size": 140546
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/bim-107-view02-2-1-1620.8843b2696b.webp",
+    "size": 277520
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/bim-107-view02-2-1-1920.8c5af4532c.webp",
+    "size": 329318
+   }
+  ],
+  "src": "/assets/img/bim-107-view02-2-1-1920.8c5af4532c.webp",
+  "inSize": 238679,
+  "outSize": 540567
+ },
+ "https://static.tildacdn.com/tild3238-6565-4661-a262-393963633738/Macbook_Pro_Mockup_V.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-pro-mockup-v-360.3589c68209.avif",
+    "size": 7569
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-pro-mockup-v-720.b46716ab85.avif",
+    "size": 23510
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-pro-mockup-v-1080.c6b693a336.avif",
+    "size": 45424
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-pro-mockup-v-1680.1c9426b953.avif",
+    "size": 98694
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-pro-mockup-v-360.29846c6600.webp",
+    "size": 9906
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-pro-mockup-v-720.47e54de096.webp",
+    "size": 31376
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-pro-mockup-v-1080.ccdb196b8a.webp",
+    "size": 60440
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-pro-mockup-v-1680.552a07beac.webp",
+    "size": 125396
+   }
+  ],
+  "src": "/assets/img/macbook-pro-mockup-v-1680.552a07beac.webp",
+  "inSize": 188108,
+  "outSize": 224090
+ },
+ "https://static.tildacdn.com/tild6466-3162-4039-b862-343332643833/1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1200,
+  "h": 900,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.aede4d43b1.avif",
+    "size": 11610
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.0c878f4d19.avif",
+    "size": 38049
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.ae8810889a.avif",
+    "size": 70068
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/1-1200.4f20619817.avif",
+    "size": 82134
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.80b75fc812.webp",
+    "size": 16154
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.15f1e9597d.webp",
+    "size": 51656
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.28902891d5.webp",
+    "size": 94978
+   },
+   {
+    "w": 1200,
+    "src": "/assets/img/1-1200.31faec93a9.webp",
+    "size": 109742
+   }
+  ],
+  "src": "/assets/img/1-1200.31faec93a9.webp",
+  "inSize": 125081,
+  "outSize": 191876
+ },
+ "https://static.tildacdn.com/tild3036-3133-4136-b030-303330633433/KMRV___copy_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 840,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/kmrv-copy-1-360.6369256679.avif",
+    "size": 11214
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/kmrv-copy-1-720.52d531ce0f.avif",
+    "size": 33328
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/kmrv-copy-1-1080.5cb70f9eed.avif",
+    "size": 65701
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/kmrv-copy-1-1680.049e76b9fd.avif",
+    "size": 144862
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/kmrv-copy-1-360.ee6978babe.webp",
+    "size": 14624
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/kmrv-copy-1-720.7dcbce7ec7.webp",
+    "size": 44156
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/kmrv-copy-1-1080.d37f523220.webp",
+    "size": 87420
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/kmrv-copy-1-1680.618f1285e2.webp",
+    "size": 183076
+   }
+  ],
+  "src": "/assets/img/kmrv-copy-1-1680.618f1285e2.webp",
+  "inSize": 326698,
+  "outSize": 327938
+ },
+ "https://static.tildacdn.com/tild3135-6132-4434-b238-306264366564/2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 900,
+  "h": 1200,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.f8a7b18038.avif",
+    "size": 17697
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.dee62ee106.avif",
+    "size": 52464
+   },
+   {
+    "w": 900,
+    "src": "/assets/img/2-900.8d20e2a677.avif",
+    "size": 79662
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.f206946918.webp",
+    "size": 23600
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.d9bafd7228.webp",
+    "size": 68202
+   },
+   {
+    "w": 900,
+    "src": "/assets/img/2-900.ce1327db49.webp",
+    "size": 98912
+   }
+  ],
+  "src": "/assets/img/2-900.ce1327db49.webp",
+  "inSize": 111036,
+  "outSize": 178574
+ },
+ "https://static.tildacdn.com/tild3637-6431-4266-b131-653565396661/Frame_6757817.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 907,
+  "h": 1200,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757817-360.6616ffd001.avif",
+    "size": 19024
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757817-720.cbafaffa99.avif",
+    "size": 47860
+   },
+   {
+    "w": 907,
+    "src": "/assets/img/frame-6757817-907.956c9728c8.avif",
+    "size": 67512
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757817-360.161f8dfd47.webp",
+    "size": 27634
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757817-720.d113ec7aa9.webp",
+    "size": 64184
+   },
+   {
+    "w": 907,
+    "src": "/assets/img/frame-6757817-907.8495cfa9ae.webp",
+    "size": 87068
+   }
+  ],
+  "src": "/assets/img/frame-6757817-907.8495cfa9ae.webp",
+  "inSize": 797299,
+  "outSize": 154580
+ },
+ "https://static.tildacdn.com/tild3330-6261-4261-b737-303231333937/image204.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image204-360.53dae49ece.avif",
+    "size": 10623
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image204-720.d5d4d38256.avif",
+    "size": 29875
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image204-1080.9db5b7f410.avif",
+    "size": 50758
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image204-1620.38b68fc707.avif",
+    "size": 82569
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image204-1920.7a755aa0bc.avif",
+    "size": 109108
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image204-360.54c40c9a24.webp",
+    "size": 13128
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image204-720.508ac835ff.webp",
+    "size": 36068
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image204-1080.00cfd61952.webp",
+    "size": 60480
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image204-1620.152cd55ab9.webp",
+    "size": 100648
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image204-1920.2ade528767.webp",
+    "size": 122798
+   }
+  ],
+  "src": "/assets/img/image204-1920.2ade528767.webp",
+  "inSize": 182037,
+  "outSize": 231906
+ },
+ "https://static.tildacdn.com/tild6639-6564-4332-b862-396265373166/image2081.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2081-360.c72b409171.avif",
+    "size": 8820
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2081-720.31d8404a5f.avif",
+    "size": 28801
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2081-1080.123ffd2d5d.avif",
+    "size": 56139
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2081-1620.d8c6f35a4f.avif",
+    "size": 109918
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2081-1920.4d9d1f8148.avif",
+    "size": 148920
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2081-360.18019572f1.webp",
+    "size": 12136
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2081-720.9a3eb4107f.webp",
+    "size": 38370
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2081-1080.a0b3f751c3.webp",
+    "size": 74792
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2081-1620.651ea884cd.webp",
+    "size": 140308
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2081-1920.eadef53b14.webp",
+    "size": 177930
+   }
+  ],
+  "src": "/assets/img/image2081-1920.eadef53b14.webp",
+  "inSize": 215984,
+  "outSize": 326850
+ },
+ "https://static.tildacdn.com/tild6335-3339-4339-b634-373531306136/image207.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image207-360.dba0e54760.avif",
+    "size": 9114
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image207-720.3393492226.avif",
+    "size": 29100
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image207-1080.46d1419787.avif",
+    "size": 52671
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image207-1620.29ebfad953.avif",
+    "size": 98644
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image207-1920.70f06f1f0f.avif",
+    "size": 132722
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image207-360.affdf8e454.webp",
+    "size": 11222
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image207-720.b5e11f9eb7.webp",
+    "size": 36116
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image207-1080.4dc35de5de.webp",
+    "size": 68996
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image207-1620.d3f6bd84f4.webp",
+    "size": 127340
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image207-1920.14ae107118.webp",
+    "size": 160282
+   }
+  ],
+  "src": "/assets/img/image207-1920.14ae107118.webp",
+  "inSize": 196676,
+  "outSize": 293004
+ },
+ "https://static.tildacdn.com/tild3663-3730-4461-a231-613664663762/__3-min_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1080,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-min-1-360.cfaeaefed7.avif",
+    "size": 9310
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-min-1-720.845953c773.avif",
+    "size": 24610
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-min-1-1080.485fa8cb29.avif",
+    "size": 44438
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/3-min-1-1620.fc55a0dff0.avif",
+    "size": 77700
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/3-min-1-1920.1e26164a72.avif",
+    "size": 105133
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-min-1-360.530be9fba0.webp",
+    "size": 12984
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-min-1-720.83858a75ae.webp",
+    "size": 35008
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-min-1-1080.e39de6ac29.webp",
+    "size": 62564
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/3-min-1-1620.ed82f93ee3.webp",
+    "size": 112556
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/3-min-1-1920.20a79d44ab.webp",
+    "size": 147230
+   }
+  ],
+  "src": "/assets/img/3-min-1-1920.20a79d44ab.webp",
+  "inSize": 244318,
+  "outSize": 252363
+ },
+ "https://static.tildacdn.com/tild6462-6562-4739-b563-623032363064/image205.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image205-360.01646680d0.avif",
+    "size": 10474
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image205-720.73198ae002.avif",
+    "size": 31999
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image205-1080.a76e856c23.avif",
+    "size": 59370
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image205-1620.d1c402a219.avif",
+    "size": 109225
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image205-1920.a452cbdda4.avif",
+    "size": 145491
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image205-360.429efd7a6f.webp",
+    "size": 12828
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image205-720.05827e3b21.webp",
+    "size": 40202
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image205-1080.17bf7831cc.webp",
+    "size": 76120
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image205-1620.999457500c.webp",
+    "size": 135654
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image205-1920.f5131c3476.webp",
+    "size": 173710
+   }
+  ],
+  "src": "/assets/img/image205-1920.f5131c3476.webp",
+  "inSize": 229021,
+  "outSize": 319201
+ },
+ "https://static.tildacdn.com/tild6565-3364-4161-b431-316634656530/Group-min_2_11zon.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2334,
+  "h": 3025,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/group-min-2-11zon-360.9109d2215d.avif",
+    "size": 25102
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/group-min-2-11zon-720.ad26fd4d5d.avif",
+    "size": 71367
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/group-min-2-11zon-1080.08a894ba44.avif",
+    "size": 134966
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/group-min-2-11zon-1620.45312e53ae.avif",
+    "size": 264177
+   },
+   {
+    "w": 2334,
+    "src": "/assets/img/group-min-2-11zon-2334.9761658561.avif",
+    "size": 503218
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/group-min-2-11zon-360.917ab3988f.webp",
+    "size": 43792
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/group-min-2-11zon-720.2ea5529ec3.webp",
+    "size": 145642
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/group-min-2-11zon-1080.9cad167a7f.webp",
+    "size": 287564
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/group-min-2-11zon-1620.8bc8a64db1.webp",
+    "size": 589044
+   },
+   {
+    "w": 2334,
+    "src": "/assets/img/group-min-2-11zon-2334.a3bffe6d13.webp",
+    "size": 937316
+   }
+  ],
+  "src": "/assets/img/group-min-2-11zon-2334.a3bffe6d13.webp",
+  "inSize": 860323,
+  "outSize": 1440534
+ },
+ "https://static.tildacdn.com/tild3237-3135-4236-a639-303566336537/image2012.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2012-360.fb8f425ffb.avif",
+    "size": 6550
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2012-720.c50d13c143.avif",
+    "size": 20514
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2012-1080.149366810f.avif",
+    "size": 40602
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2012-1620.6e40204076.avif",
+    "size": 81843
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2012-1920.2477112a12.avif",
+    "size": 104879
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2012-360.7b4ea3b884.webp",
+    "size": 7486
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2012-720.f654d4cdb7.webp",
+    "size": 24100
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2012-1080.582e793251.webp",
+    "size": 48328
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2012-1620.f56dbf1eb6.webp",
+    "size": 95464
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2012-1920.57483e9f3e.webp",
+    "size": 127100
+   }
+  ],
+  "src": "/assets/img/image2012-1920.57483e9f3e.webp",
+  "inSize": 148769,
+  "outSize": 231979
+ },
+ "https://static.tildacdn.com/tild6531-6431-4661-b233-636336343130/1.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.475fff09ca.avif",
+    "size": 4882
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.df63bface3.avif",
+    "size": 9207
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/1-954.989cf0af50.avif",
+    "size": 7309
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.cdab0b7cc4.webp",
+    "size": 5328
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.ee4060eb50.webp",
+    "size": 12094
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/1-954.5f9c997ab4.webp",
+    "size": 9106
+   }
+  ],
+  "src": "/assets/img/1-954.5f9c997ab4.webp",
+  "inSize": 14650,
+  "outSize": 16415
+ },
+ "https://static.tildacdn.com/tild6463-6461-4363-a235-616634316635/image2013.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2013-360.1278be0ea4.avif",
+    "size": 6377
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2013-720.451d0c1a71.avif",
+    "size": 17303
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2013-1080.cd45030f80.avif",
+    "size": 30882
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2013-1620.14d8d3f37e.avif",
+    "size": 54263
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2013-1920.3145f7ad8a.avif",
+    "size": 71290
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2013-360.a01894fe3f.webp",
+    "size": 7352
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2013-720.da3f223f88.webp",
+    "size": 20016
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2013-1080.ae7a4f7cc8.webp",
+    "size": 35142
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2013-1620.c4e1e0a4db.webp",
+    "size": 62762
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2013-1920.b1c9fba1d5.webp",
+    "size": 78524
+   }
+  ],
+  "src": "/assets/img/image2013-1920.b1c9fba1d5.webp",
+  "inSize": 116567,
+  "outSize": 149814
+ },
+ "https://static.tildacdn.com/tild3063-6436-4438-a538-303264373463/image209.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image209-360.d26824a592.avif",
+    "size": 8190
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image209-720.56109df2e0.avif",
+    "size": 22458
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image209-1080.32056dabf4.avif",
+    "size": 39116
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image209-1620.4030635827.avif",
+    "size": 70834
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image209-1920.ffbc1298bb.avif",
+    "size": 95383
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image209-360.9cd18d0c8f.webp",
+    "size": 10212
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image209-720.7a70a8d310.webp",
+    "size": 29634
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image209-1080.002bd44c67.webp",
+    "size": 53708
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image209-1620.0b4658531d.webp",
+    "size": 93262
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image209-1920.4d7fd32cdd.webp",
+    "size": 116790
+   }
+  ],
+  "src": "/assets/img/image209-1920.4d7fd32cdd.webp",
+  "inSize": 168616,
+  "outSize": 212173
+ },
+ "https://static.tildacdn.com/tild6434-3631-4235-b762-333932393835/5.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-360.cf2c04f82b.avif",
+    "size": 4657
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-720.32e8cc8fb6.avif",
+    "size": 8646
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/5-954.2cf56bfac5.avif",
+    "size": 8873
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-360.495794b8c4.webp",
+    "size": 4694
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-720.27668fb184.webp",
+    "size": 11162
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/5-954.74e63331cb.webp",
+    "size": 10288
+   }
+  ],
+  "src": "/assets/img/5-954.74e63331cb.webp",
+  "inSize": 16243,
+  "outSize": 19161
+ },
+ "https://static.tildacdn.com/tild6439-6338-4831-b837-323461386431/image2014.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2014-360.73e0de8d69.avif",
+    "size": 7865
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2014-720.6ba4aafab8.avif",
+    "size": 22443
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2014-1080.68cc6eeca7.avif",
+    "size": 41314
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2014-1620.69a9df45b5.avif",
+    "size": 78125
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2014-1920.c96f9cfd44.avif",
+    "size": 117420
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2014-360.9031b3a63a.webp",
+    "size": 9614
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2014-720.0caa9458e9.webp",
+    "size": 27968
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2014-1080.a3771cf6a5.webp",
+    "size": 50426
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2014-1620.c7e8b4497c.webp",
+    "size": 94558
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2014-1920.826630800d.webp",
+    "size": 124934
+   }
+  ],
+  "src": "/assets/img/image2014-1920.826630800d.webp",
+  "inSize": 180599,
+  "outSize": 242354
+ },
+ "https://static.tildacdn.com/tild6266-3664-4438-b464-363139373662/image2011.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2011-360.fbf5c2b9a7.avif",
+    "size": 12068
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2011-720.f9a06cd659.avif",
+    "size": 38829
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2011-1080.ad0167a592.avif",
+    "size": 74626
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2011-1620.91a7183e4a.avif",
+    "size": 142817
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2011-1920.cea3e5daec.avif",
+    "size": 183455
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2011-360.5480ec9896.webp",
+    "size": 16216
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2011-720.0abc701eb1.webp",
+    "size": 51860
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2011-1080.fe1a5700ad.webp",
+    "size": 100258
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2011-1620.2bcc04291d.webp",
+    "size": 183068
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2011-1920.d233144296.webp",
+    "size": 227046
+   }
+  ],
+  "src": "/assets/img/image2011-1920.d233144296.webp",
+  "inSize": 262228,
+  "outSize": 410501
+ },
+ "https://static.tildacdn.com/tild6333-6631-4835-b764-366438656533/2.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.c92538eba6.avif",
+    "size": 6118
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.27a851f87c.avif",
+    "size": 11733
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/2-954.fb2c1b11b9.avif",
+    "size": 10757
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.9b221a5caf.webp",
+    "size": 6396
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.99eb0faf12.webp",
+    "size": 14928
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/2-954.c2ca535737.webp",
+    "size": 11288
+   }
+  ],
+  "src": "/assets/img/2-954.c2ca535737.webp",
+  "inSize": 23446,
+  "outSize": 22045
+ },
+ "https://static.tildacdn.com/tild6632-3230-4561-b934-363830623163/Frame_509_1.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 180,
+  "h": 180,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 180,
+    "src": "/assets/img/frame-509-1-180.c5c01caa75.avif",
+    "size": 4838
+   }
+  ],
+  "webp": [
+   {
+    "w": 180,
+    "src": "/assets/img/frame-509-1-180.00dc325316.webp",
+    "size": 6382
+   }
+  ],
+  "src": "/assets/img/frame-509-1-180.00dc325316.webp",
+  "inSize": 12555,
+  "outSize": 11220
+ },
+ "https://static.tildacdn.com/tild3631-3935-4138-b237-613464323566/4.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-360.6612a9a797.avif",
+    "size": 2675
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-720.4b941065f1.avif",
+    "size": 5369
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/4-954.331d5a3f4e.avif",
+    "size": 5658
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/4-360.b22456ff89.webp",
+    "size": 3030
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/4-720.af0e31ecf7.webp",
+    "size": 6110
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/4-954.f7b429aa8b.webp",
+    "size": 7464
+   }
+  ],
+  "src": "/assets/img/4-954.f7b429aa8b.webp",
+  "inSize": 27908,
+  "outSize": 13122
+ },
+ "https://static.tildacdn.com/tild6233-6131-4166-b564-616338373536/3.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 954,
+  "h": 720,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.914e9b5edb.avif",
+    "size": 5794
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.be754d7261.avif",
+    "size": 10877
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/3-954.0147e0a0c6.avif",
+    "size": 12212
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.8d27a096e5.webp",
+    "size": 7292
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.442108a0ca.webp",
+    "size": 15918
+   },
+   {
+    "w": 954,
+    "src": "/assets/img/3-954.934b352171.webp",
+    "size": 15732
+   }
+  ],
+  "src": "/assets/img/3-954.934b352171.webp",
+  "inSize": 33713,
+  "outSize": 27944
+ },
+ "https://static.tildacdn.com/tild6264-6565-4534-a537-303037323233/image2015.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2015-360.1d07bc57ab.avif",
+    "size": 5058
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2015-720.b623c7898b.avif",
+    "size": 15419
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2015-1080.4d1964f523.avif",
+    "size": 31019
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2015-1620.3fa1aae08b.avif",
+    "size": 63911
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2015-1920.e82217669d.avif",
+    "size": 82890
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2015-360.4679fa0bb6.webp",
+    "size": 5488
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2015-720.94ebdc6211.webp",
+    "size": 17646
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2015-1080.045f59feaf.webp",
+    "size": 36548
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2015-1620.8a3600d937.webp",
+    "size": 77548
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2015-1920.d8de94ca3b.webp",
+    "size": 103634
+   }
+  ],
+  "src": "/assets/img/image2015-1920.d8de94ca3b.webp",
+  "inSize": 124593,
+  "outSize": 186524
+ },
+ "https://static.tildacdn.com/tild3262-3961-4230-b432-303530346134/Frame_509.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 180,
+  "h": 180,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 180,
+    "src": "/assets/img/frame-509-180.c5c01caa75.avif",
+    "size": 4838
+   }
+  ],
+  "webp": [
+   {
+    "w": 180,
+    "src": "/assets/img/frame-509-180.00dc325316.webp",
+    "size": 6382
+   }
+  ],
+  "src": "/assets/img/frame-509-180.00dc325316.webp",
+  "inSize": 12555,
+  "outSize": 11220
+ },
+ "https://static.tildacdn.com/tild3031-3337-4135-a238-653265666238/110_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/110-11zon-360.d16344c128.avif",
+    "size": 8856
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/110-11zon-720.ddbcad3e35.avif",
+    "size": 25099
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/110-11zon-1080.d79d7280cf.avif",
+    "size": 45379
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/110-11zon-1680.150e83d4d8.avif",
+    "size": 93833
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/110-11zon-360.03892b5c3b.webp",
+    "size": 12482
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/110-11zon-720.bb93eb0f4c.webp",
+    "size": 33632
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/110-11zon-1080.89522e80f5.webp",
+    "size": 59396
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/110-11zon-1680.785894a072.webp",
+    "size": 116598
+   }
+  ],
+  "src": "/assets/img/110-11zon-1680.785894a072.webp",
+  "inSize": 192128,
+  "outSize": 210431
+ },
+ "https://static.tildacdn.com/tild6432-3638-4665-b433-626566383463/__1.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1193,
+  "h": 864,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.eff51660a0.avif",
+    "size": 10300
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.281bcc7692.avif",
+    "size": 26186
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.714b48d177.avif",
+    "size": 41845
+   },
+   {
+    "w": 1193,
+    "src": "/assets/img/1-1193.550411a4ab.avif",
+    "size": 45754
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.bd59dbc3ca.webp",
+    "size": 12742
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.ecf3db7678.webp",
+    "size": 34242
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.72419bedb7.webp",
+    "size": 58968
+   },
+   {
+    "w": 1193,
+    "src": "/assets/img/1-1193.7a2eb16fe7.webp",
+    "size": 67088
+   }
+  ],
+  "src": "/assets/img/1-1193.7a2eb16fe7.webp",
+  "inSize": 455003,
+  "outSize": 112842
+ },
+ "https://static.tildacdn.com/tild3566-3162-4131-b833-363531326163/_3.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1600,
+  "h": 1704,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.014c3ef9bb.avif",
+    "size": 18371
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.8f182654a4.avif",
+    "size": 47397
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1080.b1b58d3666.avif",
+    "size": 79651
+   },
+   {
+    "w": 1600,
+    "src": "/assets/img/3-1600.05235d8f57.avif",
+    "size": 120168
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/3-360.8a7b3a93f7.webp",
+    "size": 23744
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/3-720.a8ff9441b5.webp",
+    "size": 59332
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/3-1080.a68cd92e76.webp",
+    "size": 95490
+   },
+   {
+    "w": 1600,
+    "src": "/assets/img/3-1600.9ad2d5ad57.webp",
+    "size": 143742
+   }
+  ],
+  "src": "/assets/img/3-1600.9ad2d5ad57.webp",
+  "inSize": 131440,
+  "outSize": 263910
+ },
+ "https://static.tildacdn.com/tild3263-6133-4432-a432-653365616538/_-2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 986,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.28f075f83f.avif",
+    "size": 8055
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.f04e55c931.avif",
+    "size": 25735
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1080.8468ca216c.avif",
+    "size": 50647
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/2-1680.b26b2bf6d2.avif",
+    "size": 107847
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.b6887be3fd.webp",
+    "size": 9350
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.bde4a9026b.webp",
+    "size": 29906
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1080.21c708aac6.webp",
+    "size": 58486
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/2-1680.da63f01c65.webp",
+    "size": 117476
+   }
+  ],
+  "src": "/assets/img/2-1680.da63f01c65.webp",
+  "inSize": 238228,
+  "outSize": 225323
+ },
+ "https://static.tildacdn.com/tild6236-6238-4933-b464-653235653062/_2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1186,
+  "h": 1434,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.84bdcc66ae.avif",
+    "size": 10559
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.4942e5cf78.avif",
+    "size": 27905
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1080.a0253d33ac.avif",
+    "size": 46743
+   },
+   {
+    "w": 1186,
+    "src": "/assets/img/2-1186.53b35a152b.avif",
+    "size": 49046
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/2-360.932d92592e.webp",
+    "size": 12804
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/2-720.18f549ae48.webp",
+    "size": 34302
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/2-1080.e2e520a234.webp",
+    "size": 58150
+   },
+   {
+    "w": 1186,
+    "src": "/assets/img/2-1186.0a7d75bc18.webp",
+    "size": 64162
+   }
+  ],
+  "src": "/assets/img/2-1186.0a7d75bc18.webp",
+  "inSize": 70207,
+  "outSize": 113208
+ },
+ "https://static.tildacdn.com/tild6639-3336-4238-a662-623738613533/___.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 808,
+  "h": 872,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-360.65a68200d7.avif",
+    "size": 22808
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-720.e373bbdbd0.avif",
+    "size": 54838
+   },
+   {
+    "w": 808,
+    "src": "/assets/img/img-808.fc375bde94.avif",
+    "size": 64000
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/img-360.2f5b6beaa4.webp",
+    "size": 28786
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/img-720.30e44c0e70.webp",
+    "size": 76350
+   },
+   {
+    "w": 808,
+    "src": "/assets/img/img-808.ed83812702.webp",
+    "size": 90348
+   }
+  ],
+  "src": "/assets/img/img-808.ed83812702.webp",
+  "inSize": 903440,
+  "outSize": 154348
+ },
+ "https://static.tildacdn.com/tild3335-6139-4630-b032-366131636236/Frame_109_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1186,
+  "h": 1434,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-109-11zon-360.47a2923ea9.avif",
+    "size": 9575
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-109-11zon-720.5c6124fa5a.avif",
+    "size": 30313
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-109-11zon-1080.a2860890b9.avif",
+    "size": 52171
+   },
+   {
+    "w": 1186,
+    "src": "/assets/img/frame-109-11zon-1186.413d189e5b.avif",
+    "size": 55878
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-109-11zon-360.124854cb27.webp",
+    "size": 11188
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-109-11zon-720.23a58c920a.webp",
+    "size": 34504
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-109-11zon-1080.d4a9a6337d.webp",
+    "size": 62550
+   },
+   {
+    "w": 1186,
+    "src": "/assets/img/frame-109-11zon-1186.43a375b48a.webp",
+    "size": 71288
+   }
+  ],
+  "src": "/assets/img/frame-109-11zon-1186.43a375b48a.webp",
+  "inSize": 56392,
+  "outSize": 127166
+ },
+ "https://static.tildacdn.com/tild3336-3233-4639-b862-343364636365/noroot.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1661,
+  "h": 715,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/noroot-360.81c00213b7.avif",
+    "size": 4683
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/noroot-720.c27f254888.avif",
+    "size": 14131
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/noroot-1080.730599c0ed.avif",
+    "size": 26935
+   },
+   {
+    "w": 1661,
+    "src": "/assets/img/noroot-1661.c5aafb10f9.avif",
+    "size": 53638
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/noroot-360.a475015fa3.webp",
+    "size": 5956
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/noroot-720.02c58b35aa.webp",
+    "size": 16878
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/noroot-1080.e5b80251c6.webp",
+    "size": 31458
+   },
+   {
+    "w": 1661,
+    "src": "/assets/img/noroot-1661.6554f377ba.webp",
+    "size": 65298
+   }
+  ],
+  "src": "/assets/img/noroot-1661.6554f377ba.webp",
+  "inSize": 404520,
+  "outSize": 118936
+ },
+ "https://static.tildacdn.com/tild3831-6534-4664-b937-353335643865/Macbook_Air_M2_Mocku.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-m2-mocku-360.3cda7f35bc.avif",
+    "size": 8730
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-m2-mocku-720.6075638356.avif",
+    "size": 23496
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-m2-mocku-1080.4cc3a1cf61.avif",
+    "size": 38645
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-m2-mocku-1680.7c51143d96.avif",
+    "size": 73530
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-m2-mocku-360.78eb43119a.webp",
+    "size": 11826
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-m2-mocku-720.3da2140be9.webp",
+    "size": 32310
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-m2-mocku-1080.fd31c9cc13.webp",
+    "size": 56684
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-m2-mocku-1680.06f2e260fb.webp",
+    "size": 105272
+   }
+  ],
+  "src": "/assets/img/macbook-air-m2-mocku-1680.06f2e260fb.webp",
+  "inSize": 174959,
+  "outSize": 178802
+ },
+ "https://static.tildacdn.com/tild3266-6635-4166-b665-626162376339/Frame_1321316728_11z.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1386,
+  "h": 1017,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316728-11z-360.728c16ec04.avif",
+    "size": 12713
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1321316728-11z-720.7f6fce2a8b.avif",
+    "size": 34889
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-1321316728-11z-1080.7fb45e65d0.avif",
+    "size": 60558
+   },
+   {
+    "w": 1386,
+    "src": "/assets/img/frame-1321316728-11z-1386.07baf94814.avif",
+    "size": 74787
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316728-11z-360.d66f5838f9.webp",
+    "size": 14530
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1321316728-11z-720.6d9de4b2f0.webp",
+    "size": 40846
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-1321316728-11z-1080.d0ec9a80fc.webp",
+    "size": 70970
+   },
+   {
+    "w": 1386,
+    "src": "/assets/img/frame-1321316728-11z-1386.6750b3270f.webp",
+    "size": 95778
+   }
+  ],
+  "src": "/assets/img/frame-1321316728-11z-1386.6750b3270f.webp",
+  "inSize": 80432,
+  "outSize": 170565
+ },
+ "https://static.tildacdn.com/tild3938-6138-4238-a533-346666366362/Frame_1321316726_11z.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1386,
+  "h": 1017,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316726-11z-360.7dc3c41159.avif",
+    "size": 7688
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1321316726-11z-720.ae638bda7f.avif",
+    "size": 20675
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-1321316726-11z-1080.7f41ad42ab.avif",
+    "size": 36218
+   },
+   {
+    "w": 1386,
+    "src": "/assets/img/frame-1321316726-11z-1386.45c62c71d9.avif",
+    "size": 48203
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316726-11z-360.9b8c667118.webp",
+    "size": 9848
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1321316726-11z-720.6c5c0d80fd.webp",
+    "size": 25768
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-1321316726-11z-1080.1dcc640738.webp",
+    "size": 46834
+   },
+   {
+    "w": 1386,
+    "src": "/assets/img/frame-1321316726-11z-1386.7326e8572a.webp",
+    "size": 64180
+   }
+  ],
+  "src": "/assets/img/frame-1321316726-11z-1386.7326e8572a.webp",
+  "inSize": 55863,
+  "outSize": 112383
+ },
+ "https://static.tildacdn.com/tild3165-3164-4462-b163-343332346566/807shots_so_11zon.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 2400,
+  "h": 1800,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/807shots-so-11zon-360.91991e2aa8.avif",
+    "size": 6857
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/807shots-so-11zon-720.11dcb844e5.avif",
+    "size": 22925
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/807shots-so-11zon-1080.705dfd84d4.avif",
+    "size": 43806
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/807shots-so-11zon-1620.57bae53369.avif",
+    "size": 74524
+   },
+   {
+    "w": 2400,
+    "src": "/assets/img/807shots-so-11zon-2400.cb4c9b1c61.avif",
+    "size": 142592
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/807shots-so-11zon-360.5cdd0305b6.webp",
+    "size": 9470
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/807shots-so-11zon-720.7f9be595d7.webp",
+    "size": 33790
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/807shots-so-11zon-1080.1c586a6314.webp",
+    "size": 66970
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/807shots-so-11zon-1620.0eceb5b2c8.webp",
+    "size": 117160
+   },
+   {
+    "w": 2400,
+    "src": "/assets/img/807shots-so-11zon-2400.919235d22f.webp",
+    "size": 211578
+   }
+  ],
+  "src": "/assets/img/807shots-so-11zon-2400.919235d22f.webp",
+  "inSize": 171792,
+  "outSize": 354170
+ },
+ "https://static.tildacdn.com/tild6130-6365-4263-a636-356137356536/Frame_1321316727_11z.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1386,
+  "h": 1017,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316727-11z-360.b990f7107f.avif",
+    "size": 5636
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1321316727-11z-720.db1b47d13a.avif",
+    "size": 17683
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-1321316727-11z-1080.494bd4c169.avif",
+    "size": 32768
+   },
+   {
+    "w": 1386,
+    "src": "/assets/img/frame-1321316727-11z-1386.e2531344a8.avif",
+    "size": 39902
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1321316727-11z-360.ea85bf2876.webp",
+    "size": 6634
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1321316727-11z-720.e567fc70ce.webp",
+    "size": 20686
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame-1321316727-11z-1080.690094154a.webp",
+    "size": 38588
+   },
+   {
+    "w": 1386,
+    "src": "/assets/img/frame-1321316727-11z-1386.8ea9980178.webp",
+    "size": 50590
+   }
+  ],
+  "src": "/assets/img/frame-1321316727-11z-1386.8ea9980178.webp",
+  "inSize": 50246,
+  "outSize": 90492
+ },
+ "https://static.tildacdn.com/tild6362-3930-4665-a165-383039633739/maksym-kaharlytskyi-.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 853,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/maksym-kaharlytskyi-360.34f5fbf248.avif",
+    "size": 13788
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/maksym-kaharlytskyi-720.92fea3f57d.avif",
+    "size": 49276
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/maksym-kaharlytskyi-1080.e2066cb02a.avif",
+    "size": 104292
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/maksym-kaharlytskyi-1680.d1692ffc4c.avif",
+    "size": 246004
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/maksym-kaharlytskyi-360.7ba6d8d67b.webp",
+    "size": 17486
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/maksym-kaharlytskyi-720.36225912fe.webp",
+    "size": 64970
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/maksym-kaharlytskyi-1080.79fe3035e8.webp",
+    "size": 143916
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/maksym-kaharlytskyi-1680.0629d6d035.webp",
+    "size": 330772
+   }
+  ],
+  "src": "/assets/img/maksym-kaharlytskyi-1680.0629d6d035.webp",
+  "inSize": 471606,
+  "outSize": 576776
+ },
+ "https://static.tildacdn.com/tild6139-3265-4566-b738-333762353034/5_11zon.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1232,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-11zon-360.ba2ad5a097.avif",
+    "size": 8546
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-11zon-720.fc72aea26b.avif",
+    "size": 24393
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-11zon-1080.c8366c7e81.avif",
+    "size": 43319
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/5-11zon-1680.b914d7d5cc.avif",
+    "size": 88457
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-11zon-360.67c606831e.webp",
+    "size": 10930
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-11zon-720.64b4327e06.webp",
+    "size": 29930
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-11zon-1080.de0499a7d6.webp",
+    "size": 52682
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/5-11zon-1680.c8276d6e24.webp",
+    "size": 103336
+   }
+  ],
+  "src": "/assets/img/5-11zon-1680.c8276d6e24.webp",
+  "inSize": 191833,
+  "outSize": 191793
+ },
+ "https://static.tildacdn.com/tild6533-6233-4538-b736-656231343965/cover_2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1121,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/cover-2-360.01a0655e50.avif",
+    "size": 11714
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/cover-2-720.d27672ae4c.avif",
+    "size": 33162
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/cover-2-1080.44d43d9b09.avif",
+    "size": 56312
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/cover-2-1680.d650f5b4f1.avif",
+    "size": 95870
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/cover-2-360.0bd17efd71.webp",
+    "size": 15306
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/cover-2-720.eaa10b4d56.webp",
+    "size": 42838
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/cover-2-1080.044127be9c.webp",
+    "size": 72106
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/cover-2-1680.12544c2460.webp",
+    "size": 117718
+   }
+  ],
+  "src": "/assets/img/cover-2-1680.12544c2460.webp",
+  "inSize": 238540,
+  "outSize": 213588
+ },
+ "https://static.tildacdn.com/tild6665-3264-4539-a438-613061336231/Macbook20Pro20Mockup.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook20pro20mockup-360.31e85d5091.avif",
+    "size": 7245
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook20pro20mockup-720.b53ef1f9dc.avif",
+    "size": 22819
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook20pro20mockup-1080.b3ee72ba6e.avif",
+    "size": 43513
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook20pro20mockup-1680.33cf8f67d8.avif",
+    "size": 94302
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook20pro20mockup-360.35c56043fe.webp",
+    "size": 9736
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook20pro20mockup-720.1639872e93.webp",
+    "size": 30714
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook20pro20mockup-1080.06e9b7e5c2.webp",
+    "size": 59490
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook20pro20mockup-1680.d1f67bb11b.webp",
+    "size": 123378
+   }
+  ],
+  "src": "/assets/img/macbook20pro20mockup-1680.d1f67bb11b.webp",
+  "inSize": 218408,
+  "outSize": 217680
+ },
+ "https://static.tildacdn.com/tild3764-6234-4537-b263-346265356135/Frame204.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1400,
+  "h": 1050,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame204-360.f083f20704.avif",
+    "size": 15678
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame204-720.537ea54075.avif",
+    "size": 53136
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame204-1080.57644a8d42.avif",
+    "size": 105986
+   },
+   {
+    "w": 1400,
+    "src": "/assets/img/frame204-1400.eaa42e2060.avif",
+    "size": 161481
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame204-360.813cc04301.webp",
+    "size": 20086
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame204-720.f99672411c.webp",
+    "size": 67028
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/frame204-1080.8f3d45d431.webp",
+    "size": 133626
+   },
+   {
+    "w": 1400,
+    "src": "/assets/img/frame204-1400.be6e51cdcb.webp",
+    "size": 199026
+   }
+  ],
+  "src": "/assets/img/frame204-1400.be6e51cdcb.webp",
+  "inSize": 232794,
+  "outSize": 360507
+ },
+ "https://static.tildacdn.com/tild6462-6435-4839-b263-396137343836/1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1400,
+  "h": 1050,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.1f3b14e431.avif",
+    "size": 7840
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.c7787078c5.avif",
+    "size": 22194
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.c8424fe6f2.avif",
+    "size": 42442
+   },
+   {
+    "w": 1400,
+    "src": "/assets/img/1-1400.0878204ad7.avif",
+    "size": 80380
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/1-360.509a4d54f0.webp",
+    "size": 10320
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/1-720.af9222bea7.webp",
+    "size": 30320
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/1-1080.a4207229b3.webp",
+    "size": 58822
+   },
+   {
+    "w": 1400,
+    "src": "/assets/img/1-1400.73e04426a0.webp",
+    "size": 96076
+   }
+  ],
+  "src": "/assets/img/1-1400.73e04426a0.webp",
+  "inSize": 169792,
+  "outSize": 176456
+ },
+ "https://static.tildacdn.com/tild3238-3939-4530-b932-303765656564/photo_2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1099,
+  "h": 545,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/photo-2-360.340115248d.avif",
+    "size": 12378
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/photo-2-720.742d549350.avif",
+    "size": 34539
+   },
+   {
+    "w": 1099,
+    "src": "/assets/img/photo-2-1099.1438e4f0ab.avif",
+    "size": 64011
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/photo-2-360.d8286c823a.webp",
+    "size": 18132
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/photo-2-720.10d404fa39.webp",
+    "size": 51008
+   },
+   {
+    "w": 1099,
+    "src": "/assets/img/photo-2-1099.71e714afa1.webp",
+    "size": 92198
+   }
+  ],
+  "src": "/assets/img/photo-2-1099.71e714afa1.webp",
+  "inSize": 506638,
+  "outSize": 156209
+ },
+ "https://static.tildacdn.com/tild6364-3833-4262-b066-613536613061/7903.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7903-360.b2e9d5bf88.avif",
+    "size": 2884
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7903-720.9c063211f9.avif",
+    "size": 5609
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7903-1080.220541e5a3.avif",
+    "size": 8263
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/7903-1680.baef5be87a.avif",
+    "size": 13199
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7903-360.c8d1726014.webp",
+    "size": 2834
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7903-720.2b5618fe63.webp",
+    "size": 6096
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7903-1080.1141c63f45.webp",
+    "size": 9822
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/7903-1680.38eb1fc253.webp",
+    "size": 17898
+   }
+  ],
+  "src": "/assets/img/7903-1680.38eb1fc253.webp",
+  "inSize": 63575,
+  "outSize": 31097
+ },
+ "https://static.tildacdn.com/tild3761-6239-4061-a532-646330343335/D180D0B5D0BAD0BBD0B0.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1316,
+  "h": 871,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-360.483f39cc08.avif",
+    "size": 4405
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-720.425d8cb0b0.avif",
+    "size": 11986
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-1080.d4e4e5a3a4.avif",
+    "size": 21833
+   },
+   {
+    "w": 1316,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-1316.04b710f8fe.avif",
+    "size": 30487
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-360.749418d165.webp",
+    "size": 5876
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-720.905fb5c048.webp",
+    "size": 16126
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-1080.6a23aa0e23.webp",
+    "size": 28838
+   },
+   {
+    "w": 1316,
+    "src": "/assets/img/d180d0b5d0bad0bbd0b0-1316.1acf887505.webp",
+    "size": 37752
+   }
+  ],
+  "src": "/assets/img/d180d0b5d0bad0bbd0b0-1316.1acf887505.webp",
+  "inSize": 51685,
+  "outSize": 68239
+ },
+ "https://static.tildacdn.com/tild3361-3638-4235-b863-666336383964/Frame_3-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1163,
+  "h": 935,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-3-min-360.6aa1bdd926.avif",
+    "size": 8832
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-3-min-720.63a02f95f1.avif",
+    "size": 20068
+   },
+   {
+    "w": 1163,
+    "src": "/assets/img/frame-3-min-1163.d9c23c78cf.avif",
+    "size": 52635
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-3-min-360.6ebd8143dc.webp",
+    "size": 12474
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-3-min-720.8e593f4241.webp",
+    "size": 28784
+   },
+   {
+    "w": 1163,
+    "src": "/assets/img/frame-3-min-1163.8695440833.webp",
+    "size": 66288
+   }
+  ],
+  "src": "/assets/img/frame-3-min-1163.8695440833.webp",
+  "inSize": 188746,
+  "outSize": 118923
+ },
+ "https://static.tildacdn.com/tild6533-6334-4164-a134-633734663462/7902.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/7902-360.98d07e721d.avif",
+    "size": 8019
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7902-720.17fe3259d2.avif",
+    "size": 19495
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7902-1080.dbe8d17828.avif",
+    "size": 30510
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/7902-1680.3b6a02ad36.avif",
+    "size": 54339
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/7902-360.8fd6953f23.webp",
+    "size": 10660
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/7902-720.1b234e0a5b.webp",
+    "size": 25560
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/7902-1080.67c3dd53c4.webp",
+    "size": 40502
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/7902-1680.c47cfed6c8.webp",
+    "size": 66950
+   }
+  ],
+  "src": "/assets/img/7902-1680.c47cfed6c8.webp",
+  "inSize": 169628,
+  "outSize": 121289
+ },
+ "https://static.tildacdn.com/tild6639-3465-4165-b037-366461393266/US-UK_Apple_Podcasts.svg": {
+  "kind": "svg",
+  "src": "/assets/img/us-uk-apple-podcasts.109aec22c1.svg",
+  "w": 129.155,
+  "h": 41,
+  "inSize": 12711,
+  "outSize": 8800
+ },
+ "https://static.tildacdn.com/tild6661-6266-4965-b331-343866343538/cssda-wotd-black_2.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 220,
+  "h": 220,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 220,
+    "src": "/assets/img/cssda-wotd-black-2-220.2032394fb7.avif",
+    "size": 4889
+   }
+  ],
+  "webp": [
+   {
+    "w": 220,
+    "src": "/assets/img/cssda-wotd-black-2-220.d89e62fba8.webp",
+    "size": 6124
+   }
+  ],
+  "src": "/assets/img/cssda-wotd-black-2-220.d89e62fba8.webp",
+  "inSize": 7453,
+  "outSize": 11013
+ },
+ "https://static.tildacdn.com/tild3561-3365-4464-b239-373531333861/D0A1D0BDD0B8D0BCD0BE.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 374,
+  "h": 904,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 374,
+    "src": "/assets/img/d0a1d0bdd0b8d0bcd0be-374.0f66cdbdf4.avif",
+    "size": 23525
+   }
+  ],
+  "webp": [
+   {
+    "w": 374,
+    "src": "/assets/img/d0a1d0bdd0b8d0bcd0be-374.c6670b073d.webp",
+    "size": 32442
+   }
+  ],
+  "src": "/assets/img/d0a1d0bdd0b8d0bcd0be-374.c6670b073d.webp",
+  "inSize": 125740,
+  "outSize": 55967
+ },
+ "https://static.tildacdn.com/tild3835-3535-4131-b333-663138663932/____-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 945,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-360.fc78d18f7b.avif",
+    "size": 8767
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-720.eb25e89f71.avif",
+    "size": 27552
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-1080.e0389639c5.avif",
+    "size": 49854
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/min-1680.247ad751f7.avif",
+    "size": 95687
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/min-360.9fe070befa.webp",
+    "size": 12280
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/min-720.31af56a2e4.webp",
+    "size": 36902
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/min-1080.138f493d0c.webp",
+    "size": 66602
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/min-1680.3384e9eebd.webp",
+    "size": 121248
+   }
+  ],
+  "src": "/assets/img/min-1680.3384e9eebd.webp",
+  "inSize": 204712,
+  "outSize": 216935
+ },
+ "https://static.tildacdn.com/tild6236-6131-4462-b434-336537646139/Frame_1-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1163,
+  "h": 935,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1-min-360.fe2d216fbf.avif",
+    "size": 10490
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1-min-720.2aff3e9b4f.avif",
+    "size": 25988
+   },
+   {
+    "w": 1163,
+    "src": "/assets/img/frame-1-min-1163.6f505a2784.avif",
+    "size": 66085
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-1-min-360.c72713eee5.webp",
+    "size": 15356
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-1-min-720.1230da9a44.webp",
+    "size": 38048
+   },
+   {
+    "w": 1163,
+    "src": "/assets/img/frame-1-min-1163.c9e7f30e5e.webp",
+    "size": 86786
+   }
+  ],
+  "src": "/assets/img/frame-1-min-1163.c9e7f30e5e.webp",
+  "inSize": 264604,
+  "outSize": 152871
+ },
+ "https://static.tildacdn.com/tild6561-3630-4435-a534-393666346433/D09AD0B5D0B8CC86D181.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1500,
+  "h": 1800,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-360.d627356123.avif",
+    "size": 2542
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-720.d0ba764dbb.avif",
+    "size": 5753
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1080.e7c34ba4cd.avif",
+    "size": 9439
+   },
+   {
+    "w": 1500,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1500.90ebea1719.avif",
+    "size": 16614
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-360.bb9ca08c5f.webp",
+    "size": 3306
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-720.22de554a60.webp",
+    "size": 8144
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1080.ea7f1447f5.webp",
+    "size": 13500
+   },
+   {
+    "w": 1500,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1500.9c26f04aa7.webp",
+    "size": 21934
+   }
+  ],
+  "src": "/assets/img/d09ad0b5d0b8cc86d181-1500.9c26f04aa7.webp",
+  "inSize": 36437,
+  "outSize": 38548
+ },
+ "https://static.tildacdn.com/tild3830-6530-4731-b261-353738656230/MacBook_Air_2022-min.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1260,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-2022-min-360.98727c2879.avif",
+    "size": 6917
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-2022-min-720.7170a67b8b.avif",
+    "size": 19983
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-2022-min-1080.d8693791b0.avif",
+    "size": 36090
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-2022-min-1680.effab80ea2.avif",
+    "size": 74273
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-air-2022-min-360.528225bf20.webp",
+    "size": 9136
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-air-2022-min-720.6eec13b43c.webp",
+    "size": 26496
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-air-2022-min-1080.506d621a7b.webp",
+    "size": 48258
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-air-2022-min-1680.89343d9ea0.webp",
+    "size": 94806
+   }
+  ],
+  "src": "/assets/img/macbook-air-2022-min-1680.89343d9ea0.webp",
+  "inSize": 175803,
+  "outSize": 169079
+ },
+ "https://static.tildacdn.com/tild3830-3763-4435-b961-653133326237/image_304.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 862,
+  "h": 857,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-304-360.cd215f9497.avif",
+    "size": 20877
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-304-720.adddba6528.avif",
+    "size": 62255
+   },
+   {
+    "w": 862,
+    "src": "/assets/img/image-304-862.c7f5aa9122.avif",
+    "size": 80123
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image-304-360.ae76b4a097.webp",
+    "size": 33752
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image-304-720.08831142c5.webp",
+    "size": 93064
+   },
+   {
+    "w": 862,
+    "src": "/assets/img/image-304-862.a89391dc3c.webp",
+    "size": 120760
+   }
+  ],
+  "src": "/assets/img/image-304-862.a89391dc3c.webp",
+  "inSize": 781164,
+  "outSize": 200883
+ },
+ "https://static.tildacdn.com/tild3763-6230-4236-b135-366432633732/D09AD0B5D0B8CC86D181.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1500,
+  "h": 1800,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-360.f5f42e24ec.avif",
+    "size": 14116
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-720.d61e3ee3a3.avif",
+    "size": 35809
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1080.74c40dd424.avif",
+    "size": 59108
+   },
+   {
+    "w": 1500,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1500.d478874d49.avif",
+    "size": 94164
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-360.be875964a8.webp",
+    "size": 19690
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-720.7842766fbb.webp",
+    "size": 46188
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1080.30d0cbe846.webp",
+    "size": 76282
+   },
+   {
+    "w": 1500,
+    "src": "/assets/img/d09ad0b5d0b8cc86d181-1500.b5397fdc20.webp",
+    "size": 111922
+   }
+  ],
+  "src": "/assets/img/d09ad0b5d0b8cc86d181-1500.b5397fdc20.webp",
+  "inSize": 153397,
+  "outSize": 206086
+ },
+ "https://static.tildacdn.com/tild3435-3764-4531-b337-663161393938/image2016.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2016-360.34c3dc9746.avif",
+    "size": 6872
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2016-720.42f712a1c7.avif",
+    "size": 19106
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2016-1080.ae133c0976.avif",
+    "size": 35852
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2016-1620.455637deac.avif",
+    "size": 65013
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2016-1920.8e43e2bc08.avif",
+    "size": 89314
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/image2016-360.0d4ee58fd8.webp",
+    "size": 8894
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/image2016-720.5fc38c34e9.webp",
+    "size": 23662
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/image2016-1080.6f38f9e2b6.webp",
+    "size": 43274
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/image2016-1620.16a0daea1c.webp",
+    "size": 75952
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/image2016-1920.1018d8a692.webp",
+    "size": 102580
+   }
+  ],
+  "src": "/assets/img/image2016-1920.1018d8a692.webp",
+  "inSize": 142329,
+  "outSize": 191894
+ },
+ "https://static.tildacdn.com/tild6637-3730-4466-a636-623131343738/MacBook_01-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 3000,
+  "h": 2250,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-01-min-360.ddd0b5e18c.avif",
+    "size": 7645
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-01-min-720.db69462778.avif",
+    "size": 21514
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-01-min-1080.8d90362588.avif",
+    "size": 41192
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/macbook-01-min-1620.566024adb6.avif",
+    "size": 76857
+   },
+   {
+    "w": 3000,
+    "src": "/assets/img/macbook-01-min-3000.7f10bd0c03.avif",
+    "size": 255792
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-01-min-360.0ee13aa4c9.webp",
+    "size": 12176
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-01-min-720.1cc81b9a48.webp",
+    "size": 33996
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-01-min-1080.a45fe59543.webp",
+    "size": 62530
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/macbook-01-min-1620.431fa33c84.webp",
+    "size": 121488
+   },
+   {
+    "w": 3000,
+    "src": "/assets/img/macbook-01-min-3000.6c70ae8c17.webp",
+    "size": 386984
+   }
+  ],
+  "src": "/assets/img/macbook-01-min-3000.6c70ae8c17.webp",
+  "inSize": 1178858,
+  "outSize": 642776
  }
 }

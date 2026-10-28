@@ -379,6 +379,7 @@ function initLazy() {
   if ($('[data-tabs],.lm-b')) import('./tabs.js').then((m) => m.init());
   $$('[data-gl]').forEach((g) => import('./gallery.js').then((m) => m.init(g)));
   $$('[data-acc]').forEach((a) => import('./accordion.js').then((m) => m.init(a)));
+  $$('[data-hs]').forEach((h) => import('./hero.js').then((m) => m.init(h)));
   $$('[data-quiz]').forEach((qz) => {
     const load = () => import('./quiz.js').then((m) => m.init(qz));
     if ('IntersectionObserver' in w) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '800px 0px' }); io.observe(qz); } else load();
