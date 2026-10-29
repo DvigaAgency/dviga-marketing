@@ -292,5 +292,23 @@
   "poster": "/assets/video/masters2.861412484d.webp",
   "w": 1506,
   "h": 720
+ },
+ "https://cp80604-bitrix-8.tw1.ru/showreel.MP4": {
+  "mp4": "/assets/video/showreel.e9bfcfb8fd.mp4",
+  "poster": "/assets/video/showreel.c7b6224da4.webp",
+  "w": 1280,
+  "h": 720
+ },
+ "https://cp80604-bitrix-8.tw1.ru/showreel.mp4": {
+  "mp4": "/assets/video/showreel.afee9ff1f2.mp4",
+  "poster": "/assets/video/showreel.a059aa95d5.webp",
+  "w": 1382,
+  "h": 720
+ },
+ "https://cp80604-bitrix-8.tw1.ru/Real_Estate_company.mp4": {
+  "mp4": "/assets/video/real-estate-company.b2a144f706.mp4",
+  "poster": "/assets/video/real-estate-company.9a4c802eaf.webp",
+  "w": 1280,
+  "h": 606
  }
 }

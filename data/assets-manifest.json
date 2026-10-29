@@ -5492,7 +5492,8 @@
   "size": 223451
  },
  "https://cp80604-bitrix-8.tw1.ru/showreel.MP4": {
-  "error": "TypeError: fetch failed"
+  "file": "source-assets/ext__showreel.MP4",
+  "size": 23573936
  },
  "https://static.tildacdn.com/tild3036-3637-4664-a130-316634663931/_-min_3.jpg": {
   "file": "source-assets/tild3036-3637-4664-a130-316634663931___-min_3.jpg",
@@ -5855,10 +5856,12 @@
   "size": 142329
  },
  "https://cp80604-bitrix-8.tw1.ru/showreel.mp4": {
-  "error": "TypeError: fetch failed"
+  "file": "source-assets/ext__showreel-2.mp4",
+  "size": 63921209
  },
  "https://cp80604-bitrix-8.tw1.ru/Real_Estate_company.mp4": {
-  "error": "TypeError: fetch failed"
+  "file": "source-assets/ext__Real_Estate_company.mp4",
+  "size": 3338650
  },
  "https://static.tildacdn.com/tild3861-3837-4631-b032-383636376539/8969.jpg": {
   "file": "source-assets/tild3861-3837-4631-b032-383636376539__8969.jpg",
