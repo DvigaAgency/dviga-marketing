@@ -80134,5 +80134,417 @@
   "src": "/assets/img/11-11zon-1-1680.16378beb64.webp",
   "inSize": 142307,
   "outSize": 135156
+ },
+ "https://static.tildacdn.com/tild3339-6432-4763-b734-663138383365/Frame_6757810.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 890,
+  "h": 1180,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757810-360.d5e393b1f4.avif",
+    "size": 8820
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757810-720.c4a61dd02a.avif",
+    "size": 21700
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/frame-6757810-890.b8022f1a88.avif",
+    "size": 29246
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757810-360.398f1250b9.webp",
+    "size": 11684
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757810-720.d1431facb6.webp",
+    "size": 30348
+   },
+   {
+    "w": 890,
+    "src": "/assets/img/frame-6757810-890.038c86c694.webp",
+    "size": 41280
+   }
+  ],
+  "src": "/assets/img/frame-6757810-890.038c86c694.webp",
+  "inSize": 387352,
+  "outSize": 70526
+ },
+ "https://static.tildacdn.com/tild3266-6130-4465-b362-613461366362/Frame_2-min.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1163,
+  "h": 935,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-2-min-360.0bc7ab5245.avif",
+    "size": 11763
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-2-min-720.c75ac15dd4.avif",
+    "size": 29303
+   },
+   {
+    "w": 1163,
+    "src": "/assets/img/frame-2-min-1163.6cce17d7ac.avif",
+    "size": 68635
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-2-min-360.06bd05c433.webp",
+    "size": 17578
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-2-min-720.6da45f1015.webp",
+    "size": 42348
+   },
+   {
+    "w": 1163,
+    "src": "/assets/img/frame-2-min-1163.a8a2c9b166.webp",
+    "size": 90500
+   }
+  ],
+  "src": "/assets/img/frame-2-min-1163.a8a2c9b166.webp",
+  "inSize": 264786,
+  "outSize": 159135
+ },
+ "https://static.tildacdn.com/tild6666-3138-4262-a435-353961316539/photo1719821108.jpeg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1280,
+  "h": 960,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/photo1719821108-360.bb67c4f0ba.avif",
+    "size": 9786
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/photo1719821108-720.feb1e84d69.avif",
+    "size": 28073
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/photo1719821108-1080.00ea6f3ac2.avif",
+    "size": 50952
+   },
+   {
+    "w": 1280,
+    "src": "/assets/img/photo1719821108-1280.a7edf84a00.avif",
+    "size": 65534
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/photo1719821108-360.7ca6866322.webp",
+    "size": 13874
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/photo1719821108-720.54b01036e1.webp",
+    "size": 37776
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/photo1719821108-1080.4b15f6bbfb.webp",
+    "size": 65758
+   },
+   {
+    "w": 1280,
+    "src": "/assets/img/photo1719821108-1280.82abeabc3d.webp",
+    "size": 84894
+   }
+  ],
+  "src": "/assets/img/photo1719821108-1280.82abeabc3d.webp",
+  "inSize": 100855,
+  "outSize": 150428
+ },
+ "https://static.tildacdn.com/tild3463-3638-4062-b366-393636373164/Macbook_16_Pro_On_Pi.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1120,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-16-pro-on-pi-360.0901eecac0.avif",
+    "size": 6292
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-16-pro-on-pi-720.3165a2ee8b.avif",
+    "size": 18620
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-16-pro-on-pi-1080.6414b278a1.avif",
+    "size": 38189
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-16-pro-on-pi-1680.30757d99e9.avif",
+    "size": 108976
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/macbook-16-pro-on-pi-360.5708397e0b.webp",
+    "size": 8676
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/macbook-16-pro-on-pi-720.fa4e186d67.webp",
+    "size": 25120
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/macbook-16-pro-on-pi-1080.6dfbc5f157.webp",
+    "size": 50746
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/macbook-16-pro-on-pi-1680.17615a4151.webp",
+    "size": 118686
+   }
+  ],
+  "src": "/assets/img/macbook-16-pro-on-pi-1680.17615a4151.webp",
+  "inSize": 219903,
+  "outSize": 227662
+ },
+ "https://static.tildacdn.com/tild6134-6636-4238-a534-396365653036/Frame_6757817_1.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 907,
+  "h": 1200,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757817-1-360.6616ffd001.avif",
+    "size": 19024
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757817-1-720.cbafaffa99.avif",
+    "size": 47860
+   },
+   {
+    "w": 907,
+    "src": "/assets/img/frame-6757817-1-907.956c9728c8.avif",
+    "size": 67512
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/frame-6757817-1-360.161f8dfd47.webp",
+    "size": 27634
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/frame-6757817-1-720.d113ec7aa9.webp",
+    "size": 64184
+   },
+   {
+    "w": 907,
+    "src": "/assets/img/frame-6757817-1-907.8495cfa9ae.webp",
+    "size": 87068
+   }
+  ],
+  "src": "/assets/img/frame-6757817-1-907.8495cfa9ae.webp",
+  "inSize": 797299,
+  "outSize": 154580
+ },
+ "https://static.tildacdn.com/tild3837-6461-4237-b636-353536666235/_5.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 1018,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-360.d15615c567.avif",
+    "size": 6755
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-720.40528665ae.avif",
+    "size": 15070
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-1080.f521729800.avif",
+    "size": 22991
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/5-1680.ca423e98ec.avif",
+    "size": 36824
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/5-360.7299c13f65.webp",
+    "size": 9318
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/5-720.3811190dd2.webp",
+    "size": 21558
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/5-1080.a62d797f19.webp",
+    "size": 34714
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/5-1680.93f0c36d52.webp",
+    "size": 59304
+   }
+  ],
+  "src": "/assets/img/5-1680.93f0c36d52.webp",
+  "inSize": 1405777,
+  "outSize": 96128
+ },
+ "https://static.tildacdn.com/tild3466-6438-4732-a134-313536626337/Depositphotos_179322.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 943,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/depositphotos-179322-360.95f0b11a90.avif",
+    "size": 17180
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/depositphotos-179322-720.74a665f8d7.avif",
+    "size": 61639
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/depositphotos-179322-1080.f2adf09305.avif",
+    "size": 124415
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/depositphotos-179322-1680.e5bcadb014.avif",
+    "size": 286725
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/depositphotos-179322-360.0013421de6.webp",
+    "size": 23694
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/depositphotos-179322-720.3f7ca19b53.webp",
+    "size": 81370
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/depositphotos-179322-1080.a559e36bed.webp",
+    "size": 169790
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/depositphotos-179322-1680.c8f8f1d33f.webp",
+    "size": 369024
+   }
+  ],
+  "src": "/assets/img/depositphotos-179322-1680.c8f8f1d33f.webp",
+  "inSize": 547703,
+  "outSize": 655749
+ },
+ "https://static.tildacdn.com/tild3631-3562-4464-a632-656463623431/D0BDD0B5D0B3D0B0D0B7.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1815,
+  "h": 1620,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-360.63755854d8.avif",
+    "size": 10054
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-720.c0787b8409.avif",
+    "size": 29519
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1080.6ee84eb0a1.avif",
+    "size": 49253
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1620.eb482b9671.avif",
+    "size": 82112
+   },
+   {
+    "w": 1815,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1815.99d7bd8513.avif",
+    "size": 108490
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-360.95f87a5ff9.webp",
+    "size": 11588
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-720.3a4dd2534e.webp",
+    "size": 33668
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1080.82e1fc8389.webp",
+    "size": 56602
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1620.2733723e43.webp",
+    "size": 95746
+   },
+   {
+    "w": 1815,
+    "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1815.fe56693b0e.webp",
+    "size": 112850
+   }
+  ],
+  "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1815.fe56693b0e.webp",
+  "inSize": 180178,
+  "outSize": 221340
  }
 }
