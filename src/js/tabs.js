@@ -10,6 +10,7 @@ export function init() {
   let ready = false;
   const hiddenByMore = new Set();
   $$('.lm-b').forEach((b) => ids(b.dataset.more).forEach((i) => hiddenByMore.add(i)));
+  const allMore = new Set(hiddenByMore); // все записи под кнопками «Загрузить еще» (в т.ч. не привязанные к вкладкам)
   const tabs = $$('[data-tabs]');
   const apply = () => {
     const inTab = new Set();
@@ -18,7 +19,7 @@ export function init() {
       $$('.tb-t', tb).forEach((t) => ids(t.dataset.ids).forEach((i) => { inTab.add(i); if (t.classList.contains('on')) active.add(i); }));
     });
     inTab.forEach((i) => { const r = rec(i); if (r) r.classList.toggle('off', !active.has(i) || hiddenByMore.has(i)); });
-    hiddenByMore.forEach((i) => { const r = rec(i); if (r && !inTab.has(i)) r.classList.toggle('off', true); });
+    allMore.forEach((i) => { const r = rec(i); if (r && !inTab.has(i)) r.classList.toggle('off', hiddenByMore.has(i)); });
     if (ready) dispatchEvent(new Event('resize')); // анимации прокрутки перемеряют только показанные записи
   };
   tabs.forEach((tb) => {
