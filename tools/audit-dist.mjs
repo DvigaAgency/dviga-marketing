@@ -16,7 +16,8 @@ const FORBIDDEN = [
 ];
 let bad = 0;
 for (const [name, re] of FORBIDDEN) {
-  const hits = text.filter((f) => re.test(fs.readFileSync(f, 'utf8').replace(/<a [^>]*>[^]*?<\/a>/g, ''))); // адреса в href — внешние ссылки-переходы (например, на сайт кейса), не ресурсы
+  const strip = (f, s) => (name.startsWith('tilda.ws') && f.endsWith('.html') ? s.replace(/>[^<]+</g, '><') : s); // упоминание адреса в тексте статьи (инструкция про Tilda) — не ресурс
+  const hits = text.filter((f) => re.test(strip(f, fs.readFileSync(f, 'utf8')).replace(/<a [^>]*>[^]*?<\/a>/g, ''))); // адреса в href — внешние ссылки-переходы (например, на сайт кейса), не ресурсы
   console.log(`${hits.length ? 'FAIL' : 'ok  '} ${name}${hits.length ? ': ' + hits.join(', ') : ''}`);
   bad += hits.length;
 }

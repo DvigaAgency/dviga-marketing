@@ -248,7 +248,7 @@ async function buildPage(spec) {
   usedAssets.add(ogM.webp.at(-1).src);
   const ldFile = home ? JSON.parse(fs.readFileSync('data/jsonld.json', 'utf8')) : $('script[type="application/ld+json"]').map((i, e) => parseJsonLd($(e).text())).get();
   const ld = ldFile
-    .map((o) => JSON.parse(JSON.stringify(o).replace(/https?:\\?\/\\?\/(static|thb)\.tildacdn\.com[^"\\]*/g, SITE_URL + logo.src).replace(/https:\/\/dviga\.marketing/g, SITE_URL)))
+    .map((o) => JSON.parse(JSON.stringify(o).replace(/https?:\\?\/\\?\/(static|thb|optim)\.tildacdn\.com[^"\\]*/g, SITE_URL + logo.src).replace(/https:\/\/dviga\.marketing/g, SITE_URL)))
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('');
   const noscript = '<style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style>';
   const cssTags = `<link rel="stylesheet" href="/assets/${commonName}"><link rel="stylesheet" href="/assets/${cssName}"><noscript>${noscript}</noscript>`;

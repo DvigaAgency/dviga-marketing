@@ -7,7 +7,8 @@ const rawFile = 'data/assets-raw.json';
 const raw = new Set(fs.existsSync(rawFile) ? JSON.parse(fs.readFileSync(rawFile, 'utf8')) : []);
 const norm = (u) => u.replace(/&amp;/g, '&').replace(/^\/\//, 'https://')
   .replace(/^https:\/\/thb\.tildacdn\.com\/([^/]+)\/-\/(?:resizeb?|empty)\/[^/]*\/?(?:-\/)?(.*)$/, 'https://static.tildacdn.com/$1/$2')
-  .replace(/^https:\/\/optim\.tildacdn\.com\/([^/]+)\/-\/[^/]+\/(?:-\/)?(?:[^/]+\/)*([^/]+)$/, 'https://static.tildacdn.com/$1/$2');
+  .replace(/^https:\/\/optim\.tildacdn\.com\/([^/]+)\/-\/[^/]+\/(?:-\/)?(?:[^/]+\/)*([^/]+)$/, 'https://static.tildacdn.com/$1/$2')
+  .replace(/(\.(?:jpe?g|png|gif))\.webp$/i, '$1'); // optim отдаёт «Name.jpg.webp» — оригинал лежит как «Name.jpg»
 const before = raw.size;
 for (const p of PAGES) {
   const s = fs.readFileSync(p.src, 'utf8');

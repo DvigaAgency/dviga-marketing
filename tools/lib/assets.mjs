@@ -5,7 +5,9 @@ const used = new Set();
 export const usedAssets = used;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const norm = (u) => u.replace(/&amp;/g, '&').replace(/^\/\//, 'https://')
-  .replace(/^https:\/\/thb\.tildacdn\.com\/([^/]+)\/-\/resizeb?\/[0-9]+x\/(.+)$/, 'https://static.tildacdn.com/$1/$2');
+  .replace(/^https:\/\/thb\.tildacdn\.com\/([^/]+)\/-\/resizeb?\/[0-9]+x\/(.+)$/, 'https://static.tildacdn.com/$1/$2')
+  .replace(/^https:\/\/optim\.tildacdn\.com\/([^/]+)\/-\/[^/]+\/(?:-\/)?(?:[^/]+\/)*([^/]+)$/, 'https://static.tildacdn.com/$1/$2')
+  .replace(/(\.(?:jpe?g|png|gif))\.webp$/i, '$1'); // optim отдаёт «Name.jpg.webp» — оригинал лежит как «Name.jpg»
 export const lookup = (url) => manifest[norm(url)] || manifest[norm(url).replace(/^http:/, 'https:')];
 
 export function picture(url, o = {}) {

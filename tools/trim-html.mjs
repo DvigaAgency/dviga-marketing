@@ -10,7 +10,7 @@ export function trim(html) {
   $('*').contents().filter((i, n) => n.type === 'comment').remove();
   return $.html();
 }
-if (process.argv[2]) {
+if (process.argv[2] && process.argv[1].endsWith('trim-html.mjs')) {
   const [i, o] = process.argv.slice(2);
   const out = trim(fs.readFileSync(i, 'utf8'));
   fs.writeFileSync(o, out);
