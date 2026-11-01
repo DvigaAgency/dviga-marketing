@@ -38,6 +38,12 @@ img{border:0}
 .tf a{border-bottom:1px solid #121212;box-shadow:none;transition:color .3s,border-bottom .3s,box-shadow .3s}
 .tf a:hover{color:#121212;border-color:#121212;box-shadow:inset 0 -1px 0 0 #121212}
 .vd{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+/* кнопка «смотреть» на ролике, который грузится по клику (тяжёлые ролики с хостинга) */
+.vp{position:absolute;left:50%;top:50%;z-index:2;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;transition:background-color .2s}
+.vp[hidden]{display:none}
+.vp::before{content:"";position:absolute;left:29px;top:21px;border-style:solid;border-width:15px 0 15px 23px;border-color:transparent transparent transparent #121212;transition:border-color .2s}
+@media(hover:hover){.vp:hover{background:#d93433}.vp:hover::before{border-left-color:#fff}}
+.vd[data-rsrc]{cursor:pointer}
 .e[data-t=video] .a{display:block;height:100%}
 .fm.ok .fo{display:none}
 html{scroll-behavior:smooth}
@@ -59,3 +65,5 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @supports (-webkit-touch-callout:none){.cv{content-visibility:visible}}
 /* как у корневого контейнера оригинала: всё, что выходит за края секций (overflow:visible у артборда), не создаёт горизонтальную прокрутку */
 main.cq,footer.cq{overflow:clip}
+.vem{position:relative;width:100%;height:100%;background:#000;cursor:pointer;overflow:hidden}
+.vem:not([data-embed]){cursor:auto}

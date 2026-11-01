@@ -34,7 +34,7 @@ async function worker() {
           fs.writeFileSync(f, Buffer.from(await r.arrayBuffer()));
         } catch (e) { // node fetch не ходит через прокси некоторых сред — запасной путь через curl
           if (/HTTP 4dd/.test(e.message)) throw e;
-          const c = spawnSync('curl', ['-sS', '-L', '--fail', '-m', '45', '--retry', '2', '-o', f, url], { encoding: 'utf8' });
+          const c = spawnSync('curl', ['-sS', '--ssl-no-revoke', '-L', '--fail', '-m', '45', '--retry', '2', '-o', f, url], { encoding: 'utf8' });
           if (c.status !== 0) { fs.rmSync(f, { force: true }); throw new Error('curl: ' + c.stderr.trim()); }
         }
       }

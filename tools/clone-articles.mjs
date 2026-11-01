@@ -28,7 +28,7 @@ const $l = cheerio.load(fs.readFileSync('data/pages/blog.html', 'utf8'), { decod
 
 function get(url) {
   for (let k = 0; k < 4; k++) {
-    const r = spawnSync('curl', ['-sS', '-L', '-m', '90', '--fail', url], { encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 });
+    const r = spawnSync('curl', ['-sS', '--ssl-no-revoke', '-L', '-m', '90', '--fail', url], { encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 });
     if (r.status === 0 && r.stdout.length > 50000) return r.stdout;
   }
   throw new Error('не удалось скачать ' + url);

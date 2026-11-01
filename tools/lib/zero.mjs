@@ -1,6 +1,7 @@
 // Конвертер Zero-блока (record type 396) в статический HTML + CSS без рантайма Tilda.
 import * as csstree from 'css-tree';
 import { makeGetter, artboardAt, elemLayout, num } from './zero-layout.mjs';
+import { applyFit } from './text-fit.mjs';
 import { buildKeyframes, scrollSteps } from './sbs.mjs';
 
 const SEL_MAP = [
@@ -41,6 +42,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
 export function convertZero($, rec, ctx) {
   const recId = rec.attr('id').replace('rec', '');
   ctx.rec = recId;
+  applyFit(rec, recId); // тексты статей — колонка 760px (замеры tools/fit-text.mjs)
   const abEl = rec.find('.t396__artboard').first();
   const ab = abEl.attr();
   const screens = (ab['data-artboard-screens'] || '320,480,640,960,1200').split(',').map(Number);
@@ -410,7 +412,8 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
     }
     case 'video': {
       const v = atom.find('.tn-atom__videoiframe');
-      body = ctx.video(v.attr('data-mp4video'), id);
+      const emb = ['rutube', 'vimeo', 'youtube'].find((k) => v.attr(`data-${k}id`));
+      body = emb && ctx.embed ? ctx.embed(emb, v.attr(`data-${emb}id`)) : ctx.video(v.attr('data-mp4video'), id);
       style = ' style="height:100%"';
       break;
     }

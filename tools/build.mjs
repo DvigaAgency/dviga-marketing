@@ -16,6 +16,7 @@ import { setLocalPaths, link } from './lib/util.mjs';
 import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSliderBlock } from './lib/listing.mjs';
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
+import { t431Table } from './lib/t431.mjs';
 import { pinFirst } from './lib/blog-pin.mjs';
 import { PAGES } from './pages.mjs';
 import { leadMeta, trackingTags } from './lib/tracking.mjs';
@@ -31,6 +32,8 @@ setLocalPaths(PAGES.map((p) => p.path));
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 const videoManifest = fs.existsSync('data/video-manifest.json') ? JSON.parse(fs.readFileSync('data/video-manifest.json', 'utf8')) : {};
+const videoEmbeds = fs.existsSync('data/video-embeds.json') ? JSON.parse(fs.readFileSync('data/video-embeds.json', 'utf8')) : {}; // плееры Rutube/Vimeo/YouTube: постер, iframe подставляется по клику (tools/embed-posters.mjs)
+const videoRemote = fs.existsSync('data/video-remote.json') ? JSON.parse(fs.readFileSync('data/video-remote.json', 'utf8')) : {}; // тяжёлые ролики с хостинга оригинала: на странице — постер и кнопка, сам ролик грузится по клику (tools/remote-videos.mjs)
 
 // ----------------------------------------------------------------- общий CSS (одинаков для всех страниц)
 const readCss = (f) => fs.readFileSync(f, 'utf8');
@@ -137,8 +140,18 @@ async function buildPage(spec) {
     drag: new Set(home ? ['864137673'] : []),
     eagerRecs,
     textHtml: (h) => videoLinks(fixLinks(h)),
+    embed(kind, raw) {
+      const raw2 = String(raw).replace(/&amp;/g, '&');
+      const m = videoEmbeds[`${kind}:${raw2}`];
+      const src = kind === 'rutube' ? `https://rutube.ru/play/embed/${raw2}` : kind === 'vimeo' ? `https://player.vimeo.com/video/${raw2}` : `https://www.youtube.com/embed/${raw2}`;
+      if (!m) return '<div class="vem"></div>';
+      usedAssets.add(m.poster);
+      return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}"><img class="vd" src="${m.poster}" width="${m.w}" height="${m.h}" alt="" loading="lazy" decoding="async"><button class="vp" type="button" aria-label="Смотреть видео"></button></div>`;
+    },
     video(url) {
       const v = videoManifest[url];
+      const rm = !v && videoRemote[url];
+      if (rm) { usedAssets.add(rm.poster); return `<video class="vd" muted loop playsinline preload="none" data-poster="${rm.poster}" data-rsrc="${String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video><button class="vp" type="button" aria-label="Смотреть видео"></button>`; }
       if (!v) return '<video class="vd" muted loop playsinline preload="none" aria-hidden="true"></video>';
       usedAssets.add(v.mp4);
       if (v.poster) usedAssets.add(v.poster);
@@ -192,7 +205,7 @@ async function buildPage(spec) {
       if (type === '833' || type === '331') continue; // T833 — фон обложки (см. выше); T331 — попап с видео: ссылка на него ведёт на страницу ролика (videoLinks)
       if (type === '169' && name === 'main') { const t = tilesBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
-      if (type === '431' && name === 'main') { const t = tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
       if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }

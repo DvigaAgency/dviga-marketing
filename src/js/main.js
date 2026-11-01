@@ -263,10 +263,33 @@ function initBg() {
   els.forEach((el) => io.observe(el));
 }
 
+/* ---------- плееры Rutube / Vimeo / YouTube: по клику на постер подставляем iframe ---------- */
+function initEmbeds() {
+  $('.vem[data-embed]').forEach((b) => b.addEventListener('click', () => {
+    const u = new URL(b.dataset.embed);
+    u.searchParams.set('autoplay', '1');
+    if (b.dataset.kind === 'rutube') u.searchParams.set('autoStart', 'true');
+    const f = d.createElement('iframe');
+    f.src = u.href; f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true; f.title = 'Видео'; f.setAttribute('frameborder', '0');
+    f.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;border:0';
+    b.replaceChildren(f); b.removeAttribute('data-embed');
+  }));
+}
+
 /* ---------- видео ---------- */
 function initVideo() {
   const vs = $$('video[data-src]');
-  if (!vs.length) return;
+  const rv = $$('video[data-rsrc]'); // тяжёлые ролики с хостинга: до клика — только постер, ролик не загружается
+  rv.forEach((v) => {
+    const b = v.nextElementSibling;
+    const sync = () => { if (b) b.hidden = !v.paused; };
+    const start = () => { if (!v.src) { v.src = v.dataset.rsrc; v.load(); } v.muted = true; v.play().catch(() => {}); };
+    if (b) b.addEventListener('click', start);
+    v.addEventListener('click', () => (v.src && !v.paused ? v.pause() : start()));
+    v.addEventListener('play', sync); v.addEventListener('pause', sync);
+  });
+  if ('IntersectionObserver' in w) { const off = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting && !e.target.paused) e.target.pause(); }), { rootMargin: '0px' }); rv.forEach((v) => off.observe(v)); }
+  if (!vs.length && !rv.length) return;
   // постеры подгружаются заранее (за ~1,5 экрана), сами ролики — только вблизи экрана и играют только в нём
   const pio = new IntersectionObserver((es) => es.forEach((e) => {
     if (e.isIntersecting) { const v = e.target; if (v.dataset.poster) v.poster = v.dataset.poster; pio.unobserve(v); }
@@ -280,6 +303,7 @@ function initVideo() {
     } else v.pause();
   }), { rootMargin: '200px 0px' });
   vs.forEach((v) => { pio.observe(v); io.observe(v); });
+  rv.forEach((v) => pio.observe(v));
   // iOS (режим энергосбережения) и часть браузеров не дают автоплей без жеста — повторяем при первом касании/прокрутке
   const wait = new Set();
   const retry = () => { wait.forEach((v) => { if (v.getBoundingClientRect().bottom > 0 && v.getBoundingClientRect().top < innerHeight) v.play().then(() => wait.delete(v)).catch(() => {}); }); };
@@ -404,6 +428,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

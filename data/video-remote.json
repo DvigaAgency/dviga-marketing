@@ -1,0 +1,62 @@
+{
+ "https://cp80604-bitrix-8.tw1.ru/IMG_4645.MP4": {
+  "poster": "/assets/video/img-4645.1da7db4edc.webp",
+  "w": 1920,
+  "h": 1080,
+  "mb": 12.4
+ },
+ "https://leonardo.osnova.io/dbe42a98-d689-52eb-a8b8-10c68cef5815/-/format/mp4/": {
+  "poster": "/assets/video/dbe42a98.6371b4d4b9.webp",
+  "w": 1888,
+  "h": 1080,
+  "mb": null
+ },
+ "https://leonardo.osnova.io/5e5bedb8-828d-54fb-ae07-255782ea3915/-/format/mp4/": {
+  "poster": "/assets/video/5e5bedb8.6cd63796ff.webp",
+  "w": 2086,
+  "h": 1080,
+  "mb": null
+ },
+ "https://leonardo.osnova.io/51299f0c-e1c4-5c56-a4cf-c40b186d819c/-/format/mp4/": {
+  "poster": "/assets/video/51299f0c.f432e377d3.webp",
+  "w": 2138,
+  "h": 1080,
+  "mb": 0.6
+ },
+ "https://leonardo.osnova.io/db5e6085-f490-5ae9-9985-93152c15b2c3/-/format/mp4/": {
+  "poster": "/assets/video/db5e6085.9f37c908ca.webp",
+  "w": 3840,
+  "h": 2160,
+  "mb": 2.5
+ },
+ "https://cp80604-bitrix-8.tw1.ru/brynner-case.mp4": {
+  "poster": "/assets/video/brynner-case.d8e3164c5f.webp",
+  "w": 1920,
+  "h": 960,
+  "mb": 12.7
+ },
+ "https://cp80604-bitrix-8.tw1.ru/dns-city.mp4": {
+  "poster": "/assets/video/dns-city.649089d590.webp",
+  "w": 1920,
+  "h": 960,
+  "mb": 42.7
+ },
+ "https://cp80604-bitrix-8.tw1.ru/maclay-case.mp4": {
+  "poster": "/assets/video/maclay-case.4b8ed86357.webp",
+  "w": 1920,
+  "h": 960,
+  "mb": 32.3
+ },
+ "https://cp80604-bitrix-8.tw1.ru/tilda.mp4": {
+  "poster": "/assets/video/tilda.07370027f7.webp",
+  "w": 1920,
+  "h": 960,
+  "mb": 7.5
+ },
+ "https://cp80604-bitrix-8.tw1.ru/zeroblock.mp4": {
+  "poster": "/assets/video/zeroblock.4a633f0260.webp",
+  "w": 1920,
+  "h": 960,
+  "mb": 9.2
+ }
+}
