@@ -532,5 +532,54 @@
    "q": "3299209401",
    "open": false
   }
+ ],
+ "kak-uznat-dvizhok-sayta": [
+  {
+   "tab": "3045003201",
+   "q": "3045003101",
+   "open": true
+  },
+  {
+   "tab": "3045003501",
+   "q": "3045003401",
+   "open": false
+  },
+  {
+   "tab": "3045003801",
+   "q": "3045003701",
+   "open": false
+  },
+  {
+   "tab": "3045004101",
+   "q": "3045004001",
+   "open": false
+  }
+ ],
+ "site-portoviy-case-fartoviy-kak-sdelat-site-dlya-torgovogo-porta": [
+  {
+   "tab": "2383901201",
+   "q": "2383901181",
+   "open": true
+  },
+  {
+   "tab": "2383901231",
+   "q": "2383901221",
+   "open": false
+  },
+  {
+   "tab": "2383906591",
+   "q": "2383905991",
+   "open": false
+  },
+  {
+   "tab": "2383907221",
+   "q": "2383907211",
+   "open": false
+  },
+  {
+   "tab": "2383908741",
+   "q": "2383908731",
+   "open": false
+  }
  ]
 }

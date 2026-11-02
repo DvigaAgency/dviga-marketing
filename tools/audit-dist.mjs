@@ -16,7 +16,7 @@ const FORBIDDEN = [
 ];
 let bad = 0;
 // якоря, которые ведут в никуда и на оригинале (оглавление статьи «Нейминг для ЖК»: у заголовков нет таких id)
-const DEAD_IN_ORIG = new Set(['etap-2-razrabotka-pozicionirovaniya-i-sozdanie-platformy-brenda', 'yuridicheskaya-proverka-nazvaniya-i-registraciya-tovarnogo-znaka', 'klassifikaciya nazvanij-zhk', 'popup:reward' /* «Маркетинговое исследование»: попапа нет и на оригинале */]);
+const DEAD_IN_ORIG = new Set(['etap-2-razrabotka-pozicionirovaniya-i-sozdanie-platformy-brenda', 'yuridicheskaya-proverka-nazvaniya-i-registraciya-tovarnogo-znaka', 'klassifikaciya nazvanij-zhk', 'popup:reward' /* «Маркетинговое исследование»: попапа нет и на оригинале */, 'content', '01' /* исследования рынка девелопмента: якорей-целей нет и на оригинале */]);
 for (const [name, re] of FORBIDDEN) {
   const strip = (f, s) => ((name.startsWith('tilda.ws') || name.startsWith('jQuery')) && f.endsWith('.html') ? s.replace(/>[^<]+</g, '><') : s); // упоминание адреса в тексте статьи (инструкция про Tilda) — не ресурс
   const hits = text.filter((f) => re.test(strip(f, fs.readFileSync(f, 'utf8')).replace(/<a [^>]*>[^]*?<\/a>/g, ''))); // адреса в href — внешние ссылки-переходы (например, на сайт кейса), не ресурсы

@@ -24,7 +24,7 @@ for (const f of fs.readdirSync('data/pages').filter((x) => x.startsWith('blog__'
   const s = fs.readFileSync(path.join('data/pages', f), 'utf8');
   for (const m of s.matchAll(/data-mp4video="([^"]+)"|<source[^>]+src="([^"]+)"|<video[^>]*?\ssrc="([^"]+)"/g)) {
     const u = (m[1] || m[2] || m[3]).replace(/&amp;/g, '&');
-    if (/^https?:/.test(u) && !man[u]) urls.add(u);
+    if (/^https?:/.test(u) && !man[u] && !/\.mp3(\?|$)/i.test(u)) urls.add(u); // аудио подкастов — не ролики (initAudio)
   }
 }
 const curl = (args) => spawnSync('curl', ['-sS', '--ssl-no-revoke', '-L', '-m', '120', '--retry', '2', ...args.map((x) => (/^https?:/.test(x) ? encodeURI(decodeURI(x)) : x))], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
