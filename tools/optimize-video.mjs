@@ -28,7 +28,7 @@ for (const [url, m] of list) {
   const h = Math.min(sh, MAXH); const w = Math.round((sw * h) / sh / 2) * 2;
   const tmpMp4 = path.join(OUT, `${slug}.tmp.mp4`); const tmpPng = path.join(OUT, `${slug}.tmp.png`);
   const vf = `scale=${w}:${h}:flags=lanczos,setsar=1,format=yuv420p`;
-  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', process.env.PRESET || 'slow', '-crf', '30', '-profile:v', 'main', '-level', '4.0', '-r', '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
+  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', process.env.PRESET || 'slow', '-crf', process.env.CRF || '30', '-profile:v', 'main', '-level', '4.0', '-r', process.env.FPS || '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
   run(['-i', src, '-ss', process.env.POSTER_AT || (slug === 'showreel1' ? '8' : '0.4'), '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
   const mp4 = `${slug}.${hash(tmpMp4)}.mp4`; 
   fs.renameSync(tmpMp4, path.join(OUT, mp4));
