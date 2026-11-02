@@ -11,6 +11,8 @@ b,strong{font-weight:700}
 img{border:0}
 /* ---- масштаб: --cw = ширина окна без полосы прокрутки (число, ставит инлайн-скрипт в <head> и обновляет при ресайзе) ---- */
 @property --cw{syntax:"<number>";inherits:true;initial-value:1440}
+/* полоса прокрутки занимает место с самого начала: ширина окна (--cw) не «прыгает», когда страница дорастает до прокрутки */
+html{scrollbar-gutter:stable}
 /* ---- Zero-блоки ---- */
 
 .ab{position:relative;width:100%;overflow:hidden;-webkit-text-size-adjust:none;text-size-adjust:none}
@@ -37,7 +39,8 @@ img{border:0}
 .sw{display:inherit;width:inherit;height:inherit}
 .tf a{border-bottom:1px solid #121212;box-shadow:none;transition:color .3s,border-bottom .3s,box-shadow .3s}
 .tf a:hover{color:#121212;border-color:#121212;box-shadow:inset 0 -1px 0 0 #121212}
-.vd{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.vd{display:block;width:100%;height:100%;object-fit:contain}
+.vd.vc,.vem .vd{object-fit:cover}
 /* кнопка «смотреть» на ролике, который грузится по клику (тяжёлые ролики с хостинга) */
 .vp{position:absolute;left:50%;top:50%;z-index:2;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;transition:background-color .2s}
 .vp[hidden]{display:none}
@@ -77,3 +80,7 @@ main.cq,footer.cq{overflow:clip}
 .zc-t{display:flex;height:100%;will-change:transform}
 .zc-i{position:relative;flex:0 0 calc(100%/var(--n,1));min-width:0;height:100%}
 .zc-nx,.zc-pv{cursor:pointer}
+/* картинки и ролики Zero: размер задаёт сам элемент (как .tn-elem в Tilda), а не содержимое — иначе display:table растягивается до естественной высоты файла */
+.e[data-t=image],.e[data-t=video]{display:block}
+.e[data-t=image] .a{display:block;height:100%;box-sizing:border-box}
+.e[data-t=image] picture{display:block;width:100%;height:100%}

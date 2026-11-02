@@ -40,6 +40,41 @@ function isDefault(d) {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
+/** высота картинок из статического CSS записи: { elemId: { R: px } } — только для картинок с object-fit:cover в .tn-atom__img (иначе высота у картинки по файлу) */
+function staticImageHeights($, rec, screens) {
+  const txt = rec.find('style').map((i, s) => $(s).text()).get().join('\n');
+  if (!/object-fit:\s*cover/.test(txt)) return {};
+  const BP = { 1199: 960, 959: 640, 639: 480, 479: 320 }; // Tilda: max-width макета → брейкпоинт Zero
+  const rules = {}; const cover = new Set();
+  const ast = csstree.parse(txt);
+  csstree.walk(ast, {
+    visit: 'Rule',
+    enter(node) {
+      const sel = csstree.generate(node.prelude).trim();
+      const m = sel.match(/^#rec\d+ \.tn-elem\[data-elem-id="(\d+)"\](\s+\.tn-atom__img)?$/);
+      if (!m) return;
+      let bp = 1200;
+      if (this.atrule) { const mm = /max-width:\s*(\d+)px/.exec(csstree.generate(this.atrule.prelude)); if (!mm || !BP[mm[1]]) return; bp = BP[mm[1]]; }
+      node.block.children.forEach((d) => {
+        if (d.type !== 'Declaration') return;
+        const v = csstree.generate(d.value);
+        if (m[2] && d.property === 'object-fit' && v === 'cover') cover.add(m[1]);
+        if (!m[2] && d.property === 'height' && /^[\d.]+px$/.test(v)) (rules[m[1]] ||= {})[bp] = parseFloat(v);
+      });
+    },
+  });
+  const out = {};
+  for (const id of cover) {
+    if (!rules[id]) continue;
+    out[id] = {};
+    for (const R of screens) { // эффективная высота: правило ближайшего большего max-width, иначе базовое
+      const c = [R, ...screens.filter((x) => x > R)].find((x) => rules[id][x] !== undefined);
+      if (c !== undefined) out[id][R] = rules[id][c];
+    }
+  }
+  return out;
+}
+
 export function convertZero($, rec, ctx) {
   const recId = rec.attr('id').replace('rec', '');
   ctx.rec = recId;
@@ -69,6 +104,13 @@ export function convertZero($, rec, ctx) {
   for (const R of screens) {
     layoutByR[R] = {};
     for (const e of elems) layoutByR[R][e.id] = elemLayout(e.attrs, screens, R, A[R]);
+  }
+  // картинка с режимом высоты hug / fit auto, но со статическим CSS «высота N px + object-fit:cover»: на оригинале действует CSS (Tilda его не пересчитывает)
+  const fixedImgH = staticImageHeights($, rec, screens);
+  for (const e of elems) {
+    const h = fixedImgH[e.id];
+    if (e.type !== 'image' || !h) continue;
+    for (const R of screens) if (layoutByR[R][e.id].height === 'auto' && h[R] > 0) layoutByR[R][e.id].height = `${h[R]}px`;
   }
   // артборд, где все элементы с контейнером «окно», масштабируется только по высоте (как в Tilda), содержимое — без масштаба
   const allWin = {};
@@ -417,7 +459,9 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
     case 'video': {
       const v = atom.find('.tn-atom__videoiframe');
       const emb = ['rutube', 'vimeo', 'youtube', 'kinescope'].find((k) => v.attr(`data-${k}id`));
-      body = emb && ctx.embed ? ctx.embed(emb, v.attr(`data-${emb}id`)) : ctx.video(v.attr('data-mp4video'), id);
+      // настройки видео-элемента Tilda: автоплей и «по кругу» — флаги элемента, рамка плеера и object-fit — атрибуты контейнера ролика
+      const vo = { ap: attrs['data-field-autoplay-value'] === 'y', lp: attrs['data-field-loop-value'] === 'y', cover: v.attr('data-video-object-fit') === 'cover', ctrl: v.attr('data-video-controls') !== 'hidden' };
+      body = emb && ctx.embed ? ctx.embed(emb, v.attr(`data-${emb}id`), vo) : ctx.video(v.attr('data-mp4video'), id, vo);
       style = ' style="height:100%"';
       break;
     }

@@ -150,23 +150,38 @@ async function buildPage(spec) {
     cursor: Object.fromEntries(ax.cursor.map((k) => [`${k.rec}:${k.elem}`, k])),
     eagerRecs,
     textHtml: (h) => videoLinks(fixLinks(h)),
-    embed(kind, raw) {
+    // o: { ap — автоплей, lp — по кругу } из настроек видео-элемента Zero. Адреса автоплея — те же, что собирает Tilda (t-video) на оригинале
+    embed(kind, raw, o = {}) {
       const raw2 = String(raw).replace(/&amp;/g, '&');
       const m = videoEmbeds[`${kind}:${raw2}`];
       const src = kind === 'rutube' ? `https://rutube.ru/play/embed/${raw2}` : kind === 'vimeo' ? `https://player.vimeo.com/video/${raw2}` : kind === 'kinescope' ? `https://kinescope.io/embed/${raw2}` : `https://www.youtube.com/embed/${raw2}`;
       if (!m) return '<div class="vem"></div>';
       usedAssets.add(m.poster);
-      return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}"><img class="vd" src="${m.poster}" width="${m.w}" height="${m.h}" alt="" loading="lazy" decoding="async"><button class="vp" type="button" aria-label="Смотреть видео"></button></div>`;
+      const auto = !o.ap ? '' : kind === 'vimeo' ? `${src}?color=ffffff&badge=0&title=0&byline=0&portrait=0${o.lp ? '&loop=1' : ''}&muted=1&autoplay=1&autopause=false&api=1`
+        : kind === 'youtube' ? `${src}?${o.lp ? `&loop=1&playlist=${raw2}` : ''}&mute=1&autoplay=1&enablejsapi=1`
+          : kind === 'kinescope' ? `${src}?&muted=true&autoplay=true&autopause=false${o.lp ? '&loop=true' : ''}` : '';
+      const img = `<img class="vd" src="${m.poster}" width="${m.w}" height="${m.h}" alt="" loading="lazy" decoding="async">`;
+      if (auto) return `<div class="vem" data-auto="${auto.replace(/&/g, '&amp;')}" data-kind="${kind}">${img}</div>`;
+      return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}">${img}<button class="vp" type="button" aria-label="Смотреть видео"></button></div>`;
     },
-    video(url) {
+    // o: { ap, lp, cover, ctrl } — автоплей, по кругу, object-fit:cover (иначе contain, как в Tilda), стандартные кнопки плеера
+    video(url, id, o = { ap: true, lp: true, cover: true, ctrl: false }) {
       const v = videoManifest[url];
       const rm = !v && videoRemote[url];
-      if (rm) { usedAssets.add(rm.poster); return `<video class="vd" muted loop playsinline preload="none" data-poster="${rm.poster}" data-rsrc="${String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video><button class="vp" type="button" aria-label="Смотреть видео"></button>`; }
-      if (!v) return '<video class="vd" muted loop playsinline preload="none" aria-hidden="true"></video>';
+      const cls = `vd${o.cover ? ' vc' : ''}`;
+      const flags = `${o.lp ? ' loop' : ''}${o.ctrl ? ' controls' : ''}`;
+      if (rm) {
+        usedAssets.add(rm.poster);
+        const u = String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags} poster="${rm.poster}" data-np data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video>`;
+        return `<video class="${cls}" muted${flags} playsinline preload="none" data-poster="${rm.poster}" data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video><button class="vp" type="button" aria-label="Смотреть видео"></button>`;
+      }
+      if (!v) return `<video class="${cls}" muted${flags} playsinline preload="none" aria-hidden="true"></video>`;
       usedAssets.add(v.mp4);
       if (v.poster) usedAssets.add(v.poster);
       if (v.webm) usedAssets.add(v.webm);
-      return `<video class="vd" muted loop playsinline preload="none"${v.poster ? ` data-poster="${v.poster}"` : ''} data-src="${v.mp4}"${v.webm ? ` data-webm="${v.webm}"` : ''} width="${v.w}" height="${v.h}" aria-hidden="true"></video>`;
+      if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags}${v.poster ? ` poster="${v.poster}"` : ''} src="${v.mp4}" width="${v.w}" height="${v.h}" aria-label="Видео"></video>`;
+      return `<video class="${cls}" muted${flags} playsinline preload="none"${v.poster ? ` data-poster="${v.poster}"` : ''} data-src="${v.mp4}"${v.webm ? ` data-webm="${v.webm}"` : ''} width="${v.w}" height="${v.h}" aria-hidden="true"></video>`;
     },
     gallery(imgs, o) {
       if (!imgs.length) return '';
@@ -292,7 +307,7 @@ async function buildPage(spec) {
   const noscript = '<style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style>';
   const cssTags = `<link rel="stylesheet" href="/assets/${commonName}"><link rel="stylesheet" href="/assets/${cssName}"><noscript>${noscript}</noscript>`;
   const ogTitle = $('meta[property="og:title"]').attr('content') || title;
-  const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(e){function f(){e.style.setProperty("--cw",e.clientWidth)}f();addEventListener("resize",f)})(document.documentElement)</script><title>${title}</title><meta name="description" content="${descr}">${leadMeta()}${noindex}<link rel="canonical" href="${url}"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
+  const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(e){function f(){e.style.setProperty("--cw",e.clientWidth)}f();addEventListener("resize",f);addEventListener("load",f);if(window.ResizeObserver)new ResizeObserver(f).observe(e)})(document.documentElement)</script><title>${title}</title><meta name="description" content="${descr}">${leadMeta()}${noindex}<link rel="canonical" href="${url}"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
     + `<meta property="og:url" content="${url}"><meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${descr}"><meta property="og:type" content="${/^\/blog\/.+/.test(spec.path) ? 'article' : 'website'}"><meta property="og:image" content="${SITE_URL}${ogM.webp.at(-1).src}"><meta name="twitter:card" content="summary_large_image">`
     + `<link rel="icon" type="image/png" sizes="32x32" href="${ic32l}" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" sizes="32x32" href="${ic32d}" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" sizes="any" href="${icSvg}"><link rel="apple-touch-icon" href="${icApple}">`
     + `${fontPre}${cssTags}${deferTag}${ld}`;

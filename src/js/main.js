@@ -332,6 +332,21 @@ function initFaq() {
 
 /* ---------- плееры Rutube / Vimeo / YouTube: по клику на постер подставляем iframe ---------- */
 function initEmbeds() {
+  // плееры с автоплеем на оригинале (Vimeo / YouTube / Kinescope): iframe подставляется, когда блок подъезжает к экрану; постер остаётся, пока плеер не загрузится
+  const auto = $$('.vem[data-auto]');
+  if (auto.length) {
+    const mount = (b) => {
+      const f = d.createElement('iframe');
+      f.src = b.dataset.auto; f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true; f.title = 'Видео'; f.setAttribute('frameborder', '0');
+      f.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;border:0';
+      f.addEventListener('load', () => { const p = b.querySelector('.vd'); if (p) p.remove(); });
+      b.appendChild(f); b.removeAttribute('data-auto');
+    };
+    if ('IntersectionObserver' in w) {
+      const aio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { aio.unobserve(e.target); mount(e.target); } }), { rootMargin: '300px 0px' });
+      auto.forEach((b) => aio.observe(b));
+    } else auto.forEach(mount);
+  }
   $$('.vem[data-embed]').forEach((b) => b.addEventListener('click', () => {
     const u = new URL(b.dataset.embed);
     u.searchParams.set('autoplay', '1');
@@ -346,7 +361,13 @@ function initEmbeds() {
 /* ---------- видео ---------- */
 function initVideo() {
   const vs = $$('video[data-src]');
-  const rv = $$('video[data-rsrc]'); // ролики с хостинга оригинала (тяжёлые, в репозитории их нет): как на Tilda — автоплей без звука по кругу, пока ролик рядом с экраном
+  // ролики хостинга без автоплея на оригинале (кнопки плеера, постер): адрес подставляется у экрана, играет по нажатию
+  const np = $$('video[data-np]');
+  if (np.length && 'IntersectionObserver' in w) {
+    const nio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const v = e.target; nio.unobserve(v); v.preload = 'metadata'; v.src = v.dataset.rsrc; } }), { rootMargin: '600px 0px' });
+    np.forEach((v) => nio.observe(v));
+  } else np.forEach((v) => { v.preload = 'metadata'; v.src = v.dataset.rsrc; });
+  const rv = $$('video[data-rsrc]:not([data-np])'); // ролики с хостинга оригинала (тяжёлые, в репозитории их нет): как на Tilda — автоплей без звука по кругу, пока ролик рядом с экраном
   if (rv.length) {
     const start = (v) => {
       const b = v.nextElementSibling;
