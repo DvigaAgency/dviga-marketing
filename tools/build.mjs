@@ -17,6 +17,9 @@ import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSlide
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
 import { t431Table } from './lib/t431.mjs';
+import { faqFor, faqMark } from './lib/faq.mjs';
+import { slidersFor, applySliders } from './lib/slider.mjs';
+import { linkHoverCss } from './lib/link-hover.mjs';
 import { pinFirst } from './lib/blog-pin.mjs';
 import { PAGES } from './pages.mjs';
 import { leadMeta, trackingTags } from './lib/tracking.mjs';
@@ -111,6 +114,8 @@ const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { d
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
+  const faqList = faqFor(spec.path);
+  const recSeen = new Set();
   // T331: попап с видео (Rutube/YouTube) -> ссылка на страницу ролика: внешние iframe в копии не грузятся
   const videoUrls = {};
   $('.r[data-record-type=331]').each((i, e) => {
@@ -161,8 +166,16 @@ async function buildPage(spec) {
     gallery(imgs, o) {
       if (!imgs.length) return '';
       const slides = imgs.map((x, i) => '<div class="gl-s">' + picture(x.li_img, { alt: x.li_imgalt || '', sizes: '(min-width:1200px) 1140px,100vw', eager: false }) + '</div>').join('');
-      const dots = imgs.length > 1 ? '<div class="gl-d" style="--d:' + (o.dots || '#818181') + ';--da:' + (o.dotsOn || '#d93433') + '">' + imgs.map((x, i) => '<i' + (i ? '' : ' class="on"') + '></i>').join('') + '</div>' : '';
-      return '<div class="gl" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + dots + '</div>';
+      // точки: none — нет, near — под картинкой (как у Tilda: 15,6px от низа, зазор ≈ 0,845 × dotshmargin), иначе на картинке
+      const rgba = (hex, op) => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return hex || ''; const n = parseInt(m[1], 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${op ?? 1})`; };
+      const showDots = imgs.length > 1 && o.dotsMode !== 'none';
+      const dotsSt = '--d:' + (o.dots || '#818181') + ';--da:' + (o.dotsOn || '#d93433') + (o.dotsSize ? ';--ds:' + o.dotsSize + 'px' : '') + (o.dotsH ? ';--g:' + (0.845 * o.dotsH).toFixed(1) + 'px' : '');
+      const dots = showDots ? '<div class="gl-d' + (o.dotsMode === 'near' ? ' gl-dn' : '') + '" style="' + dotsSt + '">' + imgs.map((x, i) => '<i' + (i ? '' : ' class="on"') + '></i>').join('') + '</div>' : '';
+      const sz = { s: 30, m: 40, l: 50 }[o.arrowSize] || 30;
+      const arSt = '--as:' + sz + 'px;--ac:' + (o.arrowColor || '#000') + ';--ach:' + (o.arrowColorHover || o.arrowColor || '#000') + ';--ab:' + rgba(o.arrowBg || '#e8e8e8', o.arrowBgOpacity) + ';--abh:' + rgba(o.arrowBgHover || o.arrowBg || '#e8e8e8', o.arrowBgOpacity) + (o.arrowH ? ';--ah:' + o.arrowH + 'px' : '');
+      const chev = '<svg viewBox="0 0 94 94" aria-hidden="true"><path d="M39 68L60 47L39 26" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>';
+      const arrows = imgs.length > 1 && (o.arrowsMode === 'in' || o.arrowsMode === 'near') ? '<button class="gl-ar gl-pv" type="button" aria-label="Назад" style="' + arSt + '">' + chev + '</button><button class="gl-ar gl-nx" type="button" aria-label="Вперёд" style="' + arSt + '">' + chev + '</button>' : '';
+      return '<div class="gl" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + arrows + dots + '</div>';
     },
     form(e) {
       const el = e.el;
@@ -194,6 +207,7 @@ async function buildPage(spec) {
       const alias = rec.attr('data-alias-record-type');
       const type = rec.attr('data-record-type') === '121' && alias ? alias : rec.attr('data-record-type'); // глобальный блок Tilda (121) ведёт себя как тип, на который он ссылается
       const rid = rec.attr('id').replace('rec', '');
+      recSeen.add(rid);
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
       if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }
@@ -213,7 +227,7 @@ async function buildPage(spec) {
       const r = convertZero($, rec, ctx);
       r.css = localUrls(r.css);
       if (ctx.eagerRecs.has(rid)) critZero.push(r.css); else { css.push(r.css); recCss[rid] = r.css; }
-      if (POPUP_RECS[rid]) popupZero[POPUP_RECS[rid]] = r.html; else html[name].push(r.html);
+      if (POPUP_RECS[rid]) popupZero[POPUP_RECS[rid]] = r.html; else html[name].push(faqList.length ? faqMark(r.html, rid, faqList) : r.html);
     }
   }
   if (catalog) { css.push(catalog.css); }
@@ -225,6 +239,10 @@ async function buildPage(spec) {
   // CSS свёрнутых записей (неактивные вкладки, «Загрузить еще») грузится отдельным файлом после загрузки страницы
   const deferred = [];
   for (const id of off) if (recCss[id]) { deferred.push(recCss[id]); const k = css.indexOf(recCss[id]); if (k >= 0) css.splice(k, 1); }
+  const lh = linkHoverCss(spec.path, recSeen);
+  if (lh) css.push(lh);
+  const sliderList = slidersFor(spec.path);
+  if (sliderList.length) { const sl = applySliders(html.main, sliderList); html.main = sl.html; css.push(sl.css); }
   for (const part of Object.keys(html)) html[part] = html[part].map((h) => h.replace(/^<section id="r([0-9]+)" class="r/, (m, id) => (off.has(id) ? m + ' off' : m)));
 
   // ---------------- попапы и виджет (одинаковые на всех страницах)

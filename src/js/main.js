@@ -263,9 +263,59 @@ function initBg() {
   els.forEach((el) => io.observe(el));
 }
 
+/* ---------- карусель из Zero-записей (клоны статей, tools/lib/slider.mjs): бесконечная, стрелки и перетаскивание ---------- */
+function initSlider() {
+  $$('.zc').forEach((sl) => {
+    const t = sl.firstElementChild;
+    const host = sl.closest('.zw') || sl.parentElement;
+    const speed = +sl.dataset.speed || 600;
+    let busy = false; let dragged = false;
+    const w = () => t.firstElementChild.offsetWidth;
+    const anim = (from, to, done) => {
+      t.style.transition = 'none'; t.style.transform = `translateX(${from}px)`; void t.offsetWidth;
+      t.style.transition = `transform ${speed}ms ease`; t.style.transform = `translateX(${to}px)`;
+      let ended = false;
+      const end = () => { if (ended) return; ended = true; t.removeEventListener('transitionend', end); t.style.transition = 'none'; done(); t.style.transform = 'none'; busy = false; };
+      t.addEventListener('transitionend', end); setTimeout(end, speed + 80);
+    };
+    const next = (from = 0) => { if (busy) return; busy = true; anim(from, -w(), () => t.append(t.firstElementChild)); };
+    const prev = (from = 0) => { if (busy) return; busy = true; t.prepend(t.lastElementChild); anim(from - w(), 0, () => {}); };
+    $$(':scope .zc-nx', host).forEach((b) => b.addEventListener('click', () => next()));
+    $$(':scope .zc-pv', host).forEach((b) => b.addEventListener('click', () => prev()));
+    let x0 = null; let dx = 0;
+    sl.addEventListener('pointerdown', (e) => { if (busy || (e.pointerType === 'mouse' && e.button)) return; x0 = e.clientX; dx = 0; dragged = false; });
+    sl.addEventListener('pointermove', (e) => {
+      if (x0 === null) return;
+      dx = e.clientX - x0;
+      if (Math.abs(dx) > 6 && !dragged) { dragged = true; try { sl.setPointerCapture(e.pointerId); } catch (_) { /* нет захвата — не страшно */ } }
+      if (dragged) { const k = (sl.getBoundingClientRect().width || 1) / sl.offsetWidth; t.style.transition = 'none'; t.style.transform = `translateX(${dx / k}px)`; }
+    });
+    const up = () => {
+      if (x0 === null) return;
+      const k = (sl.getBoundingClientRect().width || 1) / sl.offsetWidth; const d0 = dx / k; x0 = null;
+      if (!dragged) return;
+      if (d0 < -w() / 5) next(d0); else if (d0 > w() / 5) prev(d0); else { t.style.transition = 'transform .3s ease'; t.style.transform = 'none'; }
+    };
+    sl.addEventListener('pointerup', up); sl.addEventListener('pointercancel', up);
+    sl.addEventListener('click', (e) => { if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; } }, true);
+  });
+}
+
+/* ---------- «Частые вопросы» клонов статей: вопрос открывает/закрывает ответ (независимо друг от друга, как на оригинале) ---------- */
+function initFaq() {
+  $$('[data-fq-t]').forEach((q) => {
+    const a = d.getElementById(q.dataset.fqT);
+    if (!a) return;
+    q.setAttribute('role', 'button'); q.tabIndex = 0; q.setAttribute('aria-expanded', String(a.classList.contains('fq-o')));
+    const toggle = () => { const o = a.classList.toggle('fq-o'); q.classList.toggle('fq-on'); q.setAttribute('aria-expanded', String(o)); };
+    q.addEventListener('click', toggle);
+    q.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+}
+
 /* ---------- плееры Rutube / Vimeo / YouTube: по клику на постер подставляем iframe ---------- */
 function initEmbeds() {
-  $('.vem[data-embed]').forEach((b) => b.addEventListener('click', () => {
+  $$('.vem[data-embed]').forEach((b) => b.addEventListener('click', () => {
     const u = new URL(b.dataset.embed);
     u.searchParams.set('autoplay', '1');
     if (b.dataset.kind === 'rutube') u.searchParams.set('autoStart', 'true');
@@ -279,16 +329,20 @@ function initEmbeds() {
 /* ---------- видео ---------- */
 function initVideo() {
   const vs = $$('video[data-src]');
-  const rv = $$('video[data-rsrc]'); // тяжёлые ролики с хостинга: до клика — только постер, ролик не загружается
-  rv.forEach((v) => {
-    const b = v.nextElementSibling;
-    const sync = () => { if (b) b.hidden = !v.paused; };
-    const start = () => { if (!v.src) { v.src = v.dataset.rsrc; v.load(); } v.muted = true; v.play().catch(() => {}); };
-    if (b) b.addEventListener('click', start);
-    v.addEventListener('click', () => (v.src && !v.paused ? v.pause() : start()));
-    v.addEventListener('play', sync); v.addEventListener('pause', sync);
-  });
-  if ('IntersectionObserver' in w) { const off = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting && !e.target.paused) e.target.pause(); }), { rootMargin: '0px' }); rv.forEach((v) => off.observe(v)); }
+  const rv = $$('video[data-rsrc]'); // ролики с хостинга оригинала (тяжёлые, в репозитории их нет): как на Tilda — автоплей без звука по кругу, пока ролик рядом с экраном
+  if (rv.length) {
+    const start = (v) => {
+      const b = v.nextElementSibling;
+      if (!v.src) { v.src = v.dataset.rsrc; v.load(); }
+      v.muted = true; v.defaultMuted = true; v.playsInline = true;
+      return v.play().then(() => { if (b) b.hidden = true; }).catch(() => { if (b) b.hidden = false; }); // автоплей не разрешён (экономия энергии) — показываем кнопку
+    };
+    rv.forEach((v) => { const b = v.nextElementSibling; if (b) { b.hidden = true; b.addEventListener('click', () => start(v)); } });
+    if ('IntersectionObserver' in w) {
+      const rio = new IntersectionObserver((es) => es.forEach((e) => { const v = e.target; if (e.isIntersecting) { if (reduce) { if (v.nextElementSibling) v.nextElementSibling.hidden = false; } else start(v); } else v.pause(); }), { rootMargin: '200px 0px' });
+      rv.forEach((v) => rio.observe(v));
+    } else rv.forEach((v) => { if (v.nextElementSibling) v.nextElementSibling.hidden = false; });
+  }
   if (!vs.length && !rv.length) return;
   // постеры подгружаются заранее (за ~1,5 экрана), сами ролики — только вблизи экрана и играют только в нём
   const pio = new IntersectionObserver((es) => es.forEach((e) => {
@@ -428,6 +482,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

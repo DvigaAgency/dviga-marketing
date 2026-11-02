@@ -43,7 +43,6 @@ img{border:0}
 .vp[hidden]{display:none}
 .vp::before{content:"";position:absolute;left:29px;top:21px;border-style:solid;border-width:15px 0 15px 23px;border-color:transparent transparent transparent #121212;transition:border-color .2s}
 @media(hover:hover){.vp:hover{background:#d93433}.vp:hover::before{border-left-color:#fff}}
-.vd[data-rsrc]{cursor:pointer}
 .e[data-t=video] .a{display:block;height:100%}
 .fm.ok .fo{display:none}
 html{scroll-behavior:smooth}
@@ -67,3 +66,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 main.cq,footer.cq{overflow:clip}
 .vem{position:relative;width:100%;height:100%;background:#000;cursor:pointer;overflow:hidden}
 .vem:not([data-embed]){cursor:auto}
+/* «Частые вопросы» в клонах статей: ответ скрыт, пока не открыт (как .collapse оригинала); вопрос по клику открывает/закрывает ответ */
+.fq:not(.fq-o){height:0!important;padding:0!important;overflow:hidden!important;pointer-events:none!important}
+.fq-q{cursor:pointer}
+.fq-q .e[data-t="image"]>*{transition:transform .4s}
+.fq-q.fq-on .e[data-t="image"]>*{transform:rotate(45deg)}
+/* карусель из Zero-записей (клоны статей): слайды в контейнере-«шейпе», видимых слайдов --n (tools/lib/slider.mjs) */
+.zc-h{overflow:hidden}
+.zc{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.zc-t{display:flex;height:100%;will-change:transform}
+.zc-i{position:relative;flex:0 0 calc(100%/var(--n,1));min-width:0;height:100%}
+.zc-nx,.zc-pv{cursor:pointer}

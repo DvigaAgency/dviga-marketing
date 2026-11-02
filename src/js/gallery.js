@@ -9,6 +9,8 @@ export function init(gl) {
   const w = () => t.clientWidth || 1;
   const show = (k) => { i = (k + n) % n; t.scrollTo({ left: i * w(), behavior: k === i || k < 0 ? 'smooth' : 'auto' }); };
   t.addEventListener('scroll', () => { const k = Math.round(t.scrollLeft / w()); if (k !== i) { i = k; } dots.forEach((d, j) => d.classList.toggle('on', j === i)); }, { passive: true });
+  gl.querySelectorAll('.gl-pv').forEach((b) => b.addEventListener('click', () => show(i - 1)));
+  gl.querySelectorAll('.gl-nx').forEach((b) => b.addEventListener('click', () => show(i + 1)));
   const ap = +gl.dataset.ap;
   if (ap > 0 && n > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let vis = true; let hover = false;
