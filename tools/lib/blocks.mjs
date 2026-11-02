@@ -23,14 +23,14 @@ const clean = ($, root) => {
 };
 
 /** аккордеон (t668): список «вопрос — ответ»; открытие/закрытие — src/js/accordion.js */
-export function accordionBlock($, rec) {
+export function accordionBlock($, rec, p = 't668', scaled = false) {
   const id = rec.attr('id').replace('rec', '');
-  const root = cheerio.load(`<div>${$.html(rec.find('.t668'))}</div>`, { decodeEntities: false });
+  const root = cheerio.load(`<div>${$.html(rec.find('.' + p))}</div>`, { decodeEntities: false });
   const r = root('div').first();
   clean(root, r);
-  r.find('.t668__content').attr('hidden', '');
+  r.find(`.${p}__content`).attr('hidden', '');
   const html = fixLinks(r.html());
-  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id)].join('\n');
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), scaled ? zoomCss(id) : ''].join('\n');
   return { id, css, html: `<section id="r${id}" class="r acc ${recCls(rec)}" data-acc>${html}</section>` };
 }
 
@@ -81,8 +81,20 @@ export function tilesBlock($, rec, scaled = false) {
     root(e).attr('data-bg', cssImage(u, 1100, 800)).removeAttr('data-original').removeAttr('style').removeAttr('data-zoomable').removeAttr('data-zoom-target').removeAttr('data-img-zoom-url').removeClass('t-bgimg');
   });
   clean(root, g);
-  // Annexx ANX812 масштабирует блок как Zero: размер × ширина / опорная ширина брейкпоинта (1200/960/640/480/320), как у --s у Zero-записей
-  const scale = scaled ? ['', [1199, 960], [959, 640], [639, 480], [479, 320]].map((x) => (x ? `@media(max-width:${x[0]}px){#r${id}{--s:tan(atan2(100cqw,${x[1]}px))}}` : `#r${id}{--s:tan(atan2(100cqw,1200px));zoom:var(--s)}`)).join('') : '';
+  const scale = scaled ? zoomCss(id) : '';
   const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), scale].join('\n');
   return { id, css, html: `<section id="r${id}" class="r tls ${recCls(rec)}">${g.html()}</section>` };
 }
+
+/** список ссылок (T125, запись 134: «Карта сайта»): разметка записи как есть, стили — data/block-css/<id>.css */
+export function linksListBlock($, rec, scaled = false) {
+  const id = rec.attr('id').replace('rec', '');
+  const root = cheerio.load(`<div>${$.html(rec.find('.t125'))}</div>`, { decodeEntities: false });
+  const g = root('div').first();
+  clean(root, g);
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), scaled ? zoomCss(id) : ''].join('\n');
+  return { id, css, html: `<section id="r${id}" class="r lnk ${recCls(rec)}">${fixLinks(g.html())}</section>` };
+}
+
+/** Annexx ANX812 масштабирует блок как Zero: размер × ширина / опорная ширина брейкпоинта (1200/960/640/480/320), как у --s у Zero-записей */
+export const zoomCss = (id) => ['', [1199, 960], [959, 640], [639, 480], [479, 320]].map((x) => (x ? `@media(max-width:${x[0]}px){#r${id}{--s:tan(atan2(100cqw,${x[1]}px))}}` : `#r${id}{--s:tan(atan2(100cqw,1200px));zoom:var(--s)}`)).join('');

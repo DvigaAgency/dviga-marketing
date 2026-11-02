@@ -16,12 +16,12 @@ export function tabsBlock($, rec) {
 }
 
 /** «Загрузить еще» (t400) */
-export function loadMoreBlock($, rec) {
+export function loadMoreBlock($, rec, unscaled = false) {
   const id = rec.attr('id').replace('rec', '');
   const b = rec.find('.t400__submit');
   let css = recPadding(rec.attr('class') || '', id);
   // глобальный блок (121 -> 400) Tilda не масштабирует: размеры кнопки — в px оригинала (отступы по брейкпоинтам Tilda), фон записи — из её стиля
-  if (rec.attr('data-record-type') === '121') {
+  if (unscaled || rec.attr('data-record-type') === '121') {
     const bg = ((rec.attr('style') || '').match(/background-color:\s*([^;\s]+)/) || [])[1];
     css += `${bg ? `#r${id}{background-color:${bg}}` : ''}#r${id} .lm-b{padding:18.8px 60px;font-size:16px;line-height:22.4px}@media(max-width:1200px){#r${id} .lm-b{padding:18.8px 45px}}@media(max-width:640px){#r${id} .lm-b{padding:18.8px 30px}}`;
   }

@@ -6,16 +6,18 @@
 // cursor — Annexx ANX013: над элементом вместо курсора — картинка (img, ширина w), клик открывает link;
 // faq   — «Частые вопросы» из Zero-записей (Annexx ANX019): ответ (запись tab) скрыт, вопрос (запись q) по клику открывает его;
 // boost — из них те, где ScrollBooster: после отпускания лента докатывается по инерции;
+// scaleAll — масштабируются все стандартные (не Zero) записи страницы;
 // scale — стандартные блоки, которые Annexx ANX812-1 масштабирует как Zero (размер блока × ширина/опорная ширина, значения масштаба 100%).
-// Запуск: node tools/annexx-config.mjs [<имя страницы услуг>…]   (без аргументов — все страницы из data/pages/services*.html)
+// Запуск: node tools/annexx-config.mjs [<имя страницы услуг> | /<страница верхнего уровня>…]   (без аргументов — все страницы из data/pages/services*.html)
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 
 const FILE = 'data/annexx.json';
 const out = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : {};
+const ROOT = ['about', 'partners', 'consent', 'policy', 'karta-saita', 'marketing-for-devepolers-proposal']; // страницы верхнего уровня
 const names = process.argv.slice(2).length
   ? process.argv.slice(2)
-  : fs.readdirSync('data/pages').filter((f) => /^services(__.+)?\.html$/.test(f)).map((f) => f.replace(/\.html$/, '').replace(/^services__/, '') || 'services');
+  : [...fs.readdirSync('data/pages').filter((f) => /^services(__.+)?\.html$/.test(f)).map((f) => f.replace(/\.html$/, '').replace(/^services__/, '') || 'services'), ...ROOT.map((n) => '/' + n)];
 
 function get(url) {
   for (let k = 0; k < 4; k++) {
@@ -26,10 +28,13 @@ function get(url) {
 }
 
 for (const name of names) {
-  const path = name === 'services' ? '/services' : `/services/${name}`;
+  const path = name.startsWith('/') ? name : name === 'services' ? '/services' : `/services/${name}`;
   const html = get(`https://dviga.marketing${path}`);
   if (!html) { console.log('FAIL загрузка', path); continue; }
   const e = { hover: [], drag: [], boost: [], scale: [], faq: [], cursor: [] };
+  // «.tn-elem__<recId><elemId>»: у новых элементов id длиннее 13 цифр, поэтому recId выбираем из записей страницы
+  const recIds = [...new Set([...html.matchAll(/id="rec(\d+)"/g)].map((m) => m[1]))];
+  const split = (d) => { const r = recIds.filter((x) => d.startsWith(x) && d.length - x.length >= 13).sort((a, b) => b.length - a.length)[0] || d.slice(0, -13); return [r, d.slice(r.length)]; };
   // Annexx: <!--!ANX001-1!--><!--![ {"id":"1","data":"<селекторы>"}, {"id":"3","data":"<цвет>"} … ]!-->
   for (const m of html.matchAll(/<!--!ANNEXX!--><!--!(ANX\d+-\d+)!--!?><!--!(\[[^]*?\])!-->/g)) {
     let cfg;
@@ -38,18 +43,19 @@ for (const name of names) {
       if (cfg['3'] !== 'rgba(217, 52, 51, 1)') console.log('WARN цвет подсветки ссылок отличается', path, cfg['3']);
       for (const s of (cfg['1'] || '').split(/,\s*/)) {
         const d = /\.tn-elem__(\d+)\s+\.tn-atom a$/.exec(s)?.[1];
-        if (d && d.length > 13) e.hover.push(`${d.slice(0, -13)}:${d.slice(-13)}`);
+        if (d && d.length > 13) e.hover.push(split(d).join(':'));
       }
     }
     if (m[1] === 'ANX013-1' && cfg.shape && cfg['cursor-for-shape']) {
       // курсор-картинка над элементом (кнопка «Play» на обложке видео); клик открывает ролик
       const d = /\.tn-elem__(\d+)/.exec(cfg.shape)?.[1];
-      if (d && d.length > 13) e.cursor.push({ rec: d.slice(0, -13), elem: d.slice(-13), img: cfg['cursor-for-shape'], w: +cfg['width-cursor-shape'] || 100, link: cfg['link-shape'] || '', dur: +cfg['duration-shape'] || 200 });
+      if (d && d.length > 13) e.cursor.push({ rec: split(d)[0], elem: split(d)[1], img: cfg['cursor-for-shape'], w: +cfg['width-cursor-shape'] || 100, link: cfg['link-shape'] || '', dur: +cfg['duration-shape'] || 200 });
     }
     if (m[1] === 'ANX812-1') {
       const scales = Object.entries(cfg).filter(([k]) => /^scale/.test(k)).map(([, v]) => v);
       if (scales.some((v) => v !== '100')) console.log('WARN масштаб блоков не 100%', path, cfg.blocks, scales.join('/'));
       for (const b of (cfg.blocks || '').split(/,\s*/)) { const id = /#rec(\d+)/.exec(b)?.[1]; if (id) e.scale.push(id); }
+      if (/:not\(\[data-record-type='396'\]\)/.test(cfg.blocks || '')) e.scaleAll = true; // все записи, кроме Zero (политика, согласие)
     }
   }
   // dragscroll: $('#rec864137673 .t396__artboard').addClass('dragscroll'); ScrollBooster: const blockId = '#rec<id>'
@@ -72,6 +78,7 @@ for (const name of names) {
     } catch { console.log('WARN не разобрана настройка вкладок', path); }
   }
   for (const k of ['hover', 'drag', 'boost', 'scale']) e[k] = [...new Set(e[k])];
+  if (!e.scaleAll) delete e.scaleAll;
   out[path] = e;
   console.log(path.padEnd(70), `hover ${e.hover.length}, drag ${e.drag.join(',') || '—'}, scale ${e.scale.join(',') || '—'}`);
 }

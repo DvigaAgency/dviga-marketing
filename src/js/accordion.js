@@ -2,12 +2,13 @@
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 export function init(root) {
-  const items = $$('.t668__accordion', root);
+  const P = root.querySelector('.t849__accordion') ? 't849' : 't668'; // T668 (FAQ) и T849 (аккордеон текста политики) — одна механика
+  const items = $$(`.${P}__accordion`, root);
   const close = (a) => {
-    const btn = a.querySelector('.t668__trigger-button');
-    const c = a.querySelector('.t668__content');
+    const btn = a.querySelector(`.${P}__trigger-button`);
+    const c = a.querySelector(`.${P}__content`);
     btn.setAttribute('aria-expanded', 'false');
-    a.querySelector('.t668__header').classList.remove('t668__opened');
+    a.querySelector(`.${P}__header`).classList.remove(`${P}__opened`);
     c.style.maxHeight = c.scrollHeight + 'px';
     c.offsetHeight; // eslint-disable-line no-unused-expressions
     c.style.maxHeight = '0px';
@@ -17,10 +18,10 @@ export function init(root) {
     setTimeout(done, 400);
   };
   const open = (a) => {
-    const btn = a.querySelector('.t668__trigger-button');
-    const c = a.querySelector('.t668__content');
+    const btn = a.querySelector(`.${P}__trigger-button`);
+    const c = a.querySelector(`.${P}__content`);
     btn.setAttribute('aria-expanded', 'true');
-    a.querySelector('.t668__header').classList.add('t668__opened');
+    a.querySelector(`.${P}__header`).classList.add(`${P}__opened`);
     c.hidden = false;
     c.style.display = 'block';
     c.style.maxHeight = '0px';
@@ -30,11 +31,11 @@ export function init(root) {
     c.style.opacity = '1';
   };
   items.forEach((a) => {
-    const btn = a.querySelector('.t668__trigger-button');
+    const btn = a.querySelector(`.${P}__trigger-button`);
     btn.addEventListener('click', () => {
       const isOpen = btn.getAttribute('aria-expanded') === 'true';
       if (isOpen) { close(a); return; }
-      if (a.dataset.accordion === 'true') items.forEach((o) => { if (o !== a && o.querySelector('.t668__trigger-button').getAttribute('aria-expanded') === 'true') close(o); });
+      if (a.dataset.accordion === 'true') items.forEach((o) => { if (o !== a && o.querySelector(`.${P}__trigger-button`).getAttribute('aria-expanded') === 'true') close(o); });
       open(a);
     });
   });

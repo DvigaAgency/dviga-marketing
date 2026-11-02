@@ -20,5 +20,7 @@ export const PAGES = [
   ...sub('services'),
   { path: '/contacts', src: `${dir}/contacts.html`, kind: 'page' },
   ...sub('contacts'),
+  // страницы верхнего уровня: /about, /partners, /consent, /policy, /karta-saita, /marketing-for-devepolers-proposal (в адресе оригинала опечатка — так и оставлено)
+  ...['about', 'partners', 'consent', 'policy', 'karta-saita', 'marketing-for-devepolers-proposal'].map((n) => ({ path: `/${n}`, src: `${dir}/${n}.html`, kind: 'page' })),
   ...Object.entries(REDIRECTS).map(([path, to]) => ({ path, to, kind: 'redirect' })),
 ];

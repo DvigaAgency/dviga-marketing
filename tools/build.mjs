@@ -10,7 +10,7 @@ import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
-import { quizBlock, accordionBlock, tilesBlock } from './lib/blocks.mjs';
+import { quizBlock, accordionBlock, tilesBlock, linksListBlock } from './lib/blocks.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, search, fixLinks } from './lib/components.mjs';
 import { setLocalPaths, link } from './lib/util.mjs';
 import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSliderBlock } from './lib/listing.mjs';
@@ -117,6 +117,9 @@ const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { d
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
+  // Zero-записи внутри попапов меню/формы: на общих страницах — известные id, на отдельных страницах (/marketing-for-devepolers-proposal) свои — берём из data-popup-rec-ids записи T1093
+  const popupRecs = { ...POPUP_RECS };
+  $('.t-popup[data-popup-rec-ids]').each((i, e) => { const hook = ($(e).attr('data-tooltip-hook') || '').replace('#', ''); if (hook === 'menu' || hook === 'form') for (const r of ($(e).attr('data-popup-rec-ids') || '').split(',')) if (r) popupRecs[r.replace('rec', '')] = hook; });
   const ax = { hover: [], drag: [], boost: [], scale: [], cursor: [], ...(ANNEXX[spec.path] || {}) };
   const faqList = faqFor(spec.path);
   const recSeen = new Set();
@@ -238,7 +241,7 @@ async function buildPage(spec) {
       if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }
       if (type === '525') { html[name].push(reviewsSlider($, rec, home || alias === '525')); continue; } // глобальный блок отзывов (121 -> 525) — тот же блок, что на главной: масштаб как у неё
       if (type === '395' && name === 'main') { const t = tabsBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
-      if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
+      if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec, !/^\/(blog|cases)(\/|$)/.test(spec.path)); /* в листингах блога/кейсов кнопка масштабируется, на остальных страницах — нет */ css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
       if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
       if (type === '18' && name === 'main') { const t = heroSliderBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; } // обложка; слайды — из привязанной записи T833
       if (type === '833' || type === '331') continue; // T833 — фон обложки (см. выше); T331 — попап с видео: ссылка на него ведёт на страницу ролика (videoLinks)
@@ -246,13 +249,15 @@ async function buildPage(spec) {
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
+      if (type === '849' && name === 'main') { const t = accordionBlock($, rec, 't849', ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '134' && name === 'main') { const t = linksListBlock($, rec, ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (!isZero(rec)) continue;
       const r = convertZero($, rec, ctx);
       r.css = localUrls(r.css);
       if (ctx.eagerRecs.has(rid)) critZero.push(r.css); else { css.push(r.css); recCss[rid] = r.css; }
-      if (POPUP_RECS[rid]) popupZero[POPUP_RECS[rid]] = r.html; else html[name].push(faqList.length ? faqMark(r.html, rid, faqList) : r.html);
+      if (popupRecs[rid]) popupZero[popupRecs[rid]] = r.html; else html[name].push(faqList.length ? faqMark(r.html, rid, faqList) : r.html);
     }
   }
   if (catalog) { css.push(catalog.css); }

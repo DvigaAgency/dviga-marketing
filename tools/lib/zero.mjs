@@ -227,8 +227,8 @@ export function recPadding(cls, recId) {
   if (base.length) c += `#r${recId}{${base.join(';')}}`;
   const narrow = [];
   // как в таблице стилей Tilda: на ≤480px крупные отступы 120/135 ужимаются до 90, плюс явные res-480 значения
-  if (pt && pt[1] === '120') narrow.push('padding-top:90px');
-  if (pb && pb[1] === '135') narrow.push('padding-bottom:90px');
+  if (pt && ['120', '135', '165'].includes(pt[1])) narrow.push('padding-top:90px');
+  if (pb && ['135', '165'].includes(pb[1])) narrow.push('padding-bottom:90px');
   if (pt480) narrow.push(`padding-top:${pt480[1]}px`);
   if (pb480) narrow.push(`padding-bottom:${pb480[1]}px`);
   if (narrow.length) c += `@media(max-width:480px){#r${recId}{${narrow.join(';')}}}`;

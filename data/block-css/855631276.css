@@ -1,0 +1,40 @@
+:where(#r855631276) *,:where(#r855631276) *:before,:where(#r855631276) *:after{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}
+:where(#r855631276) div,:where(#r855631276) a{margin:0;padding:0;border:0}
+:where(#r855631276) .t-container{margin-left:auto;margin-right:auto;width:100%;max-width:1200px;padding:0}
+:where(#r855631276) .t-container:before,:where(#r855631276) .t-container:after{display:table;content:" ";width:0}
+:where(#r855631276) .t-container:after{clear:both}
+:where(#r855631276) .t-col{display:inline;float:left;margin-left:20px;margin-right:20px;width:100%}
+:where(#r855631276) .t-col_12{max-width:1160px}
+@media screen and (max-width:1200px){:where(#r855631276) .t-container{max-width:960px;padding:0}}
+@media screen and (max-width:1200px){:where(#r855631276) .t-col{display:inline;float:left;margin-left:10px;margin-right:10px;width:100%}}
+@media screen and (max-width:1200px){:where(#r855631276) .t-col_12{max-width:940px}}
+@media screen and (max-width:960px){:where(#r855631276) .t-container{max-width:640px}}
+@media screen and (max-width:960px){:where(#r855631276) .t-col{display:block;float:none;padding-left:20px;padding-right:20px;margin:0;width:100%;max-width:100%;box-sizing:border-box}}
+@media screen and (max-width:960px){:where(#r855631276) .t-col_12{width:100%;max-width:100%}}
+#r855631276{--t-headline-font:'Inter',Arial,sans-serif;--t-text-font:'Inter',Arial,sans-serif}
+#r855631276{--uc-button-color-aNWLk:#ffffff;--uc-button-bgcolor-aNWLk:#d93433;--uc-button-radius-aNWLk:1000px;--uc-button-bordersize-aNWLk:1px;--uc-button-padding-aNWLk:15px 27px 15px 27px;--uc-button-colorhover-aNWLk:#d93433;--uc-button-bgcolorhover-aNWLk:#f0d6d3;--uc-button-speedhover-aNWLk:0.3s;--uc-button-fontsize-aNWLk:10px;--uc-button-fontfamily-aNWLk:var(--t-text-font,Arial);--uc-button-fontweight-aNWLk:500;--uc-button-lineheight-aNWLk:1.55;--uc-button-letterspacing-aNWLk:-.5px;--uc-button-iconposition-aNWLk:row;--uc-button-iconsize-aNWLk:15px;--uc-button-gap-aNWLk:10px}
+:where(#r855631276) a{outline:none}
+:where(#r855631276) a:focus-visible{outline-color:#2015FF;outline-offset:4px;outline-style:auto}
+:where(#r855631276) a{color:#121212;text-decoration:none}
+:where(#r855631276).r_anim{-webkit-transition:opacity 0.5s;transition:opacity 0.5s}
+:where(#r855631276).r_showed{opacity:1}
+@media screen and (max-width:1024px){:where(#r855631276) a:active{-webkit-tap-highlight-color:rgba(255,255,255,.1)}}
+:where(#r855631276) .t-title{font-family:"Inter",Arial,sans-serif;font-weight:500;color:#121212}
+:where(#r855631276).t-rec_pt_0{padding-top:0}
+:where(#r855631276).t-rec_pb_0{padding-bottom:0}
+@media screen and (max-width:480px){:where(#r855631276).t-rec_pt_0{padding-top:0}}
+@media screen and (max-width:480px){:where(#r855631276).t-rec_pb_0{padding-bottom:0}}
+@media screen and (max-width:480px){:where(#r855631276).t-rec_pt-res-480_0{padding-top:0!important}}
+@media screen and (max-width:480px){:where(#r855631276).t-rec_pb-res-480_0{padding-bottom:0!important}}
+:where(#r855631276) .t125{padding-top:30px;padding-bottom:30px}
+:where(#r855631276) .t125 hr{margin-top:15px;margin-bottom:15px;border:0;border-top:1px solid #eee}
+:where(#r855631276) .t125__title{font-size:18px;line-height:28px}
+:where(#r855631276) .t125__title a{text-decoration:none;color:#121212}
+:where(#r855631276) .t-title a{border-bottom:0px solid #121212;-webkit-box-shadow:inset 0px -1px 0px 0px #121212;-moz-box-shadow:inset 0px -1px 0px 0px #121212;-moz-box-shadow:inset 0px -1px 0px 0px #121212}
+@media print{:where(#r855631276) .t-title a{border-bottom:1px solid #121212;box-shadow:none}}
+:where(#r855631276) .t-title a{transition:color 0.3s,border-bottom 0.3s,box-shadow 0.3s,color 0.3s}
+:where(#r855631276) .t-title a:hover{color:#121212}
+:where(#r855631276) .t-title a:hover{border-color:#121212;-webkit-box-shadow:inset 0px -1px 0px 0px #121212;-moz-box-shadow:inset 0px -1px 0px 0px #121212;-moz-box-shadow:inset 0px -1px 0px 0px #121212}
+#r855631276,#r855631276 *{-webkit-text-size-adjust:initial!important}
+#r855631276 .t125__title__link{font-size:14px;color:#121212;font-family:"Inter";font-weight:500}
+@media screen and (max-width:480px),(orientation:landscape) and (max-height:480px){#r855631276 .t125__title__link{font-size:12px}}
