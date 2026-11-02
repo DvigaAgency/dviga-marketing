@@ -58,5 +58,23 @@
   "w": 1920,
   "h": 960,
   "mb": 9.2
+ },
+ "https://cp80604-bitrix-8.tw1.ru/prototip.mp4": {
+  "poster": "/assets/video/prototip.d522f845fa.webp",
+  "w": 3360,
+  "h": 2100,
+  "mb": 4.2
+ },
+ "https://cp80604-bitrix-8.tw1.ru/загруженное.mp4": {
+  "poster": "/assets/video/v.36491c268f.webp",
+  "w": 1560,
+  "h": 844,
+  "mb": 7.2
+ },
+ "https://cp80604-bitrix-8.tw1.ru/загруженное (1).mp4": {
+  "poster": "/assets/video/1.5e5deb8902.webp",
+  "w": 1920,
+  "h": 1080,
+  "mb": 6.6
  }
 }

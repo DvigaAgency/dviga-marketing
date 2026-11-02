@@ -15,8 +15,10 @@ const FORBIDDEN = [
   ['классы Tilda t-rec / t396__ / tn-atom / tn-elem', /\bt-rec\b|t396__|tn-atom|tn-elem|t-records/],
 ];
 let bad = 0;
+// якоря, которые ведут в никуда и на оригинале (оглавление статьи «Нейминг для ЖК»: у заголовков нет таких id)
+const DEAD_IN_ORIG = new Set(['etap-2-razrabotka-pozicionirovaniya-i-sozdanie-platformy-brenda', 'yuridicheskaya-proverka-nazvaniya-i-registraciya-tovarnogo-znaka', 'klassifikaciya nazvanij-zhk']);
 for (const [name, re] of FORBIDDEN) {
-  const strip = (f, s) => (name.startsWith('tilda.ws') && f.endsWith('.html') ? s.replace(/>[^<]+</g, '><') : s); // упоминание адреса в тексте статьи (инструкция про Tilda) — не ресурс
+  const strip = (f, s) => ((name.startsWith('tilda.ws') || name.startsWith('jQuery')) && f.endsWith('.html') ? s.replace(/>[^<]+</g, '><') : s); // упоминание адреса в тексте статьи (инструкция про Tilda) — не ресурс
   const hits = text.filter((f) => re.test(strip(f, fs.readFileSync(f, 'utf8')).replace(/<a [^>]*>[^]*?<\/a>/g, ''))); // адреса в href — внешние ссылки-переходы (например, на сайт кейса), не ресурсы
   console.log(`${hits.length ? 'FAIL' : 'ok  '} ${name}${hits.length ? ': ' + hits.join(', ') : ''}`);
   bad += hits.length;
@@ -63,7 +65,7 @@ for (const pf of pages) {
   // якоря и попапы: каждый #hook ведёт на существующий попап/элемент
   const hooks = new Set($('[data-hook]').map((i, e) => $(e).attr('data-hook')).get());
   const dead = [];
-  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup', 'serviced'] /* #serviced — мёртвый якорь самого оригинала (/marketing-for-devepolers-proposal): цели там нет */.includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && h !== 'other' /* ссылка без цели и в оригинале */ && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
+  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup', 'serviced'] /* #serviced — мёртвый якорь самого оригинала (/marketing-for-devepolers-proposal): цели там нет */.includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && h !== 'other' /* ссылка без цели и в оригинале */ && !DEAD_IN_ORIG.has(h) && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
   if (dead.length) console.log('FAIL якоря без цели на', path.relative(root, pf) || 'index.html', [...new Set(dead)].join(', '));
   deadCount += dead.length;
 }

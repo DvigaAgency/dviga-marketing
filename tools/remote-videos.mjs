@@ -27,7 +27,7 @@ for (const f of fs.readdirSync('data/pages').filter((x) => x.startsWith('blog__'
     if (/^https?:/.test(u) && !man[u]) urls.add(u);
   }
 }
-const curl = (args) => spawnSync('curl', ['-sS', '--ssl-no-revoke', '-L', '-m', '120', '--retry', '2', ...args], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+const curl = (args) => spawnSync('curl', ['-sS', '--ssl-no-revoke', '-L', '-m', '120', '--retry', '2', ...args.map((x) => (/^https?:/.test(x) ? encodeURI(decodeURI(x)) : x))], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
 const hash = (f) => crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 10);
 const run = (args) => spawnSync(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-y', ...args], { encoding: 'utf8' });
 

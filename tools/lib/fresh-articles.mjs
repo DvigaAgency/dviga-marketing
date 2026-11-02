@@ -28,12 +28,19 @@ export function fillFresh($a, $l, recId, items) {
     const row = parseRow($l, lrec, hasImage($l, lrec.find('.t396__elem[data-elem-type="shape"]')));
     const card = row.cards.find((c) => c.href.endsWith(`/blog/${slug}`));
     const rowTops = (bp) => Math.max(...row.cards.map((c) => eff(c.shape, 'top', bp)));
-    const css = takeCss($l, lrec, card.els.map((e) => e.attr('data-elem-id')), false).replaceAll(`#rec${lrec.attr('id').replace('rec', '')}`, `#rec${recId}`);
+    let css = takeCss($l, lrec, card.els.map((e) => e.attr('data-elem-id')), false).replaceAll(`#rec${lrec.attr('id').replace('rec', '')}`, `#rec${recId}`);
+    // в листинге один и тот же id бывает у элементов разных записей: в одном блоке id должны быть разными
+    const remap = {};
     for (const el of card.els) {
       const id = el.attr('data-elem-id');
-      if (seen.has(id)) throw new Error(`fresh-articles: повтор id элемента ${id}`);
-      seen.add(id);
-      const clone = $a($l.html(el));
+      if (seen.has(id)) { remap[id] = `${id}${k + 1}`; css = css.replaceAll(`data-elem-id="${id}"`, `data-elem-id="${remap[id]}"`); }
+    }
+    for (const el of card.els) {
+      const id = el.attr('data-elem-id');
+      seen.add(remap[id] || id);
+      let html = $l.html(el);
+      if (remap[id]) html = html.replaceAll(`data-elem-id="${id}"`, `data-elem-id="${remap[id]}"`);
+      const clone = $a(html);
       for (const bp of BPS) {
         const dx = origin[k][bp].left - eff(card.shape, 'left', bp);
         const dy = origin[k][bp].top - eff(card.shape, 'top', bp);
