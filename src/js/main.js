@@ -343,7 +343,7 @@ function initEmbeds() {
       b.appendChild(f); b.removeAttribute('data-auto');
     };
     if ('IntersectionObserver' in w) {
-      const aio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { aio.unobserve(e.target); mount(e.target); } }), { rootMargin: '300px 0px' });
+      const aio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { aio.unobserve(e.target); mount(e.target); } }), { rootMargin: '1500px 0px' });
       auto.forEach((b) => aio.observe(b));
     } else auto.forEach(mount);
   }

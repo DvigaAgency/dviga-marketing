@@ -79,7 +79,9 @@ export function casesCatalog($, firstRec, ctx) {
     const k = classify(c);
     const m = c.img && lookup(c.img);
     const ratio = c.iw && c.ih ? `${c.iw}/${c.ih}` : m ? `${m.w}/${m.h}` : '4/3';
-    const img = c.img ? picture(c.img, { alt: '', sizes: '(min-width:1200px) 560px,(min-width:640px) 46vw,100vw', cls: 'cs-p' }) : '';
+    // object-fit:cover: если картинка шире рамки карточки, по высоте рамки нужна ширина файла больше ширины карточки — иначе кадр растягивается и мылится
+    const cov = m && m.w && m.h ? Math.max(1, (m.w / m.h) / (c.iw && c.ih ? c.iw / c.ih : 4 / 3)) : 1;
+    const img = c.img ? picture(c.img, { alt: '', sizes: `(min-width:640px) ${(46 * cov).toFixed(1)}vw,${Math.round(100 * cov)}vw`, cls: 'cs-p' }) : '';
     const badges = c.badges.map((b) => `<span class="cs-b" style="left:${((b.dx / c.iw) * 100).toFixed(2)}%;top:${((b.dy / c.ih) * 100).toFixed(2)}%;width:${((b.w / c.iw) * 100).toFixed(2)}%">${picture(b.url, { alt: '', sizes: '65px' })}</span>`).join('');
     const q = `${c.title} ${c.tag}`.toLowerCase();
     const href = link(c.href);

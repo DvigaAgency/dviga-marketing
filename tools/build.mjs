@@ -158,11 +158,12 @@ async function buildPage(spec) {
       const src = kind === 'rutube' ? `https://rutube.ru/play/embed/${raw2}` : kind === 'vimeo' ? `https://player.vimeo.com/video/${raw2}` : kind === 'kinescope' ? `https://kinescope.io/embed/${raw2}` : `https://www.youtube.com/embed/${raw2}`;
       if (!m) return '<div class="vem"></div>';
       usedAssets.add(m.poster);
-      const auto = !o.ap ? '' : kind === 'vimeo' ? `${src}?color=ffffff&badge=0&title=0&byline=0&portrait=0${o.lp ? '&loop=1' : ''}&muted=1&autoplay=1&autopause=false&api=1`
+      // Kinescope без флага автоплея: плеер на оригинале всё равно играет сам (без звука, по кругу) по настройкам самого ролика в Kinescope — тот же iframe без параметров
+      const auto = kind === 'kinescope' && !o.ap ? `${src}?` : !o.ap ? '' : kind === 'vimeo' ? `${src}?color=ffffff&badge=0&title=0&byline=0&portrait=0${o.lp ? '&loop=1' : ''}&muted=1&autoplay=1&autopause=false&api=1`
         : kind === 'youtube' ? `${src}?${o.lp ? `&loop=1&playlist=${raw2}` : ''}&mute=1&autoplay=1&enablejsapi=1`
           : kind === 'kinescope' ? `${src}?&muted=true&autoplay=true&autopause=false${o.lp ? '&loop=true' : ''}` : '';
       const img = `<img class="vd" src="${m.poster}" width="${m.w}" height="${m.h}" alt="" loading="lazy" decoding="async">`;
-      if (auto) return `<div class="vem" data-auto="${auto.replace(/&/g, '&amp;')}" data-kind="${kind}">${img}</div>`;
+      if (auto) return `<div class="vem" data-auto="${auto.replace(/&/g, '&amp;')}" data-kind="${kind}"></div>`;
       return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}">${img}<button class="vp" type="button" aria-label="Смотреть видео"></button></div>`;
     },
     // o: { ap, lp, cover, ctrl } — автоплей, по кругу, object-fit:cover (иначе contain, как в Tilda), стандартные кнопки плеера
