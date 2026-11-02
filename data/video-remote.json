@@ -76,5 +76,17 @@
   "w": 1920,
   "h": 1080,
   "mb": 6.6
+ },
+ "https://leonardo.osnova.io/186d43fc-3965-5429-a89a-f07e19082455/-/format/mp4/": {
+  "poster": "/assets/video/186d43fc.ff5c79fdd9.webp",
+  "w": 854,
+  "h": 568,
+  "mb": 1.6
+ },
+ "https://leonardo.osnova.io/db9e96ca-2964-5d1e-96b3-46424b49a8be/-/format/mp4/": {
+  "poster": "/assets/video/db9e96ca.795c613587.webp",
+  "w": 702,
+  "h": 382,
+  "mb": 0.8
  }
 }

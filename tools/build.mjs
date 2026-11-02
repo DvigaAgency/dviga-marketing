@@ -253,6 +253,11 @@ async function buildPage(spec) {
       if (type === '134' && name === 'main') { const t = linksListBlock($, rec, ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '131') { // HTML-блок с <audio id="#odinstartaudio">: кнопки «слушать»/«стоп» в Zero-блоках (#odinstart / #odinstop) — initAudio; файл подключается по ссылке оригинала при первом нажатии
+        const au = rec.find('audio').first(); const asrc = au.find('source').attr('src') || au.attr('src');
+        if (asrc && /^https?:/.test(asrc)) html[name].push(`<audio class="odin-au" preload="none" data-rsrc="${asrc.replace(/&/g, '&amp;')}"></audio>`);
+        continue;
+      }
       if (!isZero(rec)) continue;
       const r = convertZero($, rec, ctx);
       r.css = localUrls(r.css);

@@ -44,6 +44,7 @@ html{scrollbar-gutter:stable}
 /* кнопка «смотреть» на ролике, который грузится по клику (тяжёлые ролики с хостинга) */
 .vp{position:absolute;left:50%;top:50%;z-index:2;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;transition:background-color .2s}
 .vp[hidden]{display:none}
+.e[hidden],.e[class~="#odinstop"]{display:none!important}.e[class~="#odinstop"][style*="block"]{display:block!important}
 .vp::before{content:"";position:absolute;left:29px;top:21px;border-style:solid;border-width:15px 0 15px 23px;border-color:transparent transparent transparent #121212;transition:border-color .2s}
 @media(hover:hover){.vp:hover{background:#d93433}.vp:hover::before{border-left-color:#fff}}
 .e[data-t=video] .a{display:block;height:100%}

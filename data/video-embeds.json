@@ -248,5 +248,15 @@
   "poster": "/assets/video/rutube-1a7f1fb911.webp",
   "w": 640,
   "h": 360
+ },
+ "youtube:KcGHFDqtN9s": {
+  "poster": "/assets/video/youtube-c88e99e4ab.webp",
+  "w": 960,
+  "h": 540
+ },
+ "vimeo:928284465": {
+  "poster": "/assets/video/vimeo-4f48f8d863.webp",
+  "w": 960,
+  "h": 540
  }
 }

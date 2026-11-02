@@ -265,6 +265,26 @@ function initBg() {
 
 /* ---------- кнопка «Поделиться» (Zero-кнопка с классом share в клонах статей): как на оригинале — системное меню «Поделиться» с адресом страницы;
    там, где Web Share нет (обычный десктопный браузер), копируем адрес в буфер ---------- */
+// Плеер подкаста (HTML-блок с <audio> + Zero-кнопки с якорями #odinstart / #odinstop): «слушать» запускает запись с громкостью 0.1 и подменяет кнопку на «стоп», по окончании — обратно
+function initAudio() {
+  const au = $('audio.odin-au'); if (!au) return;
+  const starts = $$('a[href^="#odinstart"]').map((a) => a.closest('.e')).filter(Boolean);
+  const stops = $$('a[href^="#odinstop"]').map((a) => a.closest('.e')).filter(Boolean);
+  if (!starts.length) return;
+  const show = (on) => { starts.forEach((e) => { e.hidden = on; }); stops.forEach((e) => { e.style.display = on ? 'block' : 'none'; }); };
+  show(false); au.volume = 0.1;
+  const play = (e) => {
+    e.preventDefault();
+    $$('audio').forEach((x) => { if (x !== au) x.pause(); });
+    if (!au.src) au.src = au.dataset.rsrc;
+    au.play().then(() => show(true), () => {});
+  };
+  const stop = (e) => { e.preventDefault(); au.pause(); show(false); };
+  $$('a[href^="#odinstart"]').forEach((a) => a.addEventListener('click', play));
+  $$('a[href^="#odinstop"]').forEach((a) => a.addEventListener('click', stop));
+  au.addEventListener('ended', () => show(false));
+}
+
 function initShare() {
   $$('.e.share').forEach((b) => {
     b.style.cursor = 'pointer';
@@ -545,6 +565,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initShare, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initShare, initAudio, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();
