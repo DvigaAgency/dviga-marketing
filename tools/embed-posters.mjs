@@ -16,14 +16,15 @@ const curl = (args) => spawnSync('curl', ['-sS', '--ssl-no-revoke', '-L', '-m', 
 const text = (url) => (curl([url]).stdout || Buffer.alloc(0)).toString('utf8');
 
 const keys = new Set();
-for (const f of fs.readdirSync('data/pages').filter((x) => x.startsWith('blog__') && x.endsWith('.html'))) {
-  const s = fs.readFileSync(path.join('data/pages', f), 'utf8');
-  for (const m of s.matchAll(/data-(rutube|vimeo|youtube)id="([^"]+)"/g)) keys.add(`${m[1]}:${m[2].replace(/&amp;/g, '&')}`);
+for (const f of [...fs.readdirSync('data/pages').filter((x) => x.endsWith('.html')).map((x) => path.join('data/pages', x)), 'data/home.source.html']) {
+  const s = fs.readFileSync(f, 'utf8');
+  for (const m of s.matchAll(/data-(rutube|vimeo|youtube|kinescope)id="([^"]+)"/g)) keys.add(`${m[1]}:${m[2].replace(/&amp;/g, '&')}`);
 }
 
 async function posterUrl(kind, raw) {
   if (kind === 'rutube') { const [id, q] = raw.split('?p='); const j = JSON.parse(text(`https://rutube.ru/api/video/${id}/${q ? `?p=${q}` : ''}`) || '{}'); return j.thumbnail_url; }
   if (kind === 'vimeo') { const j = JSON.parse(text(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent('https://vimeo.com/' + raw)}`) || '{}'); return (j.thumbnail_url || '').replace(/_\d+x\d+/, '_1280x720'); }
+  if (kind === 'kinescope') return /property="og:image" content="([^"]+)"/.exec(text(`https://kinescope.io/embed/${raw}`))?.[1]; // постер — og:image страницы плеера
   return `https://i.ytimg.com/vi/${raw}/maxresdefault.jpg`;
 }
 

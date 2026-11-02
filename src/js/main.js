@@ -263,6 +263,23 @@ function initBg() {
   els.forEach((el) => io.observe(el));
 }
 
+/* ---------- кнопка «Поделиться» (Zero-кнопка с классом share в клонах статей): как на оригинале — системное меню «Поделиться» с адресом страницы;
+   там, где Web Share нет (обычный десктопный браузер), копируем адрес в буфер ---------- */
+function initShare() {
+  $$('.e.share').forEach((b) => {
+    b.style.cursor = 'pointer';
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = location.href.split('#')[0];
+      const meta = $('meta[name="description"]');
+      if (navigator.share) { navigator.share({ title: d.title, url, text: meta ? meta.content : '' }).catch(() => {}); return; }
+      const t = $('.bt', b); const old = t && t.textContent;
+      const done = () => { if (!t) return; t.textContent = 'Ссылка скопирована'; setTimeout(() => { t.textContent = old; }, 2000); };
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, () => {});
+    });
+  });
+}
+
 /* ---------- карусель из Zero-записей (клоны статей, tools/lib/slider.mjs): бесконечная, стрелки и перетаскивание ---------- */
 function initSlider() {
   $$('.zc').forEach((sl) => {
@@ -482,6 +499,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initShare, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

@@ -412,14 +412,14 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
     }
     case 'video': {
       const v = atom.find('.tn-atom__videoiframe');
-      const emb = ['rutube', 'vimeo', 'youtube'].find((k) => v.attr(`data-${k}id`));
+      const emb = ['rutube', 'vimeo', 'youtube', 'kinescope'].find((k) => v.attr(`data-${k}id`));
       body = emb && ctx.embed ? ctx.embed(emb, v.attr(`data-${emb}id`)) : ctx.video(v.attr('data-mp4video'), id);
       style = ' style="height:100%"';
       break;
     }
     case 'html': {
       // вставка HTML: встречается как <video><source src=…> (ролик с хоста оригинала) — собираем в обычный лениво грузимый ролик
-      const src = atom.find('video source').attr('src') || atom.find('video').attr('src');
+      const src = (atom.find('video source').attr('src') || atom.find('video').attr('src') || '').trim();
       if (src) { body = ctx.video(src, id); style = ' style="height:100%"'; atomClass += ' vid'; } else { body = ''; console.warn('WARN html-элемент без поддерживаемого содержимого', ctx.rec, id); }
       break;
     }

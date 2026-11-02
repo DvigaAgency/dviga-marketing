@@ -148,7 +148,7 @@ async function buildPage(spec) {
     embed(kind, raw) {
       const raw2 = String(raw).replace(/&amp;/g, '&');
       const m = videoEmbeds[`${kind}:${raw2}`];
-      const src = kind === 'rutube' ? `https://rutube.ru/play/embed/${raw2}` : kind === 'vimeo' ? `https://player.vimeo.com/video/${raw2}` : `https://www.youtube.com/embed/${raw2}`;
+      const src = kind === 'rutube' ? `https://rutube.ru/play/embed/${raw2}` : kind === 'vimeo' ? `https://player.vimeo.com/video/${raw2}` : kind === 'kinescope' ? `https://kinescope.io/embed/${raw2}` : `https://www.youtube.com/embed/${raw2}`;
       if (!m) return '<div class="vem"></div>';
       usedAssets.add(m.poster);
       return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}"><img class="vd" src="${m.poster}" width="${m.w}" height="${m.h}" alt="" loading="lazy" decoding="async"><button class="vp" type="button" aria-label="Смотреть видео"></button></div>`;

@@ -18,6 +18,8 @@ for (const p of PAGES) {
   }
   // ролики кейсов лежат на хосте оригинала (адрес берётся из data-mp4video / <source src>)
   for (const m of s.matchAll(new RegExp('https://cp80604-bitrix-8\\.tw1\\.ru/[^"' + String.fromCharCode(39) + '<>]+?\\.(?:mp4|mov)', 'gi'))) raw.add(m[0]);
+  // небольшие ролики на Dropbox (кейс Olympus: <video><source src=…>) — скачиваем и пережимаем как остальные
+  for (const m of s.matchAll(/https:\/\/dl\.dropboxusercontent\.com\/s\/[a-z0-9]+\/[^"'<>\s]+?\.mp4\?dl=0/gi)) raw.add(m[0].replace(/&amp;/g, '&'));
 }
 fs.writeFileSync(rawFile, JSON.stringify([...raw], null, 1));
 console.log('assets-raw:', before, '->', raw.size);

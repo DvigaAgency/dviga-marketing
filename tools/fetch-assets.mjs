@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 const all = JSON.parse(fs.readFileSync('data/assets-raw.json', 'utf8'));
-const list = all.filter((u) => /static\.tildacdn\.com\/(tild|vide)|cp80604-bitrix-8\.tw1\.ru\//.test(u));
+const list = all.filter((u) => /static\.tildacdn\.com\/(tild|vide)|cp80604-bitrix-8\.tw1\.ru\/|dl\.dropboxusercontent\.com\/s\//.test(u));
 
 fs.mkdirSync('source-assets', { recursive: true });
 const prevM = fs.existsSync('data/assets-manifest.json') ? JSON.parse(fs.readFileSync('data/assets-manifest.json', 'utf8')) : {};
@@ -14,6 +14,7 @@ const localName = (u) => {
     const [id, ...rest] = p.pathname.replace(/^\//, '').split('/');
     return `${id}__${decodeURIComponent(rest.join('_')).replace(/[^\w.\-]+/g, '_')}`;
   }
+  if (p.host.startsWith('dl.dropboxusercontent.com')) return 'dropbox_' + p.pathname.split('/')[2] + '_' + path.basename(p.pathname);
   return 'ext__' + decodeURIComponent(path.basename(p.pathname)).replace(/[^A-Za-z0-9._-]+/g, '_');
 };
 let i = 0;

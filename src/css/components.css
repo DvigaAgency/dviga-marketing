@@ -121,3 +121,6 @@ body.pl{}
 @media (max-width:640px){.tbl-t{min-width:706px}.tbl-t thead th{font-size:14px}}
 /* галерея Zero-блока: высота задана элементом (картинки кадрируются cover), а не пропорциями картинок — иначе display:table растягивается по содержимому */
 .e[data-t=gallery] .gl{position:absolute;left:0;top:0}
+/* точки галереи кликабельны (область нажатия шире самой точки) */
+.gl-d i{position:relative;pointer-events:auto;cursor:pointer}
+.gl-d i::after{content:"";position:absolute;left:-6px;right:-6px;top:-8px;bottom:-8px}
