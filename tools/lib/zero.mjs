@@ -149,6 +149,7 @@ export function convertZero($, rec, ctx) {
   const abClass = ['ab'];
   if (ovrflw === 'visible') abClass.push('ov');
   if (ctx.drag && ctx.drag.has(recId)) abClass.push('dg');
+  if (ctx.boost && ctx.boost.has(recId)) abClass.push('dgi');
   const abStyleBits = [];
   void abAttrs; void abStyleBits; void style; void fixedPos;
   const carrier = rec.find('.t396__carrier-wrapper').length

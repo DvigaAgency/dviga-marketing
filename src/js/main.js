@@ -385,10 +385,17 @@ function initVideo() {
 /* ---------- горизонтальный drag-скролл (лента наград) ---------- */
 function initDrag() {
   $$('.dg').forEach((el) => {
-    let x = 0; let sl = 0; let down = false;
-    el.addEventListener('mousedown', (e) => { down = true; x = e.pageX; sl = el.scrollLeft; el.classList.add('gr'); });
-    addEventListener('mouseup', () => { down = false; el.classList.remove('gr'); });
-    addEventListener('mousemove', (e) => { if (down) { el.scrollLeft = sl - (e.pageX - x); e.preventDefault(); } });
+    const inertia = el.classList.contains('dgi') && !reduce; // ScrollBooster оригинала: после отпускания лента докатывается (трение ~5% за кадр)
+    let x = 0; let sl = 0; let down = false; let px = 0; let v = 0; let t = 0; let raf = 0;
+    el.addEventListener('mousedown', (e) => { cancelAnimationFrame(raf); down = true; x = px = e.pageX; sl = el.scrollLeft; v = 0; el.classList.add('gr'); });
+    addEventListener('mouseup', () => {
+      if (!down) return;
+      down = false; el.classList.remove('gr');
+      if (!inertia || performance.now() - t > 80) return;
+      const run = () => { if (Math.abs(v) < 0.1) return; el.scrollLeft -= v; v *= 0.95; raf = requestAnimationFrame(run); };
+      raf = requestAnimationFrame(run);
+    });
+    addEventListener('mousemove', (e) => { if (down) { v = e.pageX - px; px = e.pageX; t = performance.now(); el.scrollLeft = sl - (e.pageX - x); e.preventDefault(); } });
   });
 }
 

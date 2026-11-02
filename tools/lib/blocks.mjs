@@ -71,7 +71,7 @@ export function quizBlock($, rec, hooks = {}) {
 
 /** галерея-плитка (t155, запись T169): сетка из фоновых картинок; раскладка — переменные --desktop-grid-… / --mobile-grid-… у плиток, стили — data/block-css/<id>.css.
  *  Увеличение по клику (tilda-zoom) в копии, как и у остальных картинок с data-zoomable, не переносится. */
-export function tilesBlock($, rec) {
+export function tilesBlock($, rec, scaled = false) {
   const id = rec.attr('id').replace('rec', '');
   const root = cheerio.load(`<div>${$.html(rec.find('.t155'))}</div>`, { decodeEntities: false });
   const g = root('div').first();
@@ -81,6 +81,8 @@ export function tilesBlock($, rec) {
     root(e).attr('data-bg', cssImage(u, 1100, 800)).removeAttr('data-original').removeAttr('style').removeAttr('data-zoomable').removeAttr('data-zoom-target').removeAttr('data-img-zoom-url').removeClass('t-bgimg');
   });
   clean(root, g);
-  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id)].join('\n');
+  // Annexx ANX812 масштабирует блок как Zero: размер × ширина / опорная ширина брейкпоинта (1200/960/640/480/320), как у --s у Zero-записей
+  const scale = scaled ? ['', [1199, 960], [959, 640], [639, 480], [479, 320]].map((x) => (x ? `@media(max-width:${x[0]}px){#r${id}{--s:tan(atan2(100cqw,${x[1]}px))}}` : `#r${id}{--s:tan(atan2(100cqw,1200px));zoom:var(--s)}`)).join('') : '';
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), scale].join('\n');
   return { id, css, html: `<section id="r${id}" class="r tls ${recCls(rec)}">${g.html()}</section>` };
 }

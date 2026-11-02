@@ -85,6 +85,8 @@ const closeSvg = '<svg role="presentation" width="23" height="23" viewBox="0 0 2
 const closeBtn = `<div class="px"><button type="button" aria-label="Закрыть диалоговое окно" data-close>${closeSvg}</button></div>`;
 const FORM_VARS = '--ih:50px;--ir:20px;--ibc:#dedede;--ibg:#f2f2f2;--ic:#121212;--tc:#121212;--ec:#000;--bbg:#f5d5d2;--bc:#d93433;--bhb:#d93433;--bhc:#fff;--bw:auto;';
 const POPUP_RECS = { 1121678416: 'menu', 1064388596: 'form' };
+// настройки Annexx/вставок страниц услуг: подсветка ссылок, перетаскиваемые ленты, масштаб стандартных блоков (tools/annexx-config.mjs)
+const ANNEXX = fs.existsSync('data/annexx.json') ? JSON.parse(fs.readFileSync('data/annexx.json', 'utf8')) : {};
 const HOME_ANX = new Set(['991113446:1743673825773', '991113446:1744966468663', '991105351:1743673825787', '991105351:1743673825773', '991105346:1744705724941', '991105346:1744966643206']);
 
 // url() внутри пользовательских свойств (--icon: url(…)) css-tree не разбирает — подставляем локальные файлы здесь
@@ -114,6 +116,7 @@ const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { d
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
+  const ax = { hover: [], drag: [], boost: [], scale: [], ...(ANNEXX[spec.path] || {}) };
   const faqList = faqFor(spec.path);
   const recSeen = new Set();
   // T331: попап с видео (Rutube/YouTube) -> ссылка на страницу ролика: внешние iframe в копии не грузятся
@@ -137,12 +140,13 @@ async function buildPage(spec) {
   const eagerRecs = new Set(home ? ['680556230', '1438775181'] : ['680556230', ...mainZero.filter((x) => !hiddenAtStart.has(x)).slice(0, 6)]);
   const ctx = {
     sel: (rec, id) => (idCount[id] > 1 ? `#r${rec} .e${id}` : `.e${id}`),
-    anx: home ? HOME_ANX : new Set(),
+    anx: home ? HOME_ANX : new Set(ax.hover),
     href: link,
     picture,
     cssImage,
     eager() { return ctx.eagerRecs.has(ctx.rec); },
-    drag: new Set(home ? ['864137673'] : []),
+    drag: new Set([...(home ? ['864137673'] : []), ...ax.drag]),
+    boost: new Set(ax.boost),
     eagerRecs,
     textHtml: (h) => videoLinks(fixLinks(h)),
     embed(kind, raw) {
@@ -217,7 +221,7 @@ async function buildPage(spec) {
       if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
       if (type === '18' && name === 'main') { const t = heroSliderBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; } // обложка; слайды — из привязанной записи T833
       if (type === '833' || type === '331') continue; // T833 — фон обложки (см. выше); T331 — попап с видео: ссылка на него ведёт на страницу ролика (videoLinks)
-      if (type === '169' && name === 'main') { const t = tilesBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '169' && name === 'main') { const t = tilesBlock($, rec, ax.scale.includes(rec.attr('id').replace('rec', ''))); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
