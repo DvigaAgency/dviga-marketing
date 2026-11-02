@@ -9,7 +9,7 @@ if (pagesMode) {
   // страницы копии из tools/pages.mjs -> data/pages/<slug>.html (адреса /a/b -> a__b)
   const { PAGES } = await import('./pages.mjs');
   fs.mkdirSync('data/pages', { recursive: true });
-  for (const p of PAGES.filter((x) => x.kind !== 'home')) {
+  for (const p of PAGES.filter((x) => x.kind !== 'home' && x.kind !== 'redirect')) {
     const html = await get('https://dviga.marketing' + p.path);
     fs.writeFileSync(p.src, html);
     console.log(p.path, (html.length / 1024).toFixed(0), 'КБ');

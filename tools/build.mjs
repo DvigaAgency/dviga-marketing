@@ -44,6 +44,7 @@ const readCss = (f) => fs.readFileSync(f, 'utf8');
 const scaleUi = (css, v = '--ui') => {
   const ast = csstree.parse(css);
   csstree.walk(ast, { visit: 'Declaration', enter(decl) {
+    if (this.rule && /\.wg-/.test(csstree.generate(this.rule.prelude))) return; // виджет «Давайте подскажем» Tilda не масштабируется: кнопка 60 px на любой ширине
     csstree.walk(decl.value, { visit: 'Dimension', enter(node, item, list) {
       if (node.unit !== 'px' || +node.value === 0 || !list) return;
       list.replace(item, list.createItem({ type: 'Function', name: 'calc', children: new csstree.List().fromArray([{ type: 'Dimension', value: node.value, unit: 'px' }, { type: 'Operator', value: '*' }, { type: 'Function', name: 'var', children: new csstree.List().fromArray([{ type: 'Identifier', name: v }]) }]) }));
@@ -322,8 +323,17 @@ async function buildPage(spec) {
   return { spec, page, cssLen: minCss.length };
 }
 
+// страница-перенаправление: как на оригинале (JS-редирект с сохранением ?query и #hash), плюс meta refresh и ссылка без скриптов
+function redirectPage(spec) {
+  const to = `${BASE}${spec.to}/`;
+  const page = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Перенаправление</title><meta name="viewport" content="width=device-width,initial-scale=1">${noindex}<link rel="canonical" href="${SITE_URL}${spec.to}/"><meta http-equiv="refresh" content="0;url=${to}"><script>location.replace(${JSON.stringify(to)}+location.search+location.hash)</script></head><body><p>Перенаправление: <a href="${to}">${spec.to}</a></p></body></html>`;
+  const outFile = path.join(OUT, spec.path, 'index.html');
+  fs.mkdirSync(path.dirname(outFile), { recursive: true });
+  fs.writeFileSync(outFile, page);
+  return { spec, page, cssLen: 0 };
+}
 const built = [];
-for (const spec of PAGES) built.push(await buildPage(spec));
+for (const spec of PAGES) built.push(spec.kind === 'redirect' ? redirectPage(spec) : await buildPage(spec));
 
 // ----------------------------------------------------------------- статика
 const fontReport = await subsetFonts(built.map((b) => b.page).join(''), path.join(OUT, 'assets/fonts'));
@@ -338,7 +348,7 @@ for (const a of usedAssets) {
 // при noindex обход разрешён (иначе поисковик не увидит мета-тег и заголовок), но sitemap не публикуется
 fs.writeFileSync(path.join(OUT, 'robots.txt'), INDEXABLE ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n` : 'User-agent: *\nAllow: /\n');
 if (!INDEXABLE) fs.rmSync(path.join(OUT, 'sitemap.xml'), { force: true });
-if (INDEXABLE) fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${PAGES.map((p) => `<url><loc>${SITE_URL}${p.path === '/' ? '/' : p.path + '/'}</loc></url>`).join('')}</urlset>\n`);
+if (INDEXABLE) fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${PAGES.filter((p) => p.kind !== 'redirect').map((p) => `<url><loc>${SITE_URL}${p.path === '/' ? '/' : p.path + '/'}</loc></url>`).join('')}</urlset>\n`);
 fs.writeFileSync(path.join(OUT, '_headers'), '/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 const kb = (n) => (n / 1024).toFixed(1);
 for (const b of built) console.log(`${b.spec.path.padEnd(60)} html ${kb(b.page.length)} KB, css ${kb(b.cssLen)} KB`);

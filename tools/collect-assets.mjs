@@ -10,7 +10,7 @@ const norm = (u) => u.replace(/&amp;/g, '&').replace(/^\/\//, 'https://')
   .replace(/^https:\/\/optim\.tildacdn\.com\/([^/]+)\/-\/[^/]+\/(?:-\/)?(?:[^/]+\/)*([^/]+)$/, 'https://static.tildacdn.com/$1/$2')
   .replace(/(\.(?:jpe?g|png|gif))\.webp$/i, '$1'); // optim отдаёт «Name.jpg.webp» — оригинал лежит как «Name.jpg»
 const before = raw.size;
-for (const p of PAGES) {
+for (const p of PAGES.filter((x) => x.src)) {
   const s = fs.readFileSync(p.src, 'utf8');
   for (const m of s.matchAll(/https?:\/\/(?:static|thb|optim)\.tildacdn\.com\/(?:tild|vide)[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/[^"')\s<>&\\]+/g)) {
     const u = norm(m[0]);
