@@ -207,5 +207,189 @@
    ],
    "color": "rgba(223, 40, 40, 1)"
   }
+ ],
+ "chto-takoe-snippet-saita": [
+  {
+   "sel": [
+    ".tn-elem__31440958011747990914437 .tn-atom a",
+    ".tn-elem__31440958011747990914420 .tn-atom a",
+    ".tn-elem__31440958011747990914404 .tn-atom a",
+    ".tn-elem__31440958011747990914385 .tn-atom a",
+    ".tn-elem__31440958011755700467195 .tn-atom a",
+    ".tn-elem__31440958011755700467182 .tn-atom a",
+    ".tn-elem__31440960011747990914420 .tn-atom a",
+    ".tn-elem__31440960011747990914404 .tn-atom a",
+    ".tn-elem__31440960011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "hlebnye-kroshki-na-sayte": [
+  {
+   "sel": [
+    ".tn-elem__31557079011747990914437 .tn-atom a",
+    ".tn-elem__31557079011747990914420 .tn-atom a",
+    ".tn-elem__31557079011747990914404 .tn-atom a",
+    ".tn-elem__31557079011747990914385 .tn-atom a",
+    ".tn-elem__31557079011755700467195 .tn-atom a",
+    ".tn-elem__31557079011755700467182 .tn-atom a",
+    ".tn-elem__31564901011747990914437 .tn-atom a",
+    ".tn-elem__31564901011747990914420 .tn-atom a",
+    ".tn-elem__31564901011747990914404 .tn-atom a",
+    ".tn-elem__31564901011747990914385 .tn-atom a",
+    ".tn-elem__31564901011755700467195 .tn-atom a",
+    ".tn-elem__31564901011755700467182 .tn-atom a",
+    ".tn-elem__31557080011747990914404 .tn-atom a",
+    ".tn-elem__31557080011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "ssl-sertifikat-dlya-sayta": [
+  {
+   "sel": [
+    ".tn-elem__33712075011747990914437 .tn-atom a",
+    ".tn-elem__33712075011747990914420 .tn-atom a",
+    ".tn-elem__33712075011747990914404 .tn-atom a",
+    ".tn-elem__33712075011747990914385 .tn-atom a",
+    ".tn-elem__33712075011755700467195 .tn-atom a",
+    ".tn-elem__33712075011755700467182 .tn-atom a",
+    ".tn-elem__33712076011747990914404 .tn-atom a",
+    ".tn-elem__33712076011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "proverka-unikalnosti": [
+  {
+   "sel": [
+    ".tn-elem__43088136011747990914437 .tn-atom a",
+    ".tn-elem__43088136011747990914420 .tn-atom a",
+    ".tn-elem__43088136011747990914404 .tn-atom a",
+    ".tn-elem__43088136011747990914385 .tn-atom a",
+    ".tn-elem__43088136011755700467182 .tn-atom a",
+    ".tn-elem__43088137011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "skorost-zagruzki-sayta": [
+  {
+   "sel": [
+    ".tn-elem__34125696011747990914437 .tn-atom a",
+    ".tn-elem__34125696011747990914420 .tn-atom a",
+    ".tn-elem__34125696011747990914404 .tn-atom a",
+    ".tn-elem__34125696011747990914385 .tn-atom a",
+    ".tn-elem__34125696011755700467195 .tn-atom a",
+    ".tn-elem__34125696011755700467182 .tn-atom a",
+    ".tn-elem__34125697011747990914404 .tn-atom a",
+    ".tn-elem__34125697011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "chto-takoe-vyorstka-sajta": [
+  {
+   "sel": [
+    ".tn-elem__33238891011747990914437 .tn-atom a",
+    ".tn-elem__33238891011747990914420 .tn-atom a",
+    ".tn-elem__33238891011747990914404 .tn-atom a",
+    ".tn-elem__33238891011747990914385 .tn-atom a",
+    ".tn-elem__33238891011755700467182 .tn-atom a",
+    ".tn-elem__33256964011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "chto-takoe-ftp-i-zachem-nuzhny-ftp-dostupy": [
+  {
+   "sel": [
+    ".tn-elem__32894748011747990914437 .tn-atom a",
+    ".tn-elem__32894748011747990914420 .tn-atom a",
+    ".tn-elem__32894748011747990914404 .tn-atom a",
+    ".tn-elem__32894748011747990914385 .tn-atom a",
+    ".tn-elem__32894748011755700467195 .tn-atom a",
+    ".tn-elem__32894748011755700467182 .tn-atom a",
+    ".tn-elem__32894750011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "portfolio-veb-dizajnera": [
+  {
+   "sel": [
+    ".tn-elem__43818040011747990914437 .tn-atom a",
+    ".tn-elem__43818040011747990914420 .tn-atom a",
+    ".tn-elem__43818040011747990914404 .tn-atom a",
+    ".tn-elem__43818040011747990914385 .tn-atom a",
+    ".tn-elem__43818040011755700467182 .tn-atom a",
+    ".tn-elem__47282892011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "hochesh-sayt-gotov-kontent-gde-kompanii-vzyat-informaciyu-dlya-sayta": [
+  {
+   "sel": [
+    ".tn-elem__24412565011747990914437 .tn-atom a",
+    ".tn-elem__24412565011747990914420 .tn-atom a",
+    ".tn-elem__24412565011747990914404 .tn-atom a",
+    ".tn-elem__24412565011747990914385 .tn-atom a",
+    ".tn-elem__24412565011755700467195 .tn-atom a",
+    ".tn-elem__24412565011755700467182 .tn-atom a",
+    ".tn-elem__24412565111747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "pozicionirovanie-obekta-nedvizhimosti": [
+  {
+   "sel": [
+    ".tn-elem__24515377211747990914437 .tn-atom a",
+    ".tn-elem__24515377211747990914420 .tn-atom a",
+    ".tn-elem__24515377211747990914404 .tn-atom a",
+    ".tn-elem__24515377211747990914385 .tn-atom a",
+    ".tn-elem__24515377211755700467195 .tn-atom a",
+    ".tn-elem__24515377211755700467182 .tn-atom a",
+    ".tn-elem__24515432711747990914420 .tn-atom a",
+    ".tn-elem__24515432711747990914404 .tn-atom a",
+    ".tn-elem__24515432711747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "omnikanalnost-v-marketinge-nedvizhimosti": [
+  {
+   "sel": [
+    ".tn-elem__24556682511747990914437 .tn-atom a",
+    ".tn-elem__24556682511747990914420 .tn-atom a",
+    ".tn-elem__24556682511747990914404 .tn-atom a",
+    ".tn-elem__24556682511747990914385 .tn-atom a",
+    ".tn-elem__24556682511755700467195 .tn-atom a",
+    ".tn-elem__24556682511755700467182 .tn-atom a",
+    ".tn-elem__24572899111747990914437 .tn-atom a",
+    ".tn-elem__24572899111747990914420 .tn-atom a",
+    ".tn-elem__24572899111747990914404 .tn-atom a",
+    ".tn-elem__24572899111747990914385 .tn-atom a",
+    ".tn-elem__24572899111755700467182 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "sajt-zastrojshika-trebovaniya-po-zakonu": [
+  {
+   "sel": [
+    ".tn-elem__30068195011747990914437 .tn-atom a",
+    ".tn-elem__30068195011747990914420 .tn-atom a",
+    ".tn-elem__30068195011747990914404 .tn-atom a",
+    ".tn-elem__30068195011747990914385 .tn-atom a",
+    ".tn-elem__30068195011755700467195 .tn-atom a",
+    ".tn-elem__30068195011755700467182 .tn-atom a",
+    ".tn-elem__30068196011747990914420 .tn-atom a",
+    ".tn-elem__30068196011747990914404 .tn-atom a",
+    ".tn-elem__30068196011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
  ]
 }
