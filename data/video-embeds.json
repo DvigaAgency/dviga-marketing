@@ -223,5 +223,30 @@
   "poster": "/assets/video/vimeo-115881c60d.webp",
   "w": 960,
   "h": 540
+ },
+ "rutube:e780c28820987c9f0d1206bd3ab6598b": {
+  "poster": "/assets/video/rutube-0d87b32c4f.webp",
+  "w": 640,
+  "h": 360
+ },
+ "youtube:375wfbffs5w": {
+  "poster": "/assets/video/youtube-22497573cd.webp",
+  "w": 480,
+  "h": 360
+ },
+ "rutube:b36987f0206e213d564cc03b1a03a350": {
+  "poster": "/assets/video/rutube-1e8eb447a3.webp",
+  "w": 640,
+  "h": 360
+ },
+ "rutube:c375b0bbe14b53fca14c920b0d478a1f": {
+  "poster": "/assets/video/rutube-0a2ed4ed80.webp",
+  "w": 640,
+  "h": 360
+ },
+ "rutube:dcb64bd5715bbdffc45af81c88b001fc": {
+  "poster": "/assets/video/rutube-1a7f1fb911.webp",
+  "w": 640,
+  "h": 360
  }
 }

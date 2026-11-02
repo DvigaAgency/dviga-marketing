@@ -164,5 +164,48 @@
    ],
    "color": "rgba(223, 40, 40, 1)"
   }
+ ],
+ "lichnyj-kabinet-tilda": [
+  {
+   "sel": [
+    ".tn-elem__22899468011747990914437 .tn-atom a",
+    ".tn-elem__22899468011747990914420 .tn-atom a",
+    ".tn-elem__22899468011747990914404 .tn-atom a",
+    ".tn-elem__22899468011747990914385 .tn-atom a",
+    ".tn-elem__22899468011755700467195 .tn-atom a",
+    ".tn-elem__22899468011755700467182 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "modifikacii-skripty-i-effekty-dlya-tildy": [
+  {
+   "sel": [
+    ".tn-elem__24449057711747990914437 .tn-atom a",
+    ".tn-elem__24449057711747990914420 .tn-atom a",
+    ".tn-elem__24449057711747990914404 .tn-atom a",
+    ".tn-elem__24449057711747990914385 .tn-atom a",
+    ".tn-elem__24449057711755700467195 .tn-atom a",
+    ".tn-elem__24449057711755700467182 .tn-atom a",
+    ".tn-elem__24449057711783329711972000002 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "perenos-maketa-iz-figmy-v-tilda": [
+  {
+   "sel": [
+    ".tn-elem__29352250011747990914437 .tn-atom a",
+    ".tn-elem__29352250011747990914420 .tn-atom a",
+    ".tn-elem__29352250011747990914404 .tn-atom a",
+    ".tn-elem__29352250011747990914385 .tn-atom a",
+    ".tn-elem__29352250011755700467195 .tn-atom a",
+    ".tn-elem__29352250011755700467182 .tn-atom a",
+    ".tn-elem__29352251011747990914420 .tn-atom a",
+    ".tn-elem__29352251011747990914404 .tn-atom a",
+    ".tn-elem__29352251011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
  ]
 }
