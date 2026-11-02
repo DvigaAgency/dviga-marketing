@@ -3,11 +3,13 @@
 import fs from 'node:fs';
 
 const FILE = 'data/articles/faq.json';
-let cfg;
+const AX = 'data/annexx.json';
+let cfg; let axCfg;
 export function faqFor(path) {
   if (!cfg) cfg = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : {};
   const m = /^\/blog\/([^/]+)/.exec(path);
-  return (m && cfg[m[1]]) || [];
+  if (!m && !axCfg) axCfg = fs.existsSync(AX) ? JSON.parse(fs.readFileSync(AX, 'utf8')) : {};
+  return (m ? cfg[m[1]] : axCfg[path]?.faq) || []; // блог — data/articles/faq.json; страницы услуг — data/annexx.json (tools/annexx-config.mjs)
 }
 
 /** html секции записи recId -> с метками аккордеона (если запись — вопрос или ответ) */

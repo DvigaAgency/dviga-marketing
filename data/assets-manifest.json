@@ -6640,5 +6640,13 @@
  "https://dl.dropboxusercontent.com/s/2xo6lzzxaa1x42g/4.mp4?dl=0": {
   "file": "source-assets/dropbox_2xo6lzzxaa1x42g_4.mp4",
   "size": 1600244
+ },
+ "https://static.tildacdn.com/tild3461-3332-4134-b666-643661333662/photo.svg": {
+  "file": "source-assets/tild3461-3332-4134-b666-643661333662__photo.svg",
+  "size": 10236
+ },
+ "https://static.tildacdn.com/tild3562-3237-4365-a264-353030653735/1.svg": {
+  "file": "source-assets/tild3562-3237-4365-a264-353030653735__1.svg",
+  "size": 19670
  }
 }

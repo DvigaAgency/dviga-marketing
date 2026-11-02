@@ -21,5 +21,7 @@ for (const p of PAGES) {
   // небольшие ролики на Dropbox (кейс Olympus: <video><source src=…>) — скачиваем и пережимаем как остальные
   for (const m of s.matchAll(/https:\/\/dl\.dropboxusercontent\.com\/s\/[a-z0-9]+\/[^"'<>\s]+?\.mp4\?dl=0/gi)) raw.add(m[0].replace(/&amp;/g, '&'));
 }
+// картинки курсоров Annexx (ANX013) — адреса лежат в настройках страниц (data/annexx.json), а не в HTML
+if (fs.existsSync('data/annexx.json')) for (const v of Object.values(JSON.parse(fs.readFileSync('data/annexx.json', 'utf8')))) for (const k of v.cursor || []) raw.add(k.img);
 fs.writeFileSync(rawFile, JSON.stringify([...raw], null, 1));
 console.log('assets-raw:', before, '->', raw.size);

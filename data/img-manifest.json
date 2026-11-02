@@ -80546,5 +80546,21 @@
   "src": "/assets/img/d0bdd0b5d0b3d0b0d0b7-1815.fe56693b0e.webp",
   "inSize": 180178,
   "outSize": 221340
+ },
+ "https://static.tildacdn.com/tild3461-3332-4134-b666-643661333662/photo.svg": {
+  "kind": "svg",
+  "src": "/assets/img/photo.3c2e3dad4f.svg",
+  "w": 368,
+  "h": 375,
+  "inSize": 10236,
+  "outSize": 5016
+ },
+ "https://static.tildacdn.com/tild3562-3237-4365-a264-353030653735/1.svg": {
+  "kind": "svg",
+  "src": "/assets/img/1.6a40d59cf6.svg",
+  "w": 722,
+  "h": 375,
+  "inSize": 19670,
+  "outSize": 9570
  }
 }

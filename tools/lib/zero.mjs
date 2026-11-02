@@ -3,6 +3,7 @@ import * as csstree from 'css-tree';
 import { makeGetter, artboardAt, elemLayout, num } from './zero-layout.mjs';
 import { applyFit } from './text-fit.mjs';
 import { buildKeyframes, scrollSteps } from './sbs.mjs';
+import { lookup, usedAssets } from './assets.mjs';
 
 const SEL_MAP = [
   [/\.t396__carrier-wrapper/g, '.cw'],
@@ -346,6 +347,8 @@ function emitElement($, e, recId, ctx, css, A, screens) {
   if (rm('data-animate-mobile') === 'y') data.push('data-mb="1"');
   if (classes.includes('dot-scale-2') && !classes.includes('dot-scale')) classes.push('dot-scale');
   if (ctx.anx && ctx.anx.has(`${recId}:${id}`)) classes.push('anx');
+  const cur = ctx.cursor && ctx.cursor[`${recId}:${id}`];
+  if (cur) { const m = lookup(cur.img); if (m) { usedAssets.add(m.src); data.push(`data-cu="${m.src}" data-cw="${cur.w}" data-cd="${cur.dur}"${cur.link ? ` data-ch="${esc(cur.link)}"` : ''}`); } else console.warn('NO CURSOR ASSET', cur.img); }
   e.dot = classes.includes('dot-scale');
   const inner = emitAtom($, e, ctx, A, screens, hasSbs && sbsEvent !== 'scroll' ? wrapStyle : '', hasSbs);
   return `<div class="e e${id}${classes.length ? ' ' + classes.join(' ') : ''}" ${data.join(' ')}>${inner}</div>`;

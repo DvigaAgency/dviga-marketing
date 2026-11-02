@@ -34,3 +34,6 @@
 .video-case .a,.video-case .vd{border-radius:14px}
 /* «Увеличение фото на кейсах» (кастомный CSS оригинала): элементы с классом shape обрезают увеличивающееся при прокрутке фото по своей рамке */
 .e.shape{overflow:hidden!important}
+.cu{position:fixed;left:0;top:0;z-index:99999;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s ease-out;will-change:transform}
+.cu.on{opacity:1}
+.e.cu-h,.e.cu-h *{cursor:none!important}

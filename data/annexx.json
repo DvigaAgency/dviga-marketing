@@ -5,7 +5,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/bitrix24_crm": {
   "hover": [
@@ -26,7 +28,9 @@
   "scale": [
    "680540530",
    "834517017"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/brand": {
   "hover": [
@@ -43,7 +47,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/brandplatform": {
   "hover": [
@@ -60,7 +66,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/internet-magazin-na-tilda": {
   "hover": [
@@ -77,7 +85,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/key-visual": {
   "hover": [
@@ -89,12 +99,17 @@
    "991712946:1743673825773"
   ],
   "drag": [
-   "864137673"
+   "864137673",
+   "822248184"
   ],
-  "boost": [],
+  "boost": [
+   "822248184"
+  ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/korporativnyj-sajt-na-tilda": {
   "hover": [
@@ -113,6 +128,17 @@
   "boost": [],
   "scale": [
    "680540530"
+  ],
+  "faq": [],
+  "cursor": [
+   {
+    "rec": "1242435221",
+    "elem": "1755854318030",
+    "img": "https://static.tildacdn.com/tild3461-3332-4134-b666-643661333662/photo.svg",
+    "w": 140,
+    "link": "https://rutube.ru/video/3f52383b59cfbae400d312b3937eb6e3/",
+    "dur": 200
+   }
   ]
  },
  "/services/korporativnyj-sajt": {
@@ -130,6 +156,17 @@
   "boost": [],
   "scale": [
    "680540530"
+  ],
+  "faq": [],
+  "cursor": [
+   {
+    "rec": "1498756521",
+    "elem": "1755854318030",
+    "img": "https://static.tildacdn.com/tild3461-3332-4134-b666-643661333662/photo.svg",
+    "w": 140,
+    "link": "https://rutube.ru/video/3f52383b59cfbae400d312b3937eb6e3/",
+    "dur": 200
+   }
   ]
  },
  "/services/marketing-for-developers": {
@@ -147,7 +184,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/marketing-for-fmcg": {
   "hover": [
@@ -164,7 +203,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/marketing-for-logistics-companies": {
   "hover": [
@@ -181,7 +222,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/marketing-for-production": {
   "hover": [
@@ -201,7 +244,9 @@
   ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/nejming-zhk": {
   "hover": [
@@ -222,7 +267,9 @@
   "scale": [
    "680540530",
    "860674754"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/paid-traffic": {
   "hover": [
@@ -239,7 +286,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/prodvizhenie-sajta-zhilogo-kompleksa": {
   "hover": [
@@ -256,7 +305,50 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [
+   {
+    "tab": "972963676",
+    "q": "972963671",
+    "open": false
+   },
+   {
+    "tab": "972963691",
+    "q": "972963686",
+    "open": false
+   },
+   {
+    "tab": "972963706",
+    "q": "972963701",
+    "open": false
+   },
+   {
+    "tab": "972963721",
+    "q": "972963716",
+    "open": false
+   },
+   {
+    "tab": "972963736",
+    "q": "972963731",
+    "open": false
+   },
+   {
+    "tab": "972963751",
+    "q": "972963746",
+    "open": false
+   },
+   {
+    "tab": "972963766",
+    "q": "972963761",
+    "open": false
+   },
+   {
+    "tab": "972963781",
+    "q": "972963776",
+    "open": false
+   }
+  ],
+  "cursor": []
  },
  "/services/razrabotka-internet-magazina": {
   "hover": [
@@ -276,7 +368,9 @@
   ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/razrabotka-logotipa-i-firmennogo-stilya-dlya-zhilogo-kompleksa": {
   "hover": [
@@ -288,12 +382,17 @@
    "991691651:1745853794343"
   ],
   "drag": [
-   "864137673"
+   "864137673",
+   "864678305"
   ],
-  "boost": [],
+  "boost": [
+   "864678305"
+  ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/razrabotka-logotipa-i-firmennogo-stilya": {
   "hover": [
@@ -310,7 +409,60 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [
+   {
+    "tab": "1005550741",
+    "q": "1005550736",
+    "open": false
+   },
+   {
+    "tab": "1005640116",
+    "q": "1005639191",
+    "open": false
+   },
+   {
+    "tab": "1005723026",
+    "q": "1005723021",
+    "open": false
+   },
+   {
+    "tab": "1005723456",
+    "q": "1005723451",
+    "open": false
+   },
+   {
+    "tab": "1005723681",
+    "q": "1005723676",
+    "open": false
+   },
+   {
+    "tab": "1005723936",
+    "q": "1005723931",
+    "open": false
+   },
+   {
+    "tab": "1005937056",
+    "q": "1005937051",
+    "open": false
+   },
+   {
+    "tab": "1005937071",
+    "q": "1005937066",
+    "open": false
+   },
+   {
+    "tab": "1005937086",
+    "q": "1005937081",
+    "open": false
+   },
+   {
+    "tab": "1005937106",
+    "q": "1005937101",
+    "open": false
+   }
+  ],
+  "cursor": []
  },
  "/services/razrabotka-sajta-zhilogo-kompleksa": {
   "hover": [
@@ -327,7 +479,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/research": {
   "hover": [
@@ -347,7 +501,9 @@
   ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/retail_and_fmcg": {
   "hover": [],
@@ -359,7 +515,9 @@
   ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/sajt-dlya-morskogo-porta": {
   "hover": [
@@ -376,7 +534,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/sayt-zastrojshchika-dviga": {
   "hover": [
@@ -398,7 +558,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/sozdanie-sajtov-na-tilda": {
   "hover": [
@@ -415,6 +577,17 @@
   "boost": [],
   "scale": [
    "680540530"
+  ],
+  "faq": [],
+  "cursor": [
+   {
+    "rec": "1240767471",
+    "elem": "1755854318030",
+    "img": "https://static.tildacdn.com/tild3562-3237-4365-a264-353030653735/1.svg",
+    "w": 230,
+    "link": "https://rutube.ru/video/3f52383b59cfbae400d312b3937eb6e3/",
+    "dur": 200
+   }
   ]
  },
  "/services/sozdaniye-brendov-nedvizhimosti": {
@@ -432,7 +605,9 @@
   "boost": [],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [],
+  "cursor": []
  },
  "/services/sozdaniye-i-razrabotka-saytov": {
   "hover": [
@@ -449,6 +624,17 @@
   "boost": [],
   "scale": [
    "680540530"
+  ],
+  "faq": [],
+  "cursor": [
+   {
+    "rec": "1936291211",
+    "elem": "1755854318030",
+    "img": "https://static.tildacdn.com/tild3461-3332-4134-b666-643661333662/photo.svg",
+    "w": 140,
+    "link": "https://rutube.ru/video/3f52383b59cfbae400d312b3937eb6e3/",
+    "dur": 200
+   }
   ]
  },
  "/services/zakazat-lending-na-tilda": {
@@ -466,6 +652,17 @@
   "boost": [],
   "scale": [
    "680540530"
+  ],
+  "faq": [],
+  "cursor": [
+   {
+    "rec": "1242410666",
+    "elem": "1755854318030",
+    "img": "https://static.tildacdn.com/tild3461-3332-4134-b666-643661333662/photo.svg",
+    "w": 140,
+    "link": "https://rutube.ru/video/3f52383b59cfbae400d312b3937eb6e3/",
+    "dur": 200
+   }
   ]
  },
  "/services/zakazat-nejming": {
@@ -486,6 +683,59 @@
   ],
   "scale": [
    "680540530"
-  ]
+  ],
+  "faq": [
+   {
+    "tab": "967158601",
+    "q": "967118651",
+    "open": false
+   },
+   {
+    "tab": "967244201",
+    "q": "967222866",
+    "open": false
+   },
+   {
+    "tab": "967288006",
+    "q": "967287731",
+    "open": false
+   },
+   {
+    "tab": "967334931",
+    "q": "967331206",
+    "open": false
+   },
+   {
+    "tab": "971731716",
+    "q": "971730966",
+    "open": false
+   },
+   {
+    "tab": "971734836",
+    "q": "971733961",
+    "open": false
+   },
+   {
+    "tab": "971737701",
+    "q": "971737591",
+    "open": false
+   },
+   {
+    "tab": "971739466",
+    "q": "971738911",
+    "open": false
+   },
+   {
+    "tab": "971743916",
+    "q": "971743621",
+    "open": false
+   },
+   {
+    "tab": "971748361",
+    "q": "971748101",
+    "open": false
+   }
+  ],
+  "cursor": []
  }
 }

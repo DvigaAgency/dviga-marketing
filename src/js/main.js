@@ -399,6 +399,24 @@ function initDrag() {
   });
 }
 
+/* ---------- курсор-картинка над элементом (Annexx ANX013: кнопка «Play» на обложке видео) ---------- */
+function initCursor() {
+  if (matchMedia('(hover:none)').matches) return;
+  $$('.e[data-cu]').forEach((el) => {
+    const w = num(el.dataset.cw, 100);
+    const im = d.createElement('img');
+    im.src = el.dataset.cu; im.alt = ''; im.className = 'cu'; im.style.width = w + 'px'; im.style.transitionDuration = num(el.dataset.cd, 200) + 'ms';
+    d.body.appendChild(im);
+    const put = (e) => { im.style.transform = `translate(${e.clientX - w / 2}px,${e.clientY - im.offsetHeight / 2}px)`; };
+    el.addEventListener('mouseenter', (e) => { put(e); im.classList.add('on'); el.classList.add('cu-h'); });
+    el.addEventListener('mousemove', put);
+    el.addEventListener('mouseleave', () => { im.classList.remove('on'); el.classList.remove('cu-h'); });
+    const go = () => { if (el.dataset.ch) w_open(el.dataset.ch); };
+    el.addEventListener('click', go);
+  });
+}
+const w_open = (u) => { try { window.open(u, '_blank', 'noopener'); } catch (_) { location.href = u; } };
+
 /* ---------- cookie ---------- */
 function initCookie() {
   const ck = $('#ck');
@@ -506,6 +524,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initShare, initDrag, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initShare, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

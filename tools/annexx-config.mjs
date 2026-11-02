@@ -1,8 +1,10 @@
 // Настройки плагина Annexx и HTML-вставок со страниц услуг оригинала. В снимках страниц (trim-html) скрипты и комментарии вырезаны,
 // поэтому забираем их с живой страницы. Результат: data/annexx.json
-//   { "/services/<имя>": { hover: ["<recId>:<elemId>", …], drag: ["<recId>", …], boost: ["<recId>", …], scale: ["<recId>", …] } }
+//   { "/services/<имя>": { hover: ["<recId>:<elemId>", …], faq: [{ tab, q, open }], cursor: [{ rec, elem, img, w, link, dur }], drag: ["<recId>", …], boost: ["<recId>", …], scale: ["<recId>", …] } }
 // hover — ссылки Zero-текстов, у которых при наведении текст краснеет (Annexx ANX001-1: селекторы «.tn-elem__<recId><elemId> .tn-atom a»);
 // drag  — записи с горизонтальной лентой, которую тянут мышью (dragscroll у 864137673; ScrollBooster у записи из blockId);
+// cursor — Annexx ANX013: над элементом вместо курсора — картинка (img, ширина w), клик открывает link;
+// faq   — «Частые вопросы» из Zero-записей (Annexx ANX019): ответ (запись tab) скрыт, вопрос (запись q) по клику открывает его;
 // boost — из них те, где ScrollBooster: после отпускания лента докатывается по инерции;
 // scale — стандартные блоки, которые Annexx ANX812-1 масштабирует как Zero (размер блока × ширина/опорная ширина, значения масштаба 100%).
 // Запуск: node tools/annexx-config.mjs [<имя страницы услуг>…]   (без аргументов — все страницы из data/pages/services*.html)
@@ -27,7 +29,7 @@ for (const name of names) {
   const path = name === 'services' ? '/services' : `/services/${name}`;
   const html = get(`https://dviga.marketing${path}`);
   if (!html) { console.log('FAIL загрузка', path); continue; }
-  const e = { hover: [], drag: [], boost: [], scale: [] };
+  const e = { hover: [], drag: [], boost: [], scale: [], faq: [], cursor: [] };
   // Annexx: <!--!ANX001-1!--><!--![ {"id":"1","data":"<селекторы>"}, {"id":"3","data":"<цвет>"} … ]!-->
   for (const m of html.matchAll(/<!--!ANNEXX!--><!--!(ANX\d+-\d+)!--!?><!--!(\[[^]*?\])!-->/g)) {
     let cfg;
@@ -39,6 +41,11 @@ for (const name of names) {
         if (d && d.length > 13) e.hover.push(`${d.slice(0, -13)}:${d.slice(-13)}`);
       }
     }
+    if (m[1] === 'ANX013-1' && cfg.shape && cfg['cursor-for-shape']) {
+      // курсор-картинка над элементом (кнопка «Play» на обложке видео); клик открывает ролик
+      const d = /\.tn-elem__(\d+)/.exec(cfg.shape)?.[1];
+      if (d && d.length > 13) e.cursor.push({ rec: d.slice(0, -13), elem: d.slice(-13), img: cfg['cursor-for-shape'], w: +cfg['width-cursor-shape'] || 100, link: cfg['link-shape'] || '', dur: +cfg['duration-shape'] || 200 });
+    }
     if (m[1] === 'ANX812-1') {
       const scales = Object.entries(cfg).filter(([k]) => /^scale/.test(k)).map(([, v]) => v);
       if (scales.some((v) => v !== '100')) console.log('WARN масштаб блоков не 100%', path, cfg.blocks, scales.join('/'));
@@ -48,7 +55,23 @@ for (const name of names) {
   // dragscroll: $('#rec864137673 .t396__artboard').addClass('dragscroll'); ScrollBooster: const blockId = '#rec<id>'
   for (const m of html.matchAll(/\$\('#rec(\d+)[^']*'\)\.addClass\('dragscroll'\)/g)) e.drag.push(m[1]);
   for (const m of html.matchAll(/blockId\s*=\s*'#rec(\d+)'/g)) { e.drag.push(m[1]); e.boost.push(m[1]); }
-  for (const k of Object.keys(e)) e[k] = [...new Set(e[k])];
+  // «Библиотека VORON» (боковой скролл Zero): scrollableBlocks = ['#rec<id>'] — тянется мышью, докатывается по инерции
+  for (const m of html.matchAll(/scrollableBlocks\s*=\s*\[([^\]]*)\]/g)) for (const r of m[1].matchAll(/#rec(\d+)/g)) { e.drag.push(r[1]); e.boost.push(r[1]); }
+  // Annexx ANX019 (вкладки по клику): группы [{name:"tab___tab-number", data:"#rec<ответ>"}, {name:"blockaction___tab-number", data:"#rec<вопрос>"}, …]
+  const key = '[[{"name":"tab___tab-number"';
+  const fi = html.indexOf(key);
+  if (fi >= 0) {
+    let dep = 0; let j = fi;
+    for (; j < html.length; j++) { if (html[j] === '[') dep++; else if (html[j] === ']') { dep--; if (!dep) { j++; break; } } }
+    try {
+      for (const g of JSON.parse(html.slice(fi, j))) {
+        const f = Object.fromEntries(g.filter((x) => x.data).map((x) => [x.name.replace('___tab-number', ''), x.data]));
+        const tab = /#rec(\d+)/.exec(f.tab || '')?.[1]; const q = /#rec(\d+)/.exec(f.blockaction || '')?.[1];
+        if (tab && q) e.faq.push({ tab, q, open: f.starttab === 'true' });
+      }
+    } catch { console.log('WARN не разобрана настройка вкладок', path); }
+  }
+  for (const k of ['hover', 'drag', 'boost', 'scale']) e[k] = [...new Set(e[k])];
   out[path] = e;
   console.log(path.padEnd(70), `hover ${e.hover.length}, drag ${e.drag.join(',') || '—'}, scale ${e.scale.join(',') || '—'}`);
 }

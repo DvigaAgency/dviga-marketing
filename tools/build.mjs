@@ -116,7 +116,7 @@ const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { d
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
-  const ax = { hover: [], drag: [], boost: [], scale: [], ...(ANNEXX[spec.path] || {}) };
+  const ax = { hover: [], drag: [], boost: [], scale: [], cursor: [], ...(ANNEXX[spec.path] || {}) };
   const faqList = faqFor(spec.path);
   const recSeen = new Set();
   // T331: попап с видео (Rutube/YouTube) -> ссылка на страницу ролика: внешние iframe в копии не грузятся
@@ -147,6 +147,7 @@ async function buildPage(spec) {
     eager() { return ctx.eagerRecs.has(ctx.rec); },
     drag: new Set([...(home ? ['864137673'] : []), ...ax.drag]),
     boost: new Set(ax.boost),
+    cursor: Object.fromEntries(ax.cursor.map((k) => [`${k.rec}:${k.elem}`, k])),
     eagerRecs,
     textHtml: (h) => videoLinks(fixLinks(h)),
     embed(kind, raw) {
@@ -211,6 +212,9 @@ async function buildPage(spec) {
       const alias = rec.attr('data-alias-record-type');
       const type = rec.attr('data-record-type') === '121' && alias ? alias : rec.attr('data-record-type'); // глобальный блок Tilda (121) ведёт себя как тип, на который он ссылается
       const rid = rec.attr('id').replace('rec', '');
+      // Tilda: запись показывается только на части ширин (t-screenmin-980px — от 981 px, t-screenmax-980px — до 980 px)
+      const vis = /t-screen(min|max)-(\d+)px/.exec(rec.attr('class') || '');
+      if (vis) css.push(vis[1] === 'min' ? `@media(max-width:${vis[2]}px){#r${rid}{display:none!important}}` : `@media(min-width:${+vis[2] + 1}px){#r${rid}{display:none!important}}`);
       recSeen.add(rid);
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
