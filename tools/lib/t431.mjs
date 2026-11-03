@@ -37,9 +37,12 @@ export function t431Table($, rec) {
   const rows = (rec.find('.t431__data-part2').text() || '').split('\n').map((x) => x.trim()).filter(Boolean).map((x) => x.split(';'));
   const st = readStyle($, id);
   const cell = (c) => c.trim(); // в ячейках Tilda допускает разметку (<b>, ссылки) — оставляем как есть
-  const col = widths.map((w, i) => (i === widths.length - 1 ? '<col>' : `<col style="width:${esc(w)}">`)).join('');
-  const th = head.map((c) => `<th scope="col">${cell(c)}</th>`).join('');
-  const tr = rows.map((r) => `<tr>${r.map((c) => `<td>${cell(c)}</td>`).join('')}</tr>`).join('');
+  // Tilda кладёт ширины из data-table-width атрибутами width на первые ячейки (их может быть меньше, чем колонок: «30%;70%» у таблицы из 5 колонок), раскладка автоматическая
+  const auto = widths.length > 0;
+  const col = auto ? '' : widths.map((w, i) => (i === widths.length - 1 ? '<col>' : `<col style="width:${esc(w)}">`)).join('');
+  const wa = (i) => (auto && widths[i] ? ` width="${esc(widths[i])}"` : '');
+  const th = head.map((c, i) => `<th scope="col"${wa(i)}>${cell(c)}</th>`).join('');
+  const tr = rows.map((r) => `<tr>${r.map((c, i) => `<td${wa(i)}>${cell(c)}</td>`).join('')}</tr>`).join('');
   const css = [recPadding(rec.attr('class') || '', id)];
   const s = `#r${id} .ar-tt`;
   const thRule = [st.th.bg && `background:${st.th.bg}`, st.th.color && `color:${st.th.color}`, st.th.bc && `border-color:${st.th.bc}`].filter(Boolean).join(';');
@@ -49,7 +52,9 @@ export function t431Table($, rec) {
   if (st.td.bc) css.push(`${s} td{border-color:${st.td.bc}}`);
   if (st.odd && !/^#?f{3,6}$|^white$/i.test(st.odd.replace('#', ''))) css.push(`${s} tbody tr:nth-child(odd){background:${st.odd}}`);
   if (st.even && !/^#?f{3,6}$|^white$/i.test(st.even.replace('#', ''))) css.push(`${s} tbody tr:nth-child(even){background:${st.even}}`);
+  // кастомный CSS страницы: «первая колонка semibold» (#allrecords .t431__table td.t431__td:first-child { font-weight: 700 })
+  if (/t431__td:first-child\s*\{[^}]*font-weight:\s*700/.test($('style').map((i, e) => $(e).text()).get().join('\n'))) css.push(`${s} td:first-child{font-weight:700}`);
   const noV = st.td.bl !== undefined && parseFloat(st.td.bl) === 0; // у таблицы без вертикальных линий — только горизонтальные
-  const cls = `ar-tt${head.length >= 3 ? ' ar-tt-wide' : ''}${noV ? ' ar-tt-nv' : ''}`;
-  return { id, css: css.filter(Boolean).join('\n'), html: `<section id="r${id}" class="r ar ar-tb"><div class="ar-c ar-tbl"><div class="ar-tsc"><table class="${cls}"><colgroup>${col}</colgroup><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div></div></section>` };
+  const cls = `ar-tt${head.length >= 3 ? ' ar-tt-wide' : ''}${noV ? ' ar-tt-nv' : ''}${auto ? ' ar-tt-auto' : ''}`;
+  return { id, css: css.filter(Boolean).join('\n'), html: `<section id="r${id}" class="r ar ar-tb${/t-rec_pt_0/.test(rec.attr('class') || '') && /t-rec_pb_0/.test(rec.attr('class') || '') ? ' ar-tb0' : ''}"><div class="ar-c ar-tbl${auto ? ' ar-tba' : ''}"><div class="ar-tsc"><table class="${cls}"><colgroup>${col}</colgroup><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div></div></section>` };
 }

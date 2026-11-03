@@ -11,3 +11,18 @@
 /* таблицы без вертикальных линий (T431 с нулевой шириной боковых границ) */
 .ar-tt-nv{border-width:0}
 .ar-tt-nv th,.ar-tt-nv td{border-width:0 0 1px}
+/* ширины заданы атрибутами width у первых ячеек — автоматическая раскладка, как у Tilda */
+.ar-tt-auto{table-layout:auto}
+.ar-tt-auto th,.ar-tt-auto td{overflow-wrap:normal}
+/* запись с нулевыми отступами (pt_0/pb_0): высота записи = высота таблицы, отступы дают соседние Zero-блоки */
+.ar-tb.ar-tb0 .ar-c{padding:0}
+/* t-col_8 оригинала: ширина таблицы по брейкпоинтам (1201+: 760 как колонка текста; 1200: 620; 960–641: 600; ≤639: 448, прокручивается) */
+.ar-tba .ar-tt{min-width:0}
+@media(max-width:1200px){.ar-tba{margin:0 auto;width:620px}}
+@media(max-width:960px){.ar-tba{width:600px}}
+@media(max-width:639px){.ar-tba{width:448px;margin:0 0 0 20px}}
+/* ячейки как у Tilda (проверено на 13 ширинах): боковой отступ 10px ≤960, межстрочный 1.45 ≤640, кегль ячеек 12px ≤480 */
+@media(max-width:960px){.ar-tt-auto th,.ar-tt-auto td{padding:20px 10px}}
+@media(max-width:640px){.ar-tt-auto th,.ar-tt-auto td{line-height:1.45}}
+@media(max-width:480px){.ar-tt-auto td{font-size:12px}}
+@media(max-width:479px){.ar-tba{width:306px;margin-left:20px}}

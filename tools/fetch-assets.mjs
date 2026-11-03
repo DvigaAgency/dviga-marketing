@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 const all = JSON.parse(fs.readFileSync('data/assets-raw.json', 'utf8'));
-const list = all.filter((u) => /static\.tildacdn\.com\/(tild|vide)|cp80604-bitrix-8\.tw1\.ru\/|dl\.dropboxusercontent\.com\/s\//.test(u));
+const list = all.filter((u) => /static\.tildacdn\.com\/(tild|tila|vide)|cp80604-bitrix-8\.tw1\.ru\/|dl\.dropboxusercontent\.com\/s\//.test(u));
 
 fs.mkdirSync('source-assets', { recursive: true });
 const prevM = fs.existsSync('data/assets-manifest.json') ? JSON.parse(fs.readFileSync('data/assets-manifest.json', 'utf8')) : {};

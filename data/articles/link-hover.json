@@ -408,5 +408,21 @@
    ],
    "color": "rgba(223, 40, 40, 1)"
   }
+ ],
+ "plyusy-i-minusy-sayta-na-bitrix": [
+  {
+   "sel": [
+    ".tn-elem__51478599011747990914437 .tn-atom a",
+    ".tn-elem__51478599011747990914420 .tn-atom a",
+    ".tn-elem__51478599011747990914404 .tn-atom a",
+    ".tn-elem__51478599011747990914385 .tn-atom a",
+    ".tn-elem__51478599011755700467195 .tn-atom a",
+    ".tn-elem__51478599011755700467182 .tn-atom a",
+    ".tn-elem__51478600011747990914420 .tn-atom a",
+    ".tn-elem__51478600011747990914404 .tn-atom a",
+    ".tn-elem__51478600011747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
  ]
 }
