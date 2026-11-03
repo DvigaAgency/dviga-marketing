@@ -1,14 +1,15 @@
 // Настройки плагина Annexx и HTML-вставок со страниц услуг оригинала. В снимках страниц (trim-html) скрипты и комментарии вырезаны,
 // поэтому забираем их с живой страницы. Результат: data/annexx.json
-//   { "/services/<имя>": { hover: ["<recId>:<elemId>", …], faq: [{ tab, q, open }], cursor: [{ rec, elem, img, w, link, dur }], drag: ["<recId>", …], boost: ["<recId>", …], scale: ["<recId>", …] } }
+//   { "/services/<имя>" (или "/blog/<статья>"): { hover: ["<recId>:<elemId>", …], faq: [{ tab, q, open }], cursor: [{ rec, elem, img, w, link, dur }], drag: ["<recId>", …], boost: ["<recId>", …], scale: ["<recId>", …] } }
 // hover — ссылки Zero-текстов, у которых при наведении текст краснеет (Annexx ANX001-1: селекторы «.tn-elem__<recId><elemId> .tn-atom a»);
 // drag  — записи с горизонтальной лентой, которую тянут мышью (dragscroll у 864137673; ScrollBooster у записи из blockId);
+// stick  — Annexx ANX831: блок закрепляется у верхнего края после прокрутки ({ rec, top, z });
 // cursor — Annexx ANX013: над элементом вместо курсора — картинка (img, ширина w), клик открывает link;
 // faq   — «Частые вопросы» из Zero-записей (Annexx ANX019): ответ (запись tab) скрыт, вопрос (запись q) по клику открывает его;
 // boost — из них те, где ScrollBooster: после отпускания лента докатывается по инерции;
 // scaleAll — масштабируются все стандартные (не Zero) записи страницы;
 // scale — стандартные блоки, которые Annexx ANX812-1 масштабирует как Zero (размер блока × ширина/опорная ширина, значения масштаба 100%).
-// Запуск: node tools/annexx-config.mjs [<имя страницы услуг> | /<страница верхнего уровня>…]   (без аргументов — все страницы из data/pages/services*.html)
+// Запуск: node tools/annexx-config.mjs [<имя страницы услуг> | /<страница верхнего уровня> | /blog/<статья>…]   (без аргументов — все страницы из data/pages/services*.html)
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 
@@ -31,7 +32,7 @@ for (const name of names) {
   const path = name.startsWith('/') ? name : name === 'services' ? '/services' : `/services/${name}`;
   const html = get(`https://dviga.marketing${path}`);
   if (!html) { console.log('FAIL загрузка', path); continue; }
-  const e = { hover: [], drag: [], boost: [], scale: [], faq: [], cursor: [] };
+  const e = { hover: [], drag: [], boost: [], scale: [], faq: [], cursor: [], stick: [] };
   // «.tn-elem__<recId><elemId>»: у новых элементов id длиннее 13 цифр, поэтому recId выбираем из записей страницы
   const recIds = [...new Set([...html.matchAll(/id="rec(\d+)"/g)].map((m) => m[1]))];
   const split = (d) => { const r = recIds.filter((x) => d.startsWith(x) && d.length - x.length >= 13).sort((a, b) => b.length - a.length)[0] || d.slice(0, -13); return [r, d.slice(r.length)]; };
@@ -50,6 +51,11 @@ for (const name of names) {
       // курсор-картинка над элементом (кнопка «Play» на обложке видео); клик открывает ролик
       const d = /\.tn-elem__(\d+)/.exec(cfg.shape)?.[1];
       if (d && d.length > 13) e.cursor.push({ rec: split(d)[0], elem: split(d)[1], img: cfg['cursor-for-shape'], w: +cfg['width-cursor-shape'] || 100, link: cfg['link-shape'] || '', dur: +cfg['duration-shape'] || 200 });
+    }
+    if (m[1] === 'ANX831-1') {
+      // «прилипающий» блок: после прокрутки закрепляется у верхнего края (position:fixed; top:offset; z-index) — например кнопка «Содержание» у статей
+      const id = /#rec(\d+)/.exec(cfg.block || '')?.[1];
+      if (id) e.stick.push({ rec: id, top: +cfg.offset || 0, z: +cfg.zindex || 999 });
     }
     if (m[1] === 'ANX812-1') {
       const scales = Object.entries(cfg).filter(([k]) => /^scale/.test(k)).map(([, v]) => v);
@@ -79,6 +85,7 @@ for (const name of names) {
   }
   for (const k of ['hover', 'drag', 'boost', 'scale']) e[k] = [...new Set(e[k])];
   if (!e.scaleAll) delete e.scaleAll;
+  if (path.startsWith('/blog/')) e.hover = []; // подсветка ссылок у статей блога — data/articles/link-hover.json (tools/faq-config.mjs, цвет rgba(223, 40, 40))
   out[path] = e;
   console.log(path.padEnd(70), `hover ${e.hover.length}, drag ${e.drag.join(',') || '—'}, scale ${e.scale.join(',') || '—'}`);
 }

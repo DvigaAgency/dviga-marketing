@@ -26,3 +26,13 @@
 @media(max-width:640px){.ar-tt-auto th,.ar-tt-auto td{line-height:1.45}}
 @media(max-width:480px){.ar-tt-auto td{font-size:12px}}
 @media(max-width:479px){.ar-tba{width:306px;margin-left:20px}}
+/* t-col_12 + mobilescroll (запись 1667157551 «Сколько стоит сайт на Тильде»): колонка шире текста, размеры в px оригинала без масштаба (правила .ar-tbw не умножаются на --s, см. scaleUi);
+   1201+: колонка 1160, шапка 18/ячейки 20; 961–1200: 940, 16/20; 641–960: колонка 640 (прокрутка 600), таблица от 960; ≤640: прокрутка на всю ширину−40, таблица от 640; ≤480: ячейки 14 */
+.ar-tbw{margin:0 auto;width:1160px;padding:0}
+.ar-tbw .ar-tt{min-width:0}
+.ar-tbw .ar-tt th,.ar-tbw .ar-tt td{padding:20px;font-size:20px;line-height:31px}
+.ar-tbw .ar-tt thead th{font-size:18px;line-height:27.9px}
+@media(max-width:1200px){.ar-tbw{width:940px}.ar-tbw .ar-tt thead th{font-size:16px;line-height:24.8px}}
+@media(max-width:960px){.ar-tbw{width:600px}.ar-tbw .ar-tt{min-width:960px}}
+@media(max-width:640px){.ar-tbw{margin:0 20px;width:calc(100% - 40px)}.ar-tbw .ar-tt{min-width:640px}.ar-tbw .ar-tt thead th{font-size:14px;line-height:20.3px}.ar-tbw .ar-tt td{line-height:29px}}
+@media(max-width:480px){.ar-tbw .ar-tt td{font-size:14px;line-height:20.3px}}

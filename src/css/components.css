@@ -21,6 +21,8 @@ body.pl{}
 .pp.blk .pc .e,.pp.blk .px{pointer-events:auto}
 .pp.blk .px{background:transparent}
 .pp.blk.menu .px{display:none}
+.pp.blk.content{background:transparent;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.pp.blk.content .pc{transition:transform .7s cubic-bezier(.76,0,.24,1)}
 /* ===== отзывы-попапы (390), бланки (756) ===== */
 .pc.rv{max-width:560px;background:#fbfbf9}
 .rv-w{padding:40px 45px}

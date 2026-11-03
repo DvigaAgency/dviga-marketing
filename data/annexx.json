@@ -893,5 +893,39 @@
     "dur": 200
    }
   ]
+ },
+ "/blog/issledovaniye-marketing-rossiyskogo-developmenta": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [
+   {
+    "rec": "827393065",
+    "top": 0,
+    "z": 999
+   }
+  ]
+ },
+ "/blog/issledovaniyeneyminga-v-rossiyskom-developmente": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [
+   {
+    "rec": "828416947",
+    "top": 0,
+    "z": 999
+   }
+  ]
  }
 }

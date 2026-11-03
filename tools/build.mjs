@@ -44,7 +44,7 @@ const readCss = (f) => fs.readFileSync(f, 'utf8');
 const scaleUi = (css, v = '--ui') => {
   const ast = csstree.parse(css);
   csstree.walk(ast, { visit: 'Declaration', enter(decl) {
-    if (this.rule && /\.wg-/.test(csstree.generate(this.rule.prelude))) return; // виджет «Давайте подскажем» Tilda не масштабируется: кнопка 60 px на любой ширине
+    if (this.rule && /\.(wg|ar-tbw)/.test(csstree.generate(this.rule.prelude))) return; // виджет «Давайте подскажем» Tilda не масштабируется: кнопка 60 px на любой ширине
     csstree.walk(decl.value, { visit: 'Dimension', enter(node, item, list) {
       if (node.unit !== 'px' || +node.value === 0 || !list) return;
       list.replace(item, list.createItem({ type: 'Function', name: 'calc', children: new csstree.List().fromArray([{ type: 'Dimension', value: node.value, unit: 'px' }, { type: 'Operator', value: '*' }, { type: 'Function', name: 'var', children: new csstree.List().fromArray([{ type: 'Identifier', name: v }]) }]) }));
@@ -119,8 +119,8 @@ async function buildPage(spec) {
   const home = spec.kind === 'home';
   // Zero-записи внутри попапов меню/формы: на общих страницах — известные id, на отдельных страницах (/marketing-for-devepolers-proposal) свои — берём из data-popup-rec-ids записи T1093
   const popupRecs = { ...POPUP_RECS };
-  $('.t-popup[data-popup-rec-ids]').each((i, e) => { const hook = ($(e).attr('data-tooltip-hook') || '').replace('#', ''); if (hook === 'menu' || hook === 'form') for (const r of ($(e).attr('data-popup-rec-ids') || '').split(',')) if (r) popupRecs[r.replace('rec', '')] = hook; });
-  const ax = { hover: [], drag: [], boost: [], scale: [], cursor: [], ...(ANNEXX[spec.path] || {}) };
+  $('.t-popup[data-popup-rec-ids]').each((i, e) => { const hook = ($(e).attr('data-tooltip-hook') || '').replace('#', ''); if (/^[a-z]+$/i.test(hook)) for (const r of ($(e).attr('data-popup-rec-ids') || '').split(',')) if (r) popupRecs[r.replace('rec', '')] = hook; });
+  const ax = { hover: [], drag: [], boost: [], scale: [], cursor: [], stick: [], ...(ANNEXX[spec.path] || {}) };
   const faqList = faqFor(spec.path);
   const recSeen = new Set();
   // T331: попап с видео (Rutube/YouTube) -> ссылка на страницу ролика: внешние iframe в копии не грузятся
@@ -274,6 +274,7 @@ async function buildPage(spec) {
   // CSS свёрнутых записей (неактивные вкладки, «Загрузить еще») грузится отдельным файлом после загрузки страницы
   const deferred = [];
   for (const id of off) if (recCss[id]) { deferred.push(recCss[id]); const k = css.indexOf(recCss[id]); if (k >= 0) css.splice(k, 1); }
+  for (const k of ax.stick) css.push(`#r${k.rec}{position:sticky;top:${k.top}px;z-index:${k.z}!important;pointer-events:none}#r${k.rec} .e{pointer-events:all}`); // ANX831: блок закрепляется у верхнего края (sticky работает, т.к. main.cq — overflow:clip)
   const lh = linkHoverCss(spec.path, recSeen);
   if (lh) css.push(lh);
   const sliderList = slidersFor(spec.path);
@@ -289,7 +290,9 @@ async function buildPage(spec) {
   const calcPopup = `<div class="pp" id="p-calculate" data-hook="popup:calculate" role="dialog" aria-modal="true" tabindex="-1" aria-label="${calcRec.find('.t702__title').text().trim()}">${closeBtn}<div class="pc cl"><div class="cl-w"><div class="cl-t">${calcRec.find('.t702__title').html()}</div>${calcForm}</div></div></div>`;
   const wRec = $c('#rec1468283321');
   const widgetForm = renderTildaForm($c, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
-  const popups = [menuPopup, formPopup, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), search($)].join('');
+  // прочие Zero-попапы страницы (например «Содержание» у статей: ссылка href="#content", запись внутри T1093 с data-tooltip-hook="#content")
+  const extraPopups = Object.entries(popupZero).filter(([k]) => k !== 'menu' && k !== 'form').map(([k, v]) => `<div class="pp blk ${k} cq" id="p-${k}" data-hook="${k}" role="dialog" aria-modal="true" aria-label="${k === 'content' ? 'Содержание' : k}" tabindex="-1">${closeBtn}<div class="pc">${v}</div></div>`).join('');
+  const popups = [menuPopup, formPopup, extraPopups, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), search($)].join('');
 
   // ---------------- CSS страницы
   // CSS страницы: стили её записей; общие стили (шрифты, база, компоненты) — в одном файле common.<hash>.css для всех страниц

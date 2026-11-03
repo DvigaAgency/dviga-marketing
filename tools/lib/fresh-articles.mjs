@@ -3,6 +3,9 @@
 // Узлы карточки копируются целиком вместе с CSS-правилами и перекладываются на координаты слотов блока (как в blog-pin.mjs).
 import { BPS, attrName, abName, eff, parseRow, takeCss } from './blog-pin.mjs';
 
+const role = (el) => { const t = el.attr('data-elem-type'); return t !== 'text' ? t : el.find('a').length ? 'title' : /мин/.test(el.text()) ? 'time' : 'tag'; };
+const SIZE = ['left', 'top', 'width', 'height'];
+
 const hasImage = ($, shapes) => shapes.filter((j, e) => $(e).find('.tn-atom[data-original], .tn-atom[style*="url("]').length);
 
 /** items: [{ slug (статья в листинге; listing — если в листинге другой адрес), title, href }] — по порядку слотов слева направо */
@@ -11,24 +14,29 @@ export function fillFresh($a, $l, recId, items) {
   const ab = rec.find('.t396__artboard').first();
   const slots = parseRow($a, rec, hasImage($a, ab.children('.t396__elem[data-elem-type="shape"]')));
   if (slots.cards.length !== items.length) throw new Error(`fresh-articles: в блоке ${slots.cards.length} карточек, а статей ${items.length}`);
+  const abHeight = Object.fromEntries(BPS.map((bp) => [bp, eff(ab, 'height', bp, abName)])); // высота блока — как у оригинала
   const origin = slots.cards.map((c) => Object.fromEntries(BPS.map((bp) => [bp, { left: eff(c.shape, 'left', bp), top: eff(c.shape, 'top', bp) }])));
 
   // старые карточки: узлы и их правила — долой
-  const oldIds = slots.cards.flatMap((c) => c.els.map((e) => e.attr('data-elem-id')));
-  takeCss($a, rec, oldIds);
+  // старые карточки: их узлы и правила снимаем; карточка статьи, которая остаётся в блоке, возвращается как есть (в листинге у неё может быть другой, крупный вид — закреплённая карточка 750×410)
+  const old = slots.cards.map((c) => ({ card: c, css: takeCss($a, rec, c.els.map((e) => e.attr('data-elem-id'))) }));
   slots.cards.forEach((c) => c.els.forEach((e) => e.remove()));
 
   const need = Object.fromEntries(BPS.map((bp) => [bp, 0]));
   const seen = new Set();
   items.forEach((it, k) => {
     const slug = it.listing || it.slug;
-    const a = $l(`a[href$="/blog/${slug}"]`).first();
-    if (!a.length) throw new Error(`fresh-articles: в листинге нет карточки ${slug}`);
-    const lrec = a.closest('.r');
-    const row = parseRow($l, lrec, hasImage($l, lrec.find('.t396__elem[data-elem-type="shape"]')));
-    const card = row.cards.find((c) => c.href.endsWith(`/blog/${slug}`));
+    const kept = old.find((o) => o.card.href && o.card.href.endsWith(`/blog/${slug}`));
+    let $s = $l; let lrec; let row; let card;
+    if (kept) { $s = $a; lrec = rec; row = slots; card = kept.card; } else {
+      const a = $l(`a[href$="/blog/${slug}"]`).first();
+      if (!a.length) throw new Error(`fresh-articles: в листинге нет карточки ${slug}`);
+      lrec = a.closest('.r');
+      row = parseRow($l, lrec, hasImage($l, lrec.find('.t396__elem[data-elem-type="shape"]')));
+      card = row.cards.find((c) => c.href.endsWith(`/blog/${slug}`));
+    }
     const rowTops = (bp) => Math.max(...row.cards.map((c) => eff(c.shape, 'top', bp)));
-    let css = takeCss($l, lrec, card.els.map((e) => e.attr('data-elem-id')), false).replaceAll(`#rec${lrec.attr('id').replace('rec', '')}`, `#rec${recId}`);
+    let css = kept ? kept.css : takeCss($l, lrec, card.els.map((e) => e.attr('data-elem-id')), false).replaceAll(`#rec${lrec.attr('id').replace('rec', '')}`, `#rec${recId}`);
     // в листинге один и тот же id бывает у элементов разных записей: в одном блоке id должны быть разными
     const remap = {};
     for (const el of card.els) {
@@ -38,10 +46,14 @@ export function fillFresh($a, $l, recId, items) {
     for (const el of card.els) {
       const id = el.attr('data-elem-id');
       seen.add(remap[id] || id);
-      let html = $l.html(el);
+      let html = $s.html(el);
       if (remap[id]) html = html.replaceAll(`data-elem-id="${id}"`, `data-elem-id="${remap[id]}"`);
       const clone = $a(html);
+      // размеры и положение — как в слоте оригинала (в листинге карточки крупнее: картинка 220 вместо 200)
+      const twin = old[k].card.els.find((o) => role(o) === role(el));
+      if (twin) for (const bp of BPS) for (const f of SIZE) { const v = eff(twin, f, bp); if (!Number.isNaN(v) && f !== 'left' && f !== 'top') clone.attr(attrName(f, bp), String(v)); }
       for (const bp of BPS) {
+        if (twin) { for (const f of ['left', 'top']) { const v = eff(twin, f, bp); if (!Number.isNaN(v)) clone.attr(attrName(f, bp), String(v)); } continue; }
         const dx = origin[k][bp].left - eff(card.shape, 'left', bp);
         const dy = origin[k][bp].top - eff(card.shape, 'top', bp);
         clone.attr(attrName('left', bp), String(Math.round((eff(el, 'left', bp) + dx) * 100) / 100));
@@ -57,5 +69,5 @@ export function fillFresh($a, $l, recId, items) {
     if (it.href) link.attr('href', it.href);
     if (it.title) link.text(it.title);
   });
-  for (const bp of BPS) ab.attr(abName('height', bp), String(Math.round(need[bp])));
+  for (const bp of BPS) ab.attr(abName('height', bp), String(Number.isNaN(abHeight[bp]) ? Math.round(need[bp]) : abHeight[bp]));
 }
