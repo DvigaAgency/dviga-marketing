@@ -498,7 +498,7 @@ function initPopups() {
       if (h === 'closepopup' || h === 'closeallpopup') { e.preventDefault(); close(cur); return; }
       if (hooks[h]) { e.preventDefault(); open(hooks[h], a); return; }
       const t = h && d.getElementById(h);
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return; }
+      if (t) { e.preventDefault(); if (cur && cur.contains(a)) close(cur); /* пункт оглавления: попап закрывается, страница прокручивается к разделу */ t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return; }
     }
     if (e.target.closest('[data-close]')) { close(cur); return; }
     if (cur && (e.target === cur || (cur.classList.contains('blk') && (e.target.classList.contains('pc') || e.target.classList.contains('r') || e.target.classList.contains('ab') || e.target.classList.contains('cr'))))) close(cur);

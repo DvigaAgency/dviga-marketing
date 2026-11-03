@@ -50,7 +50,9 @@ export function fillFresh($a, $l, recId, items) {
       if (remap[id]) html = html.replaceAll(`data-elem-id="${id}"`, `data-elem-id="${remap[id]}"`);
       const clone = $a(html);
       // размеры и положение — как в слоте оригинала (в листинге карточки крупнее: картинка 220 вместо 200)
-      const twin = old[k].card.els.find((o) => role(o) === role(el));
+      // пара из слота оригинала: по роли и порядку; у карточки с двумя категориями («Сайты», «Недвижимость») в слоте их может быть меньше — тогда координаты по смещению карточки
+      const r = role(el); const mine = card.els.filter((o) => role(o) === r); const theirs = old[k].card.els.filter((o) => role(o) === r);
+      const twin = mine.length === theirs.length ? theirs[mine.indexOf(el)] : r === 'tag' ? undefined : theirs[0];
       if (twin) for (const bp of BPS) for (const f of SIZE) { const v = eff(twin, f, bp); if (!Number.isNaN(v) && f !== 'left' && f !== 'top') clone.attr(attrName(f, bp), String(v)); }
       for (const bp of BPS) {
         if (twin) { for (const f of ['left', 'top']) { const v = eff(twin, f, bp); if (!Number.isNaN(v)) clone.attr(attrName(f, bp), String(v)); } continue; }

@@ -36,3 +36,14 @@
 @media(max-width:960px){.ar-tbw{width:600px}.ar-tbw .ar-tt{min-width:960px}}
 @media(max-width:640px){.ar-tbw{margin:0 20px;width:calc(100% - 40px)}.ar-tbw .ar-tt{min-width:640px}.ar-tbw .ar-tt thead th{font-size:14px;line-height:20.3px}.ar-tbw .ar-tt td{line-height:29px}}
 @media(max-width:480px){.ar-tbw .ar-tt td{font-size:14px;line-height:20.3px}}
+/* текстовый блок T004 (список источников): размеры в px оригинала × --s: Tilda масштабирует блок целиком (ширина окна / ширина макета брейкпоинта) */
+.ar-tp{padding:12px 0}
+.ar-t4x{font:400 20px/28px Inter,Inter Fallback,Arial,sans-serif;letter-spacing:-.5px;color:#121212}
+.ar-tp .ar-t4x ol,.ar-tp .ar-t4x ul{margin:0;padding-left:22px}
+.ar-tp .ar-t4x ol{list-style:decimal}
+.ar-tp .ar-t4x ul{list-style:disc}
+.ar-tp .ar-t4x li::before{content:none}
+.ar-tp .ar-t4x li{margin:0;padding:0 0 15px;font:inherit;letter-spacing:inherit;color:inherit}
+@media(max-width:480px){.ar-t4x{font-size:16px;line-height:22.4px}}
+@media(width:960px){.ar-c.ar-t4x{width:610px;margin-left:170px}}
+@media(min-width:640px) and (max-width:959px){.ar-c.ar-t4x{width:610px}}

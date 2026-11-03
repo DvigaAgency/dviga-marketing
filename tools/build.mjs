@@ -17,6 +17,7 @@ import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSlide
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
 import { t431Table } from './lib/t431.mjs';
+import { textBlock } from './lib/t004.mjs';
 import { faqFor, faqMark } from './lib/faq.mjs';
 import { slidersFor, applySliders } from './lib/slider.mjs';
 import { linkHoverCss } from './lib/link-hover.mjs';
@@ -252,6 +253,7 @@ async function buildPage(spec) {
       if (type === '849' && name === 'main') { const t = accordionBlock($, rec, 't849', ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '134' && name === 'main') { const t = linksListBlock($, rec, ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '106' && name === 'main' && spec.path.startsWith('/blog/')) { const t = textBlock($, rec, fixLinks); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '131') { // HTML-блок с <audio id="#odinstartaudio">: кнопки «слушать»/«стоп» в Zero-блоках (#odinstart / #odinstop) — initAudio; файл подключается по ссылке оригинала при первом нажатии
         const au = rec.find('audio').first(); const asrc = au.find('source').attr('src') || au.attr('src');
