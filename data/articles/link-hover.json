@@ -424,5 +424,19 @@
    ],
    "color": "rgba(223, 40, 40, 1)"
   }
+ ],
+ "podgotovka-kontenta-dlya-sajta": [
+  {
+   "sel": [
+    ".tn-elem__24412565011747990914437 .tn-atom a",
+    ".tn-elem__24412565011747990914420 .tn-atom a",
+    ".tn-elem__24412565011747990914404 .tn-atom a",
+    ".tn-elem__24412565011747990914385 .tn-atom a",
+    ".tn-elem__24412565011755700467195 .tn-atom a",
+    ".tn-elem__24412565011755700467182 .tn-atom a",
+    ".tn-elem__24412565111747990914385 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
  ]
 }
