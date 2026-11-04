@@ -19,6 +19,9 @@ const BASE = [
   '.t396__artboard-flex>.t396__elem:not(.tn-elem__absolute),.t396__artboard-flex>.t396__group:not(.tn-group__absolute){position:relative!important;left:initial!important;top:initial!important;height:fit-content;flex-shrink:0}',
 ].map((r) => '.flz ' + r).join('');
 
+// имена классов Tilda в итоговой странице не допускаются (audit-dist): переименовываем и в разметке, и в CSS
+const ren = (t) => t.replace(/t396__/g, 'zfx__').replace(/t396/g, 'zfx').replace(/tn-atom/g, 'zfx-atom').replace(/tn-elem/g, 'zfx-elem').replace(/tn-group/g, 'zfx-group').replace(/tn-molecule/g, 'zfx-molecule').replace(/t-rec/g, 'zfx-rec');
+
 const BASES = [[1199, 960], [959, 640], [639, 480], [479, 360]];
 
 export function flexZeroBlock($, rec, { picture, localUrls }) {
@@ -35,5 +38,5 @@ export function flexZeroBlock($, rec, { picture, localUrls }) {
   const z = `#r${id}{--t-text-font:Inter,Arial,sans-serif;--t-headline-font:Inter,Arial,sans-serif;--s:tan(atan2(100cqw,1200px));zoom:var(--s)}`
     + BASES.map(([mw, b]) => `@media(max-width:${mw}px){#r${id}{--s:tan(atan2(100cqw,${b}px))}}`).join('')
     + `#r${id} picture{display:block;width:100%;height:100%}`;
-  return { id, css: BASE + z + '\n' + localUrls(css), html: `<section id="r${id}" class="r flz">${$.html(clone)}</section>` };
+  return { id, css: ren(BASE + z + '\n' + localUrls(css)), html: `<section id="r${id}" class="r flz">${ren($.html(clone))}</section>` };
 }
