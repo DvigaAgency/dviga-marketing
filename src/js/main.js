@@ -344,7 +344,8 @@ function initFaq() {
     const a = d.getElementById(q.dataset.fqT);
     if (!a) return;
     q.setAttribute('role', 'button'); q.tabIndex = 0; q.setAttribute('aria-expanded', String(a.classList.contains('fq-o')));
-    const toggle = () => { const o = a.classList.toggle('fq-o'); q.classList.toggle('fq-on'); q.setAttribute('aria-expanded', String(o)); };
+    q.classList.toggle('fq-on', a.classList.contains('fq-o')); // изначально открытый вопрос: крестик сразу повёрнут
+    const toggle = () => { const o = a.classList.toggle('fq-o'); q.classList.toggle('fq-on', o); q.setAttribute('aria-expanded', String(o)); };
     q.addEventListener('click', toggle);
     q.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
   });

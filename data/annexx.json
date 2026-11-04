@@ -927,5 +927,142 @@
     "z": 999
    }
   ]
+ },
+ "/blog/buklet-zhk": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "4725572301",
+   "4726824101",
+   "4825237001"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [
+   {
+    "rec": "4816825001",
+    "top": 0,
+    "z": 999
+   }
+  ]
+ },
+ "/blog/besplatnye-kirillicheskie-shrifty": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "4850169701"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/itogi-dviga-rejting-runeta-2026": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/kak-privyazat-domen-k-sajtu-na-tilde": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "3222328401",
+   "3221597101",
+   "3221604301"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/chto-takoe-snippet-saita": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "3145860201",
+   "3146231001",
+   "3152548101"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/hlebnye-kroshki-na-sayte": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "3155712501",
+   "3157546501",
+   "3155714001",
+   "3157842001",
+   "3157941501",
+   "3155717601"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/portfolio-veb-dizajnera": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "4727875601"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/razrabotka-sajta-dlya-morskogo-porta": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "2383841651"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/podgotovka-kontenta-dlya-sajta": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530",
+   "2438375541",
+   "2438387151",
+   "2438390841"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
+ },
+ "/blog/marketing-ros-developmenta": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": []
  }
 }

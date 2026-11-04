@@ -54,10 +54,13 @@ function currentFresh($, rec) {
     const slug = norm(href.replace(/^\/blog\//, '').replace(/\/$/, ''));
     const title = $(a).text().replace(/\s+/g, ' ').trim();
     let o = out.find((x) => x.slug === slug);
-    if (!o) out.push((o = { slug, title: '' }));
+    if (!o) out.push((o = { slug, title: '', left: Infinity, top: Infinity }));
     if (title && !o.title) o.title = title;
+    const el = $(a).closest('.t396__elem'); const l = parseFloat(el.attr('data-field-left-value')); const t = parseFloat(el.attr('data-field-top-value'));
+    if (l < o.left || (l === o.left && t < o.top)) { o.left = l; o.top = t; }
   });
-  return out;
+  // порядок карточек — по положению на экране (слева направо), а не по порядку элементов в разметке Tilda: он может не совпадать
+  return out.sort((x, y) => (x.left - y.left) || (x.top - y.top));
 }
 
 /** 3 статьи для блока: оригинальные из копии + добор из той же темы, затем из остальных */

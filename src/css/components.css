@@ -101,6 +101,10 @@ body.pl{}
 .gl-d i{width:var(--ds,8px);height:var(--ds,8px);border-radius:50%;background:var(--d,#818181);transition:background-color .2s}
 .gl-d i.on{background:var(--da,#d93433)}
 .gl-d.gl-dn{bottom:auto;top:calc(100% + 15.6px);gap:var(--g,12.6px)}
+/* подпись к слайду: 12px/18.6px под точками (замерено на оригинале: низ картинки + 31,7px), показывается подпись текущего слайда */
+.gl-c{position:absolute;left:0;top:calc(100% + 30px);width:100%;pointer-events:none}
+.gl-ci{position:absolute;left:0;top:0;width:100%;font:400 12px/18.6px Inter,Arial,sans-serif;color:#121212;opacity:0;transition:opacity .3s ease-in-out}
+.gl-ci.on{opacity:1}
 .gl-ar{position:absolute;top:50%;z-index:1;width:var(--as,30px);height:var(--as,30px);margin-top:calc(var(--as,30px)/-2);padding:0;border:0;background:var(--ab);color:var(--ac);cursor:pointer;transition:background-color .2s,color .2s}
 .gl-ar svg{display:block;width:100%;height:100%}
 .gl-pv{left:var(--ah,20px)}.gl-pv svg{transform:scaleX(-1)}

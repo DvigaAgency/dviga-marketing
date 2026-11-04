@@ -17,6 +17,9 @@ import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSlide
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
 import { t431Table } from './lib/t431.mjs';
+import { checklistBlock } from './lib/t678.mjs';
+import { flexZeroBlock } from './lib/flex-zero.mjs';
+import { codeBlock } from './lib/t264.mjs';
 import { textBlock } from './lib/t004.mjs';
 import { faqFor, faqMark } from './lib/faq.mjs';
 import { slidersFor, applySliders } from './lib/slider.mjs';
@@ -191,7 +194,7 @@ async function buildPage(spec) {
     },
     gallery(imgs, o) {
       if (!imgs.length) return '';
-      const slides = imgs.map((x, i) => '<div class="gl-s">' + picture(x.li_img, { alt: x.li_imgalt || '', sizes: '(min-width:1200px) 1140px,100vw', eager: false }) + '</div>').join('');
+      const slides = imgs.map((x, i) => '<div class="gl-s">' + picture(x.li_img, { alt: x.li_imgalt || '', sizes: o.sizes || '(min-width:1200px) 1140px,100vw', eager: false }) + '</div>').join('');
       // точки: none — нет, near — под картинкой (как у Tilda: 15,6px от низа, зазор ≈ 0,845 × dotshmargin), иначе на картинке
       const rgba = (hex, op) => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return hex || ''; const n = parseInt(m[1], 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${op ?? 1})`; };
       const showDots = imgs.length > 1 && o.dotsMode !== 'none';
@@ -201,7 +204,10 @@ async function buildPage(spec) {
       const arSt = '--as:' + sz + 'px;--ac:' + (o.arrowColor || '#000') + ';--ach:' + (o.arrowColorHover || o.arrowColor || '#000') + ';--ab:' + rgba(o.arrowBg || '#e8e8e8', o.arrowBgOpacity) + ';--abh:' + rgba(o.arrowBgHover || o.arrowBg || '#e8e8e8', o.arrowBgOpacity) + (o.arrowH ? ';--ah:' + o.arrowH + 'px' : '');
       const chev = '<svg viewBox="0 0 94 94" aria-hidden="true"><path d="M39 68L60 47L39 26" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>';
       const arrows = imgs.length > 1 && (o.arrowsMode === 'in' || o.arrowsMode === 'near') ? '<button class="gl-ar gl-pv" type="button" aria-label="Назад" style="' + arSt + '">' + chev + '</button><button class="gl-ar gl-nx" type="button" aria-label="Вперёд" style="' + arSt + '">' + chev + '</button>' : '';
-      return '<div class="gl" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + arrows + dots + '</div>';
+      // подписи к слайдам (li_imgtitle): под точками, показывается подпись текущего слайда (в Tilda — .t-slds__caption)
+      const ce = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      const caps = imgs.some((x) => x.li_imgtitle) ? '<div class="gl-c">' + imgs.map((x, i) => '<div class="gl-ci' + (i ? '' : ' on') + '">' + ce(x.li_imgtitle || '') + '</div>').join('') + '</div>' : '';
+      return '<div class="gl" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + arrows + dots + caps + '</div>';
     },
     form(e) {
       const el = e.el;
@@ -249,6 +255,9 @@ async function buildPage(spec) {
       if (type === '169' && name === 'main') { const t = tilesBlock($, rec, ax.scale.includes(rec.attr('id').replace('rec', ''))); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '678' && name === 'main' && spec.path.startsWith('/blog/')) { const t = checklistBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // чек-лист из чекбоксов
+      if (type === '285' && name === 'main' && spec.path.startsWith('/blog/')) { const t = codeBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // блок с кодом
+      if (type === '1741' && name === 'main') { const t = flexZeroBlock($, rec, { picture, localUrls }); css.push(t.css); html[name].push(t.html); continue; } // flex-Zero (автолэйаут): чек-лист перед печатью тиража
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
       if (type === '849' && name === 'main') { const t = accordionBlock($, rec, 't849', ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '134' && name === 'main') { const t = linksListBlock($, rec, ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }

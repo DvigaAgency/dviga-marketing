@@ -47,3 +47,38 @@
 @media(max-width:480px){.ar-t4x{font-size:16px;line-height:22.4px}}
 @media(width:960px){.ar-c.ar-t4x{width:610px;margin-left:170px}}
 @media(min-width:640px) and (max-width:959px){.ar-c.ar-t4x{width:610px}}
+/* чек-лист T678 (форма из чекбоксов): квадрат 20px с красной рамкой (60% прозрачности, отмеченный — полный цвет с галочкой), текст 15px/1.2, между пунктами 20px */
+/* колонка и кегль — по замерам оригинала (T678, t-col_8 prefix_2): ≤479: left 20/280, 12px; 480–639: 20/440, 12px; 640–959: 20/600, 14px; 960–1199: 170/620, 14px; ≥1200: 220/760, 15px */
+.ar-cl .ar-c{padding:0;width:280px;margin-left:20px}
+@media(min-width:480px){.ar-cl .ar-c{width:440px}}
+@media(min-width:640px){.ar-cl .ar-c{width:600px}}
+@media(min-width:960px){.ar-cl .ar-c{width:620px;margin-left:170px}}
+@media(min-width:1200px){.ar-cl .ar-c{width:760px;margin-left:220px}}
+.ar-cli{position:relative;display:flex;align-items:flex-start;margin:0 0 20px;padding:1px 0 0;font:400 12px/1.2 Inter,Inter Fallback,Arial,sans-serif;letter-spacing:0;color:#121212;cursor:pointer}
+@media(min-width:640px){.ar-cli{font-size:14px}}
+@media(min-width:1201px){.ar-cli{font-size:15px}}
+.ar-cli input{position:absolute;z-index:-1;width:13px;height:13px;margin:3px;opacity:0}
+.ar-cli i{position:relative;flex:0 0 auto;width:20px;height:20px;margin:-1px 10px 0 0;border:1.667px solid #d93433;opacity:.6;transition:.2s}
+.ar-cli i::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid #d93433;border-width:0 2px 2px 0;opacity:0;transform:rotate(45deg);transition:.2s}
+.ar-cli input:checked+i{opacity:1}
+.ar-cli input:checked+i::after{opacity:1}
+.ar-cli input:focus-visible+i{outline:2px solid #d93433;outline-offset:2px}
+.ar-cli span{flex:1 1 auto;min-width:0}
+/* блок с кодом T264: плашка #f8f8f8, отступ 20px, моноширинный 15px/1.55, цвета подсветки highlight.js (тема github) */
+/* колонка — как у чек-листа (t-col_8 prefix_2), кегль 12 / 14 / 15px по брейкпоинтам */
+.ar-cdb .ar-c{padding:0;width:280px;margin-left:20px}
+@media(min-width:480px){.ar-cdb .ar-c{width:440px}}
+@media(min-width:640px){.ar-cdb .ar-c{width:600px}}
+@media(min-width:960px){.ar-cdb .ar-c{width:620px;margin-left:170px}}
+@media(min-width:1200px){.ar-cdb .ar-c{width:760px;margin-left:220px}}
+.ar-cd{padding:20px;background:#f8f8f8;overflow-x:auto}
+.ar-cd pre{margin:0;font:400 12px/1.55 monospace;color:#121212;white-space:pre}
+@media(min-width:640px){.ar-cd pre{font-size:14px}}
+@media(min-width:1201px){.ar-cd pre{font-size:15px}}
+.ar-cd code{display:block;padding:.5em;color:#333;font:inherit}
+.ar-cd .hljs-tag,.ar-cd .hljs-title{color:#000080}
+.ar-cd .hljs-attribute,.ar-cd .hljs-variable,.ar-cd .hljs-number{color:#008080}
+.ar-cd .hljs-value,.ar-cd .hljs-string{color:#d14}
+.ar-cd .hljs-comment{color:#998;font-style:italic}
+.ar-cd .hljs-regexp{color:#009926}
+.ar-cd .hljs-class,.ar-cd .hljs-rules,.ar-cd .hljs-rule,.ar-cd .javascript{color:#333}

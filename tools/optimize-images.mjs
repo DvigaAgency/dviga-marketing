@@ -12,17 +12,28 @@ fs.mkdirSync(OUT, { recursive: true });
 const prev = fs.existsSync('data/img-manifest.json') ? JSON.parse(fs.readFileSync('data/img-manifest.json', 'utf8')) : {};
 const result = {};
 const PRESETS = [360, 720, 1080, 1620];
+// слайды галерей (Zero «gallery» на страницах копии): крупные фото на всю колонку, на них артефакты сжатия заметнее — кодируем с запасом качества
+const gallery = new Set();
+for (const f of [...fs.readdirSync('data/pages').map((x) => 'data/pages/' + x), ...fs.readdirSync('data/articles').map((x) => 'data/articles/' + x)]) { // страницы и тексты статей по ТЗ
+  if (!f.endsWith('.html')) continue;
+  const t = fs.readFileSync(f, 'utf8');
+  for (const m of t.matchAll(/data-field-imgs-value='([^']*)'|data-field-imgs-value="([^"]*)"/g)) {
+    for (const x of (m[1] || m[2]).matchAll(/li_img(?:&quot;|")\s*:\s*(?:&quot;|")([^"&]+)/g)) { const id = /tild[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.exec(x[1]); if (id) gallery.add(id[0]); }
+  }
+}
+const isGallery = (url) => { const id = /tild[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.exec(url); return !!id && gallery.has(id[0]); };
 const QV = 'q2'; // версия параметров качества (PNG-скриншоты и иллюстрации — выше: на них заметны артефакты)
 const hash = (buf) => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 10);
 const slug = (f) => path.basename(f).replace(/^tild[0-9a-f-]+__/, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/tilda/gi, 'tld').toLowerCase().slice(0, 40) || 'img';
 
-let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm|mov)$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)) && (!process.env.NEW || !prev[u])); // NEW=1 — только ещё не обработанные // ONLY=<часть адреса> — только выбранные изображения
+let todo = Object.entries(manifestIn).filter(([u, m]) => m.file && !/\.(mp4|webm|mov)$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)) && (!process.env.NEW || !prev[u]) && (!process.env.HQ || isGallery(u))); // NEW=1 — только ещё не обработанные // ONLY=<часть адреса> — только выбранные изображения
 let done = 0, bytesIn = 0, bytesOut = 0;
 async function one([url, m]) {
   const f = m.file; const ext = path.extname(f).toLowerCase();
   const buf = fs.readFileSync(f);
   bytesIn += buf.length;
-  if (prev[url] && prev[url].q === QV && prev[url].src && prev[url].inSize === buf.length && fs.existsSync(path.join('public', prev[url].src)) && [...(prev[url].avif || []), ...(prev[url].webp || [])].every((v) => fs.existsSync(path.join('public', v.src)))) { result[url] = prev[url]; bytesOut += prev[url].outSize || 0; return; }
+  const hq = isGallery(url); const qv = hq ? QV + 'g' : QV;
+  if (prev[url] && prev[url].q === qv && prev[url].src && prev[url].inSize === buf.length && fs.existsSync(path.join('public', prev[url].src)) && [...(prev[url].avif || []), ...(prev[url].webp || [])].every((v) => fs.existsSync(path.join('public', v.src)))) { result[url] = prev[url]; bytesOut += prev[url].outSize || 0; return; }
   if (ext === '.svg') {
     const r = optimize(buf.toString('utf8'), { multipass: true, plugins: ['preset-default'] });
     const out = Buffer.from(r.data);
@@ -46,7 +57,7 @@ async function one([url, m]) {
     const base = sharp(buf).resize({ width: w, withoutEnlargement: true });
     for (const fmt of ['avif', 'webp']) {
       const png = ext === '.png';
-      const q = fmt === 'avif' ? { quality: png ? 72 : 62, effort: 4 } : { quality: png ? 90 : 82, effort: 5 };
+      const q = fmt === 'avif' ? { quality: hq ? 80 : png ? 72 : 62, effort: 4 } : { quality: hq ? 92 : png ? 90 : 82, effort: 5 };
       const o = await base.clone()[fmt](q).toBuffer();
       const name = `${slug(f)}-${w}.${hash(o)}.${fmt}`;
       fs.writeFileSync(path.join(OUT, name), o);
@@ -54,7 +65,7 @@ async function one([url, m]) {
       if (w === N || (w === widths.at(-1))) out0 += o.length;
     }
   }
-  result[url] = { q: QV, kind: 'raster', w: N, h: H, alpha: !!meta.hasAlpha, avif: variants.avif, webp: variants.webp, src: variants.webp.at(-1).src, inSize: buf.length, outSize: out0 };
+  result[url] = { q: qv, kind: 'raster', w: N, h: H, alpha: !!meta.hasAlpha, avif: variants.avif, webp: variants.webp, src: variants.webp.at(-1).src, inSize: buf.length, outSize: out0 };
   bytesOut += out0;
 }
 let idx = 0;

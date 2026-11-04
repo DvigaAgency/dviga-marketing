@@ -5,12 +5,13 @@ export function init(gl) {
   gl._init = 1;
   const t = gl.querySelector('.gl-t');
   const dots = Array.from(gl.querySelectorAll('.gl-d i'));
+  const caps = Array.from(gl.querySelectorAll('.gl-ci'));
   const n = t.children.length;
   const w = () => t.clientWidth || 1;
   const cur = () => Math.round(t.scrollLeft / w()); // текущий слайд берём из положения прокрутки: так нет рассинхрона с автоплеем и свайпом
   let lock = 0; // после ручного переключения автоплей на время замолкает
   const show = (k) => { lock = Date.now(); t.scrollTo({ left: (((k % n) + n) % n) * w(), behavior: 'smooth' }); };
-  t.addEventListener('scroll', () => { const k = cur(); dots.forEach((d, j) => d.classList.toggle('on', j === k)); }, { passive: true });
+  t.addEventListener('scroll', () => { const k = cur(); dots.forEach((d, j) => d.classList.toggle('on', j === k)); caps.forEach((c, j) => c.classList.toggle('on', j === k)); }, { passive: true });
   gl.querySelectorAll('.gl-pv').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); show(cur() - 1); }));
   gl.querySelectorAll('.gl-nx').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); show(cur() + 1); }));
   dots.forEach((d, j) => d.addEventListener('click', (e) => { e.stopPropagation(); show(j); }));
