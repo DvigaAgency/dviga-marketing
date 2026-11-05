@@ -305,7 +305,7 @@ async function buildPage(spec) {
   if (lh) css.push(lh);
   const sliderList = slidersFor(spec.path);
   if (sliderList.length) { const sl = applySliders(html.main, sliderList); html.main = sl.html; css.push(sl.css); }
-  for (const part of Object.keys(html)) html[part] = html[part].map((h) => h.replace(/^<section id="r([0-9]+)" class="r([^"]*)"/, (m, id, rest) => (off.has(id) ? `<section id="r${id}" class="r${rest} off" hidden="until-found"` : m)));
+  for (const part of Object.keys(html)) html[part] = html[part].map((h) => h.replace(/^<section id="r([0-9]+)" class="r([^"]*)"/, (m, id, rest) => (off.has(id) ? `<section id="r${id}" class="r${rest} off" hidden="${rest.includes('lm-r') ? '' : 'until-found'}"` : m)));
 
   // ---------------- попапы и виджет (одинаковые на всех страницах)
   const menuPopup = `<div class="pp blk menu cq" id="p-menu" data-hook="menu" role="dialog" aria-modal="true" aria-label="Меню" tabindex="-1"><div class="pc">${popupZero.menu}</div></div>`;

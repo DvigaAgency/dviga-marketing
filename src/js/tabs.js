@@ -21,7 +21,7 @@ const cssReady = () => new Promise((resolve) => {
 // запись скрыта: класс off (состояние) + hidden="until-found" (находится поиском по странице); у кнопки «Загрузить еще» — обычный hidden
 const setOff = (r, off, plain) => {
   r.classList.toggle('off', off);
-  if (!off) r.removeAttribute('hidden'); else if (plain) r.setAttribute('hidden', ''); else r.setAttribute('hidden', 'until-found');
+  if (!off) r.removeAttribute('hidden'); else if (plain || r.classList.contains('lm-r')) r.setAttribute('hidden', ''); else r.setAttribute('hidden', 'until-found');
 };
 
 export function init() {

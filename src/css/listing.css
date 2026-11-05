@@ -22,6 +22,8 @@
 /* записи, скрытые вкладками/кнопкой (в Tilda — нулевая высота): display:none, чтобы браузер не считал стили и раскладку 180 свёрнутых блоков; при показе анимации прокрутки перемеряются (resize) */
 /* скрытые записи (неактивные вкладки, «Загрузить еще»): hidden="until-found" — не видны, но находятся поиском по странице; без атрибута (кнопка «Загрузить еще») — display:none */
 .r.off:not([hidden=until-found]){display:none!important}
+/* скрытая запись не занимает места: .cv (content-visibility:auto с заданной высотой артборда) иначе оставляет пустоту высотой с запись */
+.r.off[hidden=until-found]{content-visibility:hidden!important;contain-intrinsic-block-size:0!important;contain-intrinsic-size:0!important;height:0!important;min-height:0!important;padding-top:0!important;padding-bottom:0!important;overflow:hidden}
 /* ===== «поделиться» (T014): квадраты 34×34, как у виджета Яндекса ===== */
 .sh-r{text-align:center}
 .shr{display:flex;justify-content:center;gap:4px;height:34px}
