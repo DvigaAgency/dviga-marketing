@@ -357,7 +357,7 @@ async function buildPage(spec) {
   const page = `<!doctype html><html lang="ru"><head>${head}</head><body${catalog ? ' data-cases' : ''}>${body}<script type="module" src="/assets/${jsName}"></script>${trackingTags()}</body></html>`;
   // локальные ссылки на страницы (href="/…") и ассеты (/assets/…) получают префикс подкаталога — каждая ровно один раз
   const fixed = BASE ? page.replace(/href="\/(?!\/|assets\/)/g, `href="${BASE}/`).replace(/(["'(,\s])\/assets\//g, `$1${BASE}/assets/`) : page;
-  const outFile = path.join(OUT, spec.path === '/' ? '' : spec.path, 'index.html');
+  const outFile = spec.out ? path.join(OUT, spec.out) : path.join(OUT, spec.path === '/' ? '' : spec.path, 'index.html'); // spec.out — файл в корне (404.html)
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, fixed);
   return { spec, page, cssLen: minCss.length };
@@ -395,7 +395,7 @@ for (const a of usedAssets) {
 // при noindex обход разрешён (иначе поисковик не увидит мета-тег и заголовок), но sitemap не публикуется
 fs.writeFileSync(path.join(OUT, 'robots.txt'), INDEXABLE ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n` : 'User-agent: *\nAllow: /\n');
 if (!INDEXABLE) fs.rmSync(path.join(OUT, 'sitemap.xml'), { force: true });
-if (INDEXABLE) fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${PAGES.filter((p) => p.kind !== 'redirect').map((p) => `<url><loc>${SITE_URL}${p.path === '/' ? '/' : p.path + '/'}</loc></url>`).join('')}</urlset>\n`);
+if (INDEXABLE) fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${PAGES.filter((p) => p.kind !== 'redirect' && !p.out).map((p) => `<url><loc>${SITE_URL}${p.path === '/' ? '/' : p.path + '/'}</loc></url>`).join('')}</urlset>\n`);
 fs.writeFileSync(path.join(OUT, '_headers'), '/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 const kb = (n) => (n / 1024).toFixed(1);
 for (const b of built) console.log(`${b.spec.path.padEnd(60)} html ${kb(b.page.length)} KB, css ${kb(b.cssLen)} KB`);

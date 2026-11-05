@@ -25,7 +25,7 @@ for (const [name, re] of FORBIDDEN) {
   bad += hits.length;
 }
 // страницы: все index.html в dist
-const pages = files.filter((f) => path.basename(f) === 'index.html');
+const pages = files.filter((f) => path.basename(f) === 'index.html' || path.basename(f) === '404.html');
 // счётчики оригинала (tools/lib/tracking.mjs): на каждой странице есть Метрика и коллтрекинг; если отключены (YM_ID=0, CT_PROJECT=0) — их нет нигде
 const { YM_ID, CT_PROJECT } = await import('./lib/tracking.mjs');
 const TRACKERS = [

@@ -24,7 +24,10 @@ export function startServer(root, port) {
     const f = path.join(root, p);
     if (!path.resolve(f).startsWith(path.resolve(root))) { res.writeHead(403); return res.end(); }
     fs.stat(f, (e, st) => {
-      if (e || !st.isFile()) { res.writeHead(404); return res.end('404'); }
+      if (e || !st.isFile()) { // как на GitHub Pages: несуществующий адрес — страница 404.html со статусом 404
+        const nf = path.join(root, '404.html');
+        return fs.readFile(nf, (er, buf) => { if (er) { res.writeHead(404); return res.end('404'); } res.writeHead(404, { 'Content-Type': MIME['.html'], 'Cache-Control': 'no-cache' }); res.end(buf); });
+      }
       const ext = path.extname(f);
       const h = { 'Content-Type': MIME[ext] || 'application/octet-stream', 'Cache-Control': /\.[0-9A-Za-z]{8,}\./.test(f) ? 'public,max-age=31536000,immutable' : 'no-cache', Vary: 'Accept-Encoding' };
       if (req.headers.range && ext === '.mp4') {
