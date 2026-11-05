@@ -33,7 +33,7 @@ const TRACKERS = [
   ['calltracking', CT_PROJECT, /calltracking\.ru/, (id) => `.${id}.async.js`],
 ];
 for (const [name, id, any, mark] of TRACKERS) {
-  const html = pages.map((f) => [f, fs.readFileSync(f, 'utf8')]).filter(([, h]) => !h.includes('http-equiv="refresh"')); // страницы-перенаправления (tools/pages.mjs REDIRECTS) без счётчиков
+  const html = pages.map((f) => [f, fs.readFileSync(f, 'utf8')]).filter(([f, h]) => !h.includes('http-equiv="refresh"') && !f.includes('vse-stranicy')); // служебный список страниц (/vse-stranicy/) без счётчиков; страницы-перенаправления (tools/pages.mjs REDIRECTS) без счётчиков
   const wrong = html.filter(([, h]) => (id ? !h.includes(mark(id)) : any.test(h))).map(([f]) => f);
   console.log(`${wrong.length ? 'FAIL' : 'ok  '} ${name} ${id ? id + ' на всех страницах' : 'отключён'}${wrong.length ? ': ' + wrong.join(', ') : ''}`);
   bad += wrong.length;
