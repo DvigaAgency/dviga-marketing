@@ -30,15 +30,16 @@ function readStyle($, id) {
   return st;
 }
 
-export function t431Table($, rec) {
+/** std — стандартный вид таблиц статей (колонка 760px, серая шапка, сетка), без оформления самой таблицы на оригинале (широкая t-col_12, зебра, цвета): так просили для части статей */
+export function t431Table($, rec, std = false) {
   const id = rec.attr('id').replace('rec', '');
   const widths = (rec.find('.t431__table').attr('data-table-width') || '').split(';').filter(Boolean);
   const head = (rec.find('.t431__data-part1').text() || '').trim().split(';');
   const rows = (rec.find('.t431__data-part2').text() || '').split('\n').map((x) => x.trim()).filter(Boolean).map((x) => x.split(';'));
-  const st = readStyle($, id);
+  const st = std ? { th: {}, td: {}, thN: {}, odd: null, even: null } : readStyle($, id);
   const cell = (c) => c.trim(); // в ячейках Tilda допускает разметку (<b>, ссылки) — оставляем как есть
   // Tilda кладёт ширины из data-table-width атрибутами width на первые ячейки (их может быть меньше, чем колонок: «30%;70%» у таблицы из 5 колонок), раскладка автоматическая
-  const auto = widths.length > 0;
+  const auto = !std && widths.length > 0;
   const wide = auto && /t-col_12/.test(rec.find('.t-col').first().attr('class') || ''); // на всю ширину контейнера, прокручивается на мобильных (t431__mobilescroll)
   const col = auto ? '' : widths.map((w, i) => (i === widths.length - 1 ? '<col>' : `<col style="width:${esc(w)}">`)).join('');
   const wa = (i) => (auto && widths[i] ? ` width="${esc(widths[i])}"` : '');

@@ -12,7 +12,6 @@ import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import * as cheerio from 'cheerio';
 import { trim } from './trim-html.mjs';
-import { fillFresh } from './lib/fresh-articles.mjs';
 import { BPS, eff, parseRow } from './lib/blog-pin.mjs';
 
 const cfg = JSON.parse(fs.readFileSync('data/articles/clones.json', 'utf8'));
@@ -63,32 +62,14 @@ function currentFresh($, rec) {
   return out.sort((x, y) => (x.left - y.left) || (x.top - y.top));
 }
 
-/** 3 статьи для блока: оригинальные из копии + добор из той же темы, затем из остальных */
-function pick(self, orig) {
-  const topic = topicOf[self];
-  const keep = orig.map((o) => o.slug).filter((s) => s !== self && cloned.includes(s));
-  const res = [...new Set(keep)].slice(0, 3);
-  const i = order.indexOf(self);
-  const rot = [...order.slice(i + 1), ...order.slice(0, i)]; // по кругу от текущей: у соседей наборы разные
-  for (const pool of [rot.filter((s) => topicOf[s] === topic), rot]) {
-    for (const s of pool) { if (res.length >= 3) break; if (s !== self && !res.includes(s)) res.push(s); }
-  }
-  return res;
-}
-
+/** «Свежие статьи» остаются как на оригинале: те же три карточки в том же порядке, с той же вёрсткой на всех брейкпоинтах (ссылки на статьи копии подставляет сборка).
+ *  Раньше карточки подменялись статьями из копии — из-за этого путался порядок, отступы на мобильных и переносы тегов. Возвращаем список статей оригинала в порядке слотов
+ *  (слева направо) и те из них, которых ещё нет в копии (их нужно добавить в clones.json и склонировать — иначе ссылка ведёт на оригинал). */
 export function swapFresh($, self) {
   const rec = findFresh($);
   if (!rec) throw new Error(`${self}: блок «Свежие статьи» не найден`);
-  const orig = currentFresh($, rec);
-  const slugs = pick(self, orig);
-  const titles = Object.fromEntries(orig.map((o) => [o.slug, o.title]));
-  const items = slugs.map((s) => {
-    const a = $l(`a[href$="/blog/${listingSlug(s)}"]`).first();
-    if (!a.length) throw new Error(`${self}: в листинге нет ${s}`);
-    return { slug: s, listing: listingSlug(s), href: `/blog/${s}`, title: titles[s] || a.text().replace(/\s+/g, ' ').trim() };
-  });
-  fillFresh($, $l, rec.attr('id').replace('rec', ''), items);
-  return { orig: orig.map((o) => o.slug), now: slugs };
+  const orig = currentFresh($, rec).map((o) => o.slug);
+  return { orig, now: orig, missing: orig.filter((s) => s !== self && !cloned.includes(s)) };
 }
 
 const args = process.argv.slice(2);
@@ -97,13 +78,12 @@ const report = {};
 for (const slug of todo) {
   if (!topicOf[slug]) throw new Error('нет в clones.json: ' + slug);
   const file = `data/pages/blog__${slug}.html`;
-  const inPlace = slug in cfg.existing;
-  const html = inPlace ? fs.readFileSync(file, 'utf8') : trim(get(`https://dviga.marketing/blog/${slug}`));
+  const html = trim(get(`https://dviga.marketing/blog/${slug}`));
   const $ = cheerio.load(html, { decodeEntities: false });
   const r = swapFresh($, slug);
   fs.writeFileSync(file, $.html());
   report[slug] = r;
-  console.log(slug.padEnd(80), (fs.statSync(file).size / 1024).toFixed(0).padStart(5), 'КБ  свежие:', r.now.map((s) => s.slice(0, 22)).join(' | '), r.orig.every((s) => r.now.includes(s)) ? '' : '(часть заменена)');
+  console.log(slug.padEnd(80), (fs.statSync(file).size / 1024).toFixed(0).padStart(5), 'КБ  свежие:', r.now.map((s) => s.slice(0, 22)).join(' | '), r.missing.length ? 'НЕТ В КОПИИ: ' + r.missing.join(', ') : '');
 }
 // статья про Битрикс (article-snapshot.mjs): «Свежие статьи» выбраны по ТЗ (data/articles/<slug>.json → fresh) — не трогаем, только проверяем, что все три есть в копии
 const b = 'plyusy-i-minusy-sayta-na-bitrix';

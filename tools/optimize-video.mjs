@@ -17,7 +17,7 @@ const hash = (f) => crypto.createHash('sha1').update(fs.readFileSync(f)).digest(
 const run = (args) => { const r = spawnSync(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-y', ...args], { encoding: 'utf8' }); if (r.status) throw new Error(r.stderr); };
 
 // ONLY=<часть адреса> — обработать только один ролик; POSTER_AT=<сек> — кадр постера (по умолчанию 0,4 с)
-const list = Object.entries(man).filter(([u, m]) => m.file && /\.(mp4|mov)$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)));
+const list = Object.entries(man).filter(([u, m]) => m.file && /\.(mp4|mov)$/i.test(m.file) && (!process.env.ONLY || u.includes(process.env.ONLY)) && (!process.env.MAXSRC_MB || (fs.existsSync(m.file) && fs.statSync(m.file).size <= +process.env.MAXSRC_MB * 1e6))); // MAXSRC_MB — только лёгкие ролики (тяжёлые остаются как есть)
 for (const [url, m] of list) {
   if (process.env.SKIP_DONE && prev[url] && prev[url].mp4 && fs.existsSync(path.join('public', prev[url].mp4))) continue; // уже обработано
   const src = m.file;

@@ -338,6 +338,21 @@ function initSlider() {
   });
 }
 
+/* ---------- «до / после» (T410): ползунок тянется мышью/пальцем, стрелки клавиатуры ---------- */
+function initBeforeAfter() {
+  $$('[data-ba]').forEach((b) => {
+    const w = b.querySelector('.ba-w'); const h = b.querySelector('.ba-h');
+    const set = (p) => { p = Math.max(0, Math.min(100, p)); b.style.setProperty('--p', p + '%'); b.style.setProperty('--r', (100 - p) + '%'); h.setAttribute('aria-valuenow', Math.round(p)); };
+    const at = (e) => { const r = w.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); };
+    let on = false;
+    w.addEventListener('pointerdown', (e) => { on = true; try { w.setPointerCapture(e.pointerId); } catch (x) { /* ok */ } at(e); });
+    w.addEventListener('pointermove', (e) => { if (on) at(e); });
+    ['pointerup', 'pointercancel'].forEach((t) => w.addEventListener(t, () => { on = false; }));
+    h.addEventListener('keydown', (e) => { const v = +h.getAttribute('aria-valuenow'); const k = { ArrowLeft: v - 5, ArrowRight: v + 5, Home: 0, End: 100 }[e.key]; if (k !== undefined) { e.preventDefault(); set(k); } });
+    set(41.6667);
+  });
+}
+
 /* ---------- «Частые вопросы» клонов статей: вопрос открывает/закрывает ответ (независимо друг от друга, как на оригинале) ---------- */
 function initFaq() {
   $$('[data-fq-t]').forEach((q) => {
@@ -566,6 +581,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initSlider, initShare, initAudio, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initBeforeAfter, initSlider, initShare, initAudio, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

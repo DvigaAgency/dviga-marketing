@@ -449,6 +449,7 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
       body = atom.html();
       if (atom.attr('field')) atomClass += ' tf';
       body = body.replace(/ field="[^"]*"/g, '');
+      if (/^\s*(?:Сайты|Брендинг|Недвижимость|Продвижение|Автоматизация|Логистические компании|Новости)(?:\s*,\s*(?:Сайты|Брендинг|Недвижимость|Продвижение|Автоматизация|Логистические компании|Новости))*\s*$/.test(atom.text())) atomClass += ' nw'; // категории карточек статей — всегда в одну строку
       body = ctx.textHtml(body);
       break;
     }
@@ -475,7 +476,9 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
       // галерея (слайдер картинок): список слайдов лежит в data-field-imgs-value
       let imgs = [];
       try { imgs = JSON.parse(attrs['data-field-imgs-value'] || '[]'); } catch { /* пусто */ }
-      body = ctx.gallery(imgs, { sizes: imgSizes(e, A, screens).replace(/([\d.]+)vw/g, (m, n) => +(n * 1.3).toFixed(2) + 'vw'), /* с запасом 30%: слайд растягивается cover'ом, а на оригинале всегда грузится полноразмерный файл */ autoplay: +(attrs['data-field-slds_autoplay-value'] || 0), dots: attrs['data-field-slds_dotsbgcolor-value'], dotsOn: attrs['data-field-slds_dotsbgcoloractive-value'],
+      const glEff = (name, bp) => { for (const b of [320, 480, 640, 960].filter((x) => x >= bp)) { const v = attrs[`data-field-${name}-res-${b}-value`]; if (v !== undefined && v !== '') return v; } return attrs[`data-field-${name}-value`]; };
+      const glCls = [320, 480, 640, 960].flatMap((bp) => [glEff('slds_arrowcontrols', bp) === 'none' ? `gl-a0-${bp}` : '', glEff('slds_dotscontrols', bp) === 'none' ? `gl-d0-${bp}` : '']).filter(Boolean).join(' '); // стрелки/точки, выключенные на отдельных брейкпоинтах
+      body = ctx.gallery(imgs, { cls: glCls, sizes: imgSizes(e, A, screens).replace(/([\d.]+)vw/g, (m, n) => +(n * 1.3).toFixed(2) + 'vw'), /* с запасом 30%: слайд растягивается cover'ом, а на оригинале всегда грузится полноразмерный файл */ autoplay: +(attrs['data-field-slds_autoplay-value'] || 0), dots: attrs['data-field-slds_dotsbgcolor-value'], dotsOn: attrs['data-field-slds_dotsbgcoloractive-value'],
         dotsMode: attrs['data-field-slds_dotscontrols-value'], dotsSize: attrs['data-field-slds_dotssize-value'], dotsH: attrs['data-field-slds_dotshmargin-value'], // none | near (под картинкой) | in (на картинке)
         arrowsMode: attrs['data-field-slds_arrowcontrols-value'], arrowSize: attrs['data-field-slds_arrowsize-value'], arrowColor: attrs['data-field-slds_arrowcolor-value'], arrowColorHover: attrs['data-field-slds_arrowcolorhover-value'],
         arrowBg: attrs['data-field-slds_arrowbgcolor-value'], arrowBgHover: attrs['data-field-slds_arrowbgcolorhover-value'], arrowBgOpacity: attrs['data-field-slds_arrowbgopacity-value'], arrowH: attrs['data-field-slds_arrowhmargin-value'] });

@@ -127580,5 +127580,123 @@
   "src": "/assets/img/1-1674.ce28d118f5.webp",
   "inSize": 124926,
   "outSize": 160911
+ },
+ "https://static.tildacdn.com/tild3836-3061-4139-b231-386261353538/imgi_78_Facebook_cov.png": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1680,
+  "h": 918,
+  "alpha": true,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/imgi-78-facebook-cov-360.bc25f0e609.avif",
+    "size": 7556
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/imgi-78-facebook-cov-720.cfb2919d43.avif",
+    "size": 18345
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/imgi-78-facebook-cov-1080.b1e442876e.avif",
+    "size": 28083
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/imgi-78-facebook-cov-1680.f2106a6a5b.avif",
+    "size": 44637
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/imgi-78-facebook-cov-360.ef9e1898f6.webp",
+    "size": 9566
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/imgi-78-facebook-cov-720.3f638c202e.webp",
+    "size": 23678
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/imgi-78-facebook-cov-1080.658269b9da.webp",
+    "size": 39500
+   },
+   {
+    "w": 1680,
+    "src": "/assets/img/imgi-78-facebook-cov-1680.ff3a0aa28e.webp",
+    "size": 66674
+   }
+  ],
+  "src": "/assets/img/imgi-78-facebook-cov-1680.ff3a0aa28e.webp",
+  "inSize": 1215152,
+  "outSize": 111311
+ },
+ "https://static.tildacdn.com/tila3634-3638-4634-b063-663131623764/D0B8D0BDD0BBD0B0D0B2.jpg": {
+  "q": "q2",
+  "kind": "raster",
+  "w": 1920,
+  "h": 1440,
+  "alpha": false,
+  "avif": [
+   {
+    "w": 360,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-360.8e66335573.avif",
+    "size": 3827
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-720.5f8144625f.avif",
+    "size": 10582
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1080.243ab266b6.avif",
+    "size": 18553
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1620.9dab5322d2.avif",
+    "size": 31615
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1920.23b39193d2.avif",
+    "size": 41167
+   }
+  ],
+  "webp": [
+   {
+    "w": 360,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-360.9355ca2ab2.webp",
+    "size": 4524
+   },
+   {
+    "w": 720,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-720.809f3517f8.webp",
+    "size": 13730
+   },
+   {
+    "w": 1080,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1080.f3e7fe1a4f.webp",
+    "size": 24170
+   },
+   {
+    "w": 1620,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1620.aee6ef29ba.webp",
+    "size": 41246
+   },
+   {
+    "w": 1920,
+    "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1920.f71bab033e.webp",
+    "size": 50776
+   }
+  ],
+  "src": "/assets/img/tila3634-3638-4634-b063-663131623764-d0b-1920.f71bab033e.webp",
+  "inSize": 73122,
+  "outSize": 91943
  }
 }

@@ -8,6 +8,7 @@
 // Запуск: node tools/faq-config.mjs [slug…]
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import * as cheerio from 'cheerio';
 
 const cl = JSON.parse(fs.readFileSync('data/articles/clones.json', 'utf8'));
 const all = [...Object.values(cl.topics).flat(), ...Object.keys(cl.existing).filter((s) => s !== 'plyusy-i-minusy-sayta-na-bitrix')];
@@ -40,6 +41,12 @@ for (const slug of slugs) {
     const color = /:hover \{ color: (rgba?\([^)]*\)) !important/.exec(t)?.[1];
     if (sel && color && sel.includes('.tn-elem__')) hov.push({ sel: sel.split(/,\s*/).filter(Boolean), color });
   }
+  if (!hov.length && fs.existsSync(`data/pages/blog__${slug}.html`)) {
+    // у части статей на оригинале подсветки оглавления нет, но заказчица просит единый вид: пункты оглавления (Zero-тексты со ссылками-якорями) краснеют при наведении, как у остальных статей
+    const $p = cheerio.load(fs.readFileSync(`data/pages/blog__${slug}.html`, 'utf8'), { decodeEntities: false });
+    const sel = $p('.t396__elem[data-elem-type="text"]').filter((i, e) => $p(e).find('a[href^="#"]').length > 0).map((i, e) => `.tn-elem__${$p(e).closest('.r').attr('id').replace('rec', '')}${$p(e).attr('data-elem-id')} .tn-atom a`).get();
+    if (sel.length >= 3) hov.push({ sel, color: 'rgba(223, 40, 40, 1)' });
+  }
   if (hov.length) outLh[slug] = hov; else delete outLh[slug];
   const i = html.indexOf('objectDataTabNumber = ');
   if (i < 0) { delete out[slug]; delete outSl[slug]; console.log('нет плагина      ', slug); continue; }
@@ -47,13 +54,16 @@ for (const slug of slugs) {
   for (; j < html.length; j++) { if (html[j] === '[') d++; else if (html[j] === ']') { d--; if (!d) { j++; break; } } }
   const groups = JSON.parse(html.slice(st, j));
   const elemOf = (sel) => [...(sel || '').matchAll(/\.tn-elem__(\d+)/g)].map((m) => m[1]); // recId + elemId (13 цифр)
+  const $h = cheerio.load(html);
   const list = [];
   const other = new Set();
   for (const g of groups) {
     const f = Object.fromEntries(g.filter((e) => e.data).map((e) => [e.name.replace('___tab-number', ''), e.data]));
     for (const k of Object.keys(f)) if (!['tab', 'elementaction', 'elementactionclose', 'starttab', 'animelement', 'slide', 'slide___slide-number'].includes(k)) other.add(k);
     const tab = /#rec(\d+)/.exec(f.tab || '')?.[1];
-    const qs = [...new Set(elemOf(f.elementaction).map((x) => x.slice(0, -13)))];
+    let qs = [...new Set(elemOf(f.elementaction).map((x) => x.slice(0, -13)))];
+    // триггер задан CSS-классом элемента (.btn1 …), а не id: ищем запись с таким элементом
+    if (!qs.length && f.elementaction && /^\.[\w-]+$/.test(f.elementaction)) qs = [...new Set($h(f.elementaction).map((n, e) => $h(e).closest('.r').attr('id')?.replace('rec', '')).get().filter(Boolean))];
     if (tab && qs.length === 1) list.push({ tab, q: qs[0], open: f.starttab === 'true' });
   }
   out[slug] = list;

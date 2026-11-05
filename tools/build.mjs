@@ -10,16 +10,21 @@ import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
-import { quizBlock, accordionBlock, tilesBlock, linksListBlock } from './lib/blocks.mjs';
+import { quizBlock, accordionBlock, tilesBlock, linksListBlock, zoomCss } from './lib/blocks.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, search, fixLinks } from './lib/components.mjs';
 import { setLocalPaths, link } from './lib/util.mjs';
 import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSliderBlock } from './lib/listing.mjs';
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
 import { t431Table } from './lib/t431.mjs';
+// статьи, у которых таблицы выводятся в стандартном виде (как у остальных статей), а не в виде оригинала
+const STD_TABLES = new Set(['lichnyj-kabinet-tilda', 'vebvizor-v-yandex-metrike', 'kak-brendam-stroit-otnosheniya-s-pokoleniyem-zumerov']);
 import { checklistBlock } from './lib/t678.mjs';
 import { flexZeroBlock } from './lib/flex-zero.mjs';
 import { codeBlock } from './lib/t264.mjs';
+import { embedBlock } from './lib/embed.mjs';
+import { beforeAfterBlock } from './lib/t410.mjs';
+import { slider670 } from './lib/t670.mjs';
 import { textBlock } from './lib/t004.mjs';
 import { faqFor, faqMark } from './lib/faq.mjs';
 import { slidersFor, applySliders } from './lib/slider.mjs';
@@ -207,7 +212,7 @@ async function buildPage(spec) {
       // подписи к слайдам (li_imgtitle): под точками, показывается подпись текущего слайда (в Tilda — .t-slds__caption)
       const ce = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
       const caps = imgs.some((x) => x.li_imgtitle) ? '<div class="gl-c">' + imgs.map((x, i) => '<div class="gl-ci' + (i ? '' : ' on') + '">' + ce(x.li_imgtitle || '') + '</div>').join('') + '</div>' : '';
-      return '<div class="gl" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + arrows + dots + caps + '</div>';
+      return '<div class="gl' + (o.cls ? ' ' + o.cls : '') + '" data-gl' + (o.autoplay ? ' data-ap="' + o.autoplay + '"' : '') + '><div class="gl-t">' + slides + '</div>' + arrows + dots + caps + '</div>';
     },
     form(e) {
       const el = e.el;
@@ -254,9 +259,12 @@ async function buildPage(spec) {
       if (type === '833' || type === '331') continue; // T833 — фон обложки (см. выше); T331 — попап с видео: ссылка на него ведёт на страницу ролика (videoLinks)
       if (type === '169' && name === 'main') { const t = tilesBlock($, rec, ax.scale.includes(rec.attr('id').replace('rec', ''))); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
-      if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec, STD_TABLES.has(spec.path.replace('/blog/', ''))) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '678' && name === 'main' && spec.path.startsWith('/blog/')) { const t = checklistBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // чек-лист из чекбоксов
       if (type === '285' && name === 'main' && spec.path.startsWith('/blog/')) { const t = codeBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // блок с кодом
+      if (type === '1370' && name === 'main') { const t = embedBlock($, rec, { localUrls }); css.push(t.css); css.push(zoomCss(rid)); html[name].push(t.html); continue; } // виджет с собственным скриптом; Tilda масштабирует такие записи сама (класс t-record_scaled: zoom = ширина / ширина макета)
+      if (type === '410' && name === 'main') { const t = beforeAfterBlock($, rec, { picture }); css.push(t.css); html[name].push(t.html); continue; } // «до / после»
+      if (type === '670' && name === 'main') { const t = slider670($, rec, { picture }); css.push(t.css); html[name].push(t.html); continue; } // слайдер картинок
       if (type === '1741' && name === 'main') { const t = flexZeroBlock($, rec, { picture, localUrls }); css.push(t.css); html[name].push(t.html); continue; } // flex-Zero (автолэйаут): чек-лист перед печатью тиража
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
       if (type === '849' && name === 'main') { const t = accordionBlock($, rec, 't849', ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }

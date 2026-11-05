@@ -130,3 +130,34 @@ body.pl{}
 /* точки галереи кликабельны (область нажатия шире самой точки) */
 .gl-d i{position:relative;pointer-events:auto;cursor:pointer}
 .gl-d i::after{content:"";position:absolute;left:-6px;right:-6px;top:-8px;bottom:-8px}
+/* стрелки галерей — круглые, как у оригинала (border-radius:100px у .t-slds__arrow) */
+.gl-ar{border-radius:100px}
+/* стрелки/точки скрываются на тех брейкпоинтах, где оригинал их отключает (slds_arrowcontrols-res-*=none): классы gl-a0-<bp>, gl-d0-<bp> */
+@media(max-width:479px){.gl-a0-320 .gl-ar{display:none}.gl-d0-320 .gl-d{display:none}}
+@media(min-width:480px) and (max-width:639px){.gl-a0-480 .gl-ar{display:none}.gl-d0-480 .gl-d{display:none}}
+@media(min-width:640px) and (max-width:959px){.gl-a0-640 .gl-ar{display:none}.gl-d0-640 .gl-d{display:none}}
+@media(min-width:960px) and (max-width:1199px){.gl-a0-960 .gl-ar{display:none}.gl-d0-960 .gl-d{display:none}}
+/* слайдер T670: картинка 860×550 по центру, стрелки 40px снаружи, точки на 26px ниже картинки (замерено на оригинале; масштаба нет) */
+.sl6 .gl{width:860px;height:550px;margin:0 auto 60px}
+.sl6 .gl-ar{--as:40px;--ab:#e8e8e8;--abh:#e8e8e8;--ac:#000;--ach:#000}
+.sl6 .gl-pv{left:-70px}.sl6 .gl-nx{right:-70px}
+.sl6 .gl-d.gl-dn{top:calc(100% + 26px);gap:12px}
+@media(max-width:1199px){.sl6 .gl{width:720px;height:460px}.sl6 .gl-pv{left:-64px}.sl6 .gl-nx{right:-64px}}
+@media(max-width:959px){.sl6 .gl{width:600px;height:384px}}
+@media(max-width:639px){.sl6 .gl{width:440px;height:282px}}
+@media(max-width:479px){.sl6 .gl{width:100%;height:auto;aspect-ratio:860/550}.sl6 .gl-ar{--as:24px}.sl6 .gl-pv{left:5px}.sl6 .gl-nx{right:5px}}
+@media(max-width:959px) and (min-width:480px){.sl6 .gl-pv{left:-64px}.sl6 .gl-nx{right:-64px}}
+/* «до / после» T410: ширина колонки минус по 20px, левая картинка обрезается по ползунку */
+.ba-w{position:relative;margin:0 20px;overflow:hidden;cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.ba-i{position:relative}
+.ba-r picture,.ba-r img{display:block;width:100%;height:auto}
+.ba-f{position:absolute;left:0;top:0;right:0;bottom:0;clip-path:inset(0 var(--r,58.3333%) 0 0)}
+.ba-f picture,.ba-f img{display:block;width:100%;height:100%;object-fit:cover}
+.ba-l{position:absolute;top:0;padding:4px 14px;font:400 16px/1.4 Inter,Arial,sans-serif;color:#fff;background:rgba(0,0,0,.45);pointer-events:none}
+.ba-f .ba-l{left:0}.ba-r .ba-l{right:0}
+.ba-h{position:absolute;top:0;bottom:0;left:var(--p,41.6667%);width:4px;margin-left:-2px;background:var(--bac,#fff);outline:none}
+.ba-c{position:absolute;left:50%;top:50%;width:11px;height:72px;margin:-36px 0 0 -5.5px;background:var(--bac,#fff)}
+.ba-h:focus-visible .ba-c{outline:2px solid #d93433}
+.ba-a{position:absolute;top:50%;width:0;height:0;margin-top:-8px;border:solid transparent;border-width:8px 10px}
+.ba-ar{left:100%;margin-left:8px;border-left-color:var(--bac,#fff);border-right-width:0}
+.ba-al{right:100%;margin-right:8px;border-right-color:var(--bac,#fff);border-left-width:0}

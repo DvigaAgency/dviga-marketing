@@ -28,6 +28,7 @@ export function accordionBlock($, rec, p = 't668', scaled = false) {
   const root = cheerio.load(`<div>${$.html(rec.find('.' + p))}</div>`, { decodeEntities: false });
   const r = root('div').first();
   clean(root, r);
+  r.find('.t-animate').removeClass('t-animate t-animate_wait').removeAttr('data-animate-style').removeAttr('data-animate-group'); // анимацию появления рисует скрипт Tilda; без него блок остаётся прозрачным (opacity:0)
   r.find(`.${p}__content`).attr('hidden', '');
   const html = fixLinks(r.html());
   const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), scaled ? zoomCss(id) : ''].join('\n');
