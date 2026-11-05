@@ -27,6 +27,7 @@ import { embedBlock } from './lib/embed.mjs';
 import { beforeAfterBlock } from './lib/t410.mjs';
 import { slider670 } from './lib/t670.mjs';
 import { textBlock } from './lib/t004.mjs';
+import { pageIndexHtml } from './lib/page-index.mjs';
 import { faqFor, faqMark } from './lib/faq.mjs';
 import { slidersFor, applySliders } from './lib/slider.mjs';
 import { linkHoverCss } from './lib/link-hover.mjs';
@@ -360,6 +361,8 @@ async function buildPage(spec) {
   const outFile = spec.out ? path.join(OUT, spec.out) : path.join(OUT, spec.path === '/' ? '' : spec.path, 'index.html'); // spec.out — файл в корне (404.html)
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, fixed);
+  usedAssets.add(ogM.webp[0].src);
+  pageList.push({ path: spec.path, title: title.replace(/\s+/g, ' ').trim() || spec.path, img: ogM.webp[0].src });
   return { spec, page, cssLen: minCss.length };
 }
 
@@ -373,6 +376,7 @@ function redirectPage(spec) {
   return { spec, page, cssLen: 0 };
 }
 const built = [];
+const pageList = []; // для служебной страницы «Все страницы сайта»
 { // индекс внутреннего поиска: один файл с хэшем в имени, грузится при первом открытии поиска
   const si = buildSearchIndex(PAGES);
   fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
@@ -381,6 +385,7 @@ const built = [];
   console.log(`search index: ${si.count} страниц, ${(si.json.length / 1024).toFixed(0)} КБ`);
 }
 for (const spec of PAGES) built.push(spec.kind === 'redirect' ? redirectPage(spec) : await buildPage(spec));
+{ const dir = path.join(OUT, 'vse-stranicy'); fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, 'index.html'), pageIndexHtml(pageList, BASE)); } // служебный список всех страниц (как в Tilda)
 
 // ----------------------------------------------------------------- статика
 const fontReport = await subsetFonts(built.map((b) => b.page).join(''), path.join(OUT, 'assets/fonts'));
