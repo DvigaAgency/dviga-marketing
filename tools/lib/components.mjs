@@ -67,9 +67,12 @@ export function widget($, formHtml) {
 }
 
 /** поиск (t985) */
-export function search($) {
+export function search($, indexUrl = '') {
   const ph = $('#rec3285898701 input').attr('placeholder') || 'Поиск';
-  return `<div class="sr" id="sr" role="dialog" aria-label="Поиск" data-hook="search"><div class="sr-h"><div class="sr-c"><form class="sr-i" action="https://yandex.ru/search/" method="get" target="_blank" role="search"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" role="presentation"><circle r="7.93" transform="matrix(.7156 .6985 -.7156 .6985 18.59 11.78)" stroke="#b6b6b6"/><line y1="-.5" x2="9.18" y2="-.5" transform="matrix(-.7156 .6985 -.7156 -.6985 12.75 16.96)" stroke="#b6b6b6"/></svg><input type="search" name="text" placeholder="${esc(ph)}" aria-label="${esc(ph)}" autocomplete="off"><input type="hidden" name="site" value="dviga.marketing"><button type="button" class="sr-x" aria-label="Закрыть поиск" data-close>×</button></form></div></div></div>`;
+  const lens = '<svg width="30" height="30" viewBox="0 0 30 30" fill="none" role="presentation"><circle r="7.93" transform="matrix(.7156 .6985 -.7156 .6985 18.59 11.78)" stroke="#b6b6b6"/><line y1="-.5" x2="9.18" y2="-.5" transform="matrix(-.7156 .6985 -.7156 -.6985 12.75 16.96)" stroke="#b6b6b6"/></svg>';
+  const cross = '<svg width="30" height="30" viewBox="0 0 23 23" aria-hidden="true"><path stroke="#000" stroke-width="1" d="M0 0L23 23M23 0L0 23"/></svg>';
+  // внутренний поиск (как у оригинала: строка, счётчик «N результатов по запросу», список «заголовок + фрагмент с выделением»); данные — индекс страниц копии, src/js/search.js
+  return `<div class="sr" id="sr" role="dialog" aria-label="Поиск" data-hook="search" data-index="${indexUrl}"><div class="sr-h"><div class="sr-c"><form class="sr-i" role="search" action="#">${lens}<input type="search" name="q" placeholder="${esc(ph)}" aria-label="${esc(ph)}" autocomplete="off" enterkeyhint="search"><button type="button" class="sr-cl" aria-label="Очистить" hidden>×</button></form><button type="button" class="sr-x" aria-label="Закрыть поиск" data-close>${cross}</button></div></div><div class="sr-b" hidden><div class="sr-w"><div class="sr-n" aria-live="polite"></div><ul class="sr-l"></ul><button type="button" class="sr-m" hidden>Показать ещё</button></div></div></div>`;
 }
 
 /** лайтбокс-галереи (T746): попап с картинками, открывается ссылкой #popup:<имя>; слайдер — общий модуль gallery.js */

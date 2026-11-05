@@ -2,6 +2,7 @@
 // kind: home | cases (каталог кейсов с новой фильтрацией) | page (любая страница из Zero-блоков)
 // Страницы кейсов, статей и услуг подхватываются автоматически: data/pages/cases__<slug>.html -> /cases/<slug>, blog__<slug>.html -> /blog/<slug>, services__<slug>.html -> /services/<slug>, contacts__<slug>.html -> /contacts/<slug>.
 import fs from 'node:fs';
+import { blogTabs } from './lib/blog-tabs.mjs';
 
 const dir = 'data/pages';
 const files = fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
@@ -14,8 +15,11 @@ export const PAGES = [
   { path: '/', src: 'data/home.source.html', kind: 'home' },
   { path: '/cases', src: `${dir}/cases.html`, kind: 'cases' },
   ...sub('cases'),
-  { path: '/blog', src: `${dir}/blog.html`, kind: 'page' },
+  { path: '/blog', src: `${dir}/blog.html`, kind: 'page', tab: 1 },
+  // вкладки блога с собственными адресами: тот же снимок, другая активная вкладка
+  ...blogTabs().filter((t) => t.slug).map((t) => ({ path: `/blog/${t.slug}`, src: `${dir}/blog.html`, kind: 'page', tab: t.index })),
   ...sub('blog'),
+  ...sub('authors'),
   { path: '/services', src: `${dir}/services.html`, kind: 'page' },
   ...sub('services'),
   { path: '/contacts', src: `${dir}/contacts.html`, kind: 'page' },

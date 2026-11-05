@@ -61,7 +61,7 @@ for (const name of names) {
       const scales = Object.entries(cfg).filter(([k]) => /^scale/.test(k)).map(([, v]) => v);
       if (scales.some((v) => v !== '100')) console.log('WARN масштаб блоков не 100%', path, cfg.blocks, scales.join('/'));
       for (const b of (cfg.blocks || '').split(/,\s*/)) { const id = /#rec(\d+)/.exec(b)?.[1]; if (id) e.scale.push(id); }
-      if (/:not\(\[data-record-type='396'\]\)/.test(cfg.blocks || '')) e.scaleAll = true; // все записи, кроме Zero (политика, согласие)
+      if (/:not\(\[data-record-type='396'\][,)]/.test(cfg.blocks || '')) e.scaleAll = true; // все записи, кроме Zero (политика, согласие)
     }
   }
   // dragscroll: $('#rec864137673 .t396__artboard').addClass('dragscroll'); ScrollBooster: const blockId = '#rec<id>'

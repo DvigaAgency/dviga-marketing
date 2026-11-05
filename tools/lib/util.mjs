@@ -11,8 +11,12 @@ const ALIAS = { '/blog/skolko-stoit-sdelat-sajt-na-tilde-v-2025-ceny': '/blog/sk
 
 /** href внутренней ссылки оригинала -> локальный путь (с завершающим «/») или абсолютный адрес оригинала.
  *  Абсолютные ссылки на статьи блога (https://dviga.marketing/blog/…) ведут на копию, если статья в ней есть. */
+// вкладки каталога кейсов на оригинале (/cases#!/tab/698207106-<номер>) — в копии это фильтры каталога (src/js/cases.js): номер вкладки -> параметр адреса
+const CASE_TABS = { 1: '', 2: '?service=sites', 3: '?service=branding', 4: '?industry=realty', 5: '?service=promo', 6: '?service=auto', 7: '?industry=logistics', 8: '?industry=industry' };
 export function link(h) {
   const orig = h;
+  const ct = /^(?:https:\/\/dviga\.marketing)?\/cases\/?#!\/tab\/\d+-(\d+)$/.exec(h || '');
+  if (ct && ct[1] in CASE_TABS) return '/cases/' + CASE_TABS[ct[1]];
   if (h && h.startsWith(ORIGIN + '/blog/')) h = h.slice(ORIGIN.length);
   if (!h || !/^\/(?!\/)/.test(h)) return orig;
   const m = /^([^?#]*)(.*)$/.exec(h);

@@ -1,17 +1,26 @@
 // Блоки листингов (кейсы, блог): вкладки T395, «Загрузить еще» T400, кнопки «поделиться» T014 — собственная разметка по данным оригинала.
 import { recPadding } from './zero.mjs';
+import { blogTabs } from './blog-tabs.mjs';
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 /** вкладки (t395): записи Zero из data-tab-rec-ids показываются/скрываются JS (src/js/tabs.js) */
-export function tabsBlock($, rec) {
+export function tabsBlock($, rec, activeIdx) {
   const id = rec.attr('id').replace('rec', '');
-  const tabs = rec.find('li.t395__tab').map((i, li) => {
-    const t = $(li);
-    return `<li class="tb-t${t.hasClass('t395__tab_active') ? ' on' : ''}" role="presentation" data-ids="${esc(t.attr('data-tab-rec-ids'))}"><button type="button" class="tb-b" role="tab" aria-selected="${t.hasClass('t395__tab_active')}">${t.find('.t395__title').first().html().trim()}</button></li>`;
-  }).get().join('');
+  const named = new Map(blogTabs().map((t) => [t.name, t]));
+  const lis = rec.find('li.t395__tab').toArray().map((li, i) => {
+    const t = $(li); const name = t.text().replace(/\s+/g, ' ').trim(); const bt = named.get(name);
+    const on = activeIdx ? i + 1 === activeIdx : t.hasClass('t395__tab_active');
+    return { t, on, bt, name, ids: (t.attr('data-tab-rec-ids') || '').split(',').filter(Boolean) };
+  });
+  const tabs = lis.map(({ t, on, bt }) => {
+    const title = t.find('.t395__title').first().html().trim();
+    // вкладка — ссылка на собственный адрес (/blog/sajty): работает без скриптов, открывается в новой вкладке; клик перехватывает tabs.js
+    const el = bt ? `<a class="tb-b" href="/blog${bt.slug ? '/' + bt.slug : ''}/" role="tab" aria-selected="${on}">${title}</a>` : `<button type="button" class="tb-b" role="tab" aria-selected="${on}">${title}</button>`;
+    return `<li class="tb-t${on ? ' on' : ''}" role="presentation" data-ids="${esc(t.attr('data-tab-rec-ids'))}"${bt ? ` data-slug="${bt.slug}"` : ''}>${el}</li>`;
+  }).join('');
   const css = recPadding(rec.attr('class') || '', id);
-  const info = rec.find('li.t395__tab').map((i, li) => ({ on: $(li).hasClass('t395__tab_active'), ids: ($(li).attr('data-tab-rec-ids') || '').split(',').filter(Boolean) })).get();
+  const info = lis.map(({ on, ids }) => ({ on, ids }));
   return { id, css, tabs: info, html: `<section id="r${id}" class="r tb-r"><div class="tb" data-tabs><ul class="tb-w" role="tablist">${tabs}</ul></div></section>` };
 }
 

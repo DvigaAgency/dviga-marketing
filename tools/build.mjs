@@ -10,12 +10,13 @@ import { convertZero } from './lib/zero.mjs';
 import { picture, cssImage, lookup, usedAssets } from './lib/assets.mjs';
 import { renderZeroForm, renderTildaForm } from './lib/forms.mjs';
 import { subsetFonts } from './subset-fonts.mjs';
-import { quizBlock, accordionBlock, tilesBlock, linksListBlock, zoomCss } from './lib/blocks.mjs';
+import { quizBlock, accordionBlock, tilesBlock, linksListBlock, cardsBlock, zoomCss } from './lib/blocks.mjs';
 import { cookie, reviewsSlider, reviewPopups, blankPopups, lightboxes, widget, search, fixLinks } from './lib/components.mjs';
 import { setLocalPaths, link } from './lib/util.mjs';
 import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSliderBlock } from './lib/listing.mjs';
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
+import { buildSearchIndex } from './lib/search-index.mjs';
 import { t431Table } from './lib/t431.mjs';
 // статьи, у которых таблицы выводятся в стандартном виде (как у остальных статей), а не в виде оригинала
 const STD_TABLES = new Set(['lichnyj-kabinet-tilda', 'vebvizor-v-yandex-metrike', 'kak-brendam-stroit-otnosheniya-s-pokoleniyem-zumerov']);
@@ -123,9 +124,11 @@ fs.writeFileSync(path.join(OUT, 'assets', commonName), withBase(commonCss));
 
 // ----------------------------------------------------------------- одна страница
 const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { decodeEntities: false });
+let searchUrl = '';
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
+  const isArticle = spec.path.startsWith('/blog/') && spec.tab === undefined; // адреса вкладок блога (/blog/sajty …) — это лента, а не статья
   // Zero-записи внутри попапов меню/формы: на общих страницах — известные id, на отдельных страницах (/marketing-for-devepolers-proposal) свои — берём из data-popup-rec-ids записи T1093
   const popupRecs = { ...POPUP_RECS };
   $('.t-popup[data-popup-rec-ids]').each((i, e) => { const hook = ($(e).attr('data-tooltip-hook') || '').replace('#', ''); if (/^[a-z]+$/i.test(hook)) for (const r of ($(e).attr('data-popup-rec-ids') || '').split(',')) if (r) popupRecs[r.replace('rec', '')] = hook; });
@@ -140,7 +143,7 @@ async function buildPage(spec) {
   });
   const videoLinks = (h) => h.replace(/<a ([^>]*?)href="(#popup:[^"]*)"/g, (m, a, href) => (videoUrls[href] ? `<a ${a}href="${videoUrls[href]}"` : m));
   // статьи с data/articles/<slug>.json → pin: карточка первой в сетке блога (tools/lib/blog-pin.mjs)
-  if (spec.path === '/blog' && process.env.NO_PIN !== '1') for (const f of fs.readdirSync('data/articles').filter((x) => x.endsWith('.json'))) { const a = JSON.parse(fs.readFileSync(`data/articles/${f}`, 'utf8')); if (a.pin) console.log('blog-pin', f.slice(0, -5), pinFirst($, { slug: f.slice(0, -5), ...a.pin }).join('; ')); }
+  if ((spec.path === '/blog' || spec.tab !== undefined) && process.env.NO_PIN !== '1') for (const f of fs.readdirSync('data/articles').filter((x) => x.endsWith('.json'))) { const a = JSON.parse(fs.readFileSync(`data/articles/${f}`, 'utf8')); if (a.pin) console.log('blog-pin', f.slice(0, -5), pinFirst($, { slug: f.slice(0, -5), ...a.pin }).join('; ')); }
   const extraCss = [];
   const idCount = {};
   $('.t396__elem').each((i, e) => { const id = $(e).attr('data-elem-id'); idCount[id] = (idCount[id] || 0) + 1; });
@@ -250,21 +253,21 @@ async function buildPage(spec) {
       if (vis) css.push(vis[1] === 'min' ? `@media(max-width:${vis[2]}px){#r${rid}{display:none!important}}` : `@media(min-width:${+vis[2] + 1}px){#r${rid}{display:none!important}}`);
       recSeen.add(rid);
       // в статьях подряд идущие пустые Zero-прокладки схлопываются в первую: две подряд (130 + 130) дают двойной отступ, а между блоками он должен быть одинаковым
-      if (name === 'main' && spec.path.startsWith('/blog/') && spec.path !== '/blog') { const empty = type === '396' && isZero(rec) && !rec.find('.t396__elem').length; if (empty && prevEmpty) continue; prevEmpty = empty; }
+      if (name === 'main' && isArticle) { const empty = type === '396' && isZero(rec) && !rec.find('.t396__elem').length; if (empty && prevEmpty) continue; prevEmpty = empty; }
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
       if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }
       if (type === '525') { html[name].push(reviewsSlider($, rec, home || alias === '525')); continue; } // глобальный блок отзывов (121 -> 525) — тот же блок, что на главной: масштаб как у неё
-      if (type === '395' && name === 'main') { const t = tabsBlock($, rec); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
+      if (type === '395' && name === 'main') { const t = tabsBlock($, rec, spec.tab); css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.tabs.push(t.tabs); continue; }
       if (type === '400' && name === 'main') { const t = loadMoreBlock($, rec, !/^\/(blog|cases)(\/|$)/.test(spec.path)); /* в листингах блога/кейсов кнопка масштабируется, на остальных страницах — нет */ css.push(t.css); html[name].push(t.html); hasTabs.v = true; tabInfo.more.push(t.more); continue; }
       if (type === '215' && name === 'main') { const nm = rec.find('a[name]').attr('name'); if (nm) html[name].push(`<section id="r${rid}" class="r anc-r"><a id="${nm}" class="anc"></a></section>`); continue; }
       if (type === '18' && name === 'main') { const t = heroSliderBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; } // обложка; слайды — из привязанной записи T833
       if (type === '833' || type === '331') continue; // T833 — фон обложки (см. выше); T331 — попап с видео: ссылка на него ведёт на страницу ролика (videoLinks)
       if (type === '169' && name === 'main') { const t = tilesBlock($, rec, ax.scale.includes(rec.attr('id').replace('rec', ''))); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '160' && name === 'main') { const t = coverBlock($, rec, cssImage); css.push(t.css); html[name].push(t.html); continue; }
-      if (type === '431' && name === 'main') { const t = spec.path.startsWith('/blog/') ? t431Table($, rec, STD_TABLES.has(spec.path.replace('/blog/', ''))) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
-      if (type === '678' && name === 'main' && spec.path.startsWith('/blog/')) { const t = checklistBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // чек-лист из чекбоксов
-      if (type === '285' && name === 'main' && spec.path.startsWith('/blog/')) { const t = codeBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // блок с кодом
+      if (type === '431' && name === 'main') { const t = isArticle ? t431Table($, rec, STD_TABLES.has(spec.path.replace('/blog/', ''))) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '678' && name === 'main' && isArticle) { const t = checklistBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // чек-лист из чекбоксов
+      if (type === '285' && name === 'main' && isArticle) { const t = codeBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // блок с кодом
       if (type === '1370' && name === 'main') { const t = embedBlock($, rec, { localUrls }); css.push(t.css); css.push(zoomCss(rid)); html[name].push(t.html); continue; } // виджет с собственным скриптом; Tilda масштабирует такие записи сама (класс t-record_scaled: zoom = ширина / ширина макета)
       if (type === '410' && name === 'main') { const t = beforeAfterBlock($, rec, { picture }); css.push(t.css); html[name].push(t.html); continue; } // «до / после»
       if (type === '670' && name === 'main') { const t = slider670($, rec, { picture }); css.push(t.css); html[name].push(t.html); continue; } // слайдер картинок
@@ -272,8 +275,9 @@ async function buildPage(spec) {
       if (type === '1040' && name === 'main') { const t = quizBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // стили блока — в px оригинала: Tilda не масштабирует такие блоки, размеры как у оригинала
       if (type === '849' && name === 'main') { const t = accordionBlock($, rec, 't849', ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '134' && name === 'main') { const t = linksListBlock($, rec, ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
+      if (/^(650|1032|502)$/.test(type) && name === 'main') { const t = cardsBlock($, rec, { picture, scaled: ax.scaleAll || ax.scale.includes(rid) }); css.push(t.css); html[name].push(t.html); continue; } // карточки (страницы автора)
       if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
-      if (type === '106' && name === 'main' && spec.path.startsWith('/blog/')) { const t = textBlock($, rec, fixLinks); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '106' && name === 'main' && isArticle) { const t = textBlock($, rec, fixLinks); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '131') { // HTML-блок с <audio id="#odinstartaudio">: кнопки «слушать»/«стоп» в Zero-блоках (#odinstart / #odinstop) — initAudio; файл подключается по ссылке оригинала при первом нажатии
         const au = rec.find('audio').first(); const asrc = au.find('source').attr('src') || au.attr('src');
@@ -301,7 +305,7 @@ async function buildPage(spec) {
   if (lh) css.push(lh);
   const sliderList = slidersFor(spec.path);
   if (sliderList.length) { const sl = applySliders(html.main, sliderList); html.main = sl.html; css.push(sl.css); }
-  for (const part of Object.keys(html)) html[part] = html[part].map((h) => h.replace(/^<section id="r([0-9]+)" class="r/, (m, id) => (off.has(id) ? m + ' off' : m)));
+  for (const part of Object.keys(html)) html[part] = html[part].map((h) => h.replace(/^<section id="r([0-9]+)" class="r([^"]*)"/, (m, id, rest) => (off.has(id) ? `<section id="r${id}" class="r${rest} off" hidden="until-found"` : m)));
 
   // ---------------- попапы и виджет (одинаковые на всех страницах)
   const menuPopup = `<div class="pp blk menu cq" id="p-menu" data-hook="menu" role="dialog" aria-modal="true" aria-label="Меню" tabindex="-1"><div class="pc">${popupZero.menu}</div></div>`;
@@ -314,7 +318,7 @@ async function buildPage(spec) {
   const widgetForm = renderTildaForm($c, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
   // прочие Zero-попапы страницы (например «Содержание» у статей: ссылка href="#content", запись внутри T1093 с data-tooltip-hook="#content")
   const extraPopups = Object.entries(popupZero).filter(([k]) => k !== 'menu' && k !== 'form').map(([k, v]) => `<div class="pp blk ${k} cq" id="p-${k}" data-hook="${k}" role="dialog" aria-modal="true" aria-label="${k === 'content' ? 'Содержание' : k}" tabindex="-1">${closeBtn}<div class="pc">${v}</div></div>`).join('');
-  const popups = [menuPopup, formPopup, extraPopups, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), search($)].join('');
+  const popups = [menuPopup, formPopup, extraPopups, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), search($, searchUrl)].join('');
 
   // ---------------- CSS страницы
   // CSS страницы: стили её записей; общие стили (шрифты, база, компоненты) — в одном файле common.<hash>.css для всех страниц
@@ -369,6 +373,13 @@ function redirectPage(spec) {
   return { spec, page, cssLen: 0 };
 }
 const built = [];
+{ // индекс внутреннего поиска: один файл с хэшем в имени, грузится при первом открытии поиска
+  const si = buildSearchIndex(PAGES);
+  fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'assets', si.name), si.json);
+  searchUrl = `/assets/${si.name}`;
+  console.log(`search index: ${si.count} страниц, ${(si.json.length / 1024).toFixed(0)} КБ`);
+}
 for (const spec of PAGES) built.push(spec.kind === 'redirect' ? redirectPage(spec) : await buildPage(spec));
 
 // ----------------------------------------------------------------- статика

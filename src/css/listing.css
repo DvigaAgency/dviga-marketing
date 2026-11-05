@@ -20,7 +20,8 @@
 @media (hover:hover){.lm-b:hover{background:#f5d5d2;color:#d93433}}
 @media (max-width:960px){.lm-b{padding:18.8px 30px}}
 /* записи, скрытые вкладками/кнопкой (в Tilda — нулевая высота): display:none, чтобы браузер не считал стили и раскладку 180 свёрнутых блоков; при показе анимации прокрутки перемеряются (resize) */
-.r.off{display:none!important}
+/* скрытые записи (неактивные вкладки, «Загрузить еще»): hidden="until-found" — не видны, но находятся поиском по странице; без атрибута (кнопка «Загрузить еще») — display:none */
+.r.off:not([hidden=until-found]){display:none!important}
 /* ===== «поделиться» (T014): квадраты 34×34, как у виджета Яндекса ===== */
 .sh-r{text-align:center}
 .shr{display:flex;justify-content:center;gap:4px;height:34px}
@@ -41,3 +42,5 @@
 /* якоря (T215) */
 .anc-r{height:0}
 .anc{display:block;height:0;scroll-margin-top:100px}
+/* вкладка — ссылка (ЧПУ: /blog/sajty): без подчёркивания, как кнопка */
+a.tb-b{text-decoration:none}

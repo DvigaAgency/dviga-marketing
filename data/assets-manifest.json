@@ -10225,5 +10225,81 @@
  "https://static.tildacdn.com/tild3836-3061-4139-b231-386261353538/imgi_78_Facebook_cov.png": {
   "file": "source-assets/tild3836-3061-4139-b231-386261353538__imgi_78_Facebook_cov.png",
   "size": 1215152
+ },
+ "https://static.tildacdn.com/tild6265-3062-4535-b062-366335373461/gazeta-no-bg-preview.png": {
+  "file": "source-assets/tild6265-3062-4535-b062-366335373461__gazeta-no-bg-preview.png",
+  "size": 140800
+ },
+ "https://static.tildacdn.com/tild6339-3962-4439-b334-636466326161/oaqgajg4zml.png": {
+  "file": "source-assets/tild6339-3962-4439-b334-636466326161__oaqgajg4zml.png",
+  "size": 28833
+ },
+ "https://static.tildacdn.com/tild3566-3261-4632-b732-393562663933/DSC_3752_1.jpg": {
+  "file": "source-assets/tild3566-3261-4632-b732-393562663933__DSC_3752_1.jpg",
+  "size": 2317874
+ },
+ "https://static.tildacdn.com/tild3063-3634-4339-a163-653236353431/Cossa_logo-no-bg-pre.png": {
+  "file": "source-assets/tild3063-3634-4339-a163-653236353431__Cossa_logo-no-bg-pre.png",
+  "size": 69248
+ },
+ "https://static.tildacdn.com/tild6431-3434-4233-b230-643162666166/Tilda_logo_hotizonta.svg": {
+  "file": "source-assets/tild6431-3434-4233-b230-643162666166__Tilda_logo_hotizonta.svg",
+  "size": 3684
+ },
+ "https://static.tildacdn.com/tild3035-6537-4436-b236-356237343765/tadviser-1-2048x309.png": {
+  "file": "source-assets/tild3035-6537-4436-b236-356237343765__tadviser-1-2048x309.png",
+  "size": 33066
+ },
+ "https://static.tildacdn.com/tild6331-3865-4036-b135-363234323561/noroot.png": {
+  "file": "source-assets/tild6331-3865-4036-b135-363234323561__noroot.png",
+  "size": 59305
+ },
+ "https://static.tildacdn.com/tild3063-3634-4339-a163-653236353431/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild6339-3962-4439-b334-636466326161/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild6265-3062-4535-b062-366335373461/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild3035-6537-4436-b236-356237343765/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild6331-3865-4036-b135-363234323561/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild3335-3361-4030-a437-333534633033/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild3335-3361-4030-a437-333534633033/noroot.png": {
+  "file": "source-assets/tild3335-3361-4030-a437-333534633033__noroot.png",
+  "size": 105853
+ },
+ "https://static.tildacdn.com/tild6236-3666-4233-b538-653736663931/vc.svg": {
+  "file": "source-assets/tild6236-3666-4233-b538-653736663931__vc.svg",
+  "size": 1734
+ },
+ "https://static.tildacdn.com/tild3065-3462-4661-b538-653066613933/logo.svg": {
+  "file": "source-assets/tild3065-3462-4661-b538-653066613933__logo.svg",
+  "size": 17935
+ },
+ "https://static.tildacdn.com/tild3264-3439-4535-b335-656636633134/noroot.png": {
+  "file": "source-assets/tild3264-3439-4535-b335-656636633134__noroot.png",
+  "size": 41092
+ },
+ "https://static.tildacdn.com/tild3265-3332-4238-a462-653832353636/1_Timofey_Beloglazov.webp": {
+  "file": "source-assets/tild3265-3332-4238-a462-653832353636__1_Timofey_Beloglazov.webp",
+  "size": 39754
+ },
+ "https://static.tildacdn.com/tild3137-3861-4433-b966-333561303732/Frame_513486_1.png": {
+  "file": "source-assets/tild3137-3861-4433-b966-333561303732__Frame_513486_1.png",
+  "size": 11880
+ },
+ "https://static.tildacdn.com/tild3137-3861-4433-b966-333561303732/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
+ },
+ "https://static.tildacdn.com/tild3264-3439-4535-b335-656636633134/": {
+  "error": "Error: curl: curl: (22) The requested URL returned error: 404"
  }
 }

@@ -505,7 +505,7 @@ function initPopups() {
     setTimeout(() => { pp.classList.add('on'); pp.focus({ preventScroll: true }); }, 50);
     if (!pp.classList.contains('blk')) lock(true);
     loadForms();
-    if (pp.classList.contains('sr')) { const i = $('input[type=search]', pp); if (i) setTimeout(() => i.focus(), 80); }
+    if (pp.classList.contains('sr')) { import('./search.js').then((m) => m.init(pp)); const i = $('input[type=search]', pp); if (i) setTimeout(() => i.focus(), 80); }
   };
   d.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
@@ -539,10 +539,9 @@ function initPopups() {
     $('[data-wg-close]', wp).addEventListener('click', wgClose);
     d.addEventListener('click', (e) => { if (wp.classList.contains('on') && !e.target.closest('[data-wgp],[data-wg]')) wgClose(); });
   }
-  // поиск: «site:» в запросе Яндекса
+  // внутренний поиск: форма не должна уводить со страницы, пока модуль поиска (src/js/search.js) ещё не загрузился
   const sf = $('.sr form');
-  if (sf) sf.addEventListener('submit', (e) => { e.preventDefault(); const q = $('input[type=search]', sf).value.trim(); if (q) open_(`https://yandex.ru/search/?text=${encodeURIComponent(`site:dviga.marketing ${q}`)}`); });
-  function open_(u) { w.open(u, '_blank', 'noopener'); }
+  if (sf) sf.addEventListener('submit', (e) => e.preventDefault());
 }
 
 /* ---------- отложенные модули ---------- */

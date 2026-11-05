@@ -99,3 +99,21 @@ export function linksListBlock($, rec, scaled = false) {
 
 /** Annexx ANX812 масштабирует блок как Zero: размер × ширина / опорная ширина брейкпоинта (1200/960/640/480/320), как у --s у Zero-записей */
 export const zoomCss = (id) => ['', [1199, 960], [959, 640], [639, 480], [479, 320]].map((x) => (x ? `@media(max-width:${x[0]}px){#r${id}{--s:tan(atan2(100cqw,${x[1]}px))}}` : `#r${id}{--s:tan(atan2(100cqw,1200px));zoom:var(--s)}`)).join('');
+
+/** Стандартные блоки-«карточки» Tilda (T650 — карточки с текстом, T1032 — карточки со ссылками и логотипами, T502 — список с кружками): разметка оригинала, стили записи — из data/block-css (tools/extract-block-css.mjs) */
+export function cardsBlock($, rec, { picture, scaled = false }) {
+  const id = rec.attr('id').replace('rec', '');
+  const root = cheerio.load(`<div>${$.html(rec.children('div').first())}</div>`, { decodeEntities: false });
+  const r = root('div').first();
+  clean(root, r);
+  r.find('.t-animate').removeClass('t-animate t-animate_wait').removeAttr('data-animate-style').removeAttr('data-animate-group').removeAttr('data-animate-chain');
+  r.find('img').each((i, img) => {
+    const im = root(img); const keep = im.attr('style'); const cls = (im.attr('class') || '').replace(/\bt-img\b/, '').trim();
+    const u = im.attr('data-original') || im.attr('src'); if (!/tildacdn.com/.test(u || '')) return;
+    const pic = picture(u, { alt: im.attr('alt') || '', cls });
+    im.replaceWith(keep ? pic.replace(/<img /, `<img style="${keep}" `) : pic);
+  });
+  const html = fixLinks(r.html());
+  const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), scaled ? zoomCss(id) : ''].join('\n');
+  return { id, css, html: `<section id="r${id}" class="r crd ${recCls(rec)}">${html}</section>` };
+}

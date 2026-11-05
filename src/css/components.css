@@ -58,17 +58,37 @@ body.pl{}
 .sl-n{right:-25px}
 @media (max-width:640px){.sl-p{left:10px}.sl-n{right:10px}.si{text-align:center}.si-i{margin:0 0 20px}.si-b,.si-x,.si-n,.si-s{text-align:left}}
 /* ===== поиск ===== */
-.sr{position:fixed;inset:0;z-index:999999;display:none;flex-direction:column;background:rgba(0,0,0,.5);opacity:0;transition:opacity .3s}
+.sr{position:fixed;inset:0;z-index:999999;display:none;flex-direction:column;background:transparent;opacity:0;transition:opacity .3s}
 .sr.sh{display:flex}
 .sr.on{opacity:1}
-.sr-h{position:fixed;left:0;right:0;top:0;z-index:99999;box-sizing:content-box;height:60px;padding:45px 0;background:#fff;box-shadow:0 5px 10px rgba(0,0,0,.1);transform:translateY(-100%);transition:transform .3s}
+.sr.q{background:#fff}
+.sr-h{position:fixed;left:0;right:0;top:0;z-index:2;box-sizing:content-box;height:60px;padding:45px 0;background:#fff;box-shadow:0 5px 10px rgba(0,0,0,.1);transform:translateY(-100%);transition:transform .3s}
 .sr.on .sr-h{transform:none}
-.sr-c{display:flex;align-items:center;max-width:1200px;height:60px;margin:0 auto}
+.sr-c{position:relative;display:flex;align-items:center;max-width:1200px;height:60px;margin:0 auto}
 .sr-i{position:relative;display:flex;align-items:center;box-sizing:border-box;width:760px;max-width:100%;height:60px;margin:0 auto;border:1px solid #c4c4c4;border-radius:10px}
 .sr-i input{box-sizing:border-box;width:100%;height:58px;padding:0 55px;border:0;border-radius:10px;background:transparent;font:400 16px Inter,Arial,sans-serif;color:#121212;outline:0}
+.sr-i input::-webkit-search-cancel-button{display:none}
 .sr-i svg{position:absolute;left:15px;top:15px}
-.sr-x{position:absolute;right:15px;top:15px;width:30px;height:30px;padding:0;border:0;background:none;cursor:pointer;font-size:24px;line-height:30px;color:#b6b6b6}
-@media (max-width:960px){.sr-i{width:calc(100% - 40px)}}
+.sr-cl{position:absolute;right:15px;top:15px;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:#ececec;cursor:pointer;font:400 20px/30px Inter,Arial,sans-serif;color:#121212}
+.sr-cl[hidden]{display:none}
+.sr-x{position:absolute;left:calc(50% + 394px);top:15px;width:30px;height:30px;padding:0;border:0;background:none;cursor:pointer;line-height:0}
+.sr-x svg{width:30px;height:30px}
+@media (max-width:960px){.sr-i{width:calc(100% - 100px);margin:0 0 0 20px}.sr-x{left:auto;right:20px}}
+/* результаты: список поверх страницы под строкой поиска — заголовок-ссылка и фрагмент с выделенными словами */
+.sr-b{position:absolute;left:0;right:0;top:150px;bottom:0;overflow-y:auto;background:#fff;-webkit-overflow-scrolling:touch}
+.sr-b[hidden]{display:none}
+.sr-w{box-sizing:border-box;max-width:800px;margin:0 auto;padding:30px 20px 100px}
+.sr-n{margin:0 0 35px;font:400 12px/1.4 Inter,Arial,sans-serif;color:#121212}
+.sr-l{margin:0;padding:0;list-style:none}
+.sr-l li{margin:0 0 30px}
+.sr-l a{display:block;font:400 18px/1.4 Inter,Arial,sans-serif;color:#121212;text-decoration:none}
+.sr-l a:hover .sr-t{color:#d93433}
+.sr-t{display:block;transition:color .2s}
+.sr-s{display:block;margin-top:2px;font:400 17px/1.4 Inter,Arial,sans-serif;color:#121212}
+.sr-s b{font-weight:700}
+.sr-m{display:block;margin:10px 0 0;padding:16px 40px;border:0;border-radius:30px;background:#d93433;color:#fff;font:500 16px/1.2 Inter,Arial,sans-serif;cursor:pointer;transition:background-color .2s}
+.sr-m[hidden]{display:none}
+@media (hover:hover){.sr-m:hover{background:#121212}}
 /* ===== попап «Рассчитайте стоимость» (702) ===== */
 .pc.cl{max-width:1160px;border-radius:20px;overflow:hidden}
 .cl-w{padding:40px 45px}
@@ -161,3 +181,7 @@ body.pl{}
 .ba-a{position:absolute;top:50%;width:0;height:0;margin-top:-8px;border:solid transparent;border-width:8px 10px}
 .ba-ar{left:100%;margin-left:8px;border-left-color:var(--bac,#fff);border-right-width:0}
 .ba-al{right:100%;margin-right:8px;border-right-color:var(--bac,#fff);border-left-width:0}
+/* карточки Tilda (T650 / T1032 / T502, страницы автора): карточки ряда одной высоты, как у оригинала (там их выравнивает скрипт) */
+.crd .t1032__row{display:flex;flex-wrap:wrap}
+.crd .t1032__col,.crd .t-card__col{display:flex}
+.crd .t1032__content,.crd .t650__inner-col{flex:1 1 auto;width:100%;box-sizing:border-box}

@@ -1120,5 +1120,29 @@
   "faq": [],
   "cursor": [],
   "stick": []
+ },
+ "/authors/timofey-beloglazov": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [],
+  "scaleAll": true
+ },
+ "/authors/timofey-beloglazov_en": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [],
+  "scaleAll": true
  }
 }
