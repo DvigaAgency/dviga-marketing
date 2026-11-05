@@ -28,7 +28,7 @@ var COLUMNS = {
   comment: 'комментарий'
 };
 
-var SERVICE = { form: 1, page: 1, checkbox: 1, referrer: 1, files: 1, yclid: 1,
+var SERVICE = { form: 1, page: 1, checkbox: 1, referrer: 1, files: 1, files_failed: 1, folder: 1, yclid: 1,
   utm_source: 1, utm_medium: 1, utm_campaign: 1, utm_content: 1, utm_term: 1 };
 
 function first_(params, key) {
@@ -75,10 +75,50 @@ function buildLead_(params, now) {
   var form = first_(params, 'form');
   lead.form = FORM_NAMES[form] || form;
   lead.page = first_(params, 'page');
-  var files = first_(params, 'files');
-  if (files) extra.push('Файлы: ' + files + ' (в таблицу не передаются)');
+  var files = first_(params, 'files'), failed = first_(params, 'files_failed');
+  if (files) extra.push('Файлы: ' + files);
+  if (failed) extra.push('Не удалось загрузить файлы: ' + failed);
   lead.comment = extra.join('\n');
+  lead.folder = files ? first_(params, 'folder') : '';   // папка на Яндекс.Диске, не колонка таблицы
   return lead;
+}
+
+// ---------- Яндекс.Диск ----------
+// Токен приложения (право cloud_api:disk.app_folder) — свойство скрипта YANDEX_TOKEN. Файлы лежат в «Приложения/<приложение>/<папка заявки>/».
+var DISK = 'https://cloud-api.yandex.net/v1/disk/resources';
+var BLOCKED_EXT = /\.(exe|bat|cmd|com|scr|msi|js|jse|vbs|ps1|jar|apk|sh|dll|lnk)$/i;
+
+function token_() { return PropertiesService.getScriptProperties().getProperty('YANDEX_TOKEN'); }
+
+function safeName_(s, max) {
+  return String(s || '').replace(/[\\\/:*?"<>|\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim().replace(/^\.+/, '').slice(0, max);
+}
+
+function disk_(method, url) {
+  return UrlFetchApp.fetch(url, { method: method, headers: { Authorization: 'OAuth ' + token_() }, muteHttpExceptions: true });
+}
+
+/** Подготовка загрузки одного файла: создаёт папку заявки и возвращает адрес, на который браузер отправляет файл методом PUT */
+function prepareUpload_(p) {
+  if (!token_()) return { ok: false, error: 'YANDEX_TOKEN not set' };
+  var folder = safeName_(p.folder, 80) || 'без имени';
+  var name = safeName_(p.name, 120);
+  if (!name || BLOCKED_EXT.test(name)) return { ok: false, error: 'file type not allowed' };
+  var dir = 'app:/' + folder;
+  var mk = disk_('put', DISK + '?path=' + encodeURIComponent(dir)).getResponseCode();
+  if (mk !== 201 && mk !== 409) return { ok: false, error: 'folder ' + mk };   // 409 — папка уже есть (второй файл той же заявки)
+  var r = disk_('get', DISK + '/upload?overwrite=true&path=' + encodeURIComponent(dir + '/' + name));
+  var j = JSON.parse(r.getContentText() || '{}');
+  if (r.getResponseCode() !== 200 || !j.href) return { ok: false, error: 'upload ' + r.getResponseCode() };
+  return { ok: true, href: j.href };
+}
+
+/** Ссылка на папку заявки в веб-интерфейсе Яндекс.Диска (откроется у владельца диска) */
+function folderUrl_(folder) {
+  var r = disk_('get', DISK + '?fields=path&path=' + encodeURIComponent('app:/' + safeName_(folder, 80)));
+  if (r.getResponseCode() !== 200) return '';
+  var path = String(JSON.parse(r.getContentText()).path || '').replace(/^disk:\//, '');
+  return path ? 'https://disk.yandex.ru/client/disk/' + path.split('/').map(encodeURIComponent).join('/') : '';
 }
 
 function json_(obj) {
@@ -124,6 +164,12 @@ function doPost(e) {
   try {
     var lead = buildLead_((e && e.parameters) || {}, new Date());
     if (!lead) return json_({ ok: false, error: 'phone or email required' });
+    if (lead.folder && token_()) {
+      try {
+        var url = folderUrl_(lead.folder);
+        if (url) lead.comment += '\nЯндекс.Диск: ' + url;
+      } catch (err) { /* заявка важнее ссылки на папку */ }
+    }
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
     append_(sheet, lead);
     return json_({ ok: true });
@@ -132,8 +178,22 @@ function doPost(e) {
   }
 }
 
-// открытие адреса в браузере — проверка, что развёртывание работает
-function doGet() { return json_({ ok: true, service: 'dviga-leads' }); }
+// ?action=upload&folder=…&name=… — адрес для загрузки файла на Яндекс.Диск; без параметров — проверка, что развёртывание работает
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.action === 'upload') {
+    try { return json_(prepareUpload_(p)); } catch (err) { return json_({ ok: false, error: String(err) }); }
+  }
+  return json_({ ok: true, service: 'dviga-leads' });
+}
+
+// проверка Яндекс.Диска: запустить из редактора — выдать права на внешние запросы, в «Приложения/…/Проверка» появится файл test.txt
+function testDisk() {
+  var r = prepareUpload_({ folder: 'Проверка', name: 'test.txt' });
+  if (!r.ok) throw new Error(JSON.stringify(r));
+  var put = UrlFetchApp.fetch(r.href, { method: 'put', payload: 'Проверка загрузки с сайта DVIGA', contentType: 'text/plain', muteHttpExceptions: true });
+  Logger.log('Загрузка: HTTP ' + put.getResponseCode() + ' (201/202 — успешно). Папка: ' + folderUrl_('Проверка'));
+}
 
 // пробная заявка: запустить из редактора (кнопка «Выполнить»), чтобы проверить права и таблицу
 function testLead() {
