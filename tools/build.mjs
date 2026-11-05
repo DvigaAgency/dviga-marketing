@@ -238,6 +238,7 @@ async function buildPage(spec) {
   const hasTabs = { v: false };
   const tabInfo = { tabs: [], more: [] }; // для начального состояния записей (вкладки/«загрузить еще»)
   let catalog = null;
+  let prevEmpty = false;
   for (const [name, list] of Object.entries(regions)) {
     for (const node of list) {
       const rec = $(node);
@@ -248,6 +249,8 @@ async function buildPage(spec) {
       const vis = /t-screen(min|max)-(\d+)px/.exec(rec.attr('class') || '');
       if (vis) css.push(vis[1] === 'min' ? `@media(max-width:${vis[2]}px){#r${rid}{display:none!important}}` : `@media(min-width:${+vis[2] + 1}px){#r${rid}{display:none!important}}`);
       recSeen.add(rid);
+      // в статьях подряд идущие пустые Zero-прокладки схлопываются в первую: две подряд (130 + 130) дают двойной отступ, а между блоками он должен быть одинаковым
+      if (name === 'main' && spec.path.startsWith('/blog/') && spec.path !== '/blog') { const empty = type === '396' && isZero(rec) && !rec.find('.t396__elem').length; if (empty && prevEmpty) continue; prevEmpty = empty; }
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
       if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }

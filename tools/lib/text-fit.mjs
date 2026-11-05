@@ -34,3 +34,38 @@ export function applyFit(rec, recId) {
     ab.attr('data-artboard-height', String(fit.ab));
   }
 }
+
+// ---- нормализация отступов и ширины заголовков по брейкпоинтам (замеры tools/fit-gaps.mjs → data/articles/gap-fit.json) ----
+const GAP_FILE = 'data/articles/gap-fit.json';
+const SCR = [320, 480, 640, 960];
+let gapCache;
+const gapFit = () => {
+  if (process.env.NO_GAP === '1') return {};
+  if (!gapCache) gapCache = fs.existsSync(GAP_FILE) ? JSON.parse(fs.readFileSync(GAP_FILE, 'utf8')) : {};
+  return gapCache;
+};
+const attr = (name, bp) => (bp === 1200 ? `data-field-${name}-value` : `data-field-${name}-res-${bp}-value`);
+const abAttr = (bp) => (bp === 1200 ? 'data-artboard-height' : `data-artboard-height-res-${bp}`);
+const chainOf = (bp) => [bp, ...SCR.filter((s) => s > bp), 1200];
+/** задаёт значение на брейкпоинте bp; нижние брейкпоинты, наследовавшие прежнее значение, фиксируются (иначе они «поплывут» вслед за верхним) */
+function setBp(el, attrOf, bp, val) {
+  const lowers = SCR.filter((s) => s < bp);
+  const old = {};
+  for (const b of lowers) for (const c of chainOf(b)) { const v = el.attr(attrOf(c)); if (v !== undefined && v !== '') { old[b] = v; break; } }
+  el.attr(attrOf(bp), String(val));
+  for (const b of lowers) if (el.attr(attrOf(b)) === undefined && old[b] !== undefined) el.attr(attrOf(b), old[b]);
+}
+export function applyGaps(rec, recId) {
+  const g = gapFit()[recId];
+  if (!g) return;
+  const F2 = { l: 'left', w: 'width', h: 'height', t: 'top' };
+  for (const bp of [1200, 960, 640, 480, 320]) {
+    const v = g[bp]; if (!v) continue;
+    for (const [elemId, vals] of Object.entries(v.e || {})) {
+      const el = rec.find(`.t396__elem[data-elem-id="${elemId}"]`).first();
+      if (!el.length) continue;
+      for (const [k, name] of Object.entries(F2)) if (vals[k] !== undefined) setBp(el, (b) => attr(name, b), bp, vals[k]);
+    }
+    if (v.ab !== undefined) setBp(rec.find('.t396__artboard').first(), abAttr, bp, v.ab);
+  }
+}

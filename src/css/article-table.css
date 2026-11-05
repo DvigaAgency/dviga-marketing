@@ -20,12 +20,12 @@
 .ar-tba .ar-tt{min-width:0}
 @media(max-width:1200px){.ar-tba{margin:0 auto;width:620px}}
 @media(max-width:960px){.ar-tba{width:600px}}
-@media(max-width:639px){.ar-tba{width:448px;margin:0 0 0 20px}}
+@media(max-width:639px){.ar-tba{width:460px;margin:0 0 0 10px}.ar-tt-auto th,.ar-tt-auto td{overflow-wrap:normal}} /* мобильные: колонка таблицы как у текста (отступы по 10 слева и справа), слова не разрываются — широкая таблица прокручивается вбок */
 /* ячейки как у Tilda (проверено на 13 ширинах): боковой отступ 10px ≤960, межстрочный 1.45 ≤640, кегль ячеек 12px ≤480 */
 @media(max-width:960px){.ar-tt-auto th,.ar-tt-auto td{padding:20px 10px}}
 @media(max-width:640px){.ar-tt-auto th,.ar-tt-auto td{line-height:1.45}}
 @media(max-width:480px){.ar-tt-auto td{font-size:12px}}
-@media(max-width:479px){.ar-tba{width:306px;margin-left:20px}}
+@media(max-width:479px){.ar-tba{width:300px;margin-left:10px}}
 /* t-col_12 + mobilescroll (запись 1667157551 «Сколько стоит сайт на Тильде»): колонка шире текста, размеры в px оригинала без масштаба (правила .ar-tbw не умножаются на --s, см. scaleUi);
    1201+: колонка 1160, шапка 18/ячейки 20; 961–1200: 940, 16/20; 641–960: колонка 640 (прокрутка 600), таблица от 960; ≤640: прокрутка на всю ширину−40, таблица от 640; ≤480: ячейки 14 */
 .ar-tbw{margin:0 auto;width:1160px;padding:0}
@@ -34,7 +34,7 @@
 .ar-tbw .ar-tt thead th{font-size:18px;line-height:27.9px}
 @media(max-width:1200px){.ar-tbw{width:940px}.ar-tbw .ar-tt thead th{font-size:16px;line-height:24.8px}}
 @media(max-width:960px){.ar-tbw{width:600px}.ar-tbw .ar-tt{min-width:960px}}
-@media(max-width:640px){.ar-tbw{margin:0 20px;width:calc(100% - 40px)}.ar-tbw .ar-tt{min-width:640px}.ar-tbw .ar-tt thead th{font-size:14px;line-height:20.3px}.ar-tbw .ar-tt td{line-height:29px}}
+@media(max-width:640px){.ar-tbw{margin:0 calc(var(--s) * 10px);width:calc(100% - var(--s) * 20px)}.ar-tbw .ar-tt{min-width:640px}.ar-tbw .ar-tt thead th{font-size:14px;line-height:20.3px}.ar-tbw .ar-tt td{line-height:29px}}
 @media(max-width:480px){.ar-tbw .ar-tt td{font-size:14px;line-height:20.3px}}
 /* текстовый блок T004 (список источников): размеры в px оригинала × --s: Tilda масштабирует блок целиком (ширина окна / ширина макета брейкпоинта) */
 .ar-tp{padding:12px 0}
