@@ -22,7 +22,10 @@ recs.forEach((r, i) => {
   st.text(st.text().replaceAll('height:' + from + 'px', 'height:' + a + 'px').replaceAll('height:' + from2 + 'px', 'height:' + b + 'px'));
 });
 // запись «После завершения брифинга»: в оригинале под текстом ~170px пустого артборда (у остальных статей 10–40) — убираем лишнее на каждом брейкпоинте
-const SLACK = { '722907437': { 'data-artboard-height': 158, 'data-artboard-height-res-960': 163, 'data-artboard-height-res-640': 163, 'data-artboard-height-res-480': 242, 'data-artboard-height-res-320': 210 } };
+// прокладка перед заголовком «ЖК Port May» — 90 + ~10 остатка артборда выше = 100 на 1200 и 120 на 1440 (с масштабом); остаток записи «После завершения брифинга» режет gap-fit.json (ab 527/779)
+const GAP = { '722907432': 90 };
+for (const [id, v] of Object.entries(GAP)) { const r = $('#rec' + id); const ab = r.find('.t396__artboard'); const old = ab.attr('data-artboard-height'); if (old === String(v)) continue; ab.attr('data-artboard-height', String(v)); const st = r.find('style').first(); st.text(st.text().replaceAll('height:' + old + 'px', 'height:' + v + 'px')); }
+const SLACK = { '722907437': { 'data-artboard-height': 168, 'data-artboard-height-res-960': 163, 'data-artboard-height-res-640': 163, 'data-artboard-height-res-480': 242, 'data-artboard-height-res-320': 210 } };
 const REC = { '722907437': { 'data-artboard-height': 676, 'data-artboard-height-res-960': 686, 'data-artboard-height-res-640': 798, 'data-artboard-height-res-480': 1011, 'data-artboard-height-res-320': 933 } };
 for (const [id, cut] of Object.entries(SLACK)) {
   const ab = $('#rec' + id + ' .t396__artboard'); const st = $('#rec' + id + ' style').first(); let css = st.text();
