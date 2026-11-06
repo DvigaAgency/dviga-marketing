@@ -29,6 +29,8 @@ import { beforeAfterBlock } from './lib/t410.mjs';
 import { slider670 } from './lib/t670.mjs';
 import { textBlock } from './lib/t004.mjs';
 import { pageIndexHtml } from './lib/page-index.mjs';
+import { buildAiIndex } from './lib/ai-index.mjs';
+import { aiBlock } from './lib/ai-block.mjs';
 import { faqFor, faqMark } from './lib/faq.mjs';
 import { slidersFor, applySliders } from './lib/slider.mjs';
 import { linkHoverCss } from './lib/link-hover.mjs';
@@ -126,7 +128,7 @@ fs.writeFileSync(path.join(OUT, 'assets', commonName), withBase(commonCss));
 
 // ----------------------------------------------------------------- одна страница
 const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { decodeEntities: false });
-let searchUrl = '';
+let searchUrl = ''; let aiUrl = '';
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
   const home = spec.kind === 'home';
@@ -271,6 +273,7 @@ async function buildPage(spec) {
       if (type === '431' && name === 'main') { const t = isArticle ? t431Table($, rec, STD_TABLES.has(spec.path.replace('/blog/', ''))) : tableBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '678' && name === 'main' && isArticle) { const t = checklistBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // чек-лист из чекбоксов
       if (type === '285' && name === 'main' && isArticle) { const t = codeBlock($, rec); css.push(t.css); html[name].push(t.html); continue; } // блок с кодом
+      if (type === '1370' && name === 'main' && spec.path === '/ai') { const t = aiBlock($, rec, aiUrl); css.push(t.css); css.push(zoomCss(rid)); html[name].push(t.html); continue; } // рабочий AI-помощник вместо каркаса
       if (type === '1370' && name === 'main') { const t = embedBlock($, rec, { localUrls }); css.push(t.css); css.push(zoomCss(rid)); html[name].push(t.html); continue; } // виджет с собственным скриптом; Tilda масштабирует такие записи сама (класс t-record_scaled: zoom = ширина / ширина макета)
       if (type === '410' && name === 'main') { const t = beforeAfterBlock($, rec, { picture }); css.push(t.css); html[name].push(t.html); continue; } // «до / после»
       if (type === '670' && name === 'main') { const t = slider670($, rec, { picture }); css.push(t.css); html[name].push(t.html); continue; } // слайдер картинок
@@ -388,6 +391,10 @@ const pageList = []; // для служебной страницы «Все ст
   fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
   fs.writeFileSync(path.join(OUT, 'assets', si.name), si.json);
   searchUrl = `/assets/${si.name}`;
+  const ai = buildAiIndex(PAGES); // база знаний AI-помощника (/ai)
+  fs.writeFileSync(path.join(OUT, 'assets', ai.name), ai.json);
+  aiUrl = `/assets/${ai.name}`;
+  console.log(`ai index: ${ai.docs} страниц, ${ai.faq} вопросов-ответов, ${(ai.json.length / 1024).toFixed(0)} КБ`);
   console.log(`search index: ${si.count} страниц, ${(si.json.length / 1024).toFixed(0)} КБ`);
 }
 for (const spec of PAGES) built.push(spec.kind === 'redirect' ? redirectPage(spec) : await buildPage(spec));

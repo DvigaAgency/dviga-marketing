@@ -8,7 +8,7 @@ import * as cheerio from 'cheerio';
 const MAX_TEXT = 4500; // знаков текста на страницу: хватает для поиска по смыслу и держит индекс небольшим
 const clean = (s) => String(s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 
-function pageText($, slug) {
+export function pageText($, slug) {
   const parts = [];
   const recs = $('#allrecords > .r').toArray();
   for (const n of recs) {

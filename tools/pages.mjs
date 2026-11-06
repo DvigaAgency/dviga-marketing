@@ -25,7 +25,7 @@ export const PAGES = [
   { path: '/contacts', src: `${dir}/contacts.html`, kind: 'page' },
   ...sub('contacts'),
   // страницы верхнего уровня: /about, /partners, /consent, /policy, /karta-saita, /marketing-for-devepolers-proposal (в адресе оригинала опечатка — так и оставлено)
-  ...['about', 'partners', 'consent', 'policy', 'karta-saita', 'marketing-for-devepolers-proposal'].map((n) => ({ path: `/${n}`, src: `${dir}/${n}.html`, kind: 'page' })),
+  ...['about', 'partners', 'consent', 'policy', 'karta-saita', 'marketing-for-devepolers-proposal', 'ai'].map((n) => ({ path: `/${n}`, src: `${dir}/${n}.html`, kind: 'page' })),
   // страница ошибки: GitHub Pages отдаёт 404.html на любой несуществующий адрес (ассеты и ссылки — абсолютные, с префиксом подкаталога)
   { path: '/404', src: `${dir}/404.html`, kind: 'page', out: '404.html' },
   ...Object.entries(REDIRECTS).map(([path, to]) => ({ path, to, kind: 'redirect' })),

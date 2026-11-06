@@ -560,6 +560,8 @@ function initLazy() {
     const load = () => import('./quiz.js').then((m) => m.init(qz));
     if ('IntersectionObserver' in w) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '800px 0px' }); io.observe(qz); } else load();
   });
+  const ai = $('[data-ai]'); // AI-помощник (/ai)
+  if (ai) import('./ai.js').then((x) => x.init(ai));
   const cs = $('[data-cases-root]');
   if (cs) import('./cases.js').then((m) => m.init(cs));
   const fm = $('.fm');
