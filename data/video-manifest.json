@@ -358,5 +358,23 @@
   "poster": "/assets/video/video.9893010ca8.webp",
   "w": 1920,
   "h": 1080
+ },
+ "https://cp80604-bitrix-8.tw1.ru/tllog.MP4": {
+  "mp4": "/assets/video/tllog.9df98fb65b.mp4",
+  "poster": "/assets/video/tllog.490c79accf.webp",
+  "w": 1280,
+  "h": 800
+ },
+ "https://cp80604-bitrix-8.tw1.ru/olimp1.mp4": {
+  "mp4": "/assets/video/olimp1.529b55d31e.mp4",
+  "poster": "/assets/video/olimp1.f8f797611b.webp",
+  "w": 1920,
+  "h": 964
+ },
+ "https://cp80604-bitrix-8.tw1.ru/olimp2.mp4": {
+  "mp4": "/assets/video/olimp2.2ee92d91f0.mp4",
+  "poster": "/assets/video/olimp2.9221015793.webp",
+  "w": 1920,
+  "h": 1080
  }
 }

@@ -10377,5 +10377,17 @@
  "https://static.tildacdn.com/tild3033-3837-4263-b135-333363336134/404.svg": {
   "file": "source-assets/tild3033-3837-4263-b135-333363336134__404.svg",
   "size": 1673
+ },
+ "https://cp80604-bitrix-8.tw1.ru/tllog.MP4": {
+  "file": "source-assets/ext__tllog.MP4",
+  "size": 9338119
+ },
+ "https://cp80604-bitrix-8.tw1.ru/olimp1.mp4": {
+  "file": "source-assets/ext__olimp1.mp4",
+  "size": 220718
+ },
+ "https://cp80604-bitrix-8.tw1.ru/olimp2.mp4": {
+  "file": "source-assets/ext__olimp2.mp4",
+  "size": 3146097
  }
 }
