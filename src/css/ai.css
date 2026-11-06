@@ -436,3 +436,13 @@
 .vb-a2s__input:focus,.vb-a2s__input:focus-visible{outline:0;box-shadow:none}
 @media(max-width:640px){.vb-a2s__bubble--answer{flex:1 1 0;max-width:none;width:auto}}
 @media(max-width:640px){.vb-a2s__chat{padding:14px}.vb-a2s__avatar{width:30px;height:30px;font-size:11px}.vb-a2s__msg{gap:8px}.vb-a2s__bubble{padding:12px 14px}}
+
+@media(max-width:640px){
+ .vb-a2s{padding:40px 16px}
+ .vb-a2s__tmeta{flex-direction:row;flex-wrap:wrap;gap:2px 12px;white-space:normal}
+ .vb-a2s__tname,.vb-a2s__trow{min-width:0}
+ .vb-a2s__table,.vb-a2s__list,.vb-a2s__block{min-width:0;max-width:100%}
+ .vb-a2s__chat{overflow:hidden}
+ .vb-a2s__messages.vb-a2s__messages--active{padding-right:2px}
+ .vb-a2s__title{font-size:clamp(30px,9vw,40px)}
+}

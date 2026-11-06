@@ -308,7 +308,7 @@ export function createAssistant(data) {
     const sameIntent = fb && (!has('price') || INTENT[3][1].test(norm(fb.it.q))) && (!has('timeline') || INTENT[4][1].test(norm(fb.it.q)));
     const qs = fb ? new Set(stems(fb.it.q)) : null;
     const qCover = fb && subject.length ? subject.filter((x) => qs.has(x)).length / subject.length : 0; // доля слов-предмета вопроса, которые есть в самом вопросе FAQ
-    const vague = (has('price') || has('timeline')) && !topic && subject.length < 2;
+    const vague = (has('price') || has('timeline')) && ((!topic && subject.length < 2) || (topic && topic.u === data.t.src && subject.filter((x) => !stems(topic.t).includes(x)).length < 1)); // общий вопрос про сайт на Тильде — таблица тарифов, а не случайный FAQ
     const strong = fb && !has('blog') && !vague && sameIntent && qCover >= 0.75 && fb.key && fb.ratio >= 0.6 && fb.cov >= 0.5 && fb.score > 4.5 && fb.hits >= Math.min(2, content.length) && (!has('define') || /^что (такое|значит|это)/i.test(fb.it.q));
     const extra = topic ? subject.filter((x) => !stems(topic.t).includes(x)).length : 99;
     const topicOnly = topicFromQuery && !its.length && extra <= (topic.u === data.t.src ? 0 : 2); // в вопросе только название услуги: показываем профиль услуги
