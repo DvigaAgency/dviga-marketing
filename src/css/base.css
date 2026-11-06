@@ -40,6 +40,7 @@ html{scrollbar-gutter:stable}
 .tf a{border-bottom:1px solid #121212;box-shadow:none;transition:color .3s,border-bottom .3s,box-shadow .3s}
 .tf a:hover{color:#121212;border-color:#121212;box-shadow:inset 0 -1px 0 0 #121212}
 .vd{display:block;width:100%;height:100%;object-fit:contain}
+.a.vid{position:relative}.a.vid>.vd{position:absolute;left:0;top:0} /* видео html-элемента вне потока, как у Tilda: иначе ячейка .e .a (table-cell) растёт по пропорциям ролика 16:9 выше заданной высоты блока */
 .vd.vc,.vem .vd{object-fit:cover}
 /* кнопка «смотреть» на ролике, который грузится по клику (тяжёлые ролики с хостинга) */
 .vp{position:absolute;left:50%;top:50%;z-index:2;width:72px;height:72px;margin:-36px 0 0 -36px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;transition:background-color .2s}
