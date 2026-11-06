@@ -3,22 +3,29 @@
 const DEV = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'yclid'];
 
-// метки рекламы и внешний источник перехода запоминаются на сессию: заявка уходит не обязательно с той страницы, куда пришёл посетитель
+// Источник посетителя (метки рекламы и домен внешнего перехода) запоминается в localStorage: заявка уходит не обязательно с той страницы,
+// куда он пришёл. Прямой заход и переход внутри сайта запись не меняют; новая метка или внешний переход заменяют её целиком.
+const ATTR = 'dviga_attr';
+const www = (h) => String(h || '').replace(/^www\./, '');
+
 export function saveUtm() {
   try {
     const q = new URLSearchParams(location.search);
-    UTM.forEach((k) => { if (q.get(k)) sessionStorage.setItem(k, q.get(k)); });
-    if (!sessionStorage.getItem('referrer') && document.referrer) {
-      const host = new URL(document.referrer).hostname;
-      if (host && host !== location.hostname) sessionStorage.setItem('referrer', document.referrer);
-    }
-  } catch { /* sessionStorage недоступен */ }
+    let ref = '';
+    try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch { /* битый referrer */ }
+    if (www(ref) === www(location.hostname)) ref = '';
+    if (!q.get('utm_source') && !q.get('yclid') && !ref) return;
+    const a = { referrer: ref };
+    UTM.forEach((k) => { a[k] = q.get(k) || ''; });
+    localStorage.setItem(ATTR, JSON.stringify(a));
+  } catch { /* localStorage недоступен */ }
 }
 
 function addUtm(body) {
   try {
-    [...UTM, 'referrer'].forEach((k) => { const v = sessionStorage.getItem(k); if (v) body.append(k, v); });
-  } catch { /* sessionStorage недоступен */ }
+    const a = JSON.parse(localStorage.getItem(ATTR)) || {};
+    [...UTM, 'referrer'].forEach((k) => { if (a[k]) body.append(k, a[k]); });
+  } catch { /* localStorage недоступен или пуст */ }
 }
 
 // как в оригинале (tilda-forms): виртуальный просмотр /tilda/<форма>/submitted/ в Метрике

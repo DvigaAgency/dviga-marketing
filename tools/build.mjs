@@ -17,6 +17,7 @@ import { tabsBlock, loadMoreBlock, shareBlock, coverBlock, tableBlock, heroSlide
 import { casesCatalog } from './lib/cases.mjs';
 import { articleBlock } from './lib/article.mjs';
 import { buildSearchIndex } from './lib/search-index.mjs';
+import { arrowImages } from './lib/arrow-img.mjs';
 import { t431Table } from './lib/t431.mjs';
 // статьи, у которых таблицы выводятся в стандартном виде (как у остальных статей), а не в виде оригинала
 const STD_TABLES = new Set(['lichnyj-kabinet-tilda', 'vebvizor-v-yandex-metrike', 'kak-brendam-stroit-otnosheniya-s-pokoleniyem-zumerov']);
@@ -255,7 +256,7 @@ async function buildPage(spec) {
       if (vis) css.push(vis[1] === 'min' ? `@media(max-width:${vis[2]}px){#r${rid}{display:none!important}}` : `@media(min-width:${+vis[2] + 1}px){#r${rid}{display:none!important}}`);
       recSeen.add(rid);
       // в статьях подряд идущие пустые Zero-прокладки схлопываются в первую: две подряд (130 + 130) дают двойной отступ, а между блоками он должен быть одинаковым
-      if (name === 'main' && isArticle) { const empty = type === '396' && isZero(rec) && !rec.find('.t396__elem').length; if (empty && prevEmpty) continue; prevEmpty = empty; }
+      if (name === 'main' && isArticle) { const bgm = /\.t396__artboard\{[^}]*background-color:\s*([^;}]+)/.exec(rec.find('style').first().html() || ''); const plainBg = !bgm || ['#ffffff', '#fff', 'white', 'transparent'].includes(bgm[1].trim().toLowerCase()); const empty = type === '396' && isZero(rec) && !rec.find('.t396__elem').length && plainBg; /* цветная прокладка (фон секции, например серый блок генератора) — не прокладка */ if (empty && prevEmpty) continue; prevEmpty = empty; }
       if (catalog && catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; }
       if (spec.kind === 'cases' && name === 'main' && !catalog) { catalog = casesCatalog($, rec, ctx, spec); if (catalog.skip.has(rid)) { if (catalog.at === rid) html[name].push(catalog.html); continue; } }
       if (type === 'article' && name === 'main') { html[name].push(articleBlock($, rec, fixLinks).html); continue; }
@@ -278,9 +279,10 @@ async function buildPage(spec) {
       if (type === '849' && name === 'main') { const t = accordionBlock($, rec, 't849', ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '134' && name === 'main') { const t = linksListBlock($, rec, ax.scaleAll || ax.scale.includes(rid)); css.push(t.css); html[name].push(t.html); continue; }
       if (/^(650|1032|502)$/.test(type) && name === 'main') { const t = cardsBlock($, rec, { picture, scaled: ax.scaleAll || ax.scale.includes(rid) }); css.push(t.css); html[name].push(t.html); continue; } // карточки (страницы автора)
-      if (type === '668' && name === 'main') { const t = accordionBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '668' && name === 'main') { const t = accordionBlock($, rec, 't668', isArticle); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '106' && name === 'main' && isArticle) { const t = textBlock($, rec, fixLinks); css.push(t.css); html[name].push(t.html); continue; }
       if (type === '151' && name === 'main') { const t = shareBlock($, rec); css.push(t.css); html[name].push(t.html); continue; }
+      if (type === '131' && isArticle && name === 'main' && $('#allrecords > .r[data-record-type="1370"]').length) { const st = rec.find('style').map((i, e) => $(e).html()).get().join(' '); if (/utmg|hp-tdoc|vb-qiz/.test(st)) css.push(localUrls(st)); } // HTML-блок с правками CSS виджета (T1370) на этой же странице (например .utmg { padding: 0 !important })
       if (type === '131') { // HTML-блок с <audio id="#odinstartaudio">: кнопки «слушать»/«стоп» в Zero-блоках (#odinstart / #odinstop) — initAudio; файл подключается по ссылке оригинала при первом нажатии
         const au = rec.find('audio').first(); const asrc = au.find('source').attr('src') || au.attr('src');
         if (asrc && /^https?:/.test(asrc)) html[name].push(`<audio class="odin-au" preload="none" data-rsrc="${asrc.replace(/&/g, '&amp;')}"></audio>`);
@@ -303,6 +305,9 @@ async function buildPage(spec) {
   const deferred = [];
   for (const id of off) if (recCss[id]) { deferred.push(recCss[id]); const k = css.indexOf(recCss[id]); if (k >= 0) css.splice(k, 1); }
   for (const k of ax.stick) css.push(`#r${k.rec}{position:sticky;top:${k.top}px;z-index:${k.z}!important;pointer-events:none}#r${k.rec} .e{pointer-events:all}`); // ANX831: блок закрепляется у верхнего края (sticky работает, т.к. main.cq — overflow:clip)
+  // свои стрелки галерей страницы (HTML-блок оригинала с .t-slds__arrow-left/right { background-image })
+  const arrowImg = arrowImages($);
+  if (arrowImg) css.push(`.gl-ar{background-color:transparent!important;background-repeat:no-repeat;background-position:center;background-size:contain}.gl-ar svg{display:none}.gl-pv{background-image:${localUrls(`url(${arrowImg.left})`)}!important}.gl-nx{background-image:${localUrls(`url(${arrowImg.right})`)}!important}`);
   const lh = linkHoverCss(spec.path, recSeen);
   if (lh) css.push(lh);
   const sliderList = slidersFor(spec.path);

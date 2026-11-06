@@ -16,5 +16,6 @@ export function embedBlock($, rec, { localUrls }) {
   c.find('style').remove();
   const html = localUrls(c.html()).replace(/\bt-rec\b/g, 'emb-rec');
   const script = raw && raw.script ? `<script>${raw.script.replace(/<\/script/gi, '<\\/script')}</script>` : '';
-  return { id, css: localUrls(style), html: `<section id="r${id}" class="r emb">${html}${script}</section>` };
+  const bg = (rec.attr('style') || '').match(/background-color:\s*([^;\s]+)/)?.[1]; // фон записи (серая подложка генератора)
+  return { id, css: (bg ? `#r${id}{background-color:${bg}}` : '') + localUrls(style), html: `<section id="r${id}" class="r emb">${html}${script}</section>` };
 }

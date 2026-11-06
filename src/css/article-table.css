@@ -59,7 +59,7 @@
 @media(min-width:1201px){.ar-cli{font-size:15px}}
 .ar-cli input{position:absolute;z-index:-1;width:13px;height:13px;margin:3px;opacity:0}
 .ar-cli i{position:relative;flex:0 0 auto;width:20px;height:20px;margin:-1px 10px 0 0;border:1.667px solid #d93433;opacity:.6;transition:.2s}
-.ar-cli i::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid #d93433;border-width:0 2px 2px 0;opacity:0;transform:rotate(45deg);transition:.2s}
+.ar-cli i::after{content:"";position:absolute;left:6.4px;top:1.7px;width:6px;height:11px;border:solid #d93433;border-width:0 2px 2px 0;opacity:0;transform:rotate(45deg);transition:.2s}
 .ar-cli input:checked+i{opacity:1}
 .ar-cli input:checked+i::after{opacity:1}
 .ar-cli input:focus-visible+i{outline:2px solid #d93433;outline-offset:2px}

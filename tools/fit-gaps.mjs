@@ -28,6 +28,7 @@ for (const bp of BPS) {
     await p.waitForTimeout(300);
     const res = await p.evaluate(({ bp }) => {
       const G = bp === 320 ? 20 : 30;
+      const plain = (sec) => { const ab = sec.querySelector('.ab'); const c = ab ? getComputedStyle(ab).backgroundColor : ''; return !ab || c === 'rgba(0, 0, 0, 0)' || c === 'rgb(255, 255, 255)'; }; // белый фон: цветные прокладки (серые блоки) не схлопываем
       const skipHead = /^(Оглавление|Содержание|Автор статьи|Telegram-канал)/;
       const secsAll = [...document.querySelectorAll('main section.r')];
       const stopEl = secsAll.find((s) => /Свежие статьи/.test(s.innerText));
@@ -103,7 +104,8 @@ for (const bp of BPS) {
         const bottom = (h.nT ?? h.T) + (h.nH || h.H);
         if (r.els.some((x) => x !== h && x.T > h.T - 1)) continue; // в записи есть другие элементы ниже/рядом — это не «одинокий» заголовок
         let j = i + 1; const gaps = [];
-        while (j < recs.length && !recs[j].skip && recs[j].els.length === 0) { gaps.push(recs[j]); j++; }
+        if (!plain(r.sec)) continue;
+        while (j < recs.length && !recs[j].skip && recs[j].els.length === 0 && plain(recs[j].sec)) { gaps.push(recs[j]); j++; }
         const nx = recs[j]; if (!nx || nx.skip || !nx.els.length) continue;
         const first = nx.els.reduce((m, x) => (x.T < m.T ? x : m), nx.els[0]);
         const okFirst = first.T <= 5 && ((first.t === 'text' && first.fs < h.fs) || (bp <= 480 && first.t === 'shape'));

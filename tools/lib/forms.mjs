@@ -35,6 +35,9 @@ export function renderField(f, o = {}) {
   }
 }
 
+// поле-ловушка от ботов: человеку не видно, бот его заполняет — сервер такую заявку молча отбрасывает
+export const HONEYPOT = '<div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><input type="text" name="hp" tabindex="-1" autocomplete="off"></div>';
+
 const px = (v) => (v === null || v === undefined || v === '' ? null : `${parseFloat(v)}px`);
 
 /** Zero-форма: стили из data-field-*, поля из data-value */
@@ -70,7 +73,7 @@ export function renderZeroForm(attrs, inputs, uid, screens) {
   const fields = inputs.sort((a, b) => (+a.ls || 0) - (+b.ls || 0)).map((f) => renderField(f)).join('');
   const msg = attrs['data-field-formmsgsuccess-value'] || 'Спасибо! Мы свяжемся с вами.';
   const btn = attrs['data-field-buttontitle-value'] || 'Отправить';
-  const html = `<form class="fm f${uid}" data-f="${uid}" action="/api/lead" method="post" novalidate style="${esc(style)}"><div class="fz" role="status" aria-live="polite">${msg}</div><div class="fx">${fields}</div><button class="fo" type="submit">${esc(btn)}</button></form>`;
+  const html = `<form class="fm f${uid}" data-f="${uid}" action="/api/lead" method="post" novalidate style="${esc(style)}"><div class="fz" role="status" aria-live="polite">${msg}</div><div class="fx">${fields}${HONEYPOT}</div><button class="fo" type="submit">${esc(btn)}</button></form>`;
   return { html, css };
 }
 
@@ -106,5 +109,5 @@ export function renderTildaForm($, formEl, uid, o = {}) {
     : `<button class="fo" type="submit">${esc(label)}</button>`;
   const vars = o.vars || '';
   const msg = o.success || 'Спасибо! Мы свяжемся с вами.';
-  return `<form class="fm f${uid}" data-f="${uid}" action="/api/lead" method="post" novalidate style="${vars}"><div class="fz" role="status" aria-live="polite">${msg}</div><div class="fx">${body}</div>${actions}</form>`;
+  return `<form class="fm f${uid}" data-f="${uid}" action="/api/lead" method="post" novalidate style="${vars}"><div class="fz" role="status" aria-live="polite">${msg}</div><div class="fx">${body}${HONEYPOT}</div>${actions}</form>`;
 }

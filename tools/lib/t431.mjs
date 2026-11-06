@@ -41,7 +41,9 @@ export function t431Table($, rec, std = false) {
   // Tilda кладёт ширины из data-table-width атрибутами width на первые ячейки (их может быть меньше, чем колонок: «30%;70%» у таблицы из 5 колонок), раскладка автоматическая
   const auto = !std && widths.length > 0;
   const wide = auto && /t-col_12/.test(rec.find('.t-col').first().attr('class') || ''); // на всю ширину контейнера, прокручивается на мобильных (t431__mobilescroll)
-  const col = auto ? '' : widths.map((w, i) => (i === widths.length - 1 ? '<col>' : `<col style="width:${esc(w)}">`)).join('');
+  // число значений в data-table-width бывает не равно числу колонок (лишние давали пустую «призрачную» колонку и сужали остальные) — тогда колонки равны
+  const usable = widths.length === head.length;
+  const col = auto || !usable ? '' : widths.map((w, i) => (i === widths.length - 1 ? '<col>' : `<col style="width:${esc(w)}">`)).join('');
   const wa = (i) => (auto && widths[i] ? ` width="${esc(widths[i])}"` : '');
   const th = head.map((c, i) => `<th scope="col"${wa(i)}>${cell(c)}</th>`).join('');
   const tr = rows.map((r) => `<tr>${r.map((c, i) => `<td${wa(i)}>${cell(c)}</td>`).join('')}</tr>`).join('');

@@ -36,6 +36,8 @@ for (const slug of slugs) {
       // кандидаты: тексты колонки и врезок
       const cands = [];
       for (const x of els) {
+        // текст со «значками» списка (маленькие красные квадраты-шейпы слева, поставленные по строкам оригинала) не перестраиваем: от новой ширины строки съедут, и значки окажутся не там
+        if (x.t === 'text' && els.some((q) => q.t === 'shape' && q.W <= 30 && q.H <= 30 && q.L < x.L && q.L + q.W + 120 > x.L && q.T >= x.T - 5 && q.T <= x.T + x.H)) continue;
         if (x.t === 'text' && x.len > 40 && x.L >= COL_L - 1 && x.L <= COL_L + 6 && x.W >= 600 && x.W <= 880) { if (x.W !== COL_W || x.L !== COL_L) cands.push({ ...x, nl: COL_L, nw: COL_W }); } else if (x.t === 'text' && x.len > 40 && x.L > COL_L + 6 && x.L <= 262 && x.L + x.W > COL_R) cands.push({ ...x, nl: x.L, nw: COL_R - x.L });
       }
       const shapesWide = els.filter((x) => x.t === 'shape' && x.L >= COL_L - 1 && x.L <= COL_L + 6 && x.W > COL_W + 1 && x.W <= 880 && els.some((y) => y.t === 'text' && y.T >= x.T - 2 && y.T + y.H <= x.T + x.H + 2 && y.L >= x.L && y.L + y.W <= x.L + x.W + 2));

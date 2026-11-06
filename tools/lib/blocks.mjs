@@ -5,6 +5,7 @@ import * as cheerio from 'cheerio';
 import { picture, cssImage } from './assets.mjs';
 import { fixLinks } from './util.mjs';
 import { recPadding } from './zero.mjs';
+import { HONEYPOT } from './forms.mjs';
 
 const recBg = (rec, id) => { const m = (rec.attr('style') || '').match(/background-color:\s*([^;\s]+)/); return m ? `#r${id}{background-color:${m[1]}}` : ''; };
 const recCls = (rec) => (rec.attr('class') || '').split(/\s+/).filter((c) => c && c !== 'r' && c !== 't-rec' && !/^t-rec_/.test(c)).join(' ');
@@ -64,6 +65,7 @@ export function quizBlock($, rec, hooks = {}) {
   const form = q.find('form');
   form.attr('action', '/api/lead').attr('data-quiz-form', formName).attr('novalidate', '');
   form.removeAttr('data-success-callback').removeAttr('data-formactiontype').removeAttr('data-inputbox').removeAttr('role');
+  form.append(HONEYPOT);
   q.find('.t-quiz__screen-wrapper').first().addClass('t-step-form__step_active'); // первый шаг виден сразу, до загрузки скрипта
   const html = fixLinks(q.html());
   const css = [recPadding(rec.attr('class') || '', id), recBg(rec, id), blockCss(id), extra.join('\n'), `:where(#r${id}) picture{display:contents}:where(#r${id}) .t-quiz__consultant__img{display:block}@media screen and (max-width:640px){#r${id} .t-quiz__btn-wrapper.t-quiz__btn-wrapper_mobile{display:flex;opacity:1}}@media screen and (max-width:960px){#r${id} .t-input-group__header .t-quiz__consultant{order:-1}}`].join('\n');

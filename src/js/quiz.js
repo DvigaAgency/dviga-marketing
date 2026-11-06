@@ -144,6 +144,8 @@ export function init(root) {
       if (txt) vals.push(txt.value.trim());
       if (vals.length) body.append(name.trim(), vals.join(', '));
     }));
+    const hp = $('input[name=hp]', form);
+    if (hp && hp.value) body.append('hp', hp.value);
     body.append('form', form.dataset.quizForm || 'Квиз');
     body.append('page', location.href);
     subs.forEach((b) => { b.disabled = true; });
