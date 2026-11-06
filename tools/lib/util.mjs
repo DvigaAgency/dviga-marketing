@@ -28,4 +28,6 @@ export function link(h) {
   return ORIGIN + h;
 }
 
-export const fixLinks = (html) => String(html ?? '').replace(new RegExp(`href="((?:${ORIGIN.replace(/[.]/g, '\\.')}(?=/blog/))?/[^"/][^"]*|/)"`, 'g'), (m, h) => `href="${link(h)}"`);
+// переключатель языка («en» / «ru» в шапке и меню) — ссылка внутри текста Zero-элемента, а не href атома: тоже ведёт на главную другой версии копии (RU_URL / EN_URL)
+const SWITCH_RE = new RegExp(`href="${P.switchFrom.replace(/\/$/, '').replace(/[.]/g, '\\.')}/?"`, 'g');
+export const fixLinks = (html) => String(html ?? '').replace(SWITCH_RE, `href="${P.switchTo}"`).replace(new RegExp(`href="((?:${ORIGIN.replace(/[.]/g, '\\.')}(?=/blog/))?/[^"/][^"]*|/)"`, 'g'), (m, h) => `href="${link(h)}"`);
