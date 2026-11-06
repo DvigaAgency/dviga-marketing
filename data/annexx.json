@@ -1144,5 +1144,52 @@
   "cursor": [],
   "stick": [],
   "scaleAll": true
+ },
+ "/cases/tl-logistic": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [],
+  "video": [
+   {
+    "rec": "788716135",
+    "elem": "1701753161700",
+    "link": "https://cp80604-bitrix-8.tw1.ru/tllog.MP4",
+    "loop": true,
+    "cover": true
+   }
+  ]
+ },
+ "/cases/olympus": {
+  "hover": [],
+  "drag": [],
+  "boost": [],
+  "scale": [
+   "680540530"
+  ],
+  "faq": [],
+  "cursor": [],
+  "stick": [],
+  "video": [
+   {
+    "rec": "681128762",
+    "elem": "1470210224069",
+    "link": "https://cp80604-bitrix-8.tw1.ru/olimp2.mp4",
+    "loop": true,
+    "cover": true
+   },
+   {
+    "rec": "764058676",
+    "elem": "1702367946662",
+    "link": "https://cp80604-bitrix-8.tw1.ru/olimp1.mp4",
+    "loop": true,
+    "cover": true
+   }
+  ]
  }
 }

@@ -434,6 +434,8 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
         style = ctx.eager() ? ` style="${esc('background-image:' + val)}"` : ` data-bg="${esc(val)}"`;
       }
       if (atom.hasClass('t-bgimg')) atomClass += ' bg';
+      const sv = ctx.shapeVideo && ctx.shapeVideo[`${ctx.rec}:${e.id}`]; // Annexx ANX011: ролик внутри шейпа
+      if (sv) { body = ctx.video(sv.link, e.id, { ap: true, lp: sv.loop, cover: sv.cover, ctrl: false }); style = ' style="height:100%"'; atomClass += ' vid'; }
       const al = atom.attr('aria-label');
       const has = linkAttrs.some((x) => x.startsWith('aria-label'));
       if (href !== undefined) { const lab = al || ariaFor(href); if (lab && !has) linkAttrs.push(`aria-label="${esc(lab)}"`); } else linkAttrs.push('aria-hidden="true"');

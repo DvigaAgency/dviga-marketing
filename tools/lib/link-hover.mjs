@@ -9,7 +9,7 @@ let cfg;
 /** CSS для страницы /blog/<slug>; recIds — id записей страницы (чтобы отделить recId от elemId в слитном номере) */
 export function linkHoverCss(path, recIds) {
   if (!cfg) cfg = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : {};
-  const m = /^\/blog\/([^/]+)/.exec(path);
+  const m0 = /^\/(blog|cases)\/([^/]+)/.exec(path); const m = m0 && [0, m0[1] === 'cases' ? `cases/${m0[2]}` : m0[2]]; // статьи — по слагу, кейсы — «cases/<слаг>»
   const out = [];
   for (const g of (m && cfg[m[1]]) || []) {
     const sels = [];

@@ -133,7 +133,7 @@ async function buildPage(spec) {
   // Zero-записи внутри попапов меню/формы: на общих страницах — известные id, на отдельных страницах (/marketing-for-devepolers-proposal) свои — берём из data-popup-rec-ids записи T1093
   const popupRecs = { ...POPUP_RECS };
   $('.t-popup[data-popup-rec-ids]').each((i, e) => { const hook = ($(e).attr('data-tooltip-hook') || '').replace('#', ''); if (/^[a-z]+$/i.test(hook)) for (const r of ($(e).attr('data-popup-rec-ids') || '').split(',')) if (r) popupRecs[r.replace('rec', '')] = hook; });
-  const ax = { hover: [], drag: [], boost: [], scale: [], cursor: [], stick: [], ...(ANNEXX[spec.path] || {}) };
+  const ax = { hover: [], drag: [], boost: [], scale: [], cursor: [], stick: [], video: [], ...(ANNEXX[spec.path] || {}) };
   const faqList = faqFor(spec.path);
   const recSeen = new Set();
   // T331: попап с видео (Rutube/YouTube) -> ссылка на страницу ролика: внешние iframe в копии не грузятся
@@ -165,6 +165,7 @@ async function buildPage(spec) {
     drag: new Set([...(home ? ['864137673'] : []), ...ax.drag]),
     boost: new Set(ax.boost),
     cursor: Object.fromEntries(ax.cursor.map((k) => [`${k.rec}:${k.elem}`, k])),
+    shapeVideo: Object.fromEntries(ax.video.map((k) => [`${k.rec}:${k.elem}`, k])),
     eagerRecs,
     textHtml: (h) => videoLinks(fixLinks(h)),
     // o: { ap — автоплей, lp — по кругу } из настроек видео-элемента Zero. Адреса автоплея — те же, что собирает Tilda (t-video) на оригинале
@@ -194,7 +195,7 @@ async function buildPage(spec) {
         if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags} poster="${rm.poster}" data-np data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video>`;
         return `<video class="${cls}" muted${flags} playsinline preload="none" data-poster="${rm.poster}" data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video><button class="vp" type="button" aria-label="Смотреть видео"></button>`;
       }
-      if (!v) return `<video class="${cls}" muted${flags} playsinline preload="none" aria-hidden="true"></video>`;
+      if (!v) return /^https?:/.test(url || '') ? `<video class="${cls}" muted${flags} playsinline preload="none" data-rsrc="${String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" aria-hidden="true"></video>` : `<video class="${cls}" muted${flags} playsinline preload="none" aria-hidden="true"></video>`; // ролик не обработан (нет в манифестах): грузится по ссылке оригинала без постера
       usedAssets.add(v.mp4);
       if (v.poster) usedAssets.add(v.poster);
       if (v.webm) usedAssets.add(v.webm);

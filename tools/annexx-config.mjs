@@ -3,6 +3,7 @@
 //   { "/services/<имя>" (или "/blog/<статья>"): { hover: ["<recId>:<elemId>", …], faq: [{ tab, q, open }], cursor: [{ rec, elem, img, w, link, dur }], drag: ["<recId>", …], boost: ["<recId>", …], scale: ["<recId>", …] } }
 // hover — ссылки Zero-текстов, у которых при наведении текст краснеет (Annexx ANX001-1: селекторы «.tn-elem__<recId><elemId> .tn-atom a»);
 // drag  — записи с горизонтальной лентой, которую тянут мышью (dragscroll у 864137673; ScrollBooster у записи из blockId);
+// video  — Annexx ANX011: ролик в шейпе Zero ({ rec, elem, link, loop, cover });
 // stick  — Annexx ANX831: блок закрепляется у верхнего края после прокрутки ({ rec, top, z });
 // cursor — Annexx ANX013: над элементом вместо курсора — картинка (img, ширина w), клик открывает link;
 // faq   — «Частые вопросы» из Zero-записей (Annexx ANX019): ответ (запись tab) скрыт, вопрос (запись q) по клику открывает его;
@@ -32,7 +33,7 @@ for (const name of names) {
   const path = name.startsWith('/') ? name : name === 'services' ? '/services' : `/services/${name}`;
   const html = get(`https://dviga.marketing${path}`);
   if (!html) { console.log('FAIL загрузка', path); continue; }
-  const e = { hover: [], drag: [], boost: [], scale: [], faq: [], cursor: [], stick: [] };
+  const e = { hover: [], drag: [], boost: [], scale: [], faq: [], cursor: [], stick: [], video: [] };
   // «.tn-elem__<recId><elemId>»: у новых элементов id длиннее 13 цифр, поэтому recId выбираем из записей страницы
   const recIds = [...new Set([...html.matchAll(/id="rec(\d+)"/g)].map((m) => m[1]))];
   const split = (d) => { const r = recIds.filter((x) => d.startsWith(x) && d.length - x.length >= 13).sort((a, b) => b.length - a.length)[0] || d.slice(0, -13); return [r, d.slice(r.length)]; };
@@ -51,6 +52,11 @@ for (const name of names) {
       // курсор-картинка над элементом (кнопка «Play» на обложке видео); клик открывает ролик
       const d = /\.tn-elem__(\d+)/.exec(cfg.shape)?.[1];
       if (d && d.length > 13) e.cursor.push({ rec: split(d)[0], elem: split(d)[1], img: cfg['cursor-for-shape'], w: +cfg['width-cursor-shape'] || 100, link: cfg['link-shape'] || '', dur: +cfg['duration-shape'] || 200 });
+    }
+    if (m[1] === 'ANX011-1' && cfg.link && cfg.shape) {
+      // видео в шейпе Zero (Annexx ANX011): ролик по ссылке заполняет шейп; автоплей при загрузке, по кругу, cover (nocovervideo=false)
+      const d = /\.tn-elem__(\d+)/.exec(cfg.shape)?.[1];
+      if (d && d.length > 13) e.video.push({ rec: split(d)[0], elem: split(d)[1], link: cfg.link, loop: cfg['play-video-loop'] !== 'false', cover: cfg.nocovervideo !== 'true' });
     }
     if (m[1] === 'ANX831-1') {
       // «прилипающий» блок: после прокрутки закрепляется у верхнего края (position:fixed; top:offset; z-index) — например кнопка «Содержание» у статей

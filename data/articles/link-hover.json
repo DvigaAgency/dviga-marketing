@@ -569,5 +569,54 @@
    ],
    "color": "rgba(223, 40, 40, 1)"
   }
+ ],
+ "cases/ajdentika-i-sajt-dlya-porta-vmpp-dviga": [
+  {
+   "sel": [
+    ".tn-elem__22159689911747990914404 .tn-atom a",
+    ".tn-elem__22159689911747990914385 .tn-atom a",
+    ".tn-elem__22159689911755700253788 .tn-atom a",
+    ".tn-elem__22159689911755700253770 .tn-atom a",
+    ".tn-elem__22159689911755700253752 .tn-atom a",
+    ".tn-elem__22159689911755700253733 .tn-atom a",
+    ".tn-elem__22159689911755700467195 .tn-atom a",
+    ".tn-elem__22159689911755700467182 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "cases/ipotechnyj-kalkulyator-dlya-sajta": [
+  {
+   "sel": [
+    ".tn-elem__24460930011747990914437 .tn-atom a",
+    ".tn-elem__24460930011747990914420 .tn-atom a",
+    ".tn-elem__24460930011747990914404 .tn-atom a",
+    ".tn-elem__24460930011747990914385 .tn-atom a",
+    ".tn-elem__24460930011755700467195 .tn-atom a",
+    ".tn-elem__24460930011755700467182 .tn-atom a",
+    ".tn-elem__24460930011783329711972000002 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)"
+  }
+ ],
+ "cases/brending-i-sozdanie-sajta-vladivostok-zhk-emocii-dviga": [
+  {
+   "sel": [
+    ".tn-elem__13139091511747990914420 .tn-atom a",
+    ".tn-elem__13139091511747990914404 .tn-atom a",
+    ".tn-elem__13139091511747990914385 .tn-atom a",
+    ".tn-elem__13139091511755700253788 .tn-atom a",
+    ".tn-elem__13139091511755700253770 .tn-atom a",
+    ".tn-elem__13139091511755700253752 .tn-atom a",
+    ".tn-elem__13139091511755700253733 .tn-atom a",
+    ".tn-elem__13139091511755700467268 .tn-atom a",
+    ".tn-elem__13139091511755700467243 .tn-atom a",
+    ".tn-elem__13139091511755700467220 .tn-atom a",
+    ".tn-elem__13139091511755700467195 .tn-atom a",
+    ".tn-elem__13139091511755700467182 .tn-atom a"
+   ],
+   "color": "rgba(223, 40, 40, 1)",
+   "fallback": true
+  }
  ]
 }
