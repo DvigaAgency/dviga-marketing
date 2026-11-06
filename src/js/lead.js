@@ -68,6 +68,7 @@ function toUrlEncoded(body, up) {
 }
 
 export async function sendLead(body, form) {
+  if (body.get('hp')) return true;   // заполнено поле-ловушка (бот): ни файлов на Диск, ни заявки, форме отвечаем «успех»
   addUtm(body);
   const meta = document.querySelector('meta[name="lead-url"]');
   const url = (meta && meta.content) || '/api/lead';

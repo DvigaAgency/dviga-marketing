@@ -28,7 +28,7 @@ var COLUMNS = {
   comment: 'комментарий'
 };
 
-var SERVICE = { form: 1, page: 1, checkbox: 1, referrer: 1, files: 1, files_failed: 1, folder: 1, yclid: 1,
+var SERVICE = { form: 1, page: 1, checkbox: 1, referrer: 1, files: 1, files_failed: 1, folder: 1, yclid: 1, hp: 1,
   utm_source: 1, utm_medium: 1, utm_campaign: 1, utm_content: 1, utm_term: 1 };
 
 function first_(params, key) {
@@ -79,7 +79,11 @@ function buildLead_(params, now) {
   if (files) extra.push('Файлы: ' + files);
   if (failed) extra.push('Не удалось загрузить файлы: ' + failed);
   lead.comment = extra.join('\n');
-  lead.folder = files ? first_(params, 'folder') : '';   // папка на Яндекс.Диске, не колонка таблицы
+  // не колонки таблицы: папка на Яндекс.Диске, метки раздельно и домен перехода (для Битрикс24 и Телеграма), ловушка от ботов
+  lead.folder = files ? first_(params, 'folder') : '';
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (u) { lead[u] = first_(params, u); });
+  lead.referrer = first_(params, 'referrer').toLowerCase().replace(/^https?:\/\//, '').split('/')[0].replace(/^www\./, '');
+  lead.hp = first_(params, 'hp');
   return lead;
 }
 
@@ -111,6 +115,14 @@ function prepareUpload_(p) {
   var j = JSON.parse(r.getContentText() || '{}');
   if (r.getResponseCode() !== 200 || !j.href) return { ok: false, error: 'upload ' + r.getResponseCode() };
   return { ok: true, href: j.href };
+}
+
+/** Публичная ссылка на папку заявки (открывается без входа в Яндекс, менеджеру в Битриксе); если опубликовать не вышло — '' */
+function publicFolderUrl_(folder) {
+  var path = 'app:/' + safeName_(folder, 80);
+  if (disk_('put', DISK + '/publish?path=' + encodeURIComponent(path)).getResponseCode() !== 200) return '';
+  var r = disk_('get', DISK + '?fields=public_url&path=' + encodeURIComponent(path));
+  return r.getResponseCode() === 200 ? String(JSON.parse(r.getContentText()).public_url || '') : '';
 }
 
 /** Ссылка на папку заявки в веб-интерфейсе Яндекс.Диска (откроется у владельца диска) */
@@ -164,14 +176,24 @@ function doPost(e) {
   try {
     var lead = buildLead_((e && e.parameters) || {}, new Date());
     if (!lead) return json_({ ok: false, error: 'phone or email required' });
+    if (lead.hp) return json_({ ok: true });                      // поле-ловушка заполнено — бот: молча «успех», никуда не пишем
     if (lead.folder && token_()) {
       try {
-        var url = folderUrl_(lead.folder);
+        var url = publicFolderUrl_(lead.folder) || folderUrl_(lead.folder);
         if (url) lead.comment += '\nЯндекс.Диск: ' + url;
       } catch (err) { /* заявка важнее ссылки на папку */ }
     }
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-    append_(sheet, lead);
+    resolveUtm_(lead);                                            // нет utm_source — по домену перехода (leads.gs)
+    var b24 = !!PROPS_().getProperty('B24_WEBHOOK');
+    var msgId = notifyTelegram_(lead, b24 ? 'Создаётся лид в Битриксе…' : '');
+    var saved = false;
+    try {
+      append_(SpreadsheetApp.getActiveSpreadsheet().getSheets()[0], lead);
+      saved = true;
+    } catch (err) { console.error('Sheet', err); }
+    var leadId = b24 ? createB24Lead_(lead) : null;
+    if (b24) updateTelegramWithLead_(lead, msgId, leadId);
+    if (!saved && !leadId && !msgId) return json_({ ok: false, error: 'not delivered' });
     return json_({ ok: true });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
