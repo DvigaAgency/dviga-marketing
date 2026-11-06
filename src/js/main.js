@@ -294,7 +294,7 @@ function initShare() {
       const meta = $('meta[name="description"]');
       if (navigator.share) { navigator.share({ title: d.title, url, text: meta ? meta.content : '' }).catch(() => {}); return; }
       const t = $('.bt', b); const old = t && t.textContent;
-      const done = () => { if (!t) return; t.textContent = 'Ссылка скопирована'; setTimeout(() => { t.textContent = old; }, 2000); };
+      const done = () => { if (!t) return; t.textContent = document.documentElement.lang === 'en' ? 'Link copied' : 'Ссылка скопирована'; setTimeout(() => { t.textContent = old; }, 2000); };
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, () => {});
     });
   });
@@ -373,7 +373,7 @@ function initEmbeds() {
   if (auto.length) {
     const mount = (b) => {
       const f = d.createElement('iframe');
-      f.src = b.dataset.auto; f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true; f.title = 'Видео'; f.setAttribute('frameborder', '0');
+      f.src = b.dataset.auto; f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true; f.title = document.documentElement.lang === 'en' ? 'Video' : 'Видео'; f.setAttribute('frameborder', '0');
       f.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;border:0';
       f.addEventListener('load', () => { const p = b.querySelector('.vd'); if (p) p.remove(); });
       b.appendChild(f); b.removeAttribute('data-auto');
@@ -388,7 +388,7 @@ function initEmbeds() {
     u.searchParams.set('autoplay', '1');
     if (b.dataset.kind === 'rutube') u.searchParams.set('autoStart', 'true');
     const f = d.createElement('iframe');
-    f.src = u.href; f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true; f.title = 'Видео'; f.setAttribute('frameborder', '0');
+    f.src = u.href; f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true; f.title = document.documentElement.lang === 'en' ? 'Video' : 'Видео'; f.setAttribute('frameborder', '0');
     f.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;border:0';
     b.replaceChildren(f); b.removeAttribute('data-embed');
   }));
@@ -475,6 +475,46 @@ function initCursor() {
 const w_open = (u) => { try { window.open(u, '_blank', 'noopener'); } catch (_) { location.href = u; } };
 
 /* ---------- cookie ---------- */
+/* ---------- «ныряющий» ролик обложки (английская главная): на оригинале GSAP + ScrollTrigger (плагин Matilda, класс video_dive_N у html-элемента,
+   триггер — элемент video_trigger_N). Ролик растёт от 405×248 до 1140×560 и сдвигается на (−735, −20) px, пока триггер проходит от верха окна до своего низа
+   (start «top top» → end «bottom top», scrub: true, ease linear); только от 1200 px ширины окна. Здесь — то же без библиотек ---------- */
+function initDive() {
+  $$('[class*="video_dive_"]').forEach((dive) => {
+    const m = /video_dive_(\w+)/.exec(dive.className);
+    const trig = m && $('.video_trigger_' + m[1]);
+    const a = $('.a', dive);
+    if (!trig || !a) return;
+    const upd = () => {
+      if (innerWidth < 1200) { a.style.cssText = ''; return; }
+      const r = trig.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / (r.height || 1)));
+      const k = (from, to) => from + (to - from) * p;
+      // !important: размеры html-элемента в CSS записи заданы жёстко (width/height = размер макета), перебиваем их
+      const st = { display: 'block', position: 'relative', width: `${k(405, 1140)}px`, height: `${k(248, 560)}px`, 'border-radius': '10px', overflow: 'hidden', transform: `translate(${k(0, -735)}px,${k(0, -20)}px)` };
+      for (const n in st) a.style.setProperty(n, st[n], 'important');
+    };
+    let busy = false;
+    const tick = () => { if (busy) return; busy = true; requestAnimationFrame(() => { busy = false; upd(); }); };
+    addEventListener('scroll', tick, { passive: true }); addEventListener('resize', tick); upd();
+  });
+}
+
+/* ---------- плагины T123 английской главной (на русском оригинале их нет): «Rolling text» и «Link underline» ---------- */
+function initEnFx() {
+  if (d.documentElement.lang !== 'en') return;
+  // каждая буква в своём span, текст дублируется вторым блоком (красным): при наведении буквы уезжают вверх (CSS .rolling-text)
+  $$('.rolling-text .a a').forEach((a) => {
+    const text = a.innerText;
+    a.textContent = '';
+    const block = d.createElement('div');
+    block.className = 'block';
+    for (const ch of text) { const s = d.createElement('span'); s.className = 'letter'; s.textContent = ch.trim() === '' ? ' ' : ch; block.appendChild(s); }
+    a.append(block, block.cloneNode(true));
+  });
+  // линия под ссылкой: span.underline-line внутри текстового элемента, по наведению по ней проезжает световая полоса
+  $$('.link-underline .a, .link-underline-2 .a').forEach((a) => { const l = d.createElement('span'); l.className = 'underline-line'; a.appendChild(l); });
+}
+
 function initCookie() {
   const ck = $('#ck');
   if (!ck) return;
@@ -511,7 +551,7 @@ function initPopups() {
     const a = e.target.closest('a[href^="#"]');
     if (a) {
       const h = a.getAttribute('href').slice(1);
-      if (h === 'closepopup' || h === 'closeallpopup') { e.preventDefault(); close(cur); return; }
+      if (h === 'closepopup' || h === 'closeallpopup' || (h === 'close' && cur)) { e.preventDefault(); close(cur); return; }
       if (hooks[h]) { e.preventDefault(); open(hooks[h], a); return; }
       const t = h && d.getElementById(h);
       if (t) { e.preventDefault(); if (cur && cur.contains(a)) close(cur); /* пункт оглавления: попап закрывается, страница прокручивается к разделу */ t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return; }
@@ -528,6 +568,8 @@ function initPopups() {
       if (e.shiftKey && (d.activeElement === first || d.activeElement === cur)) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && d.activeElement === last) { e.preventDefault(); first.focus(); }
     }
   });
+  // после успешной отправки формы (forms.js) показывается попап «спасибо», если он есть на странице (английская версия)
+  d.addEventListener('lead-sent', () => { if (hooks.thanks) open(hooks.thanks); });
   // открытие по хэшу в адресе
   const byHash = () => { const h = location.hash.slice(1); if (h && hooks[h]) open(hooks[h]); };
   addEventListener('hashchange', byHash); byHash();
@@ -582,6 +624,6 @@ const boot = () => {
   // картинки внутри скрытых попапов (display:none) не грузятся сами — подтягиваем в простое, чтобы при открытии они уже были
   addEventListener('load', () => (self.requestIdleCallback || setTimeout)(() => $$('.pp img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }), { timeout: 3000 }));
   // сначала то, что влияет на первый экран (фоны, появление), затем — тяжёлые обработчики по этапам, чтобы IntersectionObserver успел сработать
-  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initVideo, initEmbeds, initFaq, initBeforeAfter, initSlider, initShare, initAudio, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
+  afterPaint(() => { [initBg, initAppear].forEach((f) => safe(f)); afterPaint(() => { safe(initSteps); afterPaint(() => { [initScroll, initCounter, initDive, initEnFx, initVideo, initEmbeds, initFaq, initBeforeAfter, initSlider, initShare, initAudio, initDrag, initCursor, initLazy].forEach((f) => safe(f)); }); }); });
 };
 if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot); else boot();

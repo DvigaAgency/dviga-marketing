@@ -11,3 +11,4 @@ dist-test/
 dist-dev/
 reports/diff-*/
 dist-cmp/
+dist-en/

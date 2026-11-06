@@ -28,9 +28,30 @@ jobs:
           CT_PROJECT: ${{ vars.CT_PROJECT }}
           BASE: /${{ github.event.repository.name }}
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          RU_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          EN_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/en/
       - run: node tools/audit-dist.mjs
         env:
           BASE: /${{ github.event.repository.name }}
+      # английская версия (проект Tilda 85434): пока превью в подпапке /en/; для en.dviga.marketing (Timeweb) собирается отдельно, без BASE
+      - run: npm run build
+        env:
+          SITE_LANG: en
+          OUT: dist-en
+          NOINDEX: "1"
+          LEAD_URL: ${{ vars.LEAD_URL }}
+          YM_ID: ${{ vars.YM_ID }}
+          CT_PROJECT: "0"
+          BASE: /${{ github.event.repository.name }}/en
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/en
+          RU_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          EN_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/en/
+      - run: node tools/audit-dist.mjs dist-en
+        env:
+          SITE_LANG: en
+          CT_PROJECT: "0"
+          BASE: /${{ github.event.repository.name }}/en
+      - run: cp -r dist-en dist/en
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

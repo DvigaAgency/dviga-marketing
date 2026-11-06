@@ -185,3 +185,7 @@ body.pl{}
 .crd .t1032__row{display:flex;flex-wrap:wrap}
 .crd .t1032__col,.crd .t-card__col{display:flex}
 .crd .t1032__content,.crd .t650__inner-col{flex:1 1 auto;width:100%;box-sizing:border-box}
+/* «спасибо» после отправки формы (английская версия): Zero-блок поверх страницы на чёрной подложке 80% (Nolim NLM056 на оригинале), появляется плавно */
+.pp.blk.thanks{background:rgba(0,0,0,.8);-webkit-backdrop-filter:none;backdrop-filter:none;transition:opacity .4s ease;overflow:hidden auto}
+.pp.blk.thanks .pc{transform:none;transition:none}
+.pp.blk.thanks .px{display:none}

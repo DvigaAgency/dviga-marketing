@@ -66,7 +66,7 @@ for (const pf of pages) {
   // якоря и попапы: каждый #hook ведёт на существующий попап/элемент
   const hooks = new Set($('[data-hook]').map((i, e) => $(e).attr('data-hook')).get());
   const dead = [];
-  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup', 'serviced'] /* #serviced — мёртвый якорь самого оригинала (/marketing-for-devepolers-proposal): цели там нет */.includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && h !== 'other' /* ссылка без цели и в оригинале */ && !DEAD_IN_ORIG.has(h) && !/^odin(start|stop)/.test(h) /* кнопки аудиоплеера (initAudio) */ && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
+  $('a[href^="#"]').each((i, e) => { const h = $(e).attr('href').slice(1); if (h && !['closepopup', 'closeallpopup', 'close', 'serviced'] /* #serviced — мёртвый якорь самого оригинала (/marketing-for-devepolers-proposal): цели там нет */.includes(h) && !hooks.has(h) && !$('[id="' + h + '"]').length && !/^!\//.test(h) && h !== 'other' /* ссылка без цели и в оригинале */ && !DEAD_IN_ORIG.has(h) && !/^odin(start|stop)/.test(h) /* кнопки аудиоплеера (initAudio) */ && !/^popup:(my)?gallery/.test(h)) dead.push('#' + h); });
   if (dead.length) console.log('FAIL якоря без цели на', path.relative(root, pf) || 'index.html', [...new Set(dead)].join(', '));
   deadCount += dead.length;
 }

@@ -1,6 +1,7 @@
 // Генерация HTML форм (Zero-формы, t702, t708). Разметка — собственная, логика — src/js/forms.js.
 import { makeGetter } from './zero-layout.mjs';
 import { fixLinks as fixHref } from './util.mjs';
+import { LANG, T } from './lang.mjs';
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const unesc = (s) => String(s ?? '').replace(/&nbsp;/g, ' ');
@@ -18,14 +19,14 @@ export function renderField(f, o = {}) {
   switch (type) {
     case 'nm': return wrap(`<input class="fi" type="text" name="${esc(name)}" autocomplete="name"${ph}${req}>`);
     case 'em': return wrap(`<input class="fi" type="email" name="${esc(name)}" autocomplete="email" inputmode="email"${ph}${req} data-rule="email">`);
-    case 'ph': return wrap(`<input class="fi" type="tel" name="${esc(name)}" autocomplete="tel" inputmode="tel"${ph}${req} data-rule="phone" data-mask="${esc(f.li_mask || '')}">`);
+    case 'ph': return wrap(`<input class="fi" type="tel" name="${esc(name)}" autocomplete="tel" inputmode="tel"${ph}${req} data-rule="phone"${LANG === 'en' ? '' : ` data-mask="${esc(f.li_mask || '')}"`}>`);
     case 'in': return wrap(`<input class="fi" type="text" name="${esc(name)}"${ph}${req}>`);
     case 'ta': return wrap(`<textarea class="fi" name="${esc(name)}" rows="${f.li_rows || 3}"${ph}${req}></textarea>`);
     case 'sb': {
       const opts = String(f.li_variants || '').split('\n').filter(Boolean).map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
       return wrap(`<select class="fi" name="${esc(name)}"${req}><option value="">${esc(f.li_title || '')}</option>${opts}</select>`).replace(title, '');
     }
-    case 'uw': return `<div class="fg" data-t="uw"><div class="fb"><label class="ff fu-b"><input type="file" name="${esc(name)}[]" multiple hidden>Загрузить файлы</label><small class="fu-n" aria-live="polite"></small>${err}</div></div>`;
+    case 'uw': return `<div class="fg" data-t="uw"><div class="fb"><label class="ff fu-b"><input type="file" name="${esc(name)}[]" multiple hidden>${T.upload}</label><small class="fu-n" aria-live="polite"></small>${err}</div></div>`;
     case 'cb': return `<div class="fg" data-t="cb"><div class="fb"><label class="fk"><input type="checkbox" name="${esc(name)}" value="yes"${req}><i></i><span>${fixHref(f.li_label)}</span></label>${err}</div></div>`;
     case 'rd': {
       const opts = (o.options || []).map((v) => `<label class="fr"><input type="radio" name="${esc(name)}" value="${esc(v)}"${req}><i></i><span>${esc(v)}</span></label>`).join('');
@@ -71,8 +72,8 @@ export function renderZeroForm(attrs, inputs, uid, screens) {
   if (maxW !== last) rules.push([R, maxW]);
   rules.forEach(([r, w], i) => { css += i === 0 ? `.f${uid}{--bw:${w}}` : `@media(min-width:${r}px){.f${uid}{--bw:${w}}}`; });
   const fields = inputs.sort((a, b) => (+a.ls || 0) - (+b.ls || 0)).map((f) => renderField(f)).join('');
-  const msg = attrs['data-field-formmsgsuccess-value'] || 'Спасибо! Мы свяжемся с вами.';
-  const btn = attrs['data-field-buttontitle-value'] || 'Отправить';
+  const msg = attrs['data-field-formmsgsuccess-value'] || T.thanks;
+  const btn = attrs['data-field-buttontitle-value'] || T.send;
   const html = `<form class="fm f${uid}" data-f="${uid}" action="/api/lead" method="post" novalidate style="${esc(style)}"><div class="fz" role="status" aria-live="polite">${msg}</div><div class="fx">${fields}${HONEYPOT}</div><button class="fo" type="submit">${esc(btn)}</button></form>`;
   return { html, css };
 }
@@ -81,7 +82,7 @@ export function renderZeroForm(attrs, inputs, uid, screens) {
 export function renderTildaForm($, formEl, uid, o = {}) {
   const form = $(formEl);
   const screens = [[]];
-  let next = 'Далее'; let prev = 'Назад';
+  let next = T.next; let prev = T.back;
   form.find('.t-input-group').each((i, g) => {
     const x = $(g); const type = x.attr('data-field-type');
     if (type === 'st') {
@@ -103,11 +104,11 @@ export function renderTildaForm($, formEl, uid, o = {}) {
   });
   const multi = screens.length > 1;
   const body = screens.map((s, i) => `<div class="fs${i === 0 ? ' on' : ''}">${s.join('')}</div>`).join('');
-  const label = o.submit || form.find('.t-btnflex_type_submit .t-btnflex__text').first().text().trim() || 'Отправить';
+  const label = o.submit || form.find('.t-btnflex_type_submit .t-btnflex__text').first().text().trim() || T.send;
   const actions = multi
     ? `<div class="fa"><button type="button" class="fo bk" data-prev hidden>${esc(prev)}</button><button type="button" class="fo" data-next>${esc(next)}</button><button class="fo" type="submit" hidden>${esc(label)}</button></div>`
     : `<button class="fo" type="submit">${esc(label)}</button>`;
   const vars = o.vars || '';
-  const msg = o.success || 'Спасибо! Мы свяжемся с вами.';
+  const msg = o.success || T.thanks;
   return `<form class="fm f${uid}" data-f="${uid}" action="/api/lead" method="post" novalidate style="${vars}"><div class="fz" role="status" aria-live="polite">${msg}</div><div class="fx">${body}${HONEYPOT}</div>${actions}</form>`;
 }

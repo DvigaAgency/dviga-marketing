@@ -37,11 +37,12 @@ import { linkHoverCss } from './lib/link-hover.mjs';
 import { pinFirst } from './lib/blog-pin.mjs';
 import { PAGES } from './pages.mjs';
 import { leadMeta, trackingTags } from './lib/tracking.mjs';
+import { LANG, P, T, RU_URL, EN_URL } from './lib/lang.mjs';
 
 const OUT = process.env.OUT || 'dist';
 // BASE — подкаталог публикации (например /dviga-marketing для GitHub Pages проекта); по умолчанию сайт в корне
 const BASE = (process.env.BASE || '').replace(/\/$/, '');
-const SITE_URL = (process.env.SITE_URL || 'https://dviga.marketing').replace(/\/$/, '');
+const SITE_URL = (process.env.SITE_URL || P.origin).replace(/\/$/, ''); // по умолчанию боевой адрес версии (dviga.marketing / en.dviga.marketing)
 const hash = (s) => crypto.createHash('sha1').update(s).digest('hex').slice(0, 10);
 const NL = String.fromCharCode(10);
 setLocalPaths(PAGES.map((p) => p.path));
@@ -97,12 +98,12 @@ const fontPre = ['inter-cyrillic', 'inter-latin'].map((f) => `<link rel="preload
 const INDEXABLE = process.env.INDEX === '1';
 const noindex = INDEXABLE ? '' : '<meta name="robots" content="noindex,nofollow">';
 const closeSvg = '<svg role="presentation" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><rect transform="translate(11.31 11.31) rotate(-45) translate(-11.31 -11.31)" x="10.31" y="-3.69" width="2" height="30"/><rect transform="translate(11.31 11.31) rotate(-315) translate(-11.31 -11.31)" x="10.31" y="-3.69" width="2" height="30"/></g></svg>';
-const closeBtn = `<div class="px"><button type="button" aria-label="Закрыть диалоговое окно" data-close>${closeSvg}</button></div>`;
+const closeBtn = `<div class="px"><button type="button" aria-label="${T.closeDialog}" data-close>${closeSvg}</button></div>`;
 const FORM_VARS = '--ih:50px;--ir:20px;--ibc:#dedede;--ibg:#f2f2f2;--ic:#121212;--tc:#121212;--ec:#000;--bbg:#f5d5d2;--bc:#d93433;--bhb:#d93433;--bhc:#fff;--bw:auto;';
-const POPUP_RECS = { 1121678416: 'menu', 1064388596: 'form' };
+const POPUP_RECS = P.popupRecs;
 // настройки Annexx/вставок страниц услуг: подсветка ссылок, перетаскиваемые ленты, масштаб стандартных блоков (tools/annexx-config.mjs)
 const ANNEXX = fs.existsSync('data/annexx.json') ? JSON.parse(fs.readFileSync('data/annexx.json', 'utf8')) : {};
-const HOME_ANX = new Set(['991113446:1743673825773', '991113446:1744966468663', '991105351:1743673825787', '991105351:1743673825773', '991105346:1744705724941', '991105346:1744966643206']);
+const HOME_ANX = new Set(P.homeAnx);
 
 // url() внутри пользовательских свойств (--icon: url(…)) css-tree не разбирает — подставляем локальные файлы здесь
 const localUrls = (t) => t.replace(/url\((['"]?)(https?:\/\/(?:static|thb)\.tildacdn\.com\/[^)'"]+)\1\)/g, (m, q, u) => { const a = lookup(u); if (!a) { console.warn('NO CSS ASSET', u); return m; } const f = a.kind === 'svg' ? a.src : a.webp.at(-1).src; usedAssets.add(f); return `url(${f})`; });
@@ -127,7 +128,7 @@ const commonName = `common.${hash(commonCss)}.css`;
 fs.writeFileSync(path.join(OUT, 'assets', commonName), withBase(commonCss));
 
 // ----------------------------------------------------------------- одна страница
-const $home = cheerio.load(fs.readFileSync('data/home.source.html', 'utf8'), { decodeEntities: false });
+const $home = cheerio.load(fs.readFileSync(P.homeSrc, 'utf8'), { decodeEntities: false });
 let searchUrl = ''; let aiUrl = '';
 async function buildPage(spec) {
   const $ = cheerio.load(fs.readFileSync(spec.src, 'utf8'), { decodeEntities: false });
@@ -148,7 +149,7 @@ async function buildPage(spec) {
   const videoLinks = (h) => h.replace(/<a ([^>]*?)href="(#popup:[^"]*)"/g, (m, a, href) => (videoUrls[href] ? `<a ${a}href="${videoUrls[href]}"` : m));
   // статьи с data/articles/<slug>.json → pin: карточка первой в сетке блога (tools/lib/blog-pin.mjs)
   if ((spec.path === '/blog' || spec.tab !== undefined) && process.env.NO_PIN !== '1') for (const f of fs.readdirSync('data/articles').filter((x) => x.endsWith('.json'))) { const a = JSON.parse(fs.readFileSync(`data/articles/${f}`, 'utf8')); if (a.pin) console.log('blog-pin', f.slice(0, -5), pinFirst($, { slug: f.slice(0, -5), ...a.pin }).join('; ')); }
-  const extraCss = [];
+  const extraCss = P.css ? [P.css] : []; // CSS из T123-блоков языковой версии (tools/lib/lang.mjs)
   const idCount = {};
   $('.t396__elem').each((i, e) => { const id = $(e).attr('data-elem-id'); idCount[id] = (idCount[id] || 0) + 1; });
   // «ранние» записи (первый экран) — критический CSS: шапка и первые Zero-блоки основной части
@@ -157,7 +158,7 @@ async function buildPage(spec) {
   const hiddenAtStart = new Set();
   $('.t400__submit').each((i, b) => ($(b).attr('data-hidden-rec-ids') || '').split(',').forEach((x) => hiddenAtStart.add(x)));
   $('li.t395__tab').each((i, li) => { const act = $(li).closest('ul').find('li.t395__tab_active').attr('data-tab-rec-ids') || ''; ($(li).attr('data-tab-rec-ids') || '').split(',').forEach((x) => { if (!act.split(',').includes(x)) hiddenAtStart.add(x); }); });
-  const eagerRecs = new Set(home ? ['680556230', '1438775181'] : ['680556230', ...mainZero.filter((x) => !hiddenAtStart.has(x)).slice(0, 6)]);
+  const eagerRecs = new Set(home ? P.eagerHome : ['680556230', ...mainZero.filter((x) => !hiddenAtStart.has(x)).slice(0, 6)]);
   const ctx = {
     sel: (rec, id) => (idCount[id] > 1 ? `#r${rec} .e${id}` : `.e${id}`),
     anx: home ? HOME_ANX : new Set(ax.hover),
@@ -165,7 +166,7 @@ async function buildPage(spec) {
     picture,
     cssImage,
     eager() { return ctx.eagerRecs.has(ctx.rec); },
-    drag: new Set([...(home ? ['864137673'] : []), ...ax.drag]),
+    drag: new Set([...(home ? P.homeDrag : []), ...ax.drag]),
     boost: new Set(ax.boost),
     cursor: Object.fromEntries(ax.cursor.map((k) => [`${k.rec}:${k.elem}`, k])),
     shapeVideo: Object.fromEntries(ax.video.map((k) => [`${k.rec}:${k.elem}`, k])),
@@ -184,7 +185,7 @@ async function buildPage(spec) {
           : kind === 'kinescope' ? `${src}?&muted=true&autoplay=true&autopause=false${o.lp ? '&loop=true' : ''}` : '';
       const img = `<img class="vd" src="${m.poster}" width="${m.w}" height="${m.h}" alt="" loading="lazy" decoding="async">`;
       if (auto) return `<div class="vem" data-auto="${auto.replace(/&/g, '&amp;')}" data-kind="${kind}"></div>`;
-      return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}">${img}<button class="vp" type="button" aria-label="Смотреть видео"></button></div>`;
+      return `<div class="vem" data-embed="${src.replace(/&/g, '&amp;')}" data-kind="${kind}">${img}<button class="vp" type="button" aria-label="${T.watch}"></button></div>`;
     },
     // o: { ap, lp, cover, ctrl } — автоплей, по кругу, object-fit:cover (иначе contain, как в Tilda), стандартные кнопки плеера
     video(url, id, o = { ap: true, lp: true, cover: true, ctrl: false }) {
@@ -195,14 +196,14 @@ async function buildPage(spec) {
       if (rm) {
         usedAssets.add(rm.poster);
         const u = String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-        if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags} poster="${rm.poster}" data-np data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video>`;
-        return `<video class="${cls}" muted${flags} playsinline preload="none" data-poster="${rm.poster}" data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="Видео"></video><button class="vp" type="button" aria-label="Смотреть видео"></button>`;
+        if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags} poster="${rm.poster}" data-np data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="${T.video}"></video>`;
+        return `<video class="${cls}" muted${flags} playsinline preload="none" data-poster="${rm.poster}" data-rsrc="${u}" width="${rm.w}" height="${rm.h}" aria-label="${T.video}"></video><button class="vp" type="button" aria-label="${T.watch}"></button>`;
       }
       if (!v) return /^https?:/.test(url || '') ? `<video class="${cls}" muted${flags} playsinline preload="none" data-rsrc="${String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" aria-hidden="true"></video>` : `<video class="${cls}" muted${flags} playsinline preload="none" aria-hidden="true"></video>`; // ролик не обработан (нет в манифестах): грузится по ссылке оригинала без постера
       usedAssets.add(v.mp4);
       if (v.poster) usedAssets.add(v.poster);
       if (v.webm) usedAssets.add(v.webm);
-      if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags}${v.poster ? ` poster="${v.poster}"` : ''} src="${v.mp4}" width="${v.w}" height="${v.h}" aria-label="Видео"></video>`;
+      if (!o.ap) return `<video class="${cls}" playsinline preload="none"${flags}${v.poster ? ` poster="${v.poster}"` : ''} src="${v.mp4}" width="${v.w}" height="${v.h}" aria-label="${T.video}"></video>`;
       return `<video class="${cls}" muted${flags} playsinline preload="none"${v.poster ? ` data-poster="${v.poster}"` : ''} data-src="${v.mp4}"${v.webm ? ` data-webm="${v.webm}"` : ''} width="${v.w}" height="${v.h}" aria-hidden="true"></video>`;
     },
     gallery(imgs, o) {
@@ -216,7 +217,7 @@ async function buildPage(spec) {
       const sz = { s: 30, m: 40, l: 50 }[o.arrowSize] || 30;
       const arSt = '--as:' + sz + 'px;--ac:' + (o.arrowColor || '#000') + ';--ach:' + (o.arrowColorHover || o.arrowColor || '#000') + ';--ab:' + rgba(o.arrowBg || '#e8e8e8', o.arrowBgOpacity) + ';--abh:' + rgba(o.arrowBgHover || o.arrowBg || '#e8e8e8', o.arrowBgOpacity) + (o.arrowH ? ';--ah:' + o.arrowH + 'px' : '');
       const chev = '<svg viewBox="0 0 94 94" aria-hidden="true"><path d="M39 68L60 47L39 26" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>';
-      const arrows = imgs.length > 1 && (o.arrowsMode === 'in' || o.arrowsMode === 'near') ? '<button class="gl-ar gl-pv" type="button" aria-label="Назад" style="' + arSt + '">' + chev + '</button><button class="gl-ar gl-nx" type="button" aria-label="Вперёд" style="' + arSt + '">' + chev + '</button>' : '';
+      const arrows = imgs.length > 1 && (o.arrowsMode === 'in' || o.arrowsMode === 'near') ? '<button class="gl-ar gl-pv" type="button" aria-label="' + T.prev + '" style="' + arSt + '">' + chev + '</button><button class="gl-ar gl-nx" type="button" aria-label="' + T.forward + '" style="' + arSt + '">' + chev + '</button>' : '';
       // подписи к слайдам (li_imgtitle): под точками, показывается подпись текущего слайда (в Tilda — .t-slds__caption)
       const ce = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
       const caps = imgs.some((x) => x.li_imgtitle) ? '<div class="gl-c">' + imgs.map((x, i) => '<div class="gl-ci' + (i ? '' : ' on') + '">' + ce(x.li_imgtitle || '') + '</div>').join('') + '</div>' : '';
@@ -253,6 +254,7 @@ async function buildPage(spec) {
       const alias = rec.attr('data-alias-record-type');
       const type = rec.attr('data-record-type') === '121' && alias ? alias : rec.attr('data-record-type'); // глобальный блок Tilda (121) ведёт себя как тип, на который он ссылается
       const rid = rec.attr('id').replace('rec', '');
+      if (P.dropRecs.includes(rid)) continue;
       // Tilda: запись показывается только на части ширин (t-screenmin-980px — от 981 px, t-screenmax-980px — до 980 px)
       const vis = /t-screen(min|max)-(\d+)px/.exec(rec.attr('class') || '');
       if (vis) css.push(vis[1] === 'min' ? `@media(max-width:${vis[2]}px){#r${rid}{display:none!important}}` : `@media(min-width:${+vis[2] + 1}px){#r${rid}{display:none!important}}`);
@@ -318,17 +320,17 @@ async function buildPage(spec) {
   for (const part of Object.keys(html)) html[part] = html[part].map((h) => h.replace(/^<section id="r([0-9]+)" class="r([^"]*)"/, (m, id, rest) => (off.has(id) ? `<section id="r${id}" class="r${rest} off" hidden="${rest.includes('lm-r') ? '' : 'until-found'}"` : m)));
 
   // ---------------- попапы и виджет (одинаковые на всех страницах)
-  const menuPopup = `<div class="pp blk menu cq" id="p-menu" data-hook="menu" role="dialog" aria-modal="true" aria-label="Меню" tabindex="-1"><div class="pc">${popupZero.menu}</div></div>`;
-  const formPopup = `<div class="pp blk form cq" id="p-form" data-hook="form" role="dialog" aria-modal="true" aria-label="Обсудить проект" tabindex="-1">${closeBtn}<div class="pc">${popupZero.form}</div></div>`;
-  const $c = $('#rec742904618').length ? $ : $home; // общие записи сайта (cookie, виджет, расчёт) есть не в каждом снимке
-  const calcRec = $c('#rec742904618');
-  const calcForm = renderTildaForm($c, calcRec.find('form'), 'calc', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:30px;--mb:25px;--tfs:20px;--tfw:500;--tmb:5px;` });
+  const menuPopup = `<div class="pp blk menu cq" id="p-menu" data-hook="menu" role="dialog" aria-modal="true" aria-label="${T.menu}" tabindex="-1"><div class="pc">${popupZero.menu}</div></div>`;
+  const formPopup = `<div class="pp blk form cq" id="p-form" data-hook="form" role="dialog" aria-modal="true" aria-label="${T.discuss}" tabindex="-1">${closeBtn}<div class="pc">${popupZero.form}</div></div>`;
+  const $c = $('#rec' + P.calcRec).length ? $ : $home; // общие записи сайта (cookie, виджет, расчёт) есть не в каждом снимке
+  const calcRec = $c('#rec' + P.calcRec);
+  const calcForm = renderTildaForm($c, calcRec.find('form'), 'calc', { success: T.thanksSoon, vars: `${FORM_VARS}--br:30px;--mb:25px;--tfs:20px;--tfw:500;--tmb:5px;` });
   const calcPopup = `<div class="pp" id="p-calculate" data-hook="popup:calculate" role="dialog" aria-modal="true" tabindex="-1" aria-label="${calcRec.find('.t702__title').text().trim()}">${closeBtn}<div class="pc cl"><div class="cl-w"><div class="cl-t">${calcRec.find('.t702__title').html()}</div>${calcForm}</div></div></div>`;
-  const wRec = $c('#rec1468283321');
-  const widgetForm = renderTildaForm($c, wRec.find('form'), 'widget', { success: 'Спасибо! Мы свяжемся с вами в ближайшее время.', vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
+  const wRec = P.widget ? $c('#rec' + P.widgetRec) : null;
+  const widgetForm = !P.widget ? '' : renderTildaForm($c, wRec.find('form'), 'widget', { success: T.thanksSoon, vars: `${FORM_VARS}--br:100px;--mb:15px;--bfs:14px;--bfw:500;--bmt:30px;--btt:uppercase;` });
   // прочие Zero-попапы страницы (например «Содержание» у статей: ссылка href="#content", запись внутри T1093 с data-tooltip-hook="#content")
   const extraPopups = Object.entries(popupZero).filter(([k]) => k !== 'menu' && k !== 'form').map(([k, v]) => `<div class="pp blk ${k} cq" id="p-${k}" data-hook="${k}" role="dialog" aria-modal="true" aria-label="${k === 'content' ? 'Содержание' : k}" tabindex="-1">${closeBtn}<div class="pc">${v}</div></div>`).join('');
-  const popups = [menuPopup, formPopup, extraPopups, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), search($, searchUrl)].join('');
+  const popups = [menuPopup, formPopup, extraPopups, calcPopup, reviewPopups($, home ? null : $home), blankPopups($, home ? null : $home), lightboxes($), P.search ? search($, searchUrl) : ''].join('');
 
   // ---------------- CSS страницы
   // CSS страницы: стили её записей; общие стили (шрифты, база, компоненты) — в одном файле common.<hash>.css для всех страниц
@@ -351,20 +353,22 @@ async function buildPage(spec) {
   const ogSrc = $('meta[property="og:image"]').attr('content');
   const ogM = (ogSrc && lookup(ogSrc)) || ogDefault;
   usedAssets.add(ogM.webp.at(-1).src);
-  const ldFile = home ? JSON.parse(fs.readFileSync('data/jsonld.json', 'utf8')) : $('script[type="application/ld+json"]').map((i, e) => parseJsonLd($(e).text())).get();
+  const ldFile = home ? (P.jsonLd ? JSON.parse(fs.readFileSync(P.jsonLd, 'utf8')) : []) : $('script[type="application/ld+json"]').map((i, e) => parseJsonLd($(e).text())).get();
   const ld = ldFile
     .map((o) => JSON.parse(JSON.stringify(o).replace(/https?:\\?\/\\?\/(static|thb|optim)\.tildacdn\.com[^"\\]*/g, SITE_URL + logo.src).replace(/https:\/\/dviga\.marketing/g, SITE_URL)))
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('');
   const noscript = '<style>.e[data-fi]{opacity:1!important}.e[data-h0]>.sw{opacity:1!important}</style>';
   const cssTags = `<link rel="stylesheet" href="/assets/${commonName}"><link rel="stylesheet" href="/assets/${cssName}"><noscript>${noscript}</noscript>`;
   const ogTitle = $('meta[property="og:title"]').attr('content') || title;
-  const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(e){function f(){e.style.setProperty("--cw",e.clientWidth)}f();addEventListener("resize",f);addEventListener("load",f);if(window.ResizeObserver)new ResizeObserver(f).observe(e)})(document.documentElement)</script><title>${title}</title><meta name="description" content="${descr}">${leadMeta()}${noindex}<link rel="canonical" href="${url}"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
+  // главная есть в обеих языковых версиях: теги hreflang связывают их для поисковиков (остальные страницы в копии пока без пары)
+  const hreflang = home ? `<link rel="alternate" hreflang="ru" href="${RU_URL}"><link rel="alternate" hreflang="en" href="${EN_URL}"><link rel="alternate" hreflang="x-default" href="${RU_URL}">` : '';
+  const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(e){function f(){e.style.setProperty("--cw",e.clientWidth)}f();addEventListener("resize",f);addEventListener("load",f);if(window.ResizeObserver)new ResizeObserver(f).observe(e)})(document.documentElement)</script><title>${title}</title><meta name="description" content="${descr}">${leadMeta()}${noindex}<link rel="canonical" href="${url}">${hreflang}<meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff">`
     + `<meta property="og:url" content="${url}"><meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${descr}"><meta property="og:type" content="${/^\/blog\/.+/.test(spec.path) ? 'article' : 'website'}"><meta property="og:image" content="${SITE_URL}${ogM.webp.at(-1).src}"><meta name="twitter:card" content="summary_large_image">`
     + `<link rel="icon" type="image/png" sizes="32x32" href="${ic32l}" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" sizes="32x32" href="${ic32d}" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" sizes="any" href="${icSvg}"><link rel="apple-touch-icon" href="${icApple}">`
     + `${fontPre}${cssTags}${deferTag}${ld}`;
 
-  const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${cookie($c)}${widget($c, widgetForm)}`;
-  const page = `<!doctype html><html lang="ru"><head>${head}</head><body${catalog ? ' data-cases' : ''}>${body}<script type="module" src="/assets/${jsName}"></script>${trackingTags()}</body></html>`;
+  const body = `<header id="hd">${html.header.join('')}</header><main id="main" class="cq">${html.main.join('')}</main><footer class="cq">${html.footer.join('')}</footer>${popups}${P.cookie ? cookie($c) : ''}${P.widget ? widget($c, widgetForm) : ''}`;
+  const page = `<!doctype html><html lang="${P.lang}"><head>${head}</head><body${catalog ? ' data-cases' : ''}>${body}<script type="module" src="/assets/${jsName}"></script>${trackingTags()}</body></html>`;
   // локальные ссылки на страницы (href="/…") и ассеты (/assets/…) получают префикс подкаталога — каждая ровно один раз
   const fixed = BASE ? page.replace(/href="\/(?!\/|assets\/)/g, `href="${BASE}/`).replace(/(["'(,\s])\/assets\//g, `$1${BASE}/assets/`) : page;
   const outFile = spec.out ? path.join(OUT, spec.out) : path.join(OUT, spec.path === '/' ? '' : spec.path, 'index.html'); // spec.out — файл в корне (404.html)
@@ -378,7 +382,7 @@ async function buildPage(spec) {
 // страница-перенаправление: как на оригинале (JS-редирект с сохранением ?query и #hash), плюс meta refresh и ссылка без скриптов
 function redirectPage(spec) {
   const to = `${BASE}${spec.to}/`;
-  const page = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Перенаправление</title><meta name="viewport" content="width=device-width,initial-scale=1">${noindex}<link rel="canonical" href="${SITE_URL}${spec.to}/"><meta http-equiv="refresh" content="0;url=${to}"><script>location.replace(${JSON.stringify(to)}+location.search+location.hash)</script></head><body><p>Перенаправление: <a href="${to}">${spec.to}</a></p></body></html>`;
+  const page = `<!doctype html><html lang="${P.lang}"><head><meta charset="utf-8"><title>Перенаправление</title><meta name="viewport" content="width=device-width,initial-scale=1">${noindex}<link rel="canonical" href="${SITE_URL}${spec.to}/"><meta http-equiv="refresh" content="0;url=${to}"><script>location.replace(${JSON.stringify(to)}+location.search+location.hash)</script></head><body><p>Перенаправление: <a href="${to}">${spec.to}</a></p></body></html>`;
   const outFile = path.join(OUT, spec.path, 'index.html');
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, page);
@@ -386,7 +390,7 @@ function redirectPage(spec) {
 }
 const built = [];
 const pageList = []; // для служебной страницы «Все страницы сайта»
-{ // индекс внутреннего поиска: один файл с хэшем в имени, грузится при первом открытии поиска
+if (P.search) { // индекс внутреннего поиска: один файл с хэшем в имени, грузится при первом открытии поиска
   const si = buildSearchIndex(PAGES);
   fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
   fs.writeFileSync(path.join(OUT, 'assets', si.name), si.json);
@@ -398,7 +402,7 @@ const pageList = []; // для служебной страницы «Все ст
   console.log(`search index: ${si.count} страниц, ${(si.json.length / 1024).toFixed(0)} КБ`);
 }
 for (const spec of PAGES) built.push(spec.kind === 'redirect' ? redirectPage(spec) : await buildPage(spec));
-{ const dir = path.join(OUT, 'vse-stranicy'); fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, 'index.html'), pageIndexHtml(pageList, BASE)); } // служебный список всех страниц (как в Tilda)
+if (P.serviceIndex) { const dir = path.join(OUT, 'vse-stranicy'); fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, 'index.html'), pageIndexHtml(pageList, BASE)); } // служебный список всех страниц (как в Tilda)
 
 // ----------------------------------------------------------------- статика
 const fontReport = await subsetFonts(built.map((b) => b.page).join(''), path.join(OUT, 'assets/fonts'));

@@ -2,7 +2,13 @@
 import { sendLead } from './lead.js';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-const MSG = {
+const EN = document.documentElement.lang === 'en'; // английская версия: свои тексты, телефон — международный, без маски +7
+const MSG = EN ? {
+  req: 'This field is required',
+  email: 'Please enter a valid email address',
+  phone: 'Please enter a valid phone number',
+  fail: 'Could not send your request. Please try again later or call +65 9853 6101.',
+} : {
   req: 'Обязательное поле',
   email: 'Укажите, пожалуйста, корректный email',
   phone: 'Укажите, пожалуйста, корректный номер телефона',
@@ -50,9 +56,9 @@ function validate(g) {
     err(g); return true;
   }
   if (t === 'ph') v = v.replace(/_/g, '');
-  if (req && (!v || (t === 'ph' && v === '+7'))) { err(g, MSG.req); return false; }
+  if (req && (!v || (t === 'ph' && !EN && v === '+7'))) { err(g, MSG.req); return false; }
   if (v && t === 'em' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { err(g, MSG.email); return false; }
-  if (v && t === 'ph' && v !== '+7' && v.replace(/\D/g, '').length < 11) { err(g, MSG.phone); return false; }
+  if (v && t === 'ph' && (EN ? !/^\+?[\d\s().-]+$/.test(v) || v.replace(/\D/g, '').length < 6 : v !== '+7' && v.replace(/\D/g, '').length < 11)) { err(g, MSG.phone); return false; }
   err(g);
   return true;
 }
@@ -110,7 +116,7 @@ function bind(form) {
     const done = await sendLead(body, form.dataset.f || '');
     if (btn) btn.disabled = false;
     const box = $('.fz', form);
-    if (done) { form.classList.remove('eg'); form.classList.add('ok'); form.reset(); } else { form.classList.add('eg'); if (box) box.textContent = MSG.fail; }
+    if (done && $('[data-hook="thanks"]')) { form.classList.remove('eg'); form.reset(); document.dispatchEvent(new CustomEvent('lead-sent')); /* английская версия: поверх страницы — блок «Thanks for reaching out!», как на оригинале */ } else if (done) { form.classList.remove('eg'); form.classList.add('ok'); form.reset(); } else { form.classList.add('eg'); if (box) box.textContent = MSG.fail; }
   });
 }
 

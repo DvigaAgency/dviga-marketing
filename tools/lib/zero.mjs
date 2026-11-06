@@ -4,6 +4,7 @@ import { makeGetter, artboardAt, elemLayout, num } from './zero-layout.mjs';
 import { applyFit, applyGaps } from './text-fit.mjs';
 import { buildKeyframes, scrollSteps } from './sbs.mjs';
 import { lookup, usedAssets } from './assets.mjs';
+import { T } from './lang.mjs';
 
 const SEL_MAP = [
   [/\.t396__carrier-wrapper/g, '.cw'],
@@ -417,7 +418,7 @@ function emitAtom($, e, ctx, A, screens, wrapStyle, hasSbs) {
   const linkAttrs = [];
   if (href !== undefined) linkAttrs.push(`href="${esc(ctx.href(href))}"`);
   for (const k of ['target', 'rel', 'aria-label', 'data-tooltip']) if (atom.attr(k) !== undefined && atom.attr(k) !== '') linkAttrs.push(`${k}="${esc(atom.attr(k))}"`);
-  const ariaFor = (h) => (/^#menu/.test(h) ? 'Открыть меню' : /^#search/.test(h) ? 'Поиск по сайту' : /^tel:/.test(h) ? 'Позвонить: 8 800 200 23 02' : /^#form/.test(h) ? 'Обсудить проект' : /^#close/.test(h) ? 'Закрыть' : '');
+  const ariaFor = (h) => (/^#menu/.test(h) ? T.openMenu : /^#search/.test(h) ? T.siteSearch : /^tel:/.test(h) ? T.call : /^#form/.test(h) ? T.discuss : /^#close/.test(h) ? T.close : '');
   let body = '';
   let atomClass = 'a';
   let atomTag = tag === 'a' ? 'a' : (/^h[1-6]$/.test(tag) ? tag : 'div');

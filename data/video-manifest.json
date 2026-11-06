@@ -376,5 +376,47 @@
   "poster": "/assets/video/olimp2.9221015793.webp",
   "w": 1920,
   "h": 1080
+ },
+ "https://cp80604-bitrix-8.tw1.ru/showreel-en.mp4": {
+  "mp4": "/assets/video/showreel-en.d7b6fb12fd.mp4",
+  "poster": "/assets/video/showreel-en.d40bd52160.webp",
+  "w": 1280,
+  "h": 720
+ },
+ "https://cp80604-bitrix-8.tw1.ru/grink.mp4": {
+  "mp4": "/assets/video/grink.2ad75d527d.mp4",
+  "poster": "/assets/video/grink.d65ae35b9f.webp",
+  "w": 1920,
+  "h": 1080
+ },
+ "https://cp80604-bitrix-8.tw1.ru/sigir2.mp4": {
+  "mp4": "/assets/video/sigir2.0353fc2a15.mp4",
+  "poster": "/assets/video/sigir2.723175fa0c.webp",
+  "w": 1920,
+  "h": 1080
+ },
+ "https://cp80604-bitrix-8.tw1.ru/preview_inlove_en.mp4": {
+  "mp4": "/assets/video/preview-inlove-en.83df62b8c2.mp4",
+  "poster": "/assets/video/preview-inlove-en.d671d7771f.webp",
+  "w": 640,
+  "h": 846
+ },
+ "https://cp80604-bitrix-8.tw1.ru/cosmos.mp4": {
+  "mp4": "/assets/video/cosmos.e10b421339.mp4",
+  "poster": "/assets/video/cosmos.5fde3ab318.webp",
+  "w": 1280,
+  "h": 720
+ },
+ "https://cp80604-bitrix-8.tw1.ru/preview_risepack_en(1).mp4": {
+  "mp4": "/assets/video/preview-risepack-en-1.6130be53b3.mp4",
+  "poster": "/assets/video/preview-risepack-en-1.c9963d5676.webp",
+  "w": 1080,
+  "h": 1428
+ },
+ "https://cp80604-bitrix-8.tw1.ru/investment.mp4": {
+  "mp4": "/assets/video/investment.65db51e551.mp4",
+  "poster": "/assets/video/investment.10e3383718.webp",
+  "w": 1920,
+  "h": 1080
  }
 }

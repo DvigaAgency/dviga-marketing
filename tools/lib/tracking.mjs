@@ -11,7 +11,7 @@ const val = (name, def) => {
 };
 
 export const YM_ID = val('YM_ID', '36522530');
-export const CT_PROJECT = val('CT_PROJECT', '13560');
+export const CT_PROJECT = val('CT_PROJECT', process.env.SITE_LANG === 'en' ? '' : '13560'); // коллтрекинг — только у русской версии
 export const CT_SCRIPT = val('CT_SCRIPT', 'a0e70');
 export const LEAD_URL = process.env.LEAD_URL || '/api/lead';
 

@@ -13,6 +13,8 @@ fs.mkdirSync(OUT, { recursive: true });
 const prev = fs.existsSync('data/video-manifest.json') ? JSON.parse(fs.readFileSync('data/video-manifest.json', 'utf8')) : {};
 const result = {};
 const MAXH = +(process.env.MAXH || 720);
+// COPY=1 — без перекодирования: видеопоток копируется как есть (качество исходника), убирается только звук, moov-атом переносится в начало (faststart). POSTER_W / POSTER_Q — ширина и качество постера (по умолчанию 960 / 70)
+const COPY = process.env.COPY === '1';
 const hash = (f) => crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 10);
 const run = (args) => { const r = spawnSync(ffmpeg, ['-hide_banner', '-loglevel', 'error', '-y', ...args], { encoding: 'utf8' }); if (r.status) throw new Error(r.stderr); };
 
@@ -25,15 +27,16 @@ for (const [url, m] of list) {
   const probe = spawnSync(ffmpeg, ['-hide_banner', '-i', src], { encoding: 'utf8' }).stderr;
   const dim = /Video:.*?, (\d{2,5})x(\d{2,5})/.exec(probe);
   const sw = +dim[1]; const sh = +dim[2];
-  const h = Math.min(sh, MAXH); const w = Math.round((sw * h) / sh / 2) * 2;
+  const h = COPY ? sh : Math.min(sh, MAXH); const w = COPY ? sw : Math.round((sw * h) / sh / 2) * 2;
   const tmpMp4 = path.join(OUT, `${slug}.tmp.mp4`); const tmpPng = path.join(OUT, `${slug}.tmp.png`);
   const vf = `scale=${w}:${h}:flags=lanczos,setsar=1,format=yuv420p`;
-  run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', process.env.PRESET || 'slow', '-crf', process.env.CRF || '30', '-profile:v', 'main', '-level', '4.0', '-r', process.env.FPS || '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
-  run(['-i', src, '-ss', process.env.POSTER_AT || (slug === 'showreel1' ? '8' : '0.4'), '-frames:v', '1', '-vf', `scale=${Math.min(w, 960)}:-2`, tmpPng]);
+  if (COPY) run(['-i', src, '-an', '-c:v', 'copy', '-movflags', '+faststart', tmpMp4]);
+  else run(['-i', src, '-an', '-vf', vf, '-c:v', 'libx264', '-preset', process.env.PRESET || 'slow', '-crf', process.env.CRF || '30', '-profile:v', 'main', '-level', '4.0', '-r', process.env.FPS || '30', '-tag:v', 'avc1', '-movflags', '+faststart', tmpMp4]);
+  run(['-i', src, '-ss', process.env.POSTER_AT || (slug === 'showreel1' ? '8' : '0.4'), '-frames:v', '1', '-vf', `scale=${Math.min(w, +(process.env.POSTER_W || 960))}:-2`, tmpPng]);
   const mp4 = `${slug}.${hash(tmpMp4)}.mp4`; 
   fs.renameSync(tmpMp4, path.join(OUT, mp4));
   const poster = `${slug}.${hash(tmpPng)}.webp`;
-  await sharp(tmpPng).webp({ quality: 70 }).toFile(path.join(OUT, poster));
+  await sharp(tmpPng).webp({ quality: +(process.env.POSTER_Q || 70) }).toFile(path.join(OUT, poster));
   fs.unlinkSync(tmpPng);
   const mb = (f) => (fs.statSync(path.join(OUT, f)).size / 1e6).toFixed(2);
   console.log(slug, `${sw}x${sh} -> ${w}x${h}`, 'src', (fs.statSync(src).size / 1e6).toFixed(2), 'mp4', mb(mp4), 'poster', (fs.statSync(path.join(OUT, poster)).size / 1e3).toFixed(0) + 'KB');

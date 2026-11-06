@@ -1,5 +1,6 @@
 // Общие помощники сборки.
-export const ORIGIN = 'https://dviga.marketing';
+import { P } from './lang.mjs';
+export const ORIGIN = P.origin;
 
 // Страницы, которые есть в копии: ссылки на них остаются локальными, остальные внутренние ссылки оригинала — абсолютные адреса оригинала.
 let LOCAL = new Set(['/']);
@@ -14,6 +15,7 @@ const ALIAS = { '/blog/skolko-stoit-sdelat-sajt-na-tilde-v-2025-ceny': '/blog/sk
 // вкладки каталога кейсов на оригинале (/cases#!/tab/698207106-<номер>) — в копии это фильтры каталога (src/js/cases.js): номер вкладки -> параметр адреса
 const CASE_TABS = { 1: '', 2: '?service=sites', 3: '?service=branding', 4: '?industry=realty', 5: '?service=promo', 6: '?service=auto', 7: '?industry=logistics', 8: '?industry=industry' };
 export function link(h) {
+  if (h && h.replace(/\/$/, '') === P.switchFrom.replace(/\/$/, '')) return P.switchTo; // переключатель языка: ведёт на главную другой версии (RU_URL / EN_URL)
   const orig = h;
   const ct = /^(?:https:\/\/dviga\.marketing)?\/cases\/?#!\/tab\/\d+-(\d+)$/.exec(h || '');
   if (ct && ct[1] in CASE_TABS) return '/cases/' + CASE_TABS[ct[1]];
@@ -26,4 +28,4 @@ export function link(h) {
   return ORIGIN + h;
 }
 
-export const fixLinks = (html) => String(html ?? '').replace(/href="((?:https:\/\/dviga\.marketing(?=\/blog\/))?\/[^"/][^"]*|\/)"/g, (m, h) => `href="${link(h)}"`);
+export const fixLinks = (html) => String(html ?? '').replace(new RegExp(`href="((?:${ORIGIN.replace(/[.]/g, '\\.')}(?=/blog/))?/[^"/][^"]*|/)"`, 'g'), (m, h) => `href="${link(h)}"`);

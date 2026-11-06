@@ -196,6 +196,23 @@ POST /api/lead   (multipart/form-data)
 
 **Подготовка данных новых страниц:** `node tools/fetch-html.mjs --pages` → `node tools/trim-html.mjs` (урезание снимка) → `npm run assets` (сбор адресов картинок и роликов, скачивание, AVIF/WebP, H.264; прогон можно прервать и продолжить) → `npm run build`. `node tools/prune-assets.mjs` удаляет из `public/` неиспользуемые варианты ширин.
 
+## Английская версия (en.dviga.marketing)
+Источник — отдельный проект Tilda 85434 («Новый сайт Dviga (английская версия)», домен en.dviga.marketing). Пока клонирована только главная; сборка общая с русской, язык — параметр `SITE_LANG=en` (профиль языка и ID записей Tilda — `tools/lib/lang.mjs`).
+
+```bash
+node tools/fetch-en.mjs                      # снимок главной -> data/en/home.source.html (curl, прокси из HTTPS_PROXY)
+node tools/collect-assets.mjs                # адреса картинок и роликов английского снимка -> data/assets-raw.json
+HTTPS_PROXY=http://127.0.0.1:10809 CURL=1 ONLY_NEW=1 node tools/fetch-assets.mjs && NEW=1 node tools/optimize-images.mjs
+SITE_LANG=en OUT=dist-en node tools/build.mjs
+SITE_LANG=en node tools/audit-dist.mjs dist-en
+```
+
+- **Адреса версий.** `RU_URL` и `EN_URL` (по умолчанию `https://dviga.marketing/` и `https://en.dviga.marketing/`) задают переключатель языка (ссылки «ru»/«en» в шапке) и теги `hreflang` на главных страницах обеих версий. Каноничный адрес и ссылки на страницы, которых нет в копии, ведут на боевой домен версии. В превью на github.io английская версия лежит в `/en/` (см. `.github/workflows/pages.yml`: `BASE=/dviga-marketing/en`).
+- **Для Timeweb** обе версии собираются без `BASE` (сайт в корне домена): русская — `node tools/build.mjs`, английская — `SITE_LANG=en OUT=dist-en node tools/build.mjs`; `dist/` кладётся в папку основного сайта, `dist-en/` — в папку поддомена `en.dviga.marketing`. `NOINDEX` на боевой сборке не задавать (нужен `INDEX=1`). Страницу 404 на Apache задаёт строка `ErrorDocument 404 /404.html` в `.htaccess`.
+- **Чем английская версия отличается.** Нет cookie-плашки, виджета связи, внутреннего поиска и коллтрекинга (их нет на английском оригинале); телефон в формах международный, без маски +7; после отправки формы поверх страницы показывается блок «Thanks for reaching out!» (плагин Nolim NLM056 оригинала), а не строка под формой; шапка закреплена правилом `.uc-menu-header` из T123-блока; ролик обложки «ныряет» при прокрутке (GSAP на оригинале, здесь `initDive` в `src/js/main.js`, параметры те же).
+- **Ролики главной** (showreel-en, grink, sigir2, preview_inlove_en, cosmos, preview_risepack_en, investment) лежат на `cp80604-bitrix-8.tw1.ru`. Скачаны в `source-assets/ext__<имя>` (`fetch-assets.mjs` или curl, если хост медлит) и добавлены БЕЗ перекодирования: `COPY=1 POSTER_W=1280 POSTER_Q=88 SKIP_DONE=1 ONLY=tw1.ru/<имя> node tools/optimize-video.mjs` копирует видеопоток как есть (md5 потока совпадает с исходником), убирает только звук и переносит moov в начало; постер — кадр 0,4 с, WebP 1280 px, качество 88. Если хост недоступен (TLS-таймаут), на странице остаются ссылки на хост оригинала (`data-rsrc`, без постера); тогда стереть ключи с `error` в `data/assets-manifest.json` и повторить.
+- Сверка с оригиналом: `node tools/_cmp-en.mjs 1440,768,390 --els` (высоты записей и геометрия элементов; нужен запущенный `dist-en` на 4174). Эффекты T123 английского оригинала перенесены: «rolling-text» (ссылки меню, буквы прокатываются вверх, красная копия снизу) и «link-underline» (линия под ссылкой проезжает по наведению) — правила `html[lang=en]` в `src/css/embeds.css` и `initEnFx` в `src/js/main.js`. На русском оригинале этих плагинов нет (классы у элементов остались, CSS/JS нет), поэтому в русской версии они не нужны. Известное расхождение: высота слайдера отзывов на 768 px на 40 px меньше оригинала (slick в оригинале даёт треку лишние 40 px, причину не нашли).
+
 ## Развёртывание и кэширование
 Статика из `dist/`. Файлы в `dist/assets/` имеют хеш в имени → отдавать с `Cache-Control: public, max-age=31536000, immutable`; HTML — `no-cache`. В `dist/_headers` лежит готовый конфиг (Cloudflare Pages / Netlify). Для nginx:
 

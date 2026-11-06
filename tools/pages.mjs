@@ -3,6 +3,7 @@
 // Страницы кейсов, статей и услуг подхватываются автоматически: data/pages/cases__<slug>.html -> /cases/<slug>, blog__<slug>.html -> /blog/<slug>, services__<slug>.html -> /services/<slug>, contacts__<slug>.html -> /contacts/<slug>.
 import fs from 'node:fs';
 import { blogTabs } from './lib/blog-tabs.mjs';
+import { LANG, P } from './lib/lang.mjs';
 
 const dir = 'data/pages';
 const files = fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
@@ -11,7 +12,7 @@ const sub = (prefix) => files.filter((f) => f.startsWith(prefix + '__') && f.end
 // страницы-перенаправления: на оригинале это страница с блоком T305 (JS-редирект), содержимое которой посетитель не видит
 export const REDIRECTS = { '/services/internet-magazin-na-tilda': '/blog/kak-sozdat-internet-magazin-na-tilde' };
 
-export const PAGES = [
+const PAGES_RU = [
   { path: '/', src: 'data/home.source.html', kind: 'home' },
   { path: '/cases', src: `${dir}/cases.html`, kind: 'cases' },
   ...sub('cases'),
@@ -30,3 +31,6 @@ export const PAGES = [
   { path: '/404', src: `${dir}/404.html`, kind: 'page', out: '404.html' },
   ...Object.entries(REDIRECTS).map(([path, to]) => ({ path, to, kind: 'redirect' })),
 ];
+
+// английская версия (SITE_LANG=en): пока одна главная, снимок — data/en/home.source.html (tools/fetch-en.mjs)
+export const PAGES = LANG === 'en' ? [{ path: '/', src: P.homeSrc, kind: 'home' }] : PAGES_RU;
